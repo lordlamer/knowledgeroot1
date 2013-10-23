@@ -1,1 +1,0 @@
-({"saturationPickerTitle":"Doldurmaq seçimi","valueLabel":"d","blueLabel":"m","saturationLabel":"d","greenLabel":"y","redLabel":"q","hueLabel":"ç","hexLabel":"onaltılıq","huePickerTitle":"Çalar seçimi","degLabel":"°"})

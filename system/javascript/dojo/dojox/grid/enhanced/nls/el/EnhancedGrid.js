@@ -1,1 +1,0 @@
-({"singleSort":"Απλή ταξινόμηση","indirectSelectionRadio":"Γραμμή ${0}, μία επιλογή, κουμπί επιλογής","ascending":"Αύξουσα","indirectSelectionCheckBox":"Γραμμή ${0}, πολλαπλές επιλογές, τετραγωνίδιο επιλογής","selectAll":"Επιλογή όλων","descending":"Φθίνουσα","nestedSort":"Ένθετη ταξινόμηση","unsorted":"Χωρίς ταξινόμηση αυτής της στήλης","sortingState":"${0} - ${1}"})
