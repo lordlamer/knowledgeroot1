@@ -249,6 +249,7 @@ $CLASS['kr_header']->addheader('
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
 <link href="system/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="system/javascript/fontawesome/css/font-awesome.min.css">
 <script src="system/javascript/jquery/jquery.min.js"></script>
 <script src="system/javascript/bootstrap/js/bootstrap.min.js"></script>
 ');
