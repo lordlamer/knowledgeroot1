@@ -39,7 +39,7 @@ class rte extends extension_base {
 	function show($text = "") {
 		$out = "";
 
-		$out .= "<textarea ".(($this->id != "") ? "id=\"".$this->id."\" ": "").(($this->name != "") ? "name=\"".$this->name."\" " : "")."rows=\"".$this->rows."\" cols=\"".$this->cols."\">\n";
+		$out .= "<textarea class=\"form-control\" ".(($this->id != "") ? "id=\"".$this->id."\" ": "").(($this->name != "") ? "name=\"".$this->name."\" " : "")."rows=\"".$this->rows."\" cols=\"".$this->cols."\">\n";
 		$out .= $text;
 		$out .= "</textarea>";
 
