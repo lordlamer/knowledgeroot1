@@ -245,61 +245,6 @@ $CLASS['kr_header']->addheader("<link rel=\"shortcut icon\" href=\"".KR_INCLUDE_
 if(isset($version))
 	$CLASS['kr_header']->addheader("<meta name=\"generator\" content=\"Knowledgeroot - ".$version."\" />");
 
-// add dojo to html header for loading
-if($CLASS['config']->javascript->cdn) {
-$CLASS['kr_header']->addheader('
-<!-- load the dojo toolkit base -->
-<script src="'.$CLASS['config']->javascript->cdn_url.'" type="text/javascript" djConfig="parseOnLoad:false, isDebug:false"></script>
-', true);
-} else {
-$CLASS['kr_header']->addheader('
-<!-- load the dojo toolkit base -->
-<script type="text/javascript" src="system/javascript/dojo/dojo/dojo.js"
- djConfig="parseOnLoad:false, isDebug:false">
-</script>
-', true);
-}
-
-$CLASS['kr_header']->addheader('
-<!-- load the dojo toolkit base -->
-<script type="text/javascript">
-	dojo.require("dojo.parser");
-	dojo.require("dijit.MenuBar");
-	dojo.require("dijit.MenuBarItem");
-	dojo.require("dijit.MenuSeparator");
-	dojo.require("dijit.form.Select");
-	dojo.require("dijit.TitlePane");
-	dojo.require("dijit.form.Button");
-	dojo.require("dijit.form.TextBox");
-	dojo.require("dijit.form.MultiSelect");
-	dojo.require("dojox.data.HtmlStore");
-	dojo.require("dojox.grid.DataGrid");
-	dojo.require("dijit.form.CheckBox");
-	dojo.require("dijit.layout.TabContainer");
-	dojo.require("dijit.layout.ContentPane");
-
-	dojo.addOnLoad(function(){
-		dojo.parser.parse();
-	});
-</script>
-');
-
-if($CLASS['config']->javascript->cdn) {
-	$CLASS['kr_header']->addheader('
-<style type="text/css">
-@import "'.$CLASS['config']->javascript->cdn_css_base_url.'/dijit/themes/claro/claro.css";
-@import "'.$CLASS['config']->javascript->cdn_css_base_url.'/dojo/resources/dojo.css";
-</style>
-', true);
-} else {
-	$CLASS['kr_header']->addheader('
-<style type="text/css">
-@import "'.KR_INCLUDE_PREFIX.'system/javascript/dojo/dijit/themes/claro/claro.css";
-@import "'.KR_INCLUDE_PREFIX.'system/javascript/dojo/dojo/resources/dojo.css";
-</style>
-', true);
-}
-
 // add hook
 $CLASS['hooks']->setHook("init","init","end");
 ?>
