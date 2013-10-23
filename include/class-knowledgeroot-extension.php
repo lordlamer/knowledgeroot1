@@ -48,12 +48,13 @@ class knowledgeroot_extension {
 			$this->CLASS['cache']->save($data, $hashkey, array('system','extensions'));
 		}
 
-		foreach($data as $row) {
-			// set default extension folder
-			$folder = "system/extension/";
+		if(is_array($data)) {
+			foreach($data as $row) {
+				// set default extension folder
+				$folder = "system/extension/";
 
-
-			$this->load_extension($row['keyname'], $this->checkExtensionFolder($row['keyname']));
+				$this->load_extension($row['keyname'], $this->checkExtensionFolder($row['keyname']));
+			}
 		}
 
 		return 0;
