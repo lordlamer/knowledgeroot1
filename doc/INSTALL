@@ -1,0 +1,16 @@
+Install of Knowledgeroot
+########################
+
+1. Unpack your knowledgeroot package
+2. Open your browser with URL http://your.location/install.php
+3. Enter all required settings to finish the installation
+4. Check that config.inc.php and admin_config.inc.php are written to folder conf/
+5. DELETE install.php AND update.php AFTER INSTALLATION!!!
+6. Now the installation is complete. You can now enter Knowledgeroot. If you
+   have questions contact us!
+
+  
+   
+Knowledgeroot
+http://www.linuxdelta.de/knowledgeroot.html
+http://www.knowledgeroot.de

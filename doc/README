@@ -1,0 +1,32 @@
+Knowledgeroot
+#############
+
+Homepage:  http://www.linuxdelta.de/knowledgeroot.html
+License: GPL
+
+For install read INSTALL.
+For License read LICENSE.
+For Questions use the forum or the Mailinglist.
+
+Forum: http://forum.linuxdelta.de
+Mailinglist: http://lists.linuxdelta.de/cgi-bin/mailman/listinfo
+
+Requirements
+############
+
+- Apache Webserver (not tested with ISS)
+- PHP >4.1.x (better >4.3)
+- Mysql > 4.0.x or PostgreSQL >7.4.x
+
+For editor Tinymce: IE,Mozilla based browsers, Opera
+For editor Fckeditor: IE, Mozilla based browsers
+
+Hints
+#####
+
+Ajax tree will not work in Konqueror or Opera so it will be forced to static tree!
+
+Documentation
+#############
+
+For documentation check our website on: http://www.knowledgeroot.de

@@ -1,0 +1,1 @@
+({"close":"[zatvori]","title":"Naslov","authors":"Autori","summary":"Sažetak","content":"Sadržaj","contributors":"Doprinositelji","updated":"Ažurirano","displayOptions":"[opcije prikaza]","id":"ID"})

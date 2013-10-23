@@ -1,0 +1,917 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Knowledgeroot.org
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: KnowlegdeRoot\n"
+"Report-Msgid-Bugs-To: language@knowledgeroot.org\n"
+"POT-Creation-Date: 2011-06-05 21:53+0200\n"
+"PO-Revision-Date: 2011-06-08 10:16+0100\n"
+"Last-Translator: Martin Holkamp <martin@holkamp.nl>\n"
+"Language-Team: NoName Solutions <nonames@xs4all.nl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: icon.php:30
+#: index.php:50
+#: move.php:34
+#: include/init.php:236
+msgid "loading..."
+msgstr "Laden..."
+
+#: icon.php:34
+#: include/class-knowledgeroot-content.php:211
+#: include/class-knowledgeroot-content.php:312
+msgid "select icon"
+msgstr "Kies een icoon"
+
+#: icon.php:54
+msgid "no icon"
+msgstr "geen icoon"
+
+#: icon.php:57
+#: move.php:105
+msgid "close window"
+msgstr "sluit venster"
+
+#: index.php:57
+msgid "Search"
+msgstr "Zoeken"
+
+#: index.php:59
+msgid "GO"
+msgstr "GA"
+
+#: index.php:76
+msgid "version"
+msgstr "versie"
+
+#: index.php:93
+#: include/class-email-notification.php:128
+#: include/class-email-notification.php:150
+msgid "Path"
+msgstr "Pad"
+
+#: index.php:107
+msgid "User"
+msgstr "Gebruiker"
+
+#: index.php:123
+msgid "change"
+msgstr "wijzigen"
+
+#: index.php:140
+#: move.php:59
+#: include/class-default-menu.php:132
+#: include/class-default-menu.php:192
+msgid "show menu"
+msgstr "toon menu"
+
+#: move.php:38
+msgid "move to"
+msgstr "verplaats naar"
+
+#: move.php:44
+msgid "move to root"
+msgstr "verplaats naar basis"
+
+#: move.php:51
+msgid "Move content to other page:"
+msgstr "Verplaats in houd naar andere pagina:"
+
+#: move.php:82
+msgid "Move content on the same page:"
+msgstr "Verplaats inhoud op de dezelfde pagina:"
+
+#: admin/index.php:53
+msgid "Back to Knowledgeroot"
+msgstr "Terug naarKnowledgeroot"
+
+#: admin/index.php:56
+msgid "Powered by Knowledgeroot"
+msgstr "Mogelijk gemaakt door Knowledgeroot"
+
+#: admin/index.php:61
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: admin/index.php:62
+msgid "Password"
+msgstr "wachtwoord"
+
+#: admin/index.php:63
+#: include/class-default-menu.php:41
+#: include/class-knowledgeroot-content.php:799
+#: include/class-knowledgeroot-content.php:811
+msgid "login"
+msgstr "inloggen"
+
+#: admin/index.php:70
+msgid "Forgot password?"
+msgstr "Wachtwoord vergeten?"
+
+#: admin/index.php:72
+msgid "To reset the admin password you need to make a new login.<br /> After that you see a loginhash at the bottom. Copy this hash value to your app.ini in section admin."
+msgstr "Om het admin wachtwoord te restten moet je een nieuwe login maken.<br />Als je een loginhash ziet onderin het scherm. Kopieer deze hash in de app.ini in de sectie admin."
+
+#: include/class-default-menu.php:49
+msgid "logout"
+msgstr "uitloggen"
+
+#: include/class-default-menu.php:57
+msgid "roots"
+msgstr "basis"
+
+#: include/class-default-menu.php:66
+#: include/class-knowledgeroot-content.php:806
+#: include/class-knowledgeroot-content.php:998
+#: include/class-knowledgeroot-content.php:1215
+#: include/class-knowledgeroot-content.php:1281
+#: include/class-knowledgeroot.php:147
+#: include/class-knowledgeroot.php:186
+#: include/class-knowledgeroot.php:243
+#: include/class-knowledgeroot.php:287
+#: include/class-knowledgeroot.php:359
+#: include/class-knowledgeroot.php:373
+#: include/class-knowledgeroot.php:419
+#: include/class-knowledgeroot.php:497
+#: include/class-knowledgeroot.php:511
+#: include/class-knowledgeroot.php:561
+msgid "user"
+msgstr "gebruiker"
+
+#: include/class-default-menu.php:75
+msgid "options"
+msgstr "opties"
+
+#: include/class-default-menu.php:87
+#: include/class-default-menu.php:192
+msgid "hide menu"
+msgstr "menu verbergen"
+
+#: include/class-default-menu.php:96
+msgid "expand menu"
+msgstr "menu uitvouwen"
+
+#: include/class-default-menu.php:105
+msgid "reload menu"
+msgstr "menu herladen"
+
+#: include/class-default-menu.php:114
+msgid "collapse menu"
+msgstr "menu inklappen"
+
+#: include/class-default-menu.php:141
+msgid "close menu"
+msgstr "menu sluiten"
+
+#: include/class-default-menu.php:155
+#: include/class-default-menu.php:298
+msgid "add new page"
+msgstr "pagina toevoegen"
+
+#: include/class-default-menu.php:162
+#: include/class-default-menu.php:305
+msgid "edit page"
+msgstr "pagina bewerken"
+
+#: include/class-default-menu.php:169
+#: include/class-default-menu.php:312
+msgid "move page"
+msgstr "pagina verplaatsen"
+
+#: include/class-default-menu.php:177
+#: include/class-default-menu.php:320
+msgid "delete page"
+msgstr "pagina verwijderen"
+
+#: include/class-default-menu.php:179
+#: include/class-default-menu.php:182
+#: include/class-default-menu.php:322
+msgid "Do you really want to delete this page?"
+msgstr "Wilt u deze pagina echt verwijderen?"
+
+#: include/class-default-menu.php:185
+#: include/class-default-menu.php:335
+#: include/class-default-menu.php:347
+msgid "add new content"
+msgstr "inhoud toevoegen"
+
+#: include/class-default-menu.php:204
+#: include/class-knowledgeroot-content.php:1031
+#: include/class-knowledgeroot-content.php:1120
+msgid "edit"
+msgstr "bewerk"
+
+#: include/class-default-menu.php:212
+#: include/class-knowledgeroot-content.php:1031
+#: include/class-knowledgeroot-content.php:1120
+#: include/class-knowledgeroot-content.php:1639
+msgid "delete"
+msgstr "verwijder"
+
+#: include/class-default-menu.php:217
+#: include/class-default-menu.php:365
+#: include/class-knowledgeroot-content.php:1639
+msgid "Do you really want to delete?"
+msgstr "Wilt u deze inhoud echt verwijderen"
+
+#: include/class-default-menu.php:220
+msgid "move"
+msgstr "verplaatsen"
+
+#: include/class-default-menu.php:229
+msgid "print"
+msgstr "print"
+
+#: include/class-default-menu.php:238
+#: include/class-default-menu.php:382
+#: include/class-knowledgeroot-content.php:1659
+msgid "add file"
+msgstr "bestand toeveogen"
+
+#: include/class-default-menu.php:246
+msgid "Top"
+msgstr "Boven"
+
+#: include/class-default-menu.php:275
+msgid "save as default tree"
+msgstr "Opslaan als standaard boom"
+
+#: include/class-default-menu.php:283
+msgid "Sourceforge"
+msgstr "Sourceforge"
+
+#: include/class-default-menu.php:354
+msgid "edit content"
+msgstr "inhoud bewerken"
+
+#: include/class-default-menu.php:363
+msgid "delete content"
+msgstr "inhoud verwijderen"
+
+#: include/class-default-menu.php:372
+msgid "move content"
+msgstr "inhoud verplaatsen"
+
+#: include/class-email-notification.php:49
+#, php-format
+msgid "Page \"%s\" was created"
+msgstr "Pagina \"%s\" is aangemaakt"
+
+#: include/class-email-notification.php:53
+#, php-format
+msgid "Page \"%s\" was edited"
+msgstr "Pagina \"%s\" is aangepast"
+
+#: include/class-email-notification.php:57
+#, php-format
+msgid "Page \"%s\" was moved"
+msgstr "Pagina \"%s\" is verplaatst"
+
+#: include/class-email-notification.php:61
+#, php-format
+msgid "Page \"%s\" was deleted"
+msgstr "Pagina \"%s\" is verwijderd"
+
+#: include/class-email-notification.php:69
+#, php-format
+msgid "Content \"%s\" was created"
+msgstr "Inhoud \"%s\" is aangemaakt"
+
+#: include/class-email-notification.php:73
+#, php-format
+msgid "Content \"%s\" was edited"
+msgstr "Inhoud \"%s\" is bewerkt"
+
+#: include/class-email-notification.php:77
+#, php-format
+msgid "Content \"%s\" was moved"
+msgstr "Inhoud \"%s\"  is verplaatst"
+
+#: include/class-email-notification.php:81
+#, php-format
+msgid "Content \"%s\" was deleted"
+msgstr "Inhoud \"%s\"  verwijderd!"
+
+#: include/class-email-notification.php:90
+#, php-format
+msgid "File \"%s\" was created"
+msgstr "Bestand \"%s\" is aangemaakt"
+
+#: include/class-email-notification.php:94
+#, php-format
+msgid "File \"%s\" was deleted"
+msgstr "Bestand \"%s\"  is verwijderd!"
+
+#: include/class-email-notification.php:103
+#: include/class-email-notification.php:123
+msgid "Knowledgeroot notification"
+msgstr "Knowledgeroot notificatie"
+
+#: include/class-email-notification.php:129
+#: include/class-email-notification.php:151
+msgid "Action"
+msgstr "Actie"
+
+#: include/class-email-notification.php:130
+msgid "author"
+msgstr "auteur"
+
+#: include/class-email-notification.php:131
+msgid "date"
+msgstr "datum"
+
+#: include/class-email-notification.php:132
+#: include/class-email-notification.php:154
+msgid "link"
+msgstr "link"
+
+#: include/class-email-notification.php:152
+msgid "Author"
+msgstr "Auteur"
+
+#: include/class-email-notification.php:153
+msgid "Date"
+msgstr "Datum"
+
+#: include/class-email-notification.php:157
+msgid "Detail of Changes"
+msgstr "Details van de wijzigingen"
+
+#: include/class-email-notification.php:164
+msgid "Unable to send email notification"
+msgstr "kan geen email notificatie verzenden"
+
+#: include/class-knowledgeroot-content.php:86
+#: include/class-knowledgeroot-content.php:160
+#: include/class-knowledgeroot-content.php:404
+#: include/class-knowledgeroot-content.php:478
+#: include/class-knowledgeroot-content.php:913
+#: include/class-knowledgeroot-content.php:1222
+#: include/class-knowledgeroot-content.php:1289
+#: include/class-knowledgeroot-content.php:1322
+#: include/class-knowledgeroot-content.php:1365
+msgid "save"
+msgstr "opslaan"
+
+#: include/class-knowledgeroot-content.php:87
+#: include/class-knowledgeroot-content.php:161
+#: include/class-knowledgeroot-content.php:405
+#: include/class-knowledgeroot-content.php:479
+msgid "save and close"
+msgstr "opslaan en sluiten"
+
+#: include/class-knowledgeroot-content.php:88
+#: include/class-knowledgeroot-content.php:162
+#: include/class-knowledgeroot-content.php:406
+#: include/class-knowledgeroot-content.php:480
+msgid "close"
+msgstr "sluiten"
+
+#: include/class-knowledgeroot-content.php:94
+#: include/class-knowledgeroot-content.php:415
+msgid "content"
+msgstr "inhoud"
+
+#: include/class-knowledgeroot-content.php:97
+msgid "Title"
+msgstr "Titel"
+
+#: include/class-knowledgeroot-content.php:109
+#: include/class-knowledgeroot-content.php:425
+msgid "Position"
+msgstr "Positie"
+
+#: include/class-knowledgeroot-content.php:111
+#: include/class-knowledgeroot-content.php:428
+msgid "first"
+msgstr "eerste"
+
+#: include/class-knowledgeroot-content.php:122
+#: include/class-knowledgeroot-content.php:438
+#, php-format
+msgid "after %s"
+msgstr "na %s"
+
+#: include/class-knowledgeroot-content.php:135
+#: include/class-knowledgeroot-content.php:233
+#: include/class-knowledgeroot-content.php:337
+#: include/class-knowledgeroot-content.php:450
+#: include/class-knowledgeroot-content.php:873
+msgid "permissions"
+msgstr "rechten"
+
+#: include/class-knowledgeroot-content.php:188
+#: include/class-knowledgeroot-content.php:260
+msgid "create page"
+msgstr "pagina maken"
+
+#: include/class-knowledgeroot-content.php:193
+#: include/class-knowledgeroot-content.php:297
+#: include/class-knowledgeroot-content.php:854
+msgid "site"
+msgstr "site"
+
+#: include/class-knowledgeroot-content.php:195
+#: include/class-knowledgeroot-content.php:301
+msgid "page name"
+msgstr "pagina naam"
+
+#: include/class-knowledgeroot-content.php:200
+msgid "automatically open the created page"
+msgstr "open de gemaakte pagina automatisch"
+
+#: include/class-knowledgeroot-content.php:204
+#: include/class-knowledgeroot-content.php:305
+msgid "page alias"
+msgstr "pagina alias"
+
+#: include/class-knowledgeroot-content.php:208
+#: include/class-knowledgeroot-content.php:309
+msgid "at beginning"
+msgstr "aan het begin"
+
+#: include/class-knowledgeroot-content.php:208
+#: include/class-knowledgeroot-content.php:309
+msgid "at the end"
+msgstr "aan het einde"
+
+#: include/class-knowledgeroot-content.php:208
+#: include/class-knowledgeroot-content.php:309
+msgid "default position for content"
+msgstr "standaard positie voor de inhoud"
+
+#: include/class-knowledgeroot-content.php:211
+#: include/class-knowledgeroot-content.php:312
+msgid "icon"
+msgstr "icoon"
+
+#: include/class-knowledgeroot-content.php:215
+#: include/class-knowledgeroot-content.php:316
+msgid "Symlink"
+msgstr "Symlink"
+
+#: include/class-knowledgeroot-content.php:220
+#: include/class-knowledgeroot-content.php:321
+#: include/class-knowledgeroot-content.php:862
+msgid "tooltip"
+msgstr "tooltip"
+
+#: include/class-knowledgeroot-content.php:225
+#: include/class-knowledgeroot-content.php:326
+#: include/class-knowledgeroot-content.php:867
+msgid "priority"
+msgstr "urgentie"
+
+#: include/class-knowledgeroot-content.php:248
+#: include/class-knowledgeroot-content.php:353
+#: include/class-knowledgeroot-content.php:876
+msgid "inherit permissions"
+msgstr "erf de rechten"
+
+#: include/class-knowledgeroot-content.php:292
+#: include/class-knowledgeroot-content.php:364
+msgid "save changes"
+msgstr "wijzigingen opslaan"
+
+#: include/class-knowledgeroot-content.php:330
+msgid "Initially show all content on this page collapsed?"
+msgstr "Standaard alle pagina's ingevouwen tonen?"
+
+#: include/class-knowledgeroot-content.php:395
+msgid "Another user is already editing this content!"
+msgstr "Een andere gebruiker berwerkt deze gegevens al!"
+
+#: include/class-knowledgeroot-content.php:418
+msgid "title"
+msgstr "titel"
+
+#: include/class-knowledgeroot-content.php:427
+msgid "do not change"
+msgstr "niet aanpassen"
+
+#: include/class-knowledgeroot-content.php:465
+msgid "informations"
+msgstr "details"
+
+#: include/class-knowledgeroot-content.php:467
+msgid "created at"
+msgstr "gemaakt op"
+
+#: include/class-knowledgeroot-content.php:468
+#: include/class-knowledgeroot-content.php:1506
+msgid "guest"
+msgstr "gast"
+
+#: include/class-knowledgeroot-content.php:468
+msgid "last changed by"
+msgstr "laastst aangepast door"
+
+#: include/class-knowledgeroot-content.php:469
+msgid "last changed at"
+msgstr "laastst aangepast op"
+
+#: include/class-knowledgeroot-content.php:512
+msgid "Search for"
+msgstr "Zoek naar"
+
+#: include/class-knowledgeroot-content.php:515
+msgid "Content"
+msgstr "Inhoud"
+
+#: include/class-knowledgeroot-content.php:598
+msgid "show"
+msgstr "toon"
+
+#: include/class-knowledgeroot-content.php:604
+#: include/class-knowledgeroot-content.php:607
+#: include/class-knowledgeroot-content.php:682
+#: include/class-knowledgeroot-content.php:685
+#: include/class-knowledgeroot-content.php:775
+#: include/class-knowledgeroot-content.php:778
+msgid "Nothing found"
+msgstr "Niets gevonden"
+
+#: include/class-knowledgeroot-content.php:615
+msgid "Menu"
+msgstr "Menu"
+
+#: include/class-knowledgeroot-content.php:693
+msgid "Files"
+msgstr "Bestanden"
+
+#: include/class-knowledgeroot-content.php:807
+#: include/class-knowledgeroot-content.php:1207
+#: include/class-knowledgeroot-content.php:1273
+msgid "password"
+msgstr "wachtwoord"
+
+#: include/class-knowledgeroot-content.php:851
+msgid "create"
+msgstr "maak"
+
+#: include/class-knowledgeroot-content.php:856
+#: include/class-knowledgeroot-content.php:956
+#: include/class-knowledgeroot-content.php:994
+#: include/class-knowledgeroot-content.php:1206
+#: include/class-knowledgeroot-content.php:1272
+#: include/class-knowledgeroot-content.php:1316
+#: include/class-knowledgeroot-content.php:1360
+msgid "name"
+msgstr "naam"
+
+#: include/class-knowledgeroot-content.php:858
+msgid "alias"
+msgstr "alias"
+
+#: include/class-knowledgeroot-content.php:902
+msgid "change options"
+msgstr "wijzig opties"
+
+#: include/class-knowledgeroot-content.php:905
+msgid "new password"
+msgstr "nieuw wachtwoord"
+
+#: include/class-knowledgeroot-content.php:906
+msgid "confirm password"
+msgstr "bevestig wachtwoord"
+
+#: include/class-knowledgeroot-content.php:907
+#: include/class-knowledgeroot-content.php:1208
+#: include/class-knowledgeroot-content.php:1274
+msgid "theme"
+msgstr "thema"
+
+#: include/class-knowledgeroot-content.php:908
+msgid "language"
+msgstr "taal"
+
+#: include/class-knowledgeroot-content.php:950
+#: include/class-knowledgeroot-content.php:988
+msgid "id"
+msgstr "id"
+
+#: include/class-knowledgeroot-content.php:961
+#: include/class-knowledgeroot-content.php:1209
+#: include/class-knowledgeroot-content.php:1275
+msgid "default group"
+msgstr "standaard groep"
+
+#: include/class-knowledgeroot-content.php:966
+#: include/class-knowledgeroot-content.php:1214
+#: include/class-knowledgeroot-content.php:1280
+msgid "default rights"
+msgstr "standaard rechten"
+
+#: include/class-knowledgeroot-content.php:971
+#: include/class-knowledgeroot-content.php:1210
+#: include/class-knowledgeroot-content.php:1276
+msgid "admin"
+msgstr "admin"
+
+#: include/class-knowledgeroot-content.php:976
+#: include/class-knowledgeroot-content.php:1211
+#: include/class-knowledgeroot-content.php:1277
+msgid "edit rights"
+msgstr "rechten aanpassen"
+
+#: include/class-knowledgeroot-content.php:981
+#: include/class-knowledgeroot-content.php:1212
+#: include/class-knowledgeroot-content.php:1278
+msgid "enabled"
+msgstr "activeer"
+
+#: include/class-knowledgeroot-content.php:1000
+#: include/class-knowledgeroot-content.php:1200
+msgid "add user"
+msgstr "gebruiker toevoegen"
+
+#: include/class-knowledgeroot-content.php:1001
+#: include/class-knowledgeroot-content.php:1265
+msgid "edit user"
+msgstr "gebruiker bewerken"
+
+#: include/class-knowledgeroot-content.php:1002
+msgid "delete user"
+msgstr "verwijder gebruiker"
+
+#: include/class-knowledgeroot-content.php:1031
+#: include/class-knowledgeroot-content.php:1078
+msgid "Do you really want to delete this user?"
+msgstr "Wilt u deze gebruiker echt verwijderen?"
+
+#: include/class-knowledgeroot-content.php:1097
+#: include/class-knowledgeroot-content.php:1213
+#: include/class-knowledgeroot-content.php:1279
+msgid "groups"
+msgstr "groepen"
+
+#: include/class-knowledgeroot-content.php:1099
+#: include/class-knowledgeroot-content.php:1312
+msgid "add group"
+msgstr "groep toevoegen"
+
+#: include/class-knowledgeroot-content.php:1100
+#: include/class-knowledgeroot-content.php:1355
+msgid "edit group"
+msgstr "groep bewerken"
+
+#: include/class-knowledgeroot-content.php:1101
+msgid "delete group"
+msgstr "verwijder groep"
+
+#: include/class-knowledgeroot-content.php:1120
+#: include/class-knowledgeroot-content.php:1166
+msgid "Do you really want to delete this group?"
+msgstr "Wilt u deze groep echt verwijderen?"
+
+#: include/class-knowledgeroot-content.php:1216
+#: include/class-knowledgeroot-content.php:1282
+#: include/class-knowledgeroot.php:148
+#: include/class-knowledgeroot.php:187
+#: include/class-knowledgeroot.php:244
+#: include/class-knowledgeroot.php:288
+#: include/class-knowledgeroot.php:360
+#: include/class-knowledgeroot.php:378
+#: include/class-knowledgeroot.php:420
+#: include/class-knowledgeroot.php:498
+#: include/class-knowledgeroot.php:516
+#: include/class-knowledgeroot.php:562
+msgid "group"
+msgstr "groep"
+
+#: include/class-knowledgeroot-content.php:1217
+#: include/class-knowledgeroot-content.php:1283
+msgid "others"
+msgstr "overige"
+
+#: include/class-knowledgeroot-content.php:1506
+msgid "Last modified by"
+msgstr "Laats gewijzigd door"
+
+#: include/class-knowledgeroot-content.php:1506
+msgid "on"
+msgstr "op"
+
+#: include/class-knowledgeroot-content.php:1507
+msgid "created"
+msgstr "gemaakt"
+
+#: include/class-knowledgeroot-content.php:1663
+msgid "add"
+msgstr "toevoegen"
+
+#: include/class-knowledgeroot-content.php:1705
+msgid "No content here."
+msgstr "Hier geen inhoud."
+
+#: include/class-knowledgeroot-content.php:1729
+msgid "Welcome to Knowledgeroot"
+msgstr "Welkom bij Knowledgeroot"
+
+#: include/class-knowledgeroot-header.php:321
+msgid "You can login after #RELOGINDELAY# seconds!"
+msgstr "U kunt weer inloggen na #RELOGINDELAY# seconden!"
+
+#: include/class-knowledgeroot-header.php:323
+msgid "This account is disabled!"
+msgstr "Dit account is uitgeschakeld"
+
+#: include/class-knowledgeroot-header.php:327
+msgid "You have entered the wrong user or password!"
+msgstr "U heeft de verkeerde gebruiker od wachtwoord ingevoerd!"
+
+#: include/class-knowledgeroot-header.php:410
+msgid "WRONG DOWNLOADFILE!"
+msgstr "VERKEERDE DOWNLOADBESTAND!"
+
+#: include/class-knowledgeroot-header.php:417
+msgid "No File for you!"
+msgstr "Geen bestand voor u!"
+
+#: include/class-knowledgeroot-header.php:785
+msgid "Cannot add file. File is to big!"
+msgstr "Kan bestand niet toevoegen. Het is te groot!"
+
+#: include/class-knowledgeroot-header.php:795
+msgid "No upload folder found!"
+msgstr "Geen upload map gevonden!"
+
+#: include/class-knowledgeroot-header.php:951
+msgid "Cannot delete page. Check if content is on the page!"
+msgstr "Pagina kan niet worden verwijderd. Mogelijk bevat deze pagina nog inhoud!"
+
+#: include/class-knowledgeroot-header.php:1133
+msgid "name for root cannot be empty"
+msgstr "De naam voor de basis mag niet leeg zijn"
+
+#: include/class-knowledgeroot-header.php:1316
+msgid "User was deleted!"
+msgstr "Gebruiker is verwijderd!"
+
+#: include/class-knowledgeroot-header.php:1337
+msgid "Group was deleted!"
+msgstr "Groep is verwijderd!"
+
+#: include/class-knowledgeroot-header.php:1340
+msgid "Could not delete group. Group is in use as defaultgroup!"
+msgstr "Kan deze groep niet verwijderen. De groep is gebruik als standaard groep!"
+
+#: include/class-knowledgeroot-header.php:1366
+msgid "Language changed."
+msgstr "Taal aangepast."
+
+#: include/class-knowledgeroot-header.php:1371
+msgid "Password changed!"
+msgstr "Wachtwoord is aangepat!"
+
+#: include/class-knowledgeroot-header.php:1374
+msgid "Failed to change password!"
+msgstr "Wachtwoord niet aangepast!"
+
+#: include/class-knowledgeroot-header.php:1381
+msgid "Theme was changed."
+msgstr "Thema is gewijzigd."
+
+#: include/class-knowledgeroot-header.php:1626
+#: include/class-knowledgeroot-header.php:1642
+#: include/class-knowledgeroot-header.php:1689
+#: include/class-knowledgeroot-header.php:1736
+msgid "content moved"
+msgstr "inhoud verplaatst"
+
+#: include/class-knowledgeroot.php:147
+#: include/class-knowledgeroot.php:186
+#: include/class-knowledgeroot.php:243
+#: include/class-knowledgeroot.php:287
+#: include/class-knowledgeroot.php:359
+#: include/class-knowledgeroot.php:373
+#: include/class-knowledgeroot.php:419
+#: include/class-knowledgeroot.php:497
+#: include/class-knowledgeroot.php:511
+#: include/class-knowledgeroot.php:561
+msgid "userrights"
+msgstr "gebruikersrechten"
+
+#: include/class-knowledgeroot.php:148
+#: include/class-knowledgeroot.php:187
+#: include/class-knowledgeroot.php:244
+#: include/class-knowledgeroot.php:288
+#: include/class-knowledgeroot.php:360
+#: include/class-knowledgeroot.php:378
+#: include/class-knowledgeroot.php:420
+#: include/class-knowledgeroot.php:498
+#: include/class-knowledgeroot.php:516
+#: include/class-knowledgeroot.php:562
+msgid "grouprights"
+msgstr "groeps rechten"
+
+#: include/class-knowledgeroot.php:188
+#: include/class-knowledgeroot.php:289
+#: include/class-knowledgeroot.php:421
+#: include/class-knowledgeroot.php:563
+msgid "otherrights"
+msgstr "overige rechten"
+
+#: include/class-knowledgeroot.php:189
+#: include/class-knowledgeroot.php:290
+#: include/class-knowledgeroot.php:423
+#: include/class-knowledgeroot.php:565
+msgid "Add Grouprights"
+msgstr "Groepsrechten toevoegen"
+
+#: include/class-knowledgeroot.php:189
+#: include/class-knowledgeroot.php:290
+#: include/class-knowledgeroot.php:423
+#: include/class-knowledgeroot.php:565
+msgid "Add Userrights"
+msgstr "Gebruikersrechten toevoegen"
+
+#: include/class-knowledgeroot.php:280
+#: include/class-knowledgeroot.php:554
+msgid "enable inherit rights for subpages and contents"
+msgstr "Erven van rechten voor pagina's en inhoud toestaan"
+
+#: include/class-knowledgeroot.php:281
+#: include/class-knowledgeroot.php:555
+msgid "enable edit of rights for these pages and contents"
+msgstr "Aanpassen van rechten voor deze pagina's en inhoud toestaan"
+
+#: include/class-knowledgeroot.php:282
+#: include/class-knowledgeroot.php:556
+msgid "disable inherit rights for subpages and contents"
+msgstr "Erven van rechten voor pagina's en inhoud blokkeren"
+
+#: include/class-knowledgeroot.php:348
+msgid "set recursiv"
+msgstr "recursieve instellen"
+
+#: include/class-knowledgeroot.php:350
+#: include/class-knowledgeroot.php:824
+#: include/class-knowledgeroot.php:838
+msgid "no"
+msgstr "nee"
+
+#: include/class-knowledgeroot.php:351
+#: include/class-knowledgeroot.php:821
+#: include/class-knowledgeroot.php:839
+msgid "yes"
+msgstr "ja"
+
+#: include/class-knowledgeroot.php:992
+msgid "read+write"
+msgstr "lezen+schrijven"
+
+#: include/class-knowledgeroot.php:993
+msgid "read"
+msgstr "lezen"
+
+#: include/class-knowledgeroot.php:994
+msgid "no rights"
+msgstr "geen rechten"
+
+#: include/class-tree.php:436
+#: include/class-tree.php:506
+msgid "Empty"
+msgstr "Leeg"
+
+#~ msgid "Goto Top"
+#~ msgstr "Ga naar boven"
+#~ msgid "_text"
+#~ msgstr "_text"
+#~ msgid "was"
+#~ msgstr "was"
+#~ msgid "_html"
+#~ msgstr "_html"
+#~ msgid "Title of content (optional)"
+#~ msgstr "Titel van de inhoud (optioneel)"
+#~ msgid "back"
+#~ msgstr "terug"
+#~ msgid "Here you can create a new page."
+#~ msgstr "Hier kan u een nieuwe pagina maken"
+#~ msgid "pagerights"
+#~ msgstr "pagina rechten"
+#~ msgid "pagerights for subpages (inherit rights)"
+#~ msgstr "paginarechten voor subpaginas (erf de rechten)"
+#~ msgid "Here you can modify page settings."
+#~ msgstr "Hier kan u de pagina instellingen aanpassen"
+#~ msgid "create root"
+#~ msgstr "maak basis"
+#~ msgid "action"
+#~ msgstr "actie"
+#~ msgid "new user"
+#~ msgstr "nieuwe gebruiker"
+#~ msgid "Collapse/expand content"
+#~ msgstr "Inhoud in- / uiklappen"
+#~ msgid "move content down"
+#~ msgstr "verplaats inhoud omlaag"
+#~ msgid "move content up"
+#~ msgstr "verplaats inhoud omhoog"
+

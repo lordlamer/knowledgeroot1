@@ -1,0 +1,1 @@
+({"singleSort":"Sortare singură","indirectSelectionRadio":"Rândul ${0}, selecţie singulară, casetă radio","ascending":"Crescător","indirectSelectionCheckBox":"Rândul ${0}, selecţie multiplă, casetă de bifare","selectAll":"Selectare tot","descending":"Descrescător","nestedSort":"Sortare imbricată","unsorted":"Nu sortaţi această coloană","sortingState":"${0} - ${1}"})

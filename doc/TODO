@@ -1,0 +1,37 @@
+TODO
+---------------
+- test with mysqli databasewrapper
+- crypt files or content with a password or a keyfile
+- file uploads should be make with ajax
+- it should be able to use also icons for navigation (icon for edit content or create content)
+- better errorhandling
+  -> create LOGS if errors are produced
+- import from: xml, html, rtf(?), pdf(?)
+- export to: xml, html, rtf, pdf
+- print preview (?)
+- include other translations
+- edit/include metatags on every page for google and co.
+- page should be available over an alias so that we can create static links with apache rewrite
+  -> so: www.domain.org/index.php?id=32 could be www.domain.org/hello.html
+- list of content(overview) of new and recently modified content on homepage
+- list with content titles on each page for faster content selection
+- user comments for every contentelement (should be discuessed ;) )
+- link from one content to other internal content
+- move tree elements by grabbing them and drop them where it should move to
+- move content by grabbing them and moving the content vertical and drop them
+- interface for thirdparty extensions in knowledgeroot ?
+- autoupdate for admin
+- grammar correction (rechtschreibpruefung)
+
+DONE
+------------------
+- user-registration form that could be en/disabled by config
+- database cleaner - admin should be able to delete deleted pages/content/files
+- versioning
+- email notification if content is created or modified
+- allow modify of welcome page
+- user can change his language
+- "expand all" and "collapse all" under tree
+- tree should be make with ajax
+- tree should be able to slide in and out
+- it should be possible to move a content on a page up or down. (save that in database)

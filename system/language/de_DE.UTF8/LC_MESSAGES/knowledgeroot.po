@@ -1,0 +1,927 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Knowledgeroot\n"
+"Report-Msgid-Bugs-To: language@knowledgeroot.org\n"
+"POT-Creation-Date: 2011-06-05 21:53+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Frank Habermann <lordlamer@lordlamer.de>\n"
+"Language-Team: Frank Habermann <lordlamer@lordlamer.de>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: icon.php:30
+#: index.php:50
+#: move.php:34
+#: include/init.php:236
+msgid "loading..."
+msgstr "lade..."
+
+#: icon.php:34
+#: include/class-knowledgeroot-content.php:211
+#: include/class-knowledgeroot-content.php:312
+msgid "select icon"
+msgstr "Symbol auswählen"
+
+#: icon.php:54
+msgid "no icon"
+msgstr "kein Symbol"
+
+#: icon.php:57
+#: move.php:105
+msgid "close window"
+msgstr "Fenster schließen"
+
+#: index.php:57
+msgid "Search"
+msgstr "Suche"
+
+#: index.php:59
+msgid "GO"
+msgstr "Los"
+
+#: index.php:76
+msgid "version"
+msgstr "Version"
+
+#: index.php:93
+#: include/class-email-notification.php:128
+#: include/class-email-notification.php:150
+msgid "Path"
+msgstr "Pfad"
+
+#: index.php:107
+msgid "User"
+msgstr "Benutzer"
+
+#: index.php:123
+msgid "change"
+msgstr "ändern"
+
+#: index.php:140
+#: move.php:59
+#: include/class-default-menu.php:132
+#: include/class-default-menu.php:192
+msgid "show menu"
+msgstr "zeige Menü"
+
+#: move.php:38
+msgid "move to"
+msgstr "verschiebe zu"
+
+#: move.php:44
+msgid "move to root"
+msgstr "verschiebe zur Wurzel"
+
+#: move.php:51
+msgid "Move content to other page:"
+msgstr "Verschiebe Inhalt auf eine andere Seite:"
+
+#: move.php:82
+msgid "Move content on the same page:"
+msgstr "Inhalt auf dieser Seite verschieben:"
+
+#: admin/index.php:53
+msgid "Back to Knowledgeroot"
+msgstr "Zurück zu Knowledgeroot"
+
+#: admin/index.php:56
+msgid "Powered by Knowledgeroot"
+msgstr "Betrieben von Knowledgeroot"
+
+#: admin/index.php:61
+msgid "Username"
+msgstr "Benutzername"
+
+#: admin/index.php:62
+msgid "Password"
+msgstr "Passwort"
+
+#: admin/index.php:63
+#: include/class-default-menu.php:41
+#: include/class-knowledgeroot-content.php:799
+#: include/class-knowledgeroot-content.php:811
+msgid "login"
+msgstr "Login"
+
+#: admin/index.php:70
+msgid "Forgot password?"
+msgstr "Passwort vergessen?"
+
+#: admin/index.php:72
+msgid "To reset the admin password you need to make a new login.<br /> After that you see a loginhash at the bottom. Copy this hash value to your app.ini in section admin."
+msgstr "Zum Zurücksetzen des Admin Passwortes musst du einen neuen Login machen.<br />Danach hast du am unteren Bildschirm einen loginhash welchen du in deine app.ini in die Sektion admin übernehmen muss."
+
+#: include/class-default-menu.php:49
+msgid "logout"
+msgstr "Logout"
+
+#: include/class-default-menu.php:57
+msgid "roots"
+msgstr "Wurzeln"
+
+#: include/class-default-menu.php:66
+#: include/class-knowledgeroot-content.php:806
+#: include/class-knowledgeroot-content.php:998
+#: include/class-knowledgeroot-content.php:1215
+#: include/class-knowledgeroot-content.php:1281
+#: include/class-knowledgeroot.php:147
+#: include/class-knowledgeroot.php:186
+#: include/class-knowledgeroot.php:243
+#: include/class-knowledgeroot.php:287
+#: include/class-knowledgeroot.php:359
+#: include/class-knowledgeroot.php:373
+#: include/class-knowledgeroot.php:419
+#: include/class-knowledgeroot.php:497
+#: include/class-knowledgeroot.php:511
+#: include/class-knowledgeroot.php:561
+msgid "user"
+msgstr "Benutzer"
+
+#: include/class-default-menu.php:75
+msgid "options"
+msgstr "Optionen"
+
+#: include/class-default-menu.php:87
+#: include/class-default-menu.php:192
+msgid "hide menu"
+msgstr "Menü verstecken"
+
+#: include/class-default-menu.php:96
+msgid "expand menu"
+msgstr "Menü ausklappen"
+
+#: include/class-default-menu.php:105
+msgid "reload menu"
+msgstr "Menü neuladen"
+
+#: include/class-default-menu.php:114
+msgid "collapse menu"
+msgstr "Menü einklappen"
+
+#: include/class-default-menu.php:141
+msgid "close menu"
+msgstr "Menü schließen"
+
+#: include/class-default-menu.php:155
+#: include/class-default-menu.php:298
+msgid "add new page"
+msgstr "Neue Seite anlegen"
+
+#: include/class-default-menu.php:162
+#: include/class-default-menu.php:305
+msgid "edit page"
+msgstr "Seite bearbeiten"
+
+#: include/class-default-menu.php:169
+#: include/class-default-menu.php:312
+msgid "move page"
+msgstr "Seite verschieben"
+
+#: include/class-default-menu.php:177
+#: include/class-default-menu.php:320
+msgid "delete page"
+msgstr "Seite löschen"
+
+#: include/class-default-menu.php:179
+#: include/class-default-menu.php:182
+#: include/class-default-menu.php:322
+msgid "Do you really want to delete this page?"
+msgstr "Wollen Sie diese Seite wirklich löschen?"
+
+#: include/class-default-menu.php:185
+#: include/class-default-menu.php:335
+#: include/class-default-menu.php:347
+msgid "add new content"
+msgstr "Neuen Inhalt anlegen"
+
+#: include/class-default-menu.php:204
+#: include/class-knowledgeroot-content.php:1031
+#: include/class-knowledgeroot-content.php:1120
+msgid "edit"
+msgstr "bearbeiten"
+
+#: include/class-default-menu.php:212
+#: include/class-knowledgeroot-content.php:1031
+#: include/class-knowledgeroot-content.php:1120
+#: include/class-knowledgeroot-content.php:1639
+msgid "delete"
+msgstr "löschen"
+
+#: include/class-default-menu.php:217
+#: include/class-default-menu.php:365
+#: include/class-knowledgeroot-content.php:1639
+msgid "Do you really want to delete?"
+msgstr "Wollen Sie wirklich löschen?"
+
+#: include/class-default-menu.php:220
+msgid "move"
+msgstr "verschieben"
+
+#: include/class-default-menu.php:229
+msgid "print"
+msgstr "drucken"
+
+#: include/class-default-menu.php:238
+#: include/class-default-menu.php:382
+#: include/class-knowledgeroot-content.php:1659
+msgid "add file"
+msgstr "Datei hinzufügen"
+
+#: include/class-default-menu.php:246
+msgid "Top"
+msgstr "Oben"
+
+#: include/class-default-menu.php:275
+msgid "save as default tree"
+msgstr "Als Standardbaum speichern"
+
+#: include/class-default-menu.php:283
+msgid "Sourceforge"
+msgstr "Sourceforge"
+
+#: include/class-default-menu.php:354
+msgid "edit content"
+msgstr "Inhalt editieren"
+
+#: include/class-default-menu.php:363
+msgid "delete content"
+msgstr "Inhalt löschen"
+
+#: include/class-default-menu.php:372
+msgid "move content"
+msgstr "Inhalt verschieben"
+
+#: include/class-email-notification.php:49
+#, php-format
+msgid "Page \"%s\" was created"
+msgstr "Seite \"%s\" wurde erstellt"
+
+#: include/class-email-notification.php:53
+#, php-format
+msgid "Page \"%s\" was edited"
+msgstr "Seite \"%s\" wurde bearbeitet"
+
+#: include/class-email-notification.php:57
+#, php-format
+msgid "Page \"%s\" was moved"
+msgstr "Seite \"%s\" wurde verschoben"
+
+#: include/class-email-notification.php:61
+#, php-format
+msgid "Page \"%s\" was deleted"
+msgstr "Seite \"%s\" wurde gelöscht"
+
+#: include/class-email-notification.php:69
+#, php-format
+msgid "Content \"%s\" was created"
+msgstr "Inhalt \"%s\" wurde erstellt"
+
+#: include/class-email-notification.php:73
+#, php-format
+msgid "Content \"%s\" was edited"
+msgstr "Inhalt \"%s\" wurde bearbeitet"
+
+#: include/class-email-notification.php:77
+#, php-format
+msgid "Content \"%s\" was moved"
+msgstr "Inhalt \"%s\" wurde verschoben"
+
+#: include/class-email-notification.php:81
+#, php-format
+msgid "Content \"%s\" was deleted"
+msgstr "Inhalt \"%s\" wurde gelöscht"
+
+#: include/class-email-notification.php:90
+#, php-format
+msgid "File \"%s\" was created"
+msgstr "Datei \"%s\" wurde erstellt"
+
+#: include/class-email-notification.php:94
+#, php-format
+msgid "File \"%s\" was deleted"
+msgstr "Datei \"%s\" wurde gelöscht"
+
+#: include/class-email-notification.php:103
+#: include/class-email-notification.php:123
+msgid "Knowledgeroot notification"
+msgstr "Knowledgeroot Benachrichtigung"
+
+#: include/class-email-notification.php:129
+#: include/class-email-notification.php:151
+msgid "Action"
+msgstr "Aktion"
+
+#: include/class-email-notification.php:130
+msgid "author"
+msgstr "Autor"
+
+#: include/class-email-notification.php:131
+msgid "date"
+msgstr "Datum"
+
+#: include/class-email-notification.php:132
+#: include/class-email-notification.php:154
+msgid "link"
+msgstr "Link"
+
+#: include/class-email-notification.php:152
+msgid "Author"
+msgstr "Autor"
+
+#: include/class-email-notification.php:153
+msgid "Date"
+msgstr "Datum"
+
+#: include/class-email-notification.php:157
+msgid "Detail of Changes"
+msgstr "Detailveränderungen"
+
+#: include/class-email-notification.php:164
+msgid "Unable to send email notification"
+msgstr "Konnte Email nicht senden"
+
+#: include/class-knowledgeroot-content.php:86
+#: include/class-knowledgeroot-content.php:160
+#: include/class-knowledgeroot-content.php:404
+#: include/class-knowledgeroot-content.php:478
+#: include/class-knowledgeroot-content.php:913
+#: include/class-knowledgeroot-content.php:1222
+#: include/class-knowledgeroot-content.php:1289
+#: include/class-knowledgeroot-content.php:1322
+#: include/class-knowledgeroot-content.php:1365
+msgid "save"
+msgstr "speichern"
+
+#: include/class-knowledgeroot-content.php:87
+#: include/class-knowledgeroot-content.php:161
+#: include/class-knowledgeroot-content.php:405
+#: include/class-knowledgeroot-content.php:479
+msgid "save and close"
+msgstr "speichern und schließen"
+
+#: include/class-knowledgeroot-content.php:88
+#: include/class-knowledgeroot-content.php:162
+#: include/class-knowledgeroot-content.php:406
+#: include/class-knowledgeroot-content.php:480
+msgid "close"
+msgstr "schließen"
+
+#: include/class-knowledgeroot-content.php:94
+#: include/class-knowledgeroot-content.php:415
+msgid "content"
+msgstr "Inhalt"
+
+#: include/class-knowledgeroot-content.php:97
+msgid "Title"
+msgstr "Titel"
+
+#: include/class-knowledgeroot-content.php:109
+#: include/class-knowledgeroot-content.php:425
+msgid "Position"
+msgstr "Position"
+
+#: include/class-knowledgeroot-content.php:111
+#: include/class-knowledgeroot-content.php:428
+msgid "first"
+msgstr "erster"
+
+#: include/class-knowledgeroot-content.php:122
+#: include/class-knowledgeroot-content.php:438
+#, php-format
+msgid "after %s"
+msgstr "nach %s"
+
+#: include/class-knowledgeroot-content.php:135
+#: include/class-knowledgeroot-content.php:233
+#: include/class-knowledgeroot-content.php:337
+#: include/class-knowledgeroot-content.php:450
+#: include/class-knowledgeroot-content.php:873
+msgid "permissions"
+msgstr "Rechte"
+
+#: include/class-knowledgeroot-content.php:188
+#: include/class-knowledgeroot-content.php:260
+msgid "create page"
+msgstr "Seite erstellen"
+
+#: include/class-knowledgeroot-content.php:193
+#: include/class-knowledgeroot-content.php:297
+#: include/class-knowledgeroot-content.php:854
+msgid "site"
+msgstr "Seite"
+
+#: include/class-knowledgeroot-content.php:195
+#: include/class-knowledgeroot-content.php:301
+msgid "page name"
+msgstr "Seitenname"
+
+#: include/class-knowledgeroot-content.php:200
+msgid "automatically open the created page"
+msgstr "Automatisches öffnen der erstellten Seite"
+
+#: include/class-knowledgeroot-content.php:204
+#: include/class-knowledgeroot-content.php:305
+msgid "page alias"
+msgstr "Seiten Alias"
+
+#: include/class-knowledgeroot-content.php:208
+#: include/class-knowledgeroot-content.php:309
+msgid "at beginning"
+msgstr "am Anfang"
+
+#: include/class-knowledgeroot-content.php:208
+#: include/class-knowledgeroot-content.php:309
+msgid "at the end"
+msgstr "am Ende"
+
+#: include/class-knowledgeroot-content.php:208
+#: include/class-knowledgeroot-content.php:309
+msgid "default position for content"
+msgstr "Standard Position für Inhalt"
+
+#: include/class-knowledgeroot-content.php:211
+#: include/class-knowledgeroot-content.php:312
+msgid "icon"
+msgstr "Symbol"
+
+#: include/class-knowledgeroot-content.php:215
+#: include/class-knowledgeroot-content.php:316
+msgid "Symlink"
+msgstr "Verknüpfung"
+
+#: include/class-knowledgeroot-content.php:220
+#: include/class-knowledgeroot-content.php:321
+#: include/class-knowledgeroot-content.php:862
+msgid "tooltip"
+msgstr "Tooltip"
+
+#: include/class-knowledgeroot-content.php:225
+#: include/class-knowledgeroot-content.php:326
+#: include/class-knowledgeroot-content.php:867
+msgid "priority"
+msgstr "Priorität"
+
+#: include/class-knowledgeroot-content.php:248
+#: include/class-knowledgeroot-content.php:353
+#: include/class-knowledgeroot-content.php:876
+msgid "inherit permissions"
+msgstr "vererbbare Rechte"
+
+#: include/class-knowledgeroot-content.php:292
+#: include/class-knowledgeroot-content.php:364
+msgid "save changes"
+msgstr "Änderungen speichern"
+
+#: include/class-knowledgeroot-content.php:330
+msgid "Initially show all content on this page collapsed?"
+msgstr "Inhalte zusammen geklappt anzeigen?"
+
+#: include/class-knowledgeroot-content.php:395
+msgid "Another user is already editing this content!"
+msgstr "Ein anderer Benutzer bearbeitet gerade diesen Inhalt!"
+
+#: include/class-knowledgeroot-content.php:418
+msgid "title"
+msgstr "Titel"
+
+#: include/class-knowledgeroot-content.php:427
+msgid "do not change"
+msgstr "nicht ändern"
+
+#: include/class-knowledgeroot-content.php:465
+msgid "informations"
+msgstr "Informationen"
+
+#: include/class-knowledgeroot-content.php:467
+msgid "created at"
+msgstr "Erstellt am"
+
+#: include/class-knowledgeroot-content.php:468
+#: include/class-knowledgeroot-content.php:1506
+msgid "guest"
+msgstr "Gast"
+
+#: include/class-knowledgeroot-content.php:468
+msgid "last changed by"
+msgstr "zuletzt geändert von"
+
+#: include/class-knowledgeroot-content.php:469
+msgid "last changed at"
+msgstr "zuletzt geändert am"
+
+#: include/class-knowledgeroot-content.php:512
+msgid "Search for"
+msgstr "Suchen nach"
+
+#: include/class-knowledgeroot-content.php:515
+msgid "Content"
+msgstr "Inhalt"
+
+#: include/class-knowledgeroot-content.php:598
+msgid "show"
+msgstr "zeigen"
+
+#: include/class-knowledgeroot-content.php:604
+#: include/class-knowledgeroot-content.php:607
+#: include/class-knowledgeroot-content.php:682
+#: include/class-knowledgeroot-content.php:685
+#: include/class-knowledgeroot-content.php:775
+#: include/class-knowledgeroot-content.php:778
+msgid "Nothing found"
+msgstr "Nichts gefunden"
+
+#: include/class-knowledgeroot-content.php:615
+msgid "Menu"
+msgstr "Menü"
+
+#: include/class-knowledgeroot-content.php:693
+msgid "Files"
+msgstr "Dateien"
+
+#: include/class-knowledgeroot-content.php:807
+#: include/class-knowledgeroot-content.php:1207
+#: include/class-knowledgeroot-content.php:1273
+msgid "password"
+msgstr "Passwort"
+
+#: include/class-knowledgeroot-content.php:851
+msgid "create"
+msgstr "Erstellen"
+
+#: include/class-knowledgeroot-content.php:856
+#: include/class-knowledgeroot-content.php:956
+#: include/class-knowledgeroot-content.php:994
+#: include/class-knowledgeroot-content.php:1206
+#: include/class-knowledgeroot-content.php:1272
+#: include/class-knowledgeroot-content.php:1316
+#: include/class-knowledgeroot-content.php:1360
+msgid "name"
+msgstr "Name"
+
+#: include/class-knowledgeroot-content.php:858
+msgid "alias"
+msgstr "Alias"
+
+#: include/class-knowledgeroot-content.php:902
+msgid "change options"
+msgstr "Optionen ändern"
+
+#: include/class-knowledgeroot-content.php:905
+msgid "new password"
+msgstr "neues Passwort"
+
+#: include/class-knowledgeroot-content.php:906
+msgid "confirm password"
+msgstr "Passwort bestätigen"
+
+#: include/class-knowledgeroot-content.php:907
+#: include/class-knowledgeroot-content.php:1208
+#: include/class-knowledgeroot-content.php:1274
+msgid "theme"
+msgstr "Thema"
+
+#: include/class-knowledgeroot-content.php:908
+msgid "language"
+msgstr "Sprache"
+
+#: include/class-knowledgeroot-content.php:950
+#: include/class-knowledgeroot-content.php:988
+msgid "id"
+msgstr "Id"
+
+#: include/class-knowledgeroot-content.php:961
+#: include/class-knowledgeroot-content.php:1209
+#: include/class-knowledgeroot-content.php:1275
+msgid "default group"
+msgstr "Standard Gruppe"
+
+#: include/class-knowledgeroot-content.php:966
+#: include/class-knowledgeroot-content.php:1214
+#: include/class-knowledgeroot-content.php:1280
+msgid "default rights"
+msgstr "Standard Rechte"
+
+#: include/class-knowledgeroot-content.php:971
+#: include/class-knowledgeroot-content.php:1210
+#: include/class-knowledgeroot-content.php:1276
+msgid "admin"
+msgstr "Admin"
+
+#: include/class-knowledgeroot-content.php:976
+#: include/class-knowledgeroot-content.php:1211
+#: include/class-knowledgeroot-content.php:1277
+msgid "edit rights"
+msgstr "Rechte bearbeiten"
+
+#: include/class-knowledgeroot-content.php:981
+#: include/class-knowledgeroot-content.php:1212
+#: include/class-knowledgeroot-content.php:1278
+msgid "enabled"
+msgstr "aktivieren"
+
+#: include/class-knowledgeroot-content.php:1000
+#: include/class-knowledgeroot-content.php:1200
+msgid "add user"
+msgstr "Benutzer hinzufügen"
+
+#: include/class-knowledgeroot-content.php:1001
+#: include/class-knowledgeroot-content.php:1265
+msgid "edit user"
+msgstr "Benutzer bearbeiten"
+
+#: include/class-knowledgeroot-content.php:1002
+msgid "delete user"
+msgstr "Benutzer löschen"
+
+#: include/class-knowledgeroot-content.php:1031
+#: include/class-knowledgeroot-content.php:1078
+msgid "Do you really want to delete this user?"
+msgstr "Wollen Sie diesen Benutzer wirklich löschen?"
+
+#: include/class-knowledgeroot-content.php:1097
+#: include/class-knowledgeroot-content.php:1213
+#: include/class-knowledgeroot-content.php:1279
+msgid "groups"
+msgstr "Gruppen"
+
+#: include/class-knowledgeroot-content.php:1099
+#: include/class-knowledgeroot-content.php:1312
+msgid "add group"
+msgstr "Gruppe hinzufügen"
+
+#: include/class-knowledgeroot-content.php:1100
+#: include/class-knowledgeroot-content.php:1355
+msgid "edit group"
+msgstr "Gruppe bearbeiten"
+
+#: include/class-knowledgeroot-content.php:1101
+msgid "delete group"
+msgstr "Gruppe löschen"
+
+#: include/class-knowledgeroot-content.php:1120
+#: include/class-knowledgeroot-content.php:1166
+msgid "Do you really want to delete this group?"
+msgstr "Wollen Sie diese Gruppe wirklich löschen?"
+
+#: include/class-knowledgeroot-content.php:1216
+#: include/class-knowledgeroot-content.php:1282
+#: include/class-knowledgeroot.php:148
+#: include/class-knowledgeroot.php:187
+#: include/class-knowledgeroot.php:244
+#: include/class-knowledgeroot.php:288
+#: include/class-knowledgeroot.php:360
+#: include/class-knowledgeroot.php:378
+#: include/class-knowledgeroot.php:420
+#: include/class-knowledgeroot.php:498
+#: include/class-knowledgeroot.php:516
+#: include/class-knowledgeroot.php:562
+msgid "group"
+msgstr "Gruppe"
+
+#: include/class-knowledgeroot-content.php:1217
+#: include/class-knowledgeroot-content.php:1283
+msgid "others"
+msgstr "Andere"
+
+#: include/class-knowledgeroot-content.php:1506
+msgid "Last modified by"
+msgstr "Zuletzt geändert von"
+
+#: include/class-knowledgeroot-content.php:1506
+msgid "on"
+msgstr "an"
+
+#: include/class-knowledgeroot-content.php:1507
+msgid "created"
+msgstr "erstellt"
+
+#: include/class-knowledgeroot-content.php:1663
+msgid "add"
+msgstr "hinzufügen"
+
+#: include/class-knowledgeroot-content.php:1705
+msgid "No content here."
+msgstr "Kein Inhalt vorhanden."
+
+#: include/class-knowledgeroot-content.php:1729
+msgid "Welcome to Knowledgeroot"
+msgstr "Willkommen bei Knowledgeroot"
+
+#: include/class-knowledgeroot-header.php:321
+msgid "You can login after #RELOGINDELAY# seconds!"
+msgstr "Sie können sich nach #RELOGINDELAY# Sekunden wieder anmelden."
+
+#: include/class-knowledgeroot-header.php:323
+msgid "This account is disabled!"
+msgstr "Dieses Konto ist deaktiviert!"
+
+#: include/class-knowledgeroot-header.php:327
+msgid "You have entered the wrong user or password!"
+msgstr "Sie haben das falsche Passwort oder Benutzernamen eingegeben!"
+
+#: include/class-knowledgeroot-header.php:410
+msgid "WRONG DOWNLOADFILE!"
+msgstr "Falsche Datei zum herunterladen!"
+
+#: include/class-knowledgeroot-header.php:417
+msgid "No File for you!"
+msgstr "Keine Datei für dich!"
+
+#: include/class-knowledgeroot-header.php:785
+msgid "Cannot add file. File is to big!"
+msgstr "Kann Datei nicht hinzufügen. Die Datei ist zu groß!"
+
+#: include/class-knowledgeroot-header.php:795
+msgid "No upload folder found!"
+msgstr "Kein Hochlade-Verzeichnis gefunden!"
+
+#: include/class-knowledgeroot-header.php:951
+msgid "Cannot delete page. Check if content is on the page!"
+msgstr "Konnte Seite nicht löschen. Bitte prüfen Sie ob sich noch Inhalte auf ihr befinden!"
+
+#: include/class-knowledgeroot-header.php:1133
+msgid "name for root cannot be empty"
+msgstr "Name für eine Wurzel kann nicht leer sein."
+
+#: include/class-knowledgeroot-header.php:1316
+msgid "User was deleted!"
+msgstr "Benutzer wurde gelöscht!"
+
+#: include/class-knowledgeroot-header.php:1337
+msgid "Group was deleted!"
+msgstr "Gruppe wurde gelöscht!"
+
+#: include/class-knowledgeroot-header.php:1340
+msgid "Could not delete group. Group is in use as defaultgroup!"
+msgstr "Konnte Gruppe nicht löschen, da sie als Standardgruppe verwendet wird."
+
+#: include/class-knowledgeroot-header.php:1366
+msgid "Language changed."
+msgstr "Sprache geändert."
+
+#: include/class-knowledgeroot-header.php:1371
+msgid "Password changed!"
+msgstr "Passwort geändert!"
+
+#: include/class-knowledgeroot-header.php:1374
+msgid "Failed to change password!"
+msgstr "Passwort konnte nicht geändert werden!"
+
+#: include/class-knowledgeroot-header.php:1381
+msgid "Theme was changed."
+msgstr "Thema wurde geändert."
+
+#: include/class-knowledgeroot-header.php:1626
+#: include/class-knowledgeroot-header.php:1642
+#: include/class-knowledgeroot-header.php:1689
+#: include/class-knowledgeroot-header.php:1736
+msgid "content moved"
+msgstr "Inhalt verschoben"
+
+#: include/class-knowledgeroot.php:147
+#: include/class-knowledgeroot.php:186
+#: include/class-knowledgeroot.php:243
+#: include/class-knowledgeroot.php:287
+#: include/class-knowledgeroot.php:359
+#: include/class-knowledgeroot.php:373
+#: include/class-knowledgeroot.php:419
+#: include/class-knowledgeroot.php:497
+#: include/class-knowledgeroot.php:511
+#: include/class-knowledgeroot.php:561
+msgid "userrights"
+msgstr "Benutzerrechte"
+
+#: include/class-knowledgeroot.php:148
+#: include/class-knowledgeroot.php:187
+#: include/class-knowledgeroot.php:244
+#: include/class-knowledgeroot.php:288
+#: include/class-knowledgeroot.php:360
+#: include/class-knowledgeroot.php:378
+#: include/class-knowledgeroot.php:420
+#: include/class-knowledgeroot.php:498
+#: include/class-knowledgeroot.php:516
+#: include/class-knowledgeroot.php:562
+msgid "grouprights"
+msgstr "Gruppenrechte"
+
+#: include/class-knowledgeroot.php:188
+#: include/class-knowledgeroot.php:289
+#: include/class-knowledgeroot.php:421
+#: include/class-knowledgeroot.php:563
+msgid "otherrights"
+msgstr "Rechte Sonstiger"
+
+#: include/class-knowledgeroot.php:189
+#: include/class-knowledgeroot.php:290
+#: include/class-knowledgeroot.php:423
+#: include/class-knowledgeroot.php:565
+msgid "Add Grouprights"
+msgstr "Gruppenrechte hinzufügen"
+
+#: include/class-knowledgeroot.php:189
+#: include/class-knowledgeroot.php:290
+#: include/class-knowledgeroot.php:423
+#: include/class-knowledgeroot.php:565
+msgid "Add Userrights"
+msgstr "Benutzerrechte hinzufügen"
+
+#: include/class-knowledgeroot.php:280
+#: include/class-knowledgeroot.php:554
+msgid "enable inherit rights for subpages and contents"
+msgstr "Aktiviere Vererbbare Rechte für Unterseiten und Inhalte"
+
+#: include/class-knowledgeroot.php:281
+#: include/class-knowledgeroot.php:555
+msgid "enable edit of rights for these pages and contents"
+msgstr "Aktiviere Bearbeitung von Rechten für Seiten und Inhalten"
+
+#: include/class-knowledgeroot.php:282
+#: include/class-knowledgeroot.php:556
+msgid "disable inherit rights for subpages and contents"
+msgstr "Deaktiviere Vererbbare Rechte für Unterseiten und Inhalte"
+
+#: include/class-knowledgeroot.php:348
+msgid "set recursiv"
+msgstr "Rekursiv setzen"
+
+#: include/class-knowledgeroot.php:350
+#: include/class-knowledgeroot.php:824
+#: include/class-knowledgeroot.php:838
+msgid "no"
+msgstr "nein"
+
+#: include/class-knowledgeroot.php:351
+#: include/class-knowledgeroot.php:821
+#: include/class-knowledgeroot.php:839
+msgid "yes"
+msgstr "ja"
+
+#: include/class-knowledgeroot.php:992
+msgid "read+write"
+msgstr "Lesen und Schreiben"
+
+#: include/class-knowledgeroot.php:993
+msgid "read"
+msgstr "Lesen"
+
+#: include/class-knowledgeroot.php:994
+msgid "no rights"
+msgstr "keine Rechte"
+
+#: include/class-tree.php:436
+#: include/class-tree.php:506
+msgid "Empty"
+msgstr "Leer"
+
+#~ msgid "_text"
+#~ msgstr "_text"
+
+#~ msgid "was"
+#~ msgstr "war"
+
+#~ msgid "_html"
+#~ msgstr "_html"
+
+#~ msgid "Title of content (optional)"
+#~ msgstr "Titel des Inhaltes (optional)"
+
+#~ msgid "Goto Top"
+#~ msgstr "nach Oben"
+
+#~ msgid "back"
+#~ msgstr "zurück"
+
+#~ msgid "Here you can create a new page."
+#~ msgstr "Hier können Sie eine neue Seite erstellen."
+
+#~ msgid "pagerights"
+#~ msgstr "Seitenrechte"
+
+#~ msgid "pagerights for subpages (inherit rights)"
+#~ msgstr "Seitenrechte für Unterseiten (vererbbare Rechte)"
+
+#~ msgid "Here you can modify page settings."
+#~ msgstr "Hier können Sie die Seiteneinstellungen bearbeiten"
+
+#~ msgid "create root"
+#~ msgstr "Wurzel erzeugen"
+
+#~ msgid "action"
+#~ msgstr "Aktion"
+
+#~ msgid "new user"
+#~ msgstr "Neuer Benutzer"
+
+#~ msgid "Collapse/expand content"
+#~ msgstr "Inhalt Einklappen/Ausklappen"
+
+#~ msgid "move content down"
+#~ msgstr "verschiebe Inhalten nach unten"
+
+#~ msgid "move content up"
+#~ msgstr "verschiebe Inhalt nach oben"

@@ -1,0 +1,1 @@
+({"edit":"[uredi]","save":"[spremi]","cancel":"[opoziv]","doNew":"[novo]"})

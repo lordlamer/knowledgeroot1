@@ -1,0 +1,1 @@
+({"text":"Opis:","insertImageTitle":"Svojstva slike","set":"Postavi","newWindow":"Novi prozor","topWindow":"Najviši prozor","target":"Cilj:","createLinkTitle":"Svojstva veze","parentWindow":"Nadređeni prozor","currentWindow":"Aktivni prozor","url":"URL:"})

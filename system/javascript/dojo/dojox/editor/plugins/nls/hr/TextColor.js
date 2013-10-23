@@ -1,0 +1,1 @@
+({"setButtonText":"Postavi","cancelButtonText":"Opoziv"})

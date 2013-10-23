@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^[^/]*\.html$ index.php
+
+  RewriteCond %{REQUEST_FILENAME} ^.*/download.*
+  RewriteRule .* index.php [L]
+</IfModule>
+
+Order deny,allow
+Allow from all

@@ -1,0 +1,405 @@
+20131007 - fhabermann
+* using javascript only to delete files to prevent deletion of google or webcrawlers
+
+20130909 - fhabermann
+* dojo downgrade to version 1.6.2 that fixes problems with google chrome 29
+
+20130902 - fhabermann
+* updated config to use dojo 1.9.1 from cdn
+
+20130821 - fhabermann
+* zendframework upgrade to 1.12.3
+* dojo upgrade to 1.9.0
+* prototype upgrade to 1.7.1
+* changed version to 1.0.4
+* removed uploadImage from dojorte
+
+20120105 - fhabermann
+* dojotoolkit downgraded to version 1.6.1
+
+20120103 - fhabermann
+* changed version to 1.0.3
+
+20120102 - fhabermann
+* fixed auth problems with passwords that contains apostrophe (Closes: #211)
+* fixed problem with highlighting and chinese chars (Closes: #209)
+
+20111228 - fhabermann
+* fixed problem with content collapse from email notification (Closes: #214)
+
+20111225 - fhabermann
+* dojo update to version 1.7.1
+* enable multiple email receivers (Closes: #1194)
+
+20110930 - fhabermann
+* zendframework update to version 1.11.11
+* fixed german wording (Closes: #210)
+
+20110810 - fhabermann
+* zendframework update to version 1.11.10
+* disabled pagealias as default
+
+20110728 - fhabermann
+* fixed problem with not working save and close buttons on content edit
+* fixed problem with not working save and close buttons on new content
+
+20110721 - fhabermann
+* fixed problems with content ordering on ajax loaded contents
+
+20110720
+* changed version to 1.0.2
+* added actual nl_NL translation
+* zendframework update to version 1.11.9
+* add cdn support and doing requirements in init.php for dojo
+* added partial load for content elements
+
+20110607 - fhabermann
+* changed version to 1.0.1
+* fixed mysql upgrade dump
+* changed TYPE to ENGINE in initial mysql dump
+
+20110605 - fhabermann
+* changed version to 1.0.0 stable
+* added some text for forget password in admin interface
+* updated gettext template
+* updated german translation
+
+20110602 - fhabermann
+* zendframework update to 1.11.7
+* change mysql type for column lastupdated
+
+20110529 - fhabermann
+* added showtitledetail option
+* changed version to 1.0.0rc7
+* fixed wrong name of column with sqlite
+* fixed missing time on content create/edit in sql
+
+20110525 - fhabermann
+* fixed: content create date was not set
+* added content status bar that shows last update and create date
+* moved files to content title pane
+* make statusbar optional
+
+20110523 - fhabermann
+* fixed missing "default" in mysql dump
+* changed version to 1.0.0rc6
+
+20110521 - fhabermann
+* update locale pot file
+* update for de_DE locale
+
+20110520 - fhabermann
+* make default position for contents editable
+* changed version to 1.0.0rc5
+
+20110518 - fhabermann
+* added create date for contents
+
+20110517 - fhabermann
+* add missing dojo styles to edit page
+* fixed problems with content collapse
+* changed style for content move dropdown in new content and edit conent
+
+20110511 - fhabermann
+* fixed problem with tree context menu
+
+20110508 - fhabermann
+* updated worpress theme
+* fixed prolem with themes
+* added missing dojo styles to new page
+
+20110506 - fhabermann
+* zendframework update to 1.11.6
+* dojotoolkit update to 1.6.1
+
+20110505 - fhabermann
+* added missing content rights checks
+* added missing host paramter to config at install time
+* changed version to 1.0.0rc4
+
+20110501 - fhabermann
+* updated pot file
+* added actual german translation
+
+20110430 - fhabermann
+* fixed problems with dojo select drop downs
+* added support to set position on new content
+* added support to set position on edit content
+
+20110429 - fhabermann
+* fixed problem with user dropdown and special values
+* fixed multiple problems with email notification
+* added print dialog for content
+* use short names for content menu
+
+20110416 - fhabermann
+* added move functions in move.php
+* added actual pot file for translations
+* added actual translation for de_DE
+* changed version to 1.0.0rc3
+
+20110415 - fhabermann
+* added functions for move content position
+
+20110410 - fhabermann
+* added link to content in email notification
+* added missing anchor in content listing
+
+20110409 - fhabermann
+* fixed problems with include prefix
+
+20110407 - fhabermann
+* zendframework update 1.11.5
+* clear searchfield on focus
+
+20110330 - fhabermann
+* set default values for buttons
+
+20110326 - fhabermann
+* fixed wrong requirements on old config file
+
+20110210 - fhabermann
+* zendframework update 1.11.3
+
+20101228 - fhabermann
+* make new install useable
+
+20101227 - fhabermann
+* added scriptaculous 1.9.0
+
+20101226 - fhabermann
+* adding dojo styles to installer
+
+20101225 - fhabermann
+* using dojo styled for user edit
+
+20101222 - fhabermann
+* added prototype 1.7
+
+20101220 - fhabermann
+* adding support for config functions
+
+20101107 - fhabermann
+* using dojo styles to create root elements
+
+20101011 - fhabermann
+* added css marker for menues
+
+20101008 - fhabermann
+* fixed new_content hooks
+
+20101007 - fhabermann
+* fixed problems with content menu and float right
+
+20100926 - fhabermann
+* fixed login problems with button var name
+
+20100909 - fhabermann
+* fixing problems with hide and show menu functions
+
+20100908 - fhabermann
+* using dojo titlepane, textbox and button for login
+
+20100906 - fhabermann
+* fixed style problems with tabcontainer in new content mode
+* fixed style problems with tabcontainer in new page mode
+* fixed style problems with tabcontainer in edit page mode
+
+20100904 - fhabermann
+* fixed style problems with tabcontainer in edit content mode
+* added dojo styles to options
+
+20100902 - fhabermann
+* added new option to function addheader
+* move menubar to top of content
+* added new config option showpagebottomnavi
+* added check for showpagebottomnavi to contentview
+
+20100824 - fhabermann
+* added missing config values to config
+* use system locale for email notification
+* change layout for contentline menu
+
+20100822 - fhabermann
+* added htacces to config folder that denies acces to that folder
+* added dojo titlepane for contentlisting
+
+20100815 - fhabermann
+* added admin_recover system extension (Closes: #125)
+
+20100731 - fhabermann
+* added support for subinheritrights on moved objects (Closes: #160)
+
+20100730 - fhabermann
+* added dojorte as system extension
+* update to zendframework 1.10.7
+
+20100727 - fhabermann
+* added missing parameters to app.ini.dist
+* added cache folder
+* used dojo menu for page menu
+* added nolink option to show_menu function
+* fixed notice in show_menu function
+* used dijit.form.Select for language change dropdown
+
+20100725 - fhabermann
+* upgraded to dojo 1.5.0
+* switch dojo theme from tundra to claro
+
+20100706 - fhabermann
+* added check for dependencies at extension start
+* fixed problem with load dependencies - extension path was missing
+
+20100423 - fhabermann
+* added redirect function to tree
+
+20100421 - fhabermann
+* fixed notices
+* added uncompressed version of prototype and scriptaculous because
+  the compressed version brings errors (Closes: #154)
+* set default language to en_US.UTF8
+* removed commented code
+
+20100420 - fhabermann
+* enable hide menu function (Closes: #55)
+
+20100408 - fhabermann
+* added search string parser
+
+20091212 - fhabermann
+* update to dojo 1.4.0
+
+20091207 - fhabermann
+* added sqlite3 support
+
+20091203 - fhabermann
+* added icon selector for tree nodes
+* added tabcontainer to new/edit page/content
+
+20091117 - fhabermann
+* fixed counter in static tree
+* added new field icon to database
+* enabled icon in tree
+
+20091108 - fhabermann
+* make self order of tree elements possible (Closes: #146)
+
+20091103 - fhabermann
+* update to zendframework 1.9.5
+
+20091031 - fhabermann
+* make direct search with content ids possible (Closes: #147)
+
+20091030 - fhabermann
+* fixed contextmenu problems with extensions (Closes: #151)
+
+20091021 - fhabermann
+* add spanish translation (Closes: #157)
+
+20091019 - fhabermann
+* changed include paths
+
+20091017 - fhabermann
+* moved search to new position
+
+20091016 - fhabermann
+* added new top styles for theme green
+* added new config options for menu
+* changed options from old settings to new ini style in index.php
+* disabled dojo debug in admin interface
+
+20091009 - fhabermann
+* added new layout for login
+* added translations for login
+
+20091003 - fhabermann
+* added translation for empty
+* added error handling to email notification
+* fixed cache problems
+
+20090930 - fhabermann
+* added replacement for phpmailer
+
+20090920 - fhabermann
+* fixed highlight problems (Closes: #148)
+
+20090913 - fhabermann
+* fixed js problem with ie (Closes: #145)
+* fixed js problem with tree expand in ie (Closes: #141)
+
+20090908 - fhabermann
+* added prototype 1.6.1
+
+20090825 - fhabermann
+* add italian translation
+
+20090821 - fhabermann
+* fixed search problem with multiple rights
+
+20090820 - fhabermann
+* fixed collapsing problems if you come from search to content element (Closes: #135)
+* fixed search problem with multiple rights (Closes: #136)
+* fixed problem with move content (Closes: #133)
+
+20090814 - fhabermann
+* add missing field counter to sqlite dump (Closes: #134)
+* fixed problems with sqlite file download (Closes: #134)
+* fixed missing date for file upload with sqlite (Closes: #137)
+
+20090806 - fhabermann
+* added nl_NL translation (Closes: #131)
+
+20090731 - fhabermann
+* dojo update to 1.3.2
+* added new search group option with that you can search for multiple words with an and condition (Closes: #126)
+
+20090724 - fhabermann
+* fixed problem with mysql downloads (Closes: #129)
+* fixed search problems with whitespaces (Closes: #121)
+
+20090720 - fhabermann
+* fixed var problem in installer
+* fixed problem with user creation (Closes: #124)
+* added rte extensions in dump and active fckeditor for default (Closes: #123)
+* set version to database at install / update (Closes: #114)
+
+20090717 - fhabermann
+* removed php-gettext
+
+20090716 - fhabermann
+* added gettext from zendframework
+* doing translations with gettext from zendframework
+* fixing notices
+
+20090712 - fhabermann
+* fixed notices (Closes: #117)
+
+20090708 - fhabermann
+* update prototypejs to version 1.6.1rc3 (Closes: #112)
+* fixed problems with link in mail notification (Closes: #113)
+* fixed title style problems in admin interface (Closes: #116)
+
+20090705 - fhabermann
+* fixed windows problems with gettext (Closes: #109)
+
+20090703 - fhabermann
+* fixed problems with mysql handling of binary files (Closes: #108)
+
+20090606 - fhabermann
+* add zendframework 1.8.2 with dojotoolkit
+
+20090603 - fhabermann
+* added first cache stuff
+* added first test for tabs on content edit
+
+20090521 - fhabermann
+* added app.ini as new base configuration file
+* zend_cache component to init
+
+20090518 - fhabermann
+* make zendframework useable (Closes: #98)
+* make dojo framework useable (Closes: #99)
+
+20090512 - fhabermann
+* created version 1.0.0-dev
+* added zendframework 1.8.1 with dojotoolkit

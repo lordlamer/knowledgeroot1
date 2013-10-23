@@ -1,0 +1,1 @@
+({"set":"Umetni","text":"Opis","insertImageTitle":"Umetni sliku","invalidMessage":"Pogrešan tip slikovne datoteke","prePopuTextBrowse":" ili pregledajte mjesnu datoteku.","browse":"Pregledaj...","prePopuTextUrl":"Unesite URL slike","url":"Slika "})

@@ -1,0 +1,1 @@
+({"rangeMessage":"Ova vrijednost je izvan raspona.","invalidMessage":"Unesena vrijednost nije važeća.","missingMessage":"Potrebna je ova vrijednost."})

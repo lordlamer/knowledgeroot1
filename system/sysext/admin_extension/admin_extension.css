@@ -1,0 +1,77 @@
+	.extension_list_header {
+		font-size:20px;
+		font-weight:bold;
+		font-family: Verdana,Arial,Helvetica,sans-serif;
+	}
+	
+	.extension_list {
+		width:550px;
+		border:#000000 solid 0px;
+	}
+	
+	.extension_list tr.extension_list_title td {
+		font-size:14px;
+		font-weight:bold;
+		border-bottom:#000000 solid 1px;
+		background-color:#D7DBE7;
+		font-family: Verdana,Arial,Helvetica,sans-serif;
+	}
+	
+	.extension_list tr td {
+		padding:1px 2px 1px 2px;
+		font-family: Verdana,Arial,Helvetica,sans-serif;
+		background-color:#EFEFF7;
+	}
+	
+	.extension_list tr.extension_list_action_disable td {
+		padding:1px 2px 1px 2px;
+		font-family: Verdana,Arial,Helvetica,sans-serif;
+		color:#FF1C18;
+		background-color:#FFDFDF;
+	}
+	
+	.extension_list tr.extension_list_action_enable td {
+		padding:1px 2px 1px 2px;
+		font-family: Verdana,Arial,Helvetica,sans-serif;
+		color:#000000;
+		background-color:#DFD7CF;
+	}
+	
+	.extension_list tr.extension_list_action_install td {
+		padding:1px 2px 1px 2px;
+		font-family: Verdana,Arial,Helvetica,sans-serif;
+		color:#000000;
+		background-color:#EFEFF7;
+	}
+	 
+	.extension_list tr td.extension_list_state_devel {
+		background-color:#D72438;
+		font-size:12px;
+		font-weight:bold;
+		color:#ffffff;
+		text-align:center;
+	}
+	
+	.extension_list tr td.extension_list_state_alpha {
+		background-color:#FF8000;
+		font-size:12px;
+		font-weight:bold;
+		color:#ffffff;
+		text-align:center;
+	}
+	
+	.extension_list tr td.extension_list_state_beta {
+		background-color:#96B279;
+		font-size:12px;
+		font-weight:bold;
+		color:#ffffff;
+		text-align:center;
+	}
+	
+	.extension_list tr td.extension_list_state_stable {
+		background-color:#38B659;
+		font-size:12px;
+		font-weight:bold;
+		color:#ffffff;
+		text-align:center;
+	}

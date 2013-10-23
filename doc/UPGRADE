@@ -1,0 +1,33 @@
+Upgrading from Knowledgeroot 0.9.8.x
+####################################
+
+1. Make a backup of your database and of your knowledgeroot folder!
+2. Keep in mind what extra extensions you have installed!
+3. Replace all files with the files in the archiv
+4. Copy your existing configs from the conf folder to the new installation
+5. Copy your extra extensions from system/extension/ to the new installation
+6. Copy your existing upload folder to the new installation
+7. Delete install.php and update.php
+8. The update is finish!!! YOU DONT NEED TO RUN update.php
+
+ATTENTION:
+It is recommended that you install the extension libsecure!
+
+Upgradeing from Knowledgeroot 0.9.7.3
+#####################################
+
+1. Make a backup of your database and of your knowledgeroot folder.
+2. You should replace all files with the new files or create a new knowledgeroot folder.
+3. Copy your existing config.inc.php to the conf folder
+4. Copy your existing upload folder to the new one (If you have content in it!)
+5. Open your Browser with URL to knowledgeroot and start the update.php (URL: http://your.location/update.php)
+6. Do all things you read in this update! So you should realy delete update.php and install.php after update or install!
+7. Check your new config.inc.php and your admin_config.inc.php. Only databasesettings should be placed now in the config.inc.php!
+8. For changing settings that was placed in the old config.inc.php you have a admininterface (URL: http://your.location/admin/) with a
+   login you have set at install or update!
+9. Update is finished. So have fun. If you have problems or questions contact us!
+
+More Informations
+#################
+
+For more information go to www.knowledgeroot.de

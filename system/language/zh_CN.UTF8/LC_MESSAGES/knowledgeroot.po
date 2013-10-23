@@ -1,0 +1,885 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Knowledgeroot.org
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0.0.2\n"
+"Report-Msgid-Bugs-To: language@knowledgeroot.org\n"
+"POT-Creation-Date: 2011-06-05 21:53+0200\n"
+"PO-Revision-Date: 2011-09-24 12:32+0800\n"
+"Last-Translator: 林桦 <fjlinhua@gmail.com>\n"
+"Language-Team: Condy <fjlinhua@gmail.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: icon.php:30
+#: index.php:50
+#: move.php:34
+#: include/init.php:236
+msgid "loading..."
+msgstr "加载中..."
+
+#: icon.php:34
+#: include/class-knowledgeroot-content.php:211
+#: include/class-knowledgeroot-content.php:312
+msgid "select icon"
+msgstr "选择图标"
+
+#: icon.php:54
+msgid "no icon"
+msgstr "没有图标"
+
+#: icon.php:57
+#: move.php:105
+msgid "close window"
+msgstr "关闭窗体"
+
+#: index.php:57
+msgid "Search"
+msgstr "关键字"
+
+#: index.php:59
+msgid "GO"
+msgstr "查询"
+
+#: index.php:76
+msgid "version"
+msgstr "版本"
+
+#: index.php:93
+#: include/class-email-notification.php:128
+#: include/class-email-notification.php:150
+msgid "Path"
+msgstr "路径"
+
+#: index.php:107
+msgid "User"
+msgstr "用户"
+
+#: index.php:123
+msgid "change"
+msgstr "修改"
+
+#: index.php:140
+#: move.php:59
+#: include/class-default-menu.php:132
+#: include/class-default-menu.php:192
+msgid "show menu"
+msgstr "显示菜单"
+
+#: move.php:38
+msgid "move to"
+msgstr "移动至"
+
+#: move.php:44
+msgid "move to root"
+msgstr "移动到根目录"
+
+#: move.php:51
+msgid "Move content to other page:"
+msgstr "将内容移至其他页面"
+
+#: move.php:82
+msgid "Move content on the same page:"
+msgstr "在同一个页面移动内容"
+
+#: admin/index.php:53
+msgid "Back to Knowledgeroot"
+msgstr "返回到Knowledgeroot"
+
+#: admin/index.php:56
+msgid "Powered by Knowledgeroot"
+msgstr "由Knowledgeroot提供"
+
+#: admin/index.php:61
+msgid "Username"
+msgstr "用户名"
+
+#: admin/index.php:62
+msgid "Password"
+msgstr "密码"
+
+#: admin/index.php:63
+#: include/class-default-menu.php:41
+#: include/class-knowledgeroot-content.php:799
+#: include/class-knowledgeroot-content.php:811
+msgid "login"
+msgstr "登陆"
+
+#: admin/index.php:70
+msgid "Forgot password?"
+msgstr "忘记密码?"
+
+#: admin/index.php:72
+msgid "To reset the admin password you need to make a new login.<br /> After that you see a loginhash at the bottom. Copy this hash value to your app.ini in section admin."
+msgstr "需要一个新的登陆窗体重置admin的密码<br/>然后你可以看到一个loginhash在底部。把这个hash的值拷贝到您的app.ini文件的admin项下面"
+
+#: include/class-default-menu.php:49
+msgid "logout"
+msgstr "签出"
+
+#: include/class-default-menu.php:57
+msgid "roots"
+msgstr "roots"
+
+#: include/class-default-menu.php:66
+#: include/class-knowledgeroot-content.php:806
+#: include/class-knowledgeroot-content.php:998
+#: include/class-knowledgeroot-content.php:1215
+#: include/class-knowledgeroot-content.php:1281
+#: include/class-knowledgeroot.php:147
+#: include/class-knowledgeroot.php:186
+#: include/class-knowledgeroot.php:243
+#: include/class-knowledgeroot.php:287
+#: include/class-knowledgeroot.php:359
+#: include/class-knowledgeroot.php:373
+#: include/class-knowledgeroot.php:419
+#: include/class-knowledgeroot.php:497
+#: include/class-knowledgeroot.php:511
+#: include/class-knowledgeroot.php:561
+msgid "user"
+msgstr "用户"
+
+#: include/class-default-menu.php:75
+msgid "options"
+msgstr "选项"
+
+#: include/class-default-menu.php:87
+#: include/class-default-menu.php:192
+msgid "hide menu"
+msgstr "隐藏菜单"
+
+#: include/class-default-menu.php:96
+msgid "expand menu"
+msgstr "展开菜单"
+
+#: include/class-default-menu.php:105
+msgid "reload menu"
+msgstr "刷新菜单"
+
+#: include/class-default-menu.php:114
+msgid "collapse menu"
+msgstr "收缩菜单"
+
+#: include/class-default-menu.php:141
+msgid "close menu"
+msgstr "关闭菜单"
+
+#: include/class-default-menu.php:155
+#: include/class-default-menu.php:298
+msgid "add new page"
+msgstr "增加新页面"
+
+#: include/class-default-menu.php:162
+#: include/class-default-menu.php:305
+msgid "edit page"
+msgstr "编辑页面"
+
+#: include/class-default-menu.php:169
+#: include/class-default-menu.php:312
+msgid "move page"
+msgstr "移动页面"
+
+#: include/class-default-menu.php:177
+#: include/class-default-menu.php:320
+msgid "delete page"
+msgstr "删除页面"
+
+#: include/class-default-menu.php:179
+#: include/class-default-menu.php:182
+#: include/class-default-menu.php:322
+msgid "Do you really want to delete this page?"
+msgstr "确定要删除这个页面？"
+
+#: include/class-default-menu.php:185
+#: include/class-default-menu.php:335
+#: include/class-default-menu.php:347
+msgid "add new content"
+msgstr "增加新的内容"
+
+#: include/class-default-menu.php:204
+#: include/class-knowledgeroot-content.php:1031
+#: include/class-knowledgeroot-content.php:1120
+msgid "edit"
+msgstr "编辑"
+
+#: include/class-default-menu.php:212
+#: include/class-knowledgeroot-content.php:1031
+#: include/class-knowledgeroot-content.php:1120
+#: include/class-knowledgeroot-content.php:1639
+msgid "delete"
+msgstr "删除"
+
+#: include/class-default-menu.php:217
+#: include/class-default-menu.php:365
+#: include/class-knowledgeroot-content.php:1639
+msgid "Do you really want to delete?"
+msgstr "确定要删除？"
+
+#: include/class-default-menu.php:220
+msgid "move"
+msgstr "转移"
+
+#: include/class-default-menu.php:229
+msgid "print"
+msgstr "打印"
+
+#: include/class-default-menu.php:238
+#: include/class-default-menu.php:382
+#: include/class-knowledgeroot-content.php:1659
+msgid "add file"
+msgstr "添加附件"
+
+#: include/class-default-menu.php:246
+msgid "Top"
+msgstr "置顶"
+
+#: include/class-default-menu.php:275
+msgid "save as default tree"
+msgstr "作为默认树保存"
+
+#: include/class-default-menu.php:283
+msgid "Sourceforge"
+msgstr "Sourceforge"
+
+#: include/class-default-menu.php:354
+msgid "edit content"
+msgstr "编辑内容"
+
+#: include/class-default-menu.php:363
+msgid "delete content"
+msgstr "删除内容"
+
+#: include/class-default-menu.php:372
+msgid "move content"
+msgstr "转移内容"
+
+#: include/class-email-notification.php:49
+#, php-format
+msgid "Page \"%s\" was created"
+msgstr "页面 \"%s\"被创建"
+
+#: include/class-email-notification.php:53
+#, php-format
+msgid "Page \"%s\" was edited"
+msgstr "页面 \"%s\" 被修改"
+
+#: include/class-email-notification.php:57
+#, php-format
+msgid "Page \"%s\" was moved"
+msgstr "页面 \"%s\" 已经被移走"
+
+#: include/class-email-notification.php:61
+#, php-format
+msgid "Page \"%s\" was deleted"
+msgstr "页面 \"%s\" 已经被删除"
+
+#: include/class-email-notification.php:69
+#, php-format
+msgid "Content \"%s\" was created"
+msgstr "内容 \"%s\" 被创建"
+
+#: include/class-email-notification.php:73
+#, php-format
+msgid "Content \"%s\" was edited"
+msgstr "内容 \"%s\" 被编辑"
+
+#: include/class-email-notification.php:77
+#, php-format
+msgid "Content \"%s\" was moved"
+msgstr "内容 \"%s\" 被移走"
+
+#: include/class-email-notification.php:81
+#, php-format
+msgid "Content \"%s\" was deleted"
+msgstr "内容 \"%s\" 被删除"
+
+#: include/class-email-notification.php:90
+#, php-format
+msgid "File \"%s\" was created"
+msgstr "文件 \"%s\" 被创建"
+
+#: include/class-email-notification.php:94
+#, php-format
+msgid "File \"%s\" was deleted"
+msgstr "文件 \"%s\" 被删除"
+
+#: include/class-email-notification.php:103
+#: include/class-email-notification.php:123
+msgid "Knowledgeroot notification"
+msgstr "Knowledgeroot 提示"
+
+#: include/class-email-notification.php:129
+#: include/class-email-notification.php:151
+msgid "Action"
+msgstr "动作"
+
+#: include/class-email-notification.php:130
+msgid "author"
+msgstr "作者"
+
+#: include/class-email-notification.php:131
+msgid "date"
+msgstr "日期"
+
+#: include/class-email-notification.php:132
+#: include/class-email-notification.php:154
+msgid "link"
+msgstr "链接"
+
+#: include/class-email-notification.php:152
+msgid "Author"
+msgstr "作者"
+
+#: include/class-email-notification.php:153
+msgid "Date"
+msgstr "日期"
+
+#: include/class-email-notification.php:157
+msgid "Detail of Changes"
+msgstr "详细修改"
+
+#: include/class-email-notification.php:164
+msgid "Unable to send email notification"
+msgstr "不能发送邮件提醒"
+
+#: include/class-knowledgeroot-content.php:86
+#: include/class-knowledgeroot-content.php:160
+#: include/class-knowledgeroot-content.php:404
+#: include/class-knowledgeroot-content.php:478
+#: include/class-knowledgeroot-content.php:913
+#: include/class-knowledgeroot-content.php:1222
+#: include/class-knowledgeroot-content.php:1289
+#: include/class-knowledgeroot-content.php:1322
+#: include/class-knowledgeroot-content.php:1365
+msgid "save"
+msgstr "保存"
+
+#: include/class-knowledgeroot-content.php:87
+#: include/class-knowledgeroot-content.php:161
+#: include/class-knowledgeroot-content.php:405
+#: include/class-knowledgeroot-content.php:479
+msgid "save and close"
+msgstr "保存并关闭"
+
+#: include/class-knowledgeroot-content.php:88
+#: include/class-knowledgeroot-content.php:162
+#: include/class-knowledgeroot-content.php:406
+#: include/class-knowledgeroot-content.php:480
+msgid "close"
+msgstr "关闭"
+
+#: include/class-knowledgeroot-content.php:94
+#: include/class-knowledgeroot-content.php:415
+msgid "content"
+msgstr "内容"
+
+#: include/class-knowledgeroot-content.php:97
+msgid "Title"
+msgstr "标题"
+
+#: include/class-knowledgeroot-content.php:109
+#: include/class-knowledgeroot-content.php:425
+msgid "Position"
+msgstr "位置"
+
+#: include/class-knowledgeroot-content.php:111
+#: include/class-knowledgeroot-content.php:428
+msgid "first"
+msgstr "第一位"
+
+#: include/class-knowledgeroot-content.php:122
+#: include/class-knowledgeroot-content.php:438
+#, php-format
+msgid "after %s"
+msgstr "在  %s 后面"
+
+#: include/class-knowledgeroot-content.php:135
+#: include/class-knowledgeroot-content.php:233
+#: include/class-knowledgeroot-content.php:337
+#: include/class-knowledgeroot-content.php:450
+#: include/class-knowledgeroot-content.php:873
+msgid "permissions"
+msgstr "权限"
+
+#: include/class-knowledgeroot-content.php:188
+#: include/class-knowledgeroot-content.php:260
+msgid "create page"
+msgstr "创建页面"
+
+#: include/class-knowledgeroot-content.php:193
+#: include/class-knowledgeroot-content.php:297
+#: include/class-knowledgeroot-content.php:854
+msgid "site"
+msgstr "页面信息"
+
+#: include/class-knowledgeroot-content.php:195
+#: include/class-knowledgeroot-content.php:301
+msgid "page name"
+msgstr "页面名称"
+
+#: include/class-knowledgeroot-content.php:200
+msgid "automatically open the created page"
+msgstr "自动打开创建的页面"
+
+#: include/class-knowledgeroot-content.php:204
+#: include/class-knowledgeroot-content.php:305
+msgid "page alias"
+msgstr "页面别名"
+
+#: include/class-knowledgeroot-content.php:208
+#: include/class-knowledgeroot-content.php:309
+msgid "at beginning"
+msgstr "在开始处"
+
+#: include/class-knowledgeroot-content.php:208
+#: include/class-knowledgeroot-content.php:309
+msgid "at the end"
+msgstr "在结尾处"
+
+#: include/class-knowledgeroot-content.php:208
+#: include/class-knowledgeroot-content.php:309
+msgid "default position for content"
+msgstr "内容的默认位置"
+
+#: include/class-knowledgeroot-content.php:211
+#: include/class-knowledgeroot-content.php:312
+msgid "icon"
+msgstr "图标"
+
+#: include/class-knowledgeroot-content.php:215
+#: include/class-knowledgeroot-content.php:316
+msgid "Symlink"
+msgstr "超链接"
+
+#: include/class-knowledgeroot-content.php:220
+#: include/class-knowledgeroot-content.php:321
+#: include/class-knowledgeroot-content.php:862
+msgid "tooltip"
+msgstr "提示"
+
+#: include/class-knowledgeroot-content.php:225
+#: include/class-knowledgeroot-content.php:326
+#: include/class-knowledgeroot-content.php:867
+msgid "priority"
+msgstr "优先级"
+
+#: include/class-knowledgeroot-content.php:248
+#: include/class-knowledgeroot-content.php:353
+#: include/class-knowledgeroot-content.php:876
+msgid "inherit permissions"
+msgstr "继承权限"
+
+#: include/class-knowledgeroot-content.php:292
+#: include/class-knowledgeroot-content.php:364
+msgid "save changes"
+msgstr "保存修改"
+
+#: include/class-knowledgeroot-content.php:330
+msgid "Initially show all content on this page collapsed?"
+msgstr "初始化时将内容收缩？"
+
+#: include/class-knowledgeroot-content.php:395
+msgid "Another user is already editing this content!"
+msgstr "内容正在被其他用户采编"
+
+#: include/class-knowledgeroot-content.php:418
+msgid "title"
+msgstr "标题"
+
+#: include/class-knowledgeroot-content.php:427
+msgid "do not change"
+msgstr "没有改变"
+
+#: include/class-knowledgeroot-content.php:465
+msgid "informations"
+msgstr "属性信息"
+
+#: include/class-knowledgeroot-content.php:467
+msgid "created at"
+msgstr "创建于"
+
+#: include/class-knowledgeroot-content.php:468
+#: include/class-knowledgeroot-content.php:1506
+msgid "guest"
+msgstr "游客"
+
+#: include/class-knowledgeroot-content.php:468
+msgid "last changed by"
+msgstr "最后修改人员"
+
+#: include/class-knowledgeroot-content.php:469
+msgid "last changed at"
+msgstr "最后修改时间"
+
+#: include/class-knowledgeroot-content.php:512
+msgid "Search for"
+msgstr "查询"
+
+#: include/class-knowledgeroot-content.php:515
+msgid "Content"
+msgstr "内容"
+
+#: include/class-knowledgeroot-content.php:598
+msgid "show"
+msgstr "显示"
+
+#: include/class-knowledgeroot-content.php:604
+#: include/class-knowledgeroot-content.php:607
+#: include/class-knowledgeroot-content.php:682
+#: include/class-knowledgeroot-content.php:685
+#: include/class-knowledgeroot-content.php:775
+#: include/class-knowledgeroot-content.php:778
+msgid "Nothing found"
+msgstr "找不到"
+
+#: include/class-knowledgeroot-content.php:615
+msgid "Menu"
+msgstr "菜单"
+
+#: include/class-knowledgeroot-content.php:693
+msgid "Files"
+msgstr "文件"
+
+#: include/class-knowledgeroot-content.php:807
+#: include/class-knowledgeroot-content.php:1207
+#: include/class-knowledgeroot-content.php:1273
+msgid "password"
+msgstr "密码"
+
+#: include/class-knowledgeroot-content.php:851
+msgid "create"
+msgstr "创建"
+
+#: include/class-knowledgeroot-content.php:856
+#: include/class-knowledgeroot-content.php:956
+#: include/class-knowledgeroot-content.php:994
+#: include/class-knowledgeroot-content.php:1206
+#: include/class-knowledgeroot-content.php:1272
+#: include/class-knowledgeroot-content.php:1316
+#: include/class-knowledgeroot-content.php:1360
+msgid "name"
+msgstr "姓名"
+
+#: include/class-knowledgeroot-content.php:858
+msgid "alias"
+msgstr "别名"
+
+#: include/class-knowledgeroot-content.php:902
+msgid "change options"
+msgstr "修改选项"
+
+#: include/class-knowledgeroot-content.php:905
+msgid "new password"
+msgstr "新密码"
+
+#: include/class-knowledgeroot-content.php:906
+msgid "confirm password"
+msgstr "确认密码"
+
+#: include/class-knowledgeroot-content.php:907
+#: include/class-knowledgeroot-content.php:1208
+#: include/class-knowledgeroot-content.php:1274
+msgid "theme"
+msgstr "主题"
+
+#: include/class-knowledgeroot-content.php:908
+msgid "language"
+msgstr "语言"
+
+#: include/class-knowledgeroot-content.php:950
+#: include/class-knowledgeroot-content.php:988
+msgid "id"
+msgstr ""
+
+#: include/class-knowledgeroot-content.php:961
+#: include/class-knowledgeroot-content.php:1209
+#: include/class-knowledgeroot-content.php:1275
+msgid "default group"
+msgstr "默认组"
+
+#: include/class-knowledgeroot-content.php:966
+#: include/class-knowledgeroot-content.php:1214
+#: include/class-knowledgeroot-content.php:1280
+msgid "default rights"
+msgstr "默认权限"
+
+#: include/class-knowledgeroot-content.php:971
+#: include/class-knowledgeroot-content.php:1210
+#: include/class-knowledgeroot-content.php:1276
+msgid "admin"
+msgstr "管理员"
+
+#: include/class-knowledgeroot-content.php:976
+#: include/class-knowledgeroot-content.php:1211
+#: include/class-knowledgeroot-content.php:1277
+msgid "edit rights"
+msgstr "修改权限"
+
+#: include/class-knowledgeroot-content.php:981
+#: include/class-knowledgeroot-content.php:1212
+#: include/class-knowledgeroot-content.php:1278
+msgid "enabled"
+msgstr "启用"
+
+#: include/class-knowledgeroot-content.php:1000
+#: include/class-knowledgeroot-content.php:1200
+msgid "add user"
+msgstr "增加用户"
+
+#: include/class-knowledgeroot-content.php:1001
+#: include/class-knowledgeroot-content.php:1265
+msgid "edit user"
+msgstr "修改用户"
+
+#: include/class-knowledgeroot-content.php:1002
+msgid "delete user"
+msgstr "删除用户"
+
+#: include/class-knowledgeroot-content.php:1031
+#: include/class-knowledgeroot-content.php:1078
+msgid "Do you really want to delete this user?"
+msgstr "确认要删除这个用户？"
+
+#: include/class-knowledgeroot-content.php:1097
+#: include/class-knowledgeroot-content.php:1213
+#: include/class-knowledgeroot-content.php:1279
+msgid "groups"
+msgstr "组"
+
+#: include/class-knowledgeroot-content.php:1099
+#: include/class-knowledgeroot-content.php:1312
+msgid "add group"
+msgstr "增加组"
+
+#: include/class-knowledgeroot-content.php:1100
+#: include/class-knowledgeroot-content.php:1355
+msgid "edit group"
+msgstr "修改组"
+
+#: include/class-knowledgeroot-content.php:1101
+msgid "delete group"
+msgstr "删除组"
+
+#: include/class-knowledgeroot-content.php:1120
+#: include/class-knowledgeroot-content.php:1166
+msgid "Do you really want to delete this group?"
+msgstr "确认要删除这个组？"
+
+#: include/class-knowledgeroot-content.php:1216
+#: include/class-knowledgeroot-content.php:1282
+#: include/class-knowledgeroot.php:148
+#: include/class-knowledgeroot.php:187
+#: include/class-knowledgeroot.php:244
+#: include/class-knowledgeroot.php:288
+#: include/class-knowledgeroot.php:360
+#: include/class-knowledgeroot.php:378
+#: include/class-knowledgeroot.php:420
+#: include/class-knowledgeroot.php:498
+#: include/class-knowledgeroot.php:516
+#: include/class-knowledgeroot.php:562
+msgid "group"
+msgstr "组"
+
+#: include/class-knowledgeroot-content.php:1217
+#: include/class-knowledgeroot-content.php:1283
+msgid "others"
+msgstr "其他"
+
+#: include/class-knowledgeroot-content.php:1506
+msgid "Last modified by"
+msgstr "最后修改用户"
+
+#: include/class-knowledgeroot-content.php:1506
+msgid "on"
+msgstr "于"
+
+#: include/class-knowledgeroot-content.php:1507
+msgid "created"
+msgstr "创建时间"
+
+#: include/class-knowledgeroot-content.php:1663
+msgid "add"
+msgstr "增加"
+
+#: include/class-knowledgeroot-content.php:1705
+msgid "No content here."
+msgstr "没有内容"
+
+#: include/class-knowledgeroot-content.php:1729
+msgid "Welcome to Knowledgeroot"
+msgstr "欢迎到Knowledgeroot"
+
+#: include/class-knowledgeroot-header.php:321
+msgid "You can login after #RELOGINDELAY# seconds!"
+msgstr "过 #RELOGINDELAY# 秒后登入"
+
+#: include/class-knowledgeroot-header.php:323
+msgid "This account is disabled!"
+msgstr "这个账号不能使用"
+
+#: include/class-knowledgeroot-header.php:327
+msgid "You have entered the wrong user or password!"
+msgstr "用户或者密码输入错误"
+
+#: include/class-knowledgeroot-header.php:410
+msgid "WRONG DOWNLOADFILE!"
+msgstr "警告下载文件！"
+
+#: include/class-knowledgeroot-header.php:417
+msgid "No File for you!"
+msgstr "没有您的文件！"
+
+#: include/class-knowledgeroot-header.php:785
+msgid "Cannot add file. File is to big!"
+msgstr "不能增加文件，文件太大！"
+
+#: include/class-knowledgeroot-header.php:795
+msgid "No upload folder found!"
+msgstr "找不到删除的目录！"
+
+#: include/class-knowledgeroot-header.php:951
+msgid "Cannot delete page. Check if content is on the page!"
+msgstr "不能删除这个页面，请检查这个页面是否有内容！"
+
+#: include/class-knowledgeroot-header.php:1133
+msgid "name for root cannot be empty"
+msgstr "root的用户名不能为空"
+
+#: include/class-knowledgeroot-header.php:1316
+msgid "User was deleted!"
+msgstr "用户已经被删除！"
+
+#: include/class-knowledgeroot-header.php:1337
+msgid "Group was deleted!"
+msgstr "组已经被删除"
+
+#: include/class-knowledgeroot-header.php:1340
+msgid "Could not delete group. Group is in use as defaultgroup!"
+msgstr "不能删除组，这个组作为默认组！"
+
+#: include/class-knowledgeroot-header.php:1366
+msgid "Language changed."
+msgstr "语言已经修改"
+
+#: include/class-knowledgeroot-header.php:1371
+msgid "Password changed!"
+msgstr "密码已经修改！"
+
+#: include/class-knowledgeroot-header.php:1374
+msgid "Failed to change password!"
+msgstr "修改密码失败！"
+
+#: include/class-knowledgeroot-header.php:1381
+msgid "Theme was changed."
+msgstr "主题已经修改！"
+
+#: include/class-knowledgeroot-header.php:1626
+#: include/class-knowledgeroot-header.php:1642
+#: include/class-knowledgeroot-header.php:1689
+#: include/class-knowledgeroot-header.php:1736
+msgid "content moved"
+msgstr "内容被移走"
+
+#: include/class-knowledgeroot.php:147
+#: include/class-knowledgeroot.php:186
+#: include/class-knowledgeroot.php:243
+#: include/class-knowledgeroot.php:287
+#: include/class-knowledgeroot.php:359
+#: include/class-knowledgeroot.php:373
+#: include/class-knowledgeroot.php:419
+#: include/class-knowledgeroot.php:497
+#: include/class-knowledgeroot.php:511
+#: include/class-knowledgeroot.php:561
+msgid "userrights"
+msgstr "用户权限"
+
+#: include/class-knowledgeroot.php:148
+#: include/class-knowledgeroot.php:187
+#: include/class-knowledgeroot.php:244
+#: include/class-knowledgeroot.php:288
+#: include/class-knowledgeroot.php:360
+#: include/class-knowledgeroot.php:378
+#: include/class-knowledgeroot.php:420
+#: include/class-knowledgeroot.php:498
+#: include/class-knowledgeroot.php:516
+#: include/class-knowledgeroot.php:562
+msgid "grouprights"
+msgstr "组权限"
+
+#: include/class-knowledgeroot.php:188
+#: include/class-knowledgeroot.php:289
+#: include/class-knowledgeroot.php:421
+#: include/class-knowledgeroot.php:563
+msgid "otherrights"
+msgstr "其他权限"
+
+#: include/class-knowledgeroot.php:189
+#: include/class-knowledgeroot.php:290
+#: include/class-knowledgeroot.php:423
+#: include/class-knowledgeroot.php:565
+msgid "Add Grouprights"
+msgstr "增加组权限"
+
+#: include/class-knowledgeroot.php:189
+#: include/class-knowledgeroot.php:290
+#: include/class-knowledgeroot.php:423
+#: include/class-knowledgeroot.php:565
+msgid "Add Userrights"
+msgstr "增加用户权限"
+
+#: include/class-knowledgeroot.php:280
+#: include/class-knowledgeroot.php:554
+msgid "enable inherit rights for subpages and contents"
+msgstr "允许将权限继承给子页面和子内容"
+
+#: include/class-knowledgeroot.php:281
+#: include/class-knowledgeroot.php:555
+msgid "enable edit of rights for these pages and contents"
+msgstr "允许将修改的权限给这些页面和内容"
+
+#: include/class-knowledgeroot.php:282
+#: include/class-knowledgeroot.php:556
+msgid "disable inherit rights for subpages and contents"
+msgstr "禁止将权限继承给子页面和子内容"
+
+#: include/class-knowledgeroot.php:348
+msgid "set recursiv"
+msgstr "设置递归"
+
+#: include/class-knowledgeroot.php:350
+#: include/class-knowledgeroot.php:824
+#: include/class-knowledgeroot.php:838
+msgid "no"
+msgstr "取消"
+
+#: include/class-knowledgeroot.php:351
+#: include/class-knowledgeroot.php:821
+#: include/class-knowledgeroot.php:839
+msgid "yes"
+msgstr "确认"
+
+#: include/class-knowledgeroot.php:992
+msgid "read+write"
+msgstr "读+写"
+
+#: include/class-knowledgeroot.php:993
+msgid "read"
+msgstr "读"
+
+#: include/class-knowledgeroot.php:994
+msgid "no rights"
+msgstr "没有权限"
+
+#: include/class-tree.php:436
+#: include/class-tree.php:506
+msgid "Empty"
+msgstr "空"
+
