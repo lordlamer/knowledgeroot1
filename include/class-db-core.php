@@ -17,7 +17,7 @@ class db_core {
 		$this->CLASS =& $CLASS;
 	}
 
-	function connect() {
+	function connect($host,$user,$pass,$db,$schema="",$encoding="") {
 
 	}
 
@@ -25,7 +25,7 @@ class db_core {
 
 	}
 
-	function query() {
+	function query($query) {
 
 	}
 
