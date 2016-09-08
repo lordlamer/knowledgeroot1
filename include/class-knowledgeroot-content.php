@@ -750,25 +750,27 @@ class knowledgeroot_content {
 		$this->CLASS['hooks']->setHook("kr_content","show_login","start");
 
 		echo '
-		<div dojoType="dijit.TitlePane" title="<b>'.$this->CLASS['translate']->_('login').'</b>">
-
+		<div class="panel panel-default">
+                    <div class="panel-heading">'.$this->CLASS['translate']->_('login').'</div>
+                    <div class="panel-body">
+                    
 		<form action="index.php" method="post" name="loginformular">
 		<input type="hidden" name="'.session_name().'" value="'.session_id().'" />
 		<input type="hidden" name="login" value="login" />
 		<table class="loginform" border="0" cellspacing="0" cellpadding="0" width="300">
 			<tr><td><b style="color:#FFFFFF">Login</b></td></tr>
-			<tr><td>'.$this->CLASS['translate']->_('user').':</td><td align="right" style="padding:2px 2px 2px 2px;"><input dojoType="dijit.form.TextBox" type="text" name="user" value="" size="20" /></td></tr>
-			<tr><td>'.$this->CLASS['translate']->_('password').':</td><td align="right" style="padding:2px 2px 2px 2px;"><input dojoType="dijit.form.TextBox" type="password" name="password" value="" size="20" /></td></tr>';
+			<tr><td>'.$this->CLASS['translate']->_('user').':</td><td align="right" style="padding:2px 2px 2px 2px;"><input class="form-control" type="text" name="user" value="" size="20" /></td></tr>
+			<tr><td>'.$this->CLASS['translate']->_('password').':</td><td align="right" style="padding:2px 2px 2px 2px;"><input class="form-control" type="password" name="password" value="" size="20" /></td></tr>';
 
 		$this->CLASS['hooks']->setHook("kr_content","show_login","before_submit");
 
-		echo '	<tr><td colspan="2" align="right" style="padding:2px 2px 2px 2px;"><button dojoType="dijit.form.Button" type="submit" name="loginbutton">'.$this->CLASS['translate']->_('login').'</button></td></tr>';
+		echo '	<tr><td colspan="2" align="right" style="padding:2px 2px 2px 2px;"><button class="btn btn-default" type="submit" name="loginbutton">'.$this->CLASS['translate']->_('login').'</button></td></tr>';
 
 		$this->CLASS['hooks']->setHook("kr_content","show_login","after_submit");
 
 		echo '</table>
 		</form>
-
+                    </div>
 		</div>
 		';
 
@@ -1644,7 +1646,7 @@ dojo.addOnLoad(function(){
 			$this->CLASS['hooks']->setHook("kr_content","show_tree_content","welcome_msg_start");
 
 			// show welcome message
-			echo "<div class=\"welcome\">".$this->CLASS['translate']->_('Welcome to Knowledgeroot')."</div>\n";
+			echo "<div class=\"jumbotron\"><h1>Knowledgeroot</h1><p>".$this->CLASS['translate']->_('Welcome to Knowledgeroot')."<p></div>\n";
 
 			$this->CLASS['hooks']->setHook("kr_content","show_tree_content","welcome_msg_end");
 		}
