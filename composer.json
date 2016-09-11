@@ -1,0 +1,17 @@
+{
+    "name": "knowledgeroot/knowledgeroot1",
+    "description": "Knowledgeroot Knowledgebase",
+    "version": "1.1.0",
+    "type": "app",
+    "keywords": [
+        "knowledgeroot",
+        "knowledgebase"
+    ],
+    "homepage": "http://www.knowledgeroot.org",
+    "license": "GPL-V2",
+    "require": {
+        "php": ">=5.3.3",
+	"zendframework/zendframework1": "1.12.*",
+	"doctrine/dbal": "2.*"
+    }
+}

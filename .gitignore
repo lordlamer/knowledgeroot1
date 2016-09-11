@@ -1,3 +1,5 @@
 /nbproject
 /config/app.ini
 /uploads/admin_ext_rep_list.cache
+/vendor/
+composer.lock

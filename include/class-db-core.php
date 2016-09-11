@@ -1,6 +1,6 @@
 <?php
 
-class db_core {
+abstract class db_core {
 	var $dbtype = "";
 	var $dbname = "";
 
@@ -15,18 +15,6 @@ class db_core {
 	 */
 	function start(&$CLASS) {
 		$this->CLASS =& $CLASS;
-	}
-
-	function connect($host,$user,$pass,$db,$schema="",$encoding="") {
-
-	}
-
-	function close() {
-
-	}
-
-	function query($query) {
-
 	}
 
 	/**

@@ -7,12 +7,14 @@
  * @version $Id: class-mysqli.php 941 2010-06-07 20:57:58Z lordlamer $
  */
 
+include_once 'db_core_interface.php';
+
 $KNOWLEDGEROOTDB = 'MYSQL';
 
 /**
  * Class for Connect to Mysql over mysqli
  */
-class db extends db_core {
+class db extends db_core implements db_core_interface {
 	var $dbtype = "mysqli";
 	var $dbname = "mysql";
 

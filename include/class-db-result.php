@@ -11,25 +11,25 @@ class db_result {
 	 * reference to all classes
 	 * @param array $CLASS
 	 */
-	var $CLASS = null;
+	private $CLASS = null;
 
 	/**
 	 * result of query
 	 * @param resource $result
 	 */
-	var $result = null;
+	private $result = null;
 
 	/**
 	 * query that was used
 	 * @param string $query
 	 */
-	var $query = "";
+	private $query = "";
 
 	/**
 	 * constructor for php5
 	 * @param array $CLASS
 	 */
-	function __construct(&$CLASS) {
+	public function __construct(&$CLASS) {
 		$this->CLASS =& $CLASS;
 	}
 
@@ -37,7 +37,7 @@ class db_result {
 	 * get result
 	 * @return resource
 	 */
-	function getResult() {
+	public function getResult() {
 		return $this->result;
 	}
 
@@ -45,7 +45,7 @@ class db_result {
 	 * set result
 	 * @param resource $result
 	 */
-	function setResult($result) {
+	public function setResult($result) {
 		$this->result = $result;
 	}
 
@@ -53,7 +53,7 @@ class db_result {
 	 * get query
 	 * @return string $query
 	 */
-	function getQuery() {
+	public function getQuery() {
 		return $this->query;
 	}
 
@@ -61,7 +61,7 @@ class db_result {
 	 * set query
 	 * @param string $query
 	 */
-	function setQuery($query) {
+	public function setQuery($query) {
 		$this->query = $query;
 	}
 
@@ -69,7 +69,7 @@ class db_result {
 	 * fetch as assoc
 	 * @return array
 	 */
-	function fetch_assoc() {
+	public function fetch_assoc() {
 		return $this->CLASS['db']->fetch_assoc($this);
 	}
 
@@ -77,7 +77,7 @@ class db_result {
 	 * fetch as object
 	 * @return object
 	 */
-	function fetch_object() {
+	public function fetch_object() {
 		return $this->CLASS['db']->fetch_object($this);
 	}
 
@@ -85,7 +85,7 @@ class db_result {
 	 * fetch as row
 	 * @return array
 	 */
-	function fetch_row() {
+	public function fetch_row() {
 		return $this->CLASS['db']->fetch_row($this);
 	}
 
@@ -93,7 +93,7 @@ class db_result {
 	 * count rows
 	 * @return integer
 	 */
-	function num_rows() {
+	public function num_rows() {
 		return $this->CLASS['db']->num_rows($this);
 	}
 
@@ -101,7 +101,7 @@ class db_result {
 	 * get affected rows
 	 * @return integer
 	 */
-	function affected_rows() {
+	public function affected_rows() {
 		return $this->CLASS['db']->affected_rows($this);
 	}
 
@@ -110,7 +110,7 @@ class db_result {
 	 * @param integer $number
 	 * @return bool
 	 */
-	function data_seek($number) {
+	public function data_seek($number) {
 		return $this->CLASS['db']->data_seek($this, $number);
 	}
 }

@@ -18,11 +18,8 @@ function __autoload($class) {
 // base path
 $base_path = realpath(dirname(__FILE__).'/../') . '/';
 
-// set include path
-set_include_path($base_path . '/lib/' . PATH_SEPARATOR . get_include_path());
-
 // load required files
-require_once('Zend/Loader.php');
+require_once($base_path."vendor/autoload.php");
 require_once($base_path."include/version.php");
 require_once($base_path."include/class-session.php");
 require_once($base_path."include/class-runtime.php");
