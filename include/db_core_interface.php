@@ -12,7 +12,7 @@
  * @author fhabermann
  */
 interface db_core_interface {
-    public function connect($host,$user,$pass,$db,$schema="",$encoding="");
+    public function connect($adapter, $host,$user,$pass,$db,$schema="",$encoding="");
     public function close();
     public function query($query);
 }

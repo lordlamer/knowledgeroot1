@@ -40,6 +40,7 @@ require_once($base_path."include/class-hooks.php");
 require_once($base_path."include/class-rte.php");
 require_once($base_path."include/class-db-result.php");
 require_once($base_path."include/class-db-core.php");
+require_once($base_path."include/class-db-dbal.php");
 require_once($base_path."include/class-highlight.php");
 require_once($base_path."include/class-search-string-parser.php");
 
@@ -61,34 +62,6 @@ $CLASS['error']->start($CLASS);
 // define runtimer
 $CLASS['runtime'] = new runtime();
 
-// load databaseclass
-switch($CLASS['config']->db->adapter) {
-	case 'mysql':
-		require_once($base_path."include/class-mysql.php");
-		break;
-	case 'mysqli':
-		require_once($base_path."include/class-mysqli.php");
-		break;
-	case 'pgsql':
-		require_once($base_path."include/class-pgsql.php");
-		break;
-	case 'mdb2':
-		require_once($base_path."include/class-mdb2.php");
-		break;
-	case 'sqlite':
-		require_once($base_path."include/class-sqlite.php");
-		break;
-	case 'oracle':
-		require_once($base_path."include/class-oracle.php");
-		break;
-}
-
-// check if database class is loaded
-if(!class_exists('db', false)) {
-	echo "Could not load database class. Check your name for the database adapter!\n";
-	exit();
-}
-
 // init hooks
 $CLASS['hooks'] = new hooks();
 $CLASS['hooks']->start($CLASS);
@@ -102,7 +75,7 @@ $CLASS['db'] = new db();
 $CLASS['db']->start($CLASS);
 
 // connect to database
-$CLASS['db']->connect($CLASS['config']->db->params->host,$CLASS['config']->db->params->username,$CLASS['config']->db->params->password,$CLASS['config']->db->params->dbname,$CLASS['config']->db->schema,$CLASS['config']->db->encoding);
+$CLASS['db']->connect($CLASS['config']->db->adapter, $CLASS['config']->db->params->host,$CLASS['config']->db->params->username,$CLASS['config']->db->params->password,$CLASS['config']->db->params->dbname,$CLASS['config']->db->schema,$CLASS['config']->db->encoding);
 
 // init cache
 if(!is_dir($base_path.$CLASS['config']->cache->path)) {
