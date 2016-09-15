@@ -88,8 +88,7 @@ class db extends db_core implements db_core_interface {
 	 * @return object
 	 */
 	function fetch_object($result) {
-            $this->connection->setFetchMode( \PDO::FETCH_OBJ );
-            return $result->getResult()->fetch(); 
+            return $result->getResult()->fetch(PDO::FETCH_OBJ); 
 	}
 
 	/**
@@ -98,8 +97,7 @@ class db extends db_core implements db_core_interface {
 	 * @return array
 	 */
 	function fetch_assoc($result) {
-            $this->connection->setFetchMode( \PDO::FETCH_ASSOC );
-            return $result->getResult()->fetch();
+            return $result->getResult()->fetch(PDO::FETCH_ASSOC);
 	}
 
 	/**
