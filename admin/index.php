@@ -15,29 +15,23 @@ if(!is_file("../config/app.ini")) {
 // load requiered files
 require_once("../include/init_admin.php");
 
-echo '<?xml version="1.0" encoding="utf-8"?>';
 ?>
-<!DOCTYPE html
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="admin.css" type="text/css" />
-<?php
-	$CLASS['kr_header']->show_header();
-?>
-	<!-- load the dojo toolkit base -->
-	<style type="text/css">
-		@import "../system/javascript/dojo/dijit/themes/claro/claro.css";
-		@import "../system/javascript/dojo/dojo/resources/dojo.css";
-	</style>
-	<script type="text/javascript">
-		dojo.require("dijit.layout.SplitContainer");
-		dojo.require("dijit.layout.LayoutContainer");
-		dojo.require("dijit.layout.ContentPane");
-		dojo.require("dijit.form.DropDownButton");
-		dojo.require("dijit.TooltipDialog");
-	</script>
+	<meta charset="utf-8">
+	<title>Knowledgeroot</title>
+        
+	<link href="admin.css" rel="stylesheet">
+
+        <link href="../system/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="../system/javascript/fontawesome/css/font-awesome.min.css">
+        <script src="../system/javascript/jquery/jquery.min.js"></script>
+        <script src="../system/javascript/jquery-ui/jquery-ui.min.js"></script>
+        <script src="../system/javascript/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../system/javascript/jquery-layout/jquery.layout-latest.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="../system/javascript/jquery-layout/layout-default-latest.css" />
+
 </head>
 <?php
 // show login?
@@ -49,84 +43,112 @@ if (isset ($_POST['login']) and $_POST['login'] == "true") {
 
 if($CLASS['config']->admin->loginhash == '' || !isset ($_SESSION['passhash']) or $_SESSION['passhash'] == "" || $_SESSION['passhash'] != $CLASS['config']->admin->loginhash) {
 ?>
-<body class="claro login">
-<p id="toplogin"><a href="<?php echo $CLASS['config']->base->base_url; ?>">&larr; <?php echo $CLASS['translate']->_('Back to Knowledgeroot'); ?></a></p>
-
-<!-- show login -->
-<div id="login"><h1><a href="http://www.knowledgeroot.org" title="<?php echo $CLASS['translate']->_('Powered by Knowledgeroot'); ?>">Knowledgeroot</a></h1>
-<form class="login" action="index.php" method="post" name="loginformular">
-<input type="hidden" name="login" value="true" />
-
-<div id="loginform">
-	<div id="loginuser"><?php echo $CLASS['translate']->_('Username'); ?>:</div><div id="loginuserfield"><input class="input" type="text" name="user" value="" /></div>
-	<div id="loginpass"><?php echo $CLASS['translate']->_('Password'); ?>:</div><div id="loginpassfield"><input class="input" type="password" name="pass" value="" /></div>
-	<div id="loginsubmit"><input class="button" type="submit" name="submit" value="<?php echo $CLASS['translate']->_('login'); ?>" /></div>
+<body>
 <?php
 if (isset ($_POST['login']) and $_POST['login'] == "true" && $_POST['user'] != "" && $_POST['pass'] != "") {
-	echo "<div id=\"loginhash\">loginhash: ".md5($_POST['user'] . $_POST['pass'])."</div>\n";
+	echo "<div id=\"well\">loginhash: ".md5($_POST['user'] . $_POST['pass'])."</div>\n";
 }
 ?>
-	<div data-dojo-type="dijit.form.DropDownButton">
-		<span><?php echo $CLASS['translate']->_('Forgot password?'); ?></span>
-		<div data-dojo-type="dijit.TooltipDialog" id="tooltipDlg" data-dojo-props='title:"Enter Login information"'>
-			<?php echo $CLASS['translate']->_('To reset the admin password you need to make a new login.<br /> After that you see a loginhash at the bottom. Copy this hash value to your app.ini in section admin.'); ?>
-		</div>
-	</div>
+
+<div class="well">
+    <script>
+        $(".alert").alert()
+    </script>
+    <div class="page-header">
+        <h2>Knowledgeroot Admin</h2>
+    </div>
+    <form role="form" class="form-horizontal" action="./login" method="post" name="loginformular">
+        <input type="hidden" name="" value="" />
+        <input type="hidden" name="login" value="true" />
+
+        <div class="form-group">
+            <label class="col-sm-1 control-label" for="user">User</label>
+
+            <div class="input-group col-sm-3">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control" id="user" name="user" placeholder="User" required="required" autofocus="autofocus">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-1 control-label" for="password">Password</label>
+
+            <div class="input-group col-sm-3">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control" id="password" name="pass" placeholder="Password" required="required" autofocus="autofocus">
+            </div>
+        </div>
+
+        <div class="col-sm-3 col-sm-offset-1">
+            <input class="btn btn-primary" type="submit" name="submit" value="<?php echo $CLASS['translate']->_('login'); ?>" />
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        <!--
+        document.loginformular.user.focus();
+        //-->
+    </script>
 </div>
-
-</form>
-</div>
-
-<script type="text/javascript">
-	<!--
-	try{document.loginformular.user.focus();}catch(e){}
-
-	//-->
-</script>
-
 
 <?php
 } else {
 ?>
-<body class="claro">
+<body>
+<script type="text/javascript">
+    $(document).ready(function() {
+            $('#sidebar-layout').layout({
+                minSize: 300,
+                west__size: 300,
+                stateManagement__enabled: true,
+                stateManagement__cookie__path: "/"
+            });
+    });
+</script>  
 
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">&fork;Knowledgeroot</a>
+    </div>
+  </div><!-- /.container-fluid -->
+</nav>
+    
 <div style="display: none;" id="messagebox">
   <div id="msg" class="loading">lade...</div>
 </div>
 
-<!-- show content -->
-        <div dojoType="dijit.layout.LayoutContainer" layoutChildPriority="top-bottom" style="width: 100%; height: 100%;">
-            <div dojoType="dijit.layout.ContentPane" layoutAlign="top" style="height:50px; border-bottom: 1px solid #000000;">
-		<div id="logo"><img src="../images/knowledgeroot.jpg" /></div>
-		<div id="title"></div>
-            </div>
-            <div dojoType="dijit.layout.SplitContainer" orientation="horizontal" sizerWidth="7" activeSizing="0"
-                 isActiveResize="0" layoutAlign="client" >
-
-                <div dojoType="dijit.layout.ContentPane" id="leftpane" sizeMin="230" sizeShare="1"
-                     style="padding: 10px 10px 10px 10px; background-color: #A2AAB8;">
-
+<div id="sidebar-layout">
+	    <div class="ui-layout-west" style="background-color: #f5f5f5;">
 <?php
 $CLASS['kr_extension']->show_admin_menu("admin");
 ?>
-                </div>
+	    </div>
 
-                    <div dojoType="dijit.layout.ContentPane" id="downpane" sizeMin="20" sizeShare="30" style="padding: 10px 10px 10px 10px; background-color: #EFEFF4;">
+	    <div class="ui-layout-center">  
 <?php
 $CLASS['kr_extension']->show_ext_content();
 ?>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
+	</div>
+    
+
 <?php
 }
-	// show querys - only for debug
-	if($CLASS['config']->development->sqldebug && 1==0) {
-		echo "querys: " . $CLASS['db']->querys;
-		echo $CLASS['error']->view_array($CLASS['db']->query_cache);
-	}
-?>
 
+// show querys - only for debug
+if($CLASS['config']->development->sqldebug && 1==0) {
+        echo "querys: " . $CLASS['db']->querys;
+        echo $CLASS['error']->view_array($CLASS['db']->query_cache);
+}
+?>
+    
 </body>
 </html>

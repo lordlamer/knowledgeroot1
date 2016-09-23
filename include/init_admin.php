@@ -40,6 +40,7 @@ require_once($base_path."include/class-error.php");
 require_once($base_path."include/class-hooks.php");
 require_once($base_path."include/class-db-result.php");
 require_once($base_path."include/class-db-core.php");
+require_once($base_path."include/class-db-dbal.php");
 
 // this is the variable where all classes are in
 $CLASS = array();
@@ -70,28 +71,6 @@ $CLASS['error']->start($CLASS);
 // set base paths
 $CLASS['config']->admin->base_path = $base_path . "admin/";
 
-// load databaseclass
-switch($CLASS['config']->db->adapter) {
-	case 'mysql':
-		require_once($base_path."include/class-mysql.php");
-		break;
-	case 'mysqli':
-		require_once($base_path."include/class-mysqli.php");
-		break;
-	case 'pgsql':
-		require_once($base_path."include/class-pgsql.php");
-		break;
-	case 'mdb2':
-		require_once($base_path."include/class-mdb2.php");
-		break;
-	case 'sqlite':
-		require_once($base_path."include/class-sqlite.php");
-		break;
-	case 'oracle':
-		require_once($base_path."include/class-oracle.php");
-		break;
-}
-
 // check if database class is loaded
 if(!class_exists('db', false)) {
         echo "Could not load database class. Check your name for the database adapter!\n";
@@ -107,7 +86,7 @@ $CLASS['db'] = new db();
 $CLASS['db']->start($CLASS);
 
 // connect to database
-$CLASS['db']->connect($CLASS['config']->db->params->host,$CLASS['config']->db->params->username,$CLASS['config']->db->params->password,$CLASS['config']->db->params->dbname,$CLASS['config']->db->schema,$CLASS['config']->db->encoding);
+$CLASS['db']->connect($CLASS['config']->db->adapter, $CLASS['config']->db->params->host,$CLASS['config']->db->params->username,$CLASS['config']->db->params->password,$CLASS['config']->db->params->dbname,$CLASS['config']->db->schema,$CLASS['config']->db->encoding);
 
 // init cache
 if(!is_dir($base_path . $CLASS['config']->cache->path)) {
@@ -167,13 +146,25 @@ if($CLASS['config']->base->charset != "") {
 }
 
 // add javascript to htmlheader
-$CLASS['kr_header']->addjssrc("../system/javascript/prototype.js");
-$CLASS['kr_header']->addjssrc("../system/javascript/scriptaculous.js");
-$CLASS['kr_header']->addjssrc("../system/javascript/effects.js");
-$CLASS['kr_header']->addjssrc("../system/javascript/dragdrop.js");
-$CLASS['kr_header']->addjssrc("../system/javascript/showhide.js");
-$CLASS['kr_header']->addjssrc("../system/javascript/ajax-tree.js");
-$CLASS['kr_header']->addjssrc("../system/javascript/messagebox.js");
+//$CLASS['kr_header']->addjssrc("../system/javascript/prototype.js");
+//$CLASS['kr_header']->addjssrc("../system/javascript/scriptaculous.js");
+//$CLASS['kr_header']->addjssrc("../system/javascript/effects.js");
+//$CLASS['kr_header']->addjssrc("../system/javascript/dragdrop.js");
+//$CLASS['kr_header']->addjssrc("../system/javascript/showhide.js");
+//$CLASS['kr_header']->addjssrc("../system/javascript/ajax-tree.js");
+//$CLASS['kr_header']->addjssrc("../system/javascript/messagebox.js");
+
+$CLASS['kr_header']->addheader('
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link href="../system/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="../system/javascript/fontawesome/css/font-awesome.min.css">
+<script src="../system/javascript/jquery/jquery.min.js"></script>
+<script src="../system/javascript/jquery-ui/jquery-ui.min.js"></script>
+<script src="../system/javascript/bootstrap/js/bootstrap.min.js"></script>
+<script src="../system/javascript/jquery-layout/jquery.layout-latest.min.js"></script>
+<link type="text/css" rel="stylesheet" href="../system/javascript/jquery-layout/layout-default-latest.css" />
+');
 
 // start all extensions
 $CLASS['kr_extension']->start_extensions();

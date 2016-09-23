@@ -43,9 +43,7 @@ class admin_info extends extension_base {
 	function show_info() {
 		include($this->CLASS['config']->base->base_path.'/include/version.php');
 		$out = '
-    <script type="text/javascript">
-        dojo.require("dijit.TitlePane");
-    </script>
+
 ';
 		$out .= '<div style="width: 100%">';
 		$out .= '<div style="text-align:center; font-size: 20px; font-weight: bold;">';

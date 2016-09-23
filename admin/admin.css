@@ -1,252 +1,36 @@
-	* { margin: 0; padding: 0; }
-
-	html {
-		height: 100%;
-	}
-
-	body {
-		font-family: "Trebuchet MS", Arial;
-		font-size: 11px;
-		margin: 0px;
-		padding:0px;
-		background-color: #ffffff;
-		color: #333;
-		height: 100%;
-	}
-
-	body.login {
-		border-top-width: 30px;
-		border-top-style: solid;
-		border-top-color: #464646;
-	}
-
-	#page {
-		text-align: left;
-		margin: 0 auto;
-		padding: 0.5em;
-	}
-
-	#headerrow {
-		height:50px;
-		border-bottom:#333333 solid 2px;
-		background-color: #9EB68E;
-	}
-
-	#logo {
-		float: left;
-	}
-
-	#title {
-		font-size: 28px;
-		font-weight: bold;
+	    html, body {
 		width: 100%;
-		text-align: center;
-		background-color: #ffffff;
-	}
-
-	#header {
-		height:50px;
-		width: 600px;
-		text-align: right;
-		font-size:30px;
-		font-family: Verdana, Arial, Helvetica, sans-serif;
-		font-weight:bold;
-		color:#000000;
-		padding:10px 5px 0px 30px;
-	}
-
-	#menu {
-		width:220px;
-		float:left;
-		margin: 0;
+		height: 100%;
 		padding: 0;
-	}
+		margin: 0;
+		overflow: auto;
+	    }
 
-	#content {
-		padding:0px 20px 20px 20px;
-		margin-left: 22em;
-		padding: 0 1em;
-	}
+	    body {
+		padding-top: 50px;
+		padding-bottom: 0px;
+		background-color: #fdfdfd;
+	    }
 
-	.menuitem {
-		margin: 0px 20px 5px 5px;
-		padding: 3px 3px 3px 20px;
-		border: 1px solid grey;
-		width:180px;
-		font-weight:bold;
-		font-family:sans-serif;
-		font-size:16px;
-		color:#000000;
-		background-color: #9EB68E;
-	}
+	    /* Footer
+	    -------------------------------------------------- */
+	    .footer {
+		background-color: #eee;
+		min-width: 940px;
+		padding: 30px 0;
+		text-shadow: 0 1px 0 #fff;
+		border-top: 1px solid #e5e5e5;
+		-webkit-box-shadow: inset 0 5px 15px rgba(0,0,0,.025);
+		-moz-box-shadow: inset 0 5px 15px rgba(0,0,0,.025);
+		/*          box-shadow: inset 0 5px 15px rgba(0,0,0,.025);
+		*/}
+	    .footer p {
+		color: #555;
+	    }
 
-	.submenu {
-		width:180px;
-	}
-
-	.submenuitem {
-		font-weight:bold;
-		font-family:verdana, arial, helvetica, sans-serif;
-		font-size:14px;
-		color:#000000;
-		text-decoration: none;
-		padding:1px 1px 1px 10px;
-		margin: 0px 20px 5px 25px;
-		border: 1px solid grey;
-		background-color:#CFDBC7;
-	}
-
-	.menuitem a:link, .menuitem a:active, .menuitem a:visited {
-		font-weight:bold;
-		font-family:verdana, arial, helvetica, sans-serif;
-		font-size:14px;
-		color:#000000;
-		text-decoration: none;
-	}
-
-	.menuitem a:hover {
-		font-weight:bold;
-		font-family:verdana, arial, helvetica, sans-serif;
-		font-size:14px;
-		color:#333333;
-		text-decoration: none;
-	}
-
-	.submenuitem a:link, .submenuitem a:active, .submenuitem a:visited {
-		font-weight:bold;
-		font-family:verdana, arial, helvetica, sans-serif;
-		font-size:14px;
-		color:#000000;
-		text-decoration: none;
-	}
-
-	.submenuitem a:hover {
-		font-weight:bold;
-		font-family:verdana, arial, helvetica, sans-serif;
-		font-size:14px;
-		color:#333333;
-		text-decoration: none;
-	}
-
-	#logincontent {
-		padding:50px 0px 0px 100px;
-	}
-
-	#loginuser {
-		padding:20px 3px 3px 20px;
-		font-size:12px;
-		font-family:verdana, arial, helvetica, sans-serif;
-		font-weight:bold;
-	}
-
-	#loginpass {
-		padding:3px 3px 3px 20px;
-		font-size:12px;
-		font-family:verdana, arial, helvetica, sans-serif;
-		font-weight:bold;
-	}
-
-	#loginsubmit {
-		padding:3px 3px 30px 20px;
-		font-size:12px;
-		font-family:verdana, arial, helvetica, sans-serif;
-		font-weight:bold;
-	}
-
-	#loginhash {
-		padding:3px 3px 3px 20px;
-	}
-
-	.input {
-		margin-left:50px;
-		padding: 3px;
-		margin-top: 2px;
-		margin-right: 6px;
-		margin-bottom: 16px;
-		border: 1px solid #e5e5e5;
-		background: #fbfbfb;
-	}
-
-	.button {
-		margin:10px 0px 0px 50px;
-		border: 1px solid grey;
-	}
-
-	#toplogin a {
-		position: absolute;
-		top: 7px;
-		left: 15px;
-		text-decoration: none;
-		color: #cccccc;
-	}
-
-	#login { width: 320px; margin: 7em auto; }
-
-	form .login {
-		margin-left: 8px;
-		padding: 16px 16px 40px 16px;
-		font-weight: normal;
-		-moz-border-radius: 11px;
-		-khtml-border-radius: 11px;
-		-webkit-border-radius: 11px;
-		border-radius: 5px;
-		background: #fff;
-		border: 1px solid #FF7200;
-		-moz-box-shadow: rgba(200,200,200,1) 0 4px 18px;
-		-webkit-box-shadow: rgba(200,200,200,1) 0 4px 18px;
-		-khtml-box-shadow: rgba(200,200,200,1) 0 4px 18px;
-		box-shadow: rgba(200,200,200,1) 0 4px 18px;
-	}
-
-	h1 a {
-		background: url(../images/knowledgeroot.jpg) no-repeat top center;
-		width: 326px;
-		height: 67px;
-		text-indent: -9999px;
-		overflow: hidden;
-		padding-bottom: 15px;
-		display: block;
-	}
-
-	#messagebox
-	{
-		position: absolute;
-		display: none;
-		top: 1px;
-		left: 200px;
-		right: 200px;
-		z-index: 5000;
-		opacity:0.9;
-		filter:alpha(opacity:90);
-	}
-
-	#messagebox div
-	{
-		width: 400px;
-		margin: 0px auto;
-		height: 24px;
-		min-height: 24px;
-		padding: 8px 10px 8px 46px;
-	}
-
-	#messagebox div.loading
-	{
-		background: url(../../../images/loading.gif) 6px 3px no-repeat;
-		background-color: #EBEBEB;
-		border: 1px solid #CCCCCC;
-	}
-
-	#messagebox div.notice
-	{
-		background: url(../../../images/info.png) 6px 3px no-repeat;
-		background-color: #F7FDCB;
-		border: 1px solid #C2D071;
-	}
-
-	#messagebox div.error,
-	#messagebox div.warning
-	{
-		background: url(../../../images/warning.png) 6px 3px no-repeat;
-		background-color: #EF9398;
-		border: 1px solid #DC5757;
-	}
+	    #sidebar-layout {
+		background:	#999;
+		height:		100%;
+		margin:		0 auto;
+		width:		100%;
+	    }
