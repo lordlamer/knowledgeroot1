@@ -27,10 +27,10 @@ class pathTree {
 
     if($treeRecord != null)  {
       if($treeRecord->belongs_to == "0") {
-        return "/ <a href=\"" . $urlPrefix . "index.php?id=".$treeRecord->id."\">".$treeRecord->title."</a>";
+        return "<li><a href=\"" . $urlPrefix . "index.php?id=".$treeRecord->id."\">".$treeRecord->title."</a></li>";
       } else {
         $path = $this->getPath($treeRecord->belongs_to, $urlPrefix);
-        return $path . " / <a href=\"" . $urlPrefix . "index.php?id=".$treeRecord->id."\">" . $treeRecord->title."</a>";
+        return $path . "<li><a href=\"" . $urlPrefix . "index.php?id=".$treeRecord->id."\">" . $treeRecord->title."</a></li>";
       }
     } else {
       return "/ ";

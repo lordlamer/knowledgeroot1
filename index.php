@@ -68,98 +68,21 @@ if ($CLASS['config']->base->charset != '') {
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
 
-<a name="top"></a>
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-	<tr class="head">
-		<td class="head" colspan="2">
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr>
-					<td>
-						<div class="pagetitle">
-							<?php echo ($CLASS['config']->base->showlogo) ? "<img src=\"images/knowledgeroot_logo.png\" alt=\"".$CLASS['config']->base->title."\" title=\"".$CLASS['config']->base->title."\" />" : $CLASS['config']->base->title; ?>
-						</div>
-					</td>
-					<td align="right" valign="bottom">
-						<div class="version">
-							<a href="http://www.knowledgeroot.org">Knowledgeroot</a> - <?php echo $CLASS['translate']->_('version') . ":&nbsp;" . $CLASS['config']->base->version; ?>
-						</div>
-						<div class="mainnavi">
-						<?php
-						  // show top menu
-						  echo $CLASS['kr_extension']->show_menu("top");
-						?>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-
-	<tr class="navigationpath">
-		<td class="navigation" colspan="2">
-			<div class="navigationleft">
-				<b><?php echo $CLASS['translate']->_('Path'); ?>:
-	<?php
-	  // show path
-	  if($CLASS['knowledgeroot']->checkRecursivPerm($_SESSION['cid'], $_SESSION['userid']) != 0) {
-	    echo $CLASS['path']->getPath($_SESSION['cid']);
-	  } else {
-	    echo "/";
-	  }
-
-	if (!isset ($_SESSION['user'])) { $_SESSION['user'] = ''; }
-	?>
-
-			</b>
-		</div>
-		<div class="navigationright"><?php echo $CLASS['translate']->_('User')  . ":&nbsp;" . $_SESSION['user']; ?>&nbsp;</div>
-		<div class="navigationmiddle">
-		</div>
-	<?php
-	if($CLASS['config']->misc->langdropdown) {
-	?>
-		<div class="navigationmiddle">
-		<form id="change_language" action="index.php" method="post">
+    
+        
+    <?php
+      // show top menu
+      echo $CLASS['kr_extension']->show_menu("top");
+    ?>
+        
+		<form id="change_language" action="index.php" method="post" class="navbar-form navbar-right">
 			<input type="hidden" name="action" value="change_language" />
 	<?php
 
@@ -167,18 +90,18 @@ if ($CLASS['config']->base->charset != '') {
 
 	echo $CLASS['language']->lang_dropdown("language", $_SESSION['language']);
 
-	if (!$CLASS['config']->tree->ajax) {
-		echo '<input class="button" type="submit" name="submit1" value="'.$CLASS['translate']->_('change').'" />'."\n";
-	}
+
 	?>
 		</form>
-		</div>
-	<?php
-	// end for langdropdown
-	}
-	?>
-		</td>
-	</tr>
+    
+    <p class="navbar-text navbar-right"><?php echo $CLASS['translate']->_('User')  . ":&nbsp;" . $_SESSION['user']; ?></p>
+    
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<a name="top"></a>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
 
 	<tr>
 	 <td id="treecontainer">
@@ -200,6 +123,21 @@ if ($CLASS['config']->base->charset != '') {
 	  </div>
 	 </td>
 	 <td id="contentcontainer">
+             
+                                    <ol class="breadcrumb">
+	<?php
+	  // show path
+	  if($CLASS['knowledgeroot']->checkRecursivPerm($_SESSION['cid'], $_SESSION['userid']) != 0) {
+	    echo $CLASS['path']->getPath($_SESSION['cid']);
+	  } else {
+	    echo "/";
+	  }
+
+	if (!isset ($_SESSION['user'])) { $_SESSION['user'] = ''; }
+	?>
+
+			</ol>
+             
 	<?php
 	  // show page content
 	  $CLASS['kr_header']->show_messages();

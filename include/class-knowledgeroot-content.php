@@ -1419,7 +1419,9 @@ class knowledgeroot_content {
 
 					echo "<div class=\"ContentItem\" id=\"contentid_".$row['id']."\"".$mousecontext.">\n
 					<!-- anchor --><a name=\"".$row['id']."\"></a>
-					<div class=\"showMe\" style=\"display:none;\" dojoType=\"dijit.TitlePane\" title=\"<b>".$titleText."</b>".(($this->CLASS['config']->content->showtitledetails) ? "&nbsp;($lastUpdated&nbsp;|&nbsp;$created)": "")."\" open=\"".((!$collapse) ? "true":"false")."\"".(($collapse) ? " href=\"content.php?contentid=".$row['id']."\"":"").">\n";
+                                        <div class=\"panel panel-primary\">
+                                        <div class=\"panel-heading\"><b>".$titleText."</b>".(($this->CLASS['config']->content->showtitledetails) ? "&nbsp;($lastUpdated&nbsp;|&nbsp;$created)": "")."</div>\n";
+
 					if(!$collapse) {
 					// add up and down arrows
 					if($mycontentrights == 2 && $mypagerights == 2) {
@@ -1449,8 +1451,7 @@ class knowledgeroot_content {
 
 					$this->CLASS['hooks']->setHook("kr_content","show_tree_content","show_content_menu_end");
 					echo "
-						<div class=\"ContentBodyWrapper\" id=\"ContentCollapseWrapper".$row['id']."\">
-						<span class=\"ContentBody\">\n";
+						<div class=\"panel-body\">\n";
 
 					// check if content is an extension
 					if($row['type'] == "" || $row['type'] == "text") {
@@ -1491,7 +1492,7 @@ class knowledgeroot_content {
 						}
 					}
 
-					echo "</span>
+					echo "
 					</div>
 					\n";
 
