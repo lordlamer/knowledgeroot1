@@ -65,7 +65,7 @@ if ($CLASS['config']->base->charset != '') {
 <div id="mousemenu" style="display: none; position: absolute;">&nbsp;</div>
 <div id="dragbox" style="display: none; position: absolute;">&nbsp;</div>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" style="border-bottom: 3px solid #F88529;">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -75,6 +75,15 @@ if ($CLASS['config']->base->charset != '') {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+        
+<a class="navbar-brand" href="#" data-toggle="dropdown"><i class="fa fa-bars"></i></a>
+<ul class="dropdown-menu">
+    <li><a href="http://www.knowledgeroot.org" target="_blank"><i class="fa fa-rocket"></i>&nbsp;Knowledgeroot</a></li>
+    <li><a href="http://docs.knowledgeroot.org" target="_blank"><i class="fa fa-book"></i>&nbsp;Docs</a></li>
+    <li><a href="http://api.knowledgeroot.org" target="_blank"><i class="fa fa-puzzle-piece"></i>&nbsp;API</a></li>
+</ul>
+
+        
       <a class="navbar-brand" href="#">&fork;Knowledgeroot</a>
     </div>
 
@@ -132,7 +141,7 @@ if ($CLASS['config']->base->charset != '') {
 	  if($CLASS['knowledgeroot']->checkRecursivPerm($_SESSION['cid'], $_SESSION['userid']) != 0) {
 	    echo $CLASS['path']->getPath($_SESSION['cid']);
 	  } else {
-	    echo "/";
+	    echo "<i class=\"fa fa-home fa-lg\"></i> /";
 	  }
 
 	if (!isset ($_SESSION['user'])) { $_SESSION['user'] = ''; }
