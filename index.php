@@ -37,6 +37,24 @@ if ($CLASS['config']->base->charset != '') {
 <?php
   $CLASS['kr_header']->show_header();
 ?>
+    
+        <link href="system/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="system/javascript/fontawesome/css/font-awesome.min.css">
+        <script src="system/javascript/jquery/jquery.min.js"></script>
+        <script src="system/javascript/jquery-ui/jquery-ui.min.js"></script>
+        <script src="system/javascript/bootstrap/js/bootstrap.min.js"></script>
+        <script src="system/javascript/jquery-layout/jquery.layout-latest.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="system/javascript/jquery-layout/layout-default-latest.css" />
+    	<script type="text/javascript">
+	    $(document).ready(function() {
+		    $('#sidebar-layout').layout({
+			minSize: 300,
+			west__size: 300,
+			stateManagement__enabled: true,
+			stateManagement__cookie__path: "/"
+		    });
+	    });
+	</script>
 </head>
 <body class="claro" <?php if($CLASS['config']->menu->type == "slide") { echo "onload=\"Hide('tree');\""; } ?>>
 
@@ -46,13 +64,6 @@ if ($CLASS['config']->base->charset != '') {
 
 <div id="mousemenu" style="display: none; position: absolute;">&nbsp;</div>
 <div id="dragbox" style="display: none; position: absolute;">&nbsp;</div>
-<div id="searchbox">
-						<form action="index.php" method="post">
-							<input onclick="this.value = '';" class="searchfield" type="text" name="search" value="<?php if(isset ($_GET['action']) && $_GET['action'] == "showsearch" && isset ($_GET['key']) && $_GET['key'] != "" && isset($_SESSION['search'][$_GET['key']])) { echo str_replace('&amp;quot;','&quot;',htmlspecialchars(stripslashes($_SESSION['search'][$_GET['key']]))); } else { echo $CLASS['translate']->_('Search'); } ?>" />
-							<input type="hidden" name="submit" value="GO" />
-							<input class="searchgo" type="submit" name="submit" value="<?php echo $CLASS['translate']->_('GO'); ?>" />
-						</form>
-</div>
 
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
   <div class="container-fluid">
@@ -101,18 +112,9 @@ if ($CLASS['config']->base->charset != '') {
 </nav>
 
 <a name="top"></a>
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
 
-	<tr>
-	 <td id="treecontainer">
-	   <!-- <a href="#" onClick="ShowHide('tree');">#</a> -->
-	  <div id="treeopener" <?php if($CLASS['config']->menu->type == "static") { echo "style=\"display:none;\""; } else { echo "style=\"display:block;\""; } ?>>
-	    <div id="treeshow">
-	      <a href="#" onclick="ShowTree();"><img id="treeshowimg" src="images/right.gif" width="22" alt="<?php echo $CLASS['translate']->_('show menu'); ?>" title="<?php echo $CLASS['translate']->_('show menu'); ?>" /></a>
-	    </div>
-	  </div>
-
-	   <div id="tree" <?php if($CLASS['config']->menu->type == "static") { echo "style=\"display:block;\""; } else { echo "style=\"display:none; position:absolute;\""; } ?>>
+	<div id="sidebar-layout">
+	    <div class="ui-layout-west" style="background-color: #f5f5f5;">
 	<?php
 	  // show tree
 	  if (isset ($_SESSION['open'])) {
@@ -120,9 +122,9 @@ if ($CLASS['config']->base->charset != '') {
 	  }
 	  $CLASS['tree']->buildTree(0);
 	?>
-	  </div>
-	 </td>
-	 <td id="contentcontainer">
+	    </div>
+
+	    <div class="ui-layout-center">
              
                                     <ol class="breadcrumb">
 	<?php
@@ -143,9 +145,8 @@ if ($CLASS['config']->base->charset != '') {
 	  $CLASS['kr_header']->show_messages();
 	  $CLASS['kr_content']->show_content();
 	?>
-	 </td>
-	</tr>
-</table>
+	    </div>
+	</div>
 
 <?php
   // show developer toolbar

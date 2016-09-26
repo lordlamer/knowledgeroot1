@@ -79,15 +79,6 @@ class default_menu {
 		$this->defaultmenu['tree']['config']['donothide'] = '1';
                 $this->defaultmenu['tree']['config']['wrap'] = '<div class="btn-group">|</div>';
 
-		// hide button
-		//$this->defaultmenu['tree']['hide']['name'] = $this->CLASS['translate']->_('hide menu');
-                $this->defaultmenu['tree']['hide']['nolink'] = '1';
-		$this->defaultmenu['tree']['hide']['imagewidth'] = "22";
-		$this->defaultmenu['tree']['hide']['link'] = "javascript:;";
-		$this->defaultmenu['tree']['hide']['atagparams'] = "onclick=\"HideTree();\"";
-		$this->defaultmenu['tree']['hide']['wrap'] = "<a class=\"btn btn-default\" href=\"\"><span class=\"fa fa-chevron-left\"></span>|</a>";
-		$this->defaultmenu['tree']['hide']['priority'] = "10";
-
 		// expand all
 		//$this->defaultmenu['tree']['expand']['name'] = $this->CLASS['translate']->_('expand menu');
 		//$this->defaultmenu['tree']['expand']['image'] = "images/plus.gif";
@@ -117,37 +108,6 @@ class default_menu {
 		$this->defaultmenu['tree']['collapse']['atagparams'] = "onclick=\"TreeCollapse(".'{$ID}'.");\"";
 		$this->defaultmenu['tree']['collapse']['wrap'] = "<a class=\"btn btn-default\" href=\"\"><span class=\"fa fa-minus\"></span>|</a>";
 		$this->defaultmenu['tree']['collapse']['priority'] = "40";
-
-		// checking treestyle and slide
-		if($this->CLASS['config']->tree->type == "static") {
-			$fixedstyle = "style=\"display:none;\"";
-			$slidestyle = "style=\"display:block;\"";
-		} else {
-			$fixedstyle = "style=\"display:block;\"";
-			$slidestyle = "style=\"display:none;\"";
-		}
-
-		// tree fixed
-		//$this->defaultmenu['tree']['fixed']['name'] = $this->CLASS['translate']->_('show menu');
-		//$this->defaultmenu['tree']['fixed']['image'] = "images/fixed.gif";
-                /*
-                $this->defaultmenu['tree']['fixed']['nolink'] = '1';
-		$this->defaultmenu['tree']['fixed']['imagewidth'] = "22";
-		$this->defaultmenu['tree']['fixed']['link'] = "javascript:;";
-		$this->defaultmenu['tree']['fixed']['atagparams'] = "onclick=\"TreeFixed();\"";
-		$this->defaultmenu['tree']['fixed']['wrap'] = "<a class=\"btn btn-default\" href=\"\"><span class=\"fa fa-minus\"></span>|</a>";
-		$this->defaultmenu['tree']['fixed']['priority'] = "40";
-                */
-                
-		// tree slide
-		//$this->defaultmenu['tree']['slide']['name'] = $this->CLASS['translate']->_('close menu');
-		//$this->defaultmenu['tree']['slide']['image'] = "images/close.gif";
-                $this->defaultmenu['tree']['slide']['nolink'] = '1';
-		$this->defaultmenu['tree']['slide']['imagewidth'] = "22";
-		$this->defaultmenu['tree']['slide']['link'] = "javascript:;";
-		$this->defaultmenu['tree']['slide']['atagparams'] = "onclick=\"TreeSlide();\"";
-		$this->defaultmenu['tree']['slide']['wrap'] = "<a class=\"btn btn-default\" href=\"\"><span class=\"fa fa-close\"></span>|</a>";
-		$this->defaultmenu['tree']['slide']['priority'] = "41";
 
 		// END TREE NAVI
 

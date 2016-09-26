@@ -183,13 +183,13 @@ if(!defined("KR_INCLUDE_PREFIX")) {
 	define("KR_INCLUDE_PREFIX", "");
 }
 
-$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/prototype.js");
-$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/scriptaculous.js");
+//$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/prototype.js");
+//$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/scriptaculous.js");
 //$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/effects.js");
 //$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/dragdrop.js");
-$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/showhide.js");
-$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/ajax-tree.js");
-$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/messagebox.js");
+//$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/showhide.js");
+//$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/ajax-tree.js");
+//$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/messagebox.js");
 
 // check if contextmenus are enabled
 if($CLASS['config']->menu->context) {
@@ -214,15 +214,6 @@ $CLASS['kr_header']->addheader("<link rel=\"shortcut icon\" href=\"".KR_INCLUDE_
 // add generator
 if(isset($version))
 	$CLASS['kr_header']->addheader("<meta name=\"generator\" content=\"Knowledgeroot - ".$version."\" />");
-
-$CLASS['kr_header']->addheader('
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Bootstrap -->
-<link href="system/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link rel="stylesheet" href="system/javascript/fontawesome/css/font-awesome.min.css">
-<script src="system/javascript/jquery/jquery.min.js"></script>
-<script src="system/javascript/bootstrap/js/bootstrap.min.js"></script>
-');
 
 // add hook
 $CLASS['hooks']->setHook("init","init","end");
