@@ -1525,7 +1525,7 @@ class knowledgeroot_content {
 							$rows = $this->CLASS['cache']->load($hashkey);
 						}
 
-						echo '<div dojoType="dijit.layout.ContentPane">';
+						echo '<div class="list-group">';
 
 						// read all select files
 						if(is_array($rows)) {
@@ -1545,9 +1545,9 @@ class knowledgeroot_content {
 								}
 	
 								if($mycontentrights == 2) {
-									echo "<a href=\"javascript:;\" onclick=\"if(confirm('" . $this->CLASS['translate']->_('Do you really want to delete?') . "')) { location.href='index.php?delfile=".$zeile['id']."'; } \"><img src=\"images/delete.gif\" title=\"".$this->CLASS['translate']->_('delete')."\" class=\"upload\" /></a>&nbsp;<a href=\"" . $downloadlink . "\" title=\"".$title."\"><img src=\"images/file.gif\" class=\"upload\" /> ".$zeile['filename']."</a>&nbsp;<font class=\"text\">[".getfilesize($zeile['filesize'])."]&nbsp;[".$title."]</font><br />\n";
+									echo "<div class=\"list-group-item\"><a href=\"javascript:;\" onclick=\"if(confirm('" . $this->CLASS['translate']->_('Do you really want to delete?') . "')) { location.href='index.php?delfile=".$zeile['id']."'; } \"><img src=\"images/delete.gif\" title=\"".$this->CLASS['translate']->_('delete')."\" class=\"upload\" /></a>&nbsp;<a href=\"" . $downloadlink . "\" title=\"".$title."\"><img src=\"images/file.gif\" class=\"upload\" /> ".$zeile['filename']."</a>&nbsp;<font class=\"text\">[".getfilesize($zeile['filesize'])."]&nbsp;[".$title."]</font></div>\n";
 								} else {
-									echo "<a href=\"".$downloadlink."\" title=\"".$title."\"><img src=\"images/file.gif\" class=\"upload\" /> ".$zeile['filename']."</a>&nbsp;<font class=\"text\">[".getfilesize($zeile['filesize'])."]&nbsp;[".$title."]</font><br />\n";
+									echo "<a class=\"list-group-item\" href=\"".$downloadlink."\" title=\"".$title."\"><img src=\"images/file.gif\" class=\"upload\" /> ".$zeile['filename']."</a>&nbsp;<font class=\"text\">[".getfilesize($zeile['filesize'])."]&nbsp;[".$title."]</font><br />\n";
 								}
 							}
 						}
@@ -1576,7 +1576,7 @@ class knowledgeroot_content {
 
 					// show content status bar
 					if($this->CLASS['config']->content->statusbar)
-						echo "<div class=\"content_statusbar\">".$lastUpdated."&nbsp;|&nbsp;".$created."</div>\n";
+						echo "<div class=\"panel-footer\">".$lastUpdated."&nbsp;|&nbsp;".$created."</div>\n";
 
 					}
 
