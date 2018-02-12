@@ -1351,7 +1351,7 @@ class knowledgeroot_content {
 			if(!($this->CLASS['cache']->test($hashkey))) {
 				$res = $this->CLASS['db']->query($query);
 
-				$data = null;
+				$data = array();
 				while($row = $this->CLASS['db']->fetch_assoc($res)) {
 					$data[] = $row;
 				}
