@@ -149,21 +149,21 @@ class default_menu {
 		// END TREE NAVI
 
 		// BEGIN PAGE NAVI
-		$this->defaultmenu['page']['config']['wrap'] = '<div dojoType="dijit.MenuBar" region="top">|</div>';
+		$this->defaultmenu['page']['config']['wrap'] = '<div class="btn-group">|</div>';
 
 		// new page
 		$this->defaultmenu['page']['newpage']['name'] = $this->CLASS['translate']->_('add new page');
 		$this->defaultmenu['page']['newpage']['nolink'] = '1';
 		$this->defaultmenu['page']['newpage']['pagerights'] = "2";
 		$this->defaultmenu['page']['newpage']['priority'] = "10";
-		$this->defaultmenu['page']['newpage']['wrap'] = "<div dojoType=\"dijit.MenuBarItem\" onclick=\"location.href='index.php?id={\$PAGEID}&amp;action=newpage'\">|</div>";
+		$this->defaultmenu['page']['newpage']['wrap'] = "<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"location.href='index.php?id={\$PAGEID}&amp;action=newpage'\">|</button>";
 
 		// edit page
 		$this->defaultmenu['page']['editpage']['name'] = $this->CLASS['translate']->_('edit page');
 		$this->defaultmenu['page']['editpage']['nolink'] = "1";
 		$this->defaultmenu['page']['editpage']['pagerights'] = "2";
 		$this->defaultmenu['page']['editpage']['priority'] = "20";
-		$this->defaultmenu['page']['editpage']['wrap'] = "<div dojoType=\"dijit.MenuBarItem\" onclick=\"location.href='index.php?id={\$PAGEID}&amp;action=editpage'\">|</div>";
+		$this->defaultmenu['page']['editpage']['wrap'] = "<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"location.href='index.php?id={\$PAGEID}&amp;action=editpage'\">|</button>";
 
 		// move page
 		$this->defaultmenu['page']['movepage']['name'] = $this->CLASS['translate']->_('move page');
@@ -171,7 +171,7 @@ class default_menu {
 		$this->defaultmenu['page']['movepage']['atagparams'] = "onclick=\"window.document.forms.move.move.value='move'; window.open('move.php?type=page','Knowledgeroot','width=310,height=400,menubar=yes,resizable=yes,scrollbars=yes');\"";
 		$this->defaultmenu['page']['movepage']['pagerights'] = "2";
 		$this->defaultmenu['page']['movepage']['priority'] = "30";
-		$this->defaultmenu['page']['movepage']['wrap'] = "<div dojoType=\"dijit.MenuBarItem\" onclick=\"window.document.forms.move.move.value='move'; window.open('move.php?type=page','Knowledgeroot','width=310,height=400,menubar=yes,resizable=yes,scrollbars=yes');\">|</div>";
+		$this->defaultmenu['page']['movepage']['wrap'] = "<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"window.document.forms.move.move.value='move'; window.open('move.php?type=page','Knowledgeroot','width=310,height=400,menubar=yes,resizable=yes,scrollbars=yes');\">|</button>";
 
 		// delete page
 		$this->defaultmenu['page']['deletepage']['name'] = $this->CLASS['translate']->_('delete page');
@@ -179,21 +179,21 @@ class default_menu {
 		$this->defaultmenu['page']['deletepage']['atagparams'] = "onclick=\"if(confirm('" . $this->CLASS['translate']->_('Do you really want to delete this page?') . "')) { location.href='index.php?delpage={\$PAGEID}'; } else { return false; }\"";
 		$this->defaultmenu['page']['deletepage']['pagerights'] = "2";
 		$this->defaultmenu['page']['deletepage']['priority'] = "40";
-		$this->defaultmenu['page']['deletepage']['wrap'] = "<div dojoType=\"dijit.MenuBarItem\" onclick=\"if(confirm('" . $this->CLASS['translate']->_('Do you really want to delete this page?') . "')) { location.href='index.php?delpage={\$PAGEID}'; } else { return false; }\">|</div>";
+		$this->defaultmenu['page']['deletepage']['wrap'] = "<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"if(confirm('" . $this->CLASS['translate']->_('Do you really want to delete this page?') . "')) { location.href='index.php?delpage={\$PAGEID}'; } else { return false; }\">|</button>";
 
 		// create new content
 		$this->defaultmenu['page']['createcontent']['name'] = $this->CLASS['translate']->_('add new content');
 		$this->defaultmenu['page']['createcontent']['nolink'] = '1';
 		$this->defaultmenu['page']['createcontent']['pagerights'] = "2";
 		$this->defaultmenu['page']['createcontent']['priority'] = "50";
-		$this->defaultmenu['page']['createcontent']['wrap'] = "<div dojoType=\"dijit.MenuBarItem\" onclick=\"location.href='index.php?id={\$PAGEID}&amp;action=newcontent'\">|</div>";
+		$this->defaultmenu['page']['createcontent']['wrap'] = "<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"location.href='index.php?id={\$PAGEID}&amp;action=newcontent'\">|</button>";
 
 		// toggle menu
 		$this->defaultmenu['page']['togglemenu']['name'] = ((isset($_SESSION['_hide_menu_']) && $_SESSION['_hide_menu_'] != false) ? $this->CLASS['translate']->_('show menu') : $this->CLASS['translate']->_('hide menu'));
 		$this->defaultmenu['page']['togglemenu']['nolink'] = '1';
 		$this->defaultmenu['page']['togglemenu']['priority'] = "60";
 		$this->defaultmenu['page']['togglemenu']['donothide'] = "1";
-		$this->defaultmenu['page']['togglemenu']['wrap'] = "<div dojoType=\"dijit.MenuBarItem\" onclick=\"location.href='index.php?id={\$PAGEID}&amp;action=togglemenu'\">|</div>";
+		$this->defaultmenu['page']['togglemenu']['wrap'] = "<button type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"location.href='index.php?id={\$PAGEID}&amp;action=togglemenu'\">|</button>";
 
 		// END PAGE NAVI
 
