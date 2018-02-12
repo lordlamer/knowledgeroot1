@@ -1,0 +1,4 @@
+<?php
+$CONF = array (
+);
+?>

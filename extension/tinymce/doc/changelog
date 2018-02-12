@@ -1,0 +1,28 @@
+20110409 - fhabermann
+* upgrade to tinymce version 3.4.2
+
+20091031 - fhabermann
+* added tinymce version 3.2.7
+
+20090821 - fhabermann
+* added tinymce version 3.2.6
+
+20090707 - fhabermann
+* added tinymce version 3.2.5
+
+20090618 - fhabermann
+* added tinymce version 3.2.4.1
+
+20090503 - fhabermann
+* added tinymce version 3.2.3
+
+20090410 - fhabermann
+* fixed problem with info file
+  - history entries are set in dependencies
+
+20090330 - fhabermann
+* added tinymce version 3.2.2.3
+
+20090319 - fhabermann
+* added new tinymce version 3.2.2.1
+* fixed cache problems
