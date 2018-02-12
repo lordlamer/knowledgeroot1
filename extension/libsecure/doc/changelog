@@ -1,0 +1,28 @@
+CHANGELOG
+
+20.04.2007 - frank
+- fixed: whitelist was not working
+- add also global var REQUEST to check
+- adding filter for fileuploads
+
+29.04.2007 - frank
+- fixed a small bug with file uploads and the type of it
+
+07.06.2007 - frank
+- update for htmlpurifier to 1.6.1
+
+03.07.2007 - frank
+- update to htmlpurifier 2.0.1
+
+30.10.2007 - frank
+- update HTMLSax3 to fix license problems
+
+08.06.2009 - frank
+- added multibyte support for fileuploads
+
+28.09.2009 - frank
+- added htmlpurifier 4.0.0
+- code optimization
+
+16.07.2010 - frank
+- added htmlpurifier 4.1.1
