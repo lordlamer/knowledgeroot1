@@ -46,40 +46,36 @@ if ($CLASS['config']->base->charset != '') {
 
 <div id="mousemenu" style="display: none; position: absolute;">&nbsp;</div>
 <div id="dragbox" style="display: none; position: absolute;">&nbsp;</div>
-<div id="searchbox">
-						<form action="index.php" method="post">
-							<input onclick="this.value = '';" class="searchfield" type="text" name="search" value="<?php if(isset ($_GET['action']) && $_GET['action'] == "showsearch" && isset ($_GET['key']) && $_GET['key'] != "" && isset($_SESSION['search'][$_GET['key']])) { echo str_replace('&amp;quot;','&quot;',htmlspecialchars(stripslashes($_SESSION['search'][$_GET['key']]))); } else { echo $CLASS['translate']->_('Search'); } ?>" />
-							<input type="hidden" name="submit" value="GO" />
-							<input class="searchgo" type="submit" name="submit" value="<?php echo $CLASS['translate']->_('GO'); ?>" />
-						</form>
-</div>
 
 <a name="top"></a>
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-	<tr class="head">
-		<td class="head" colspan="2">
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr>
-					<td>
-						<div class="pagetitle">
-							<?php echo ($CLASS['config']->base->showlogo) ? "<img src=\"images/knowledgeroot_logo.png\" alt=\"".$CLASS['config']->base->title."\" title=\"".$CLASS['config']->base->title."\" />" : $CLASS['config']->base->title; ?>
-						</div>
-					</td>
-					<td align="right" valign="bottom">
-						<div class="version">
-							<a href="http://www.knowledgeroot.org">Knowledgeroot</a> - <?php echo $CLASS['translate']->_('version') . ":&nbsp;" . $CLASS['config']->base->version; ?>
-						</div>
-						<div class="mainnavi">
-						<?php
-						  // show top menu
-						  echo $CLASS['kr_extension']->show_menu("top");
-						?>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
+
+<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark" style="border-bottom: 3px solid #F88529;">
+    <a class="navbar-brand" href="#"><?php echo $CLASS['config']->base->title; ?></a>
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse nav-justified" id="navbarsExampleDefault">
+        <?php
+        // show top menu
+        echo $CLASS['kr_extension']->show_menu("top");
+        ?>
+
+        <form class="form-inline my-2 my-lg-0" action="index.php" method="post">
+            <input class="form-control mr-sm-2" type="text" name="search" placeholder="<?php echo $CLASS['translate']->_('Search'); ?>" aria-label="Search" value="<?php if(isset ($_GET['action']) && $_GET['action'] == "showsearch" && isset ($_GET['key']) && $_GET['key'] != "" && isset($_SESSION['search'][$_GET['key']])) { echo str_replace('&amp;quot;','&quot;',htmlspecialchars(stripslashes($_SESSION['search'][$_GET['key']]))); } ?>">
+            <input type="hidden" name="submit" value="GO" />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit"><?php echo $CLASS['translate']->_('GO'); ?></button>
+        </form>
+    </div>
+</nav>
+
+<nav class="navbar fixed-bottom navbar-light bg-light justify-content-end">
+        <span class="navbar-text">
+            <a href="http://www.knowledgeroot.org">Knowledgeroot</a> - <?php echo $CLASS['translate']->_('version') . ":&nbsp;" . $CLASS['config']->base->version; ?>
+        </span>
+</nav>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top:55px;">
 
 	<tr class="navigationpath">
 		<td class="navigation" colspan="2">

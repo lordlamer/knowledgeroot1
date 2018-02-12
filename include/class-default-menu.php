@@ -32,10 +32,10 @@ class default_menu {
 	 */
 	function set_default_menu() {
 		// BEGIN TOP MENU
-		$this->defaultmenu['top']['config']['wrap'] = '<div class="top-navigation"><ul>|</ul></div>';
-		$this->defaultmenu['top']['config']['defaultelementwrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
+		$this->defaultmenu['top']['config']['wrap'] = '<ul class="navbar-nav mr-auto">|</ul>';
+		$this->defaultmenu['top']['config']['defaultelementwrap'] = '<li class="nav-item">|</li>';
 		$this->defaultmenu['top']['config']['donothide'] = '1';
-		$this->defaultmenu['top']['config']['css_class'] = 'top-navigation-element';
+		$this->defaultmenu['top']['config']['css_class'] = 'nav-link';
 
 		// login
 		$this->defaultmenu['top']['login']['name'] = $this->CLASS['translate']->_('login');
@@ -43,7 +43,8 @@ class default_menu {
 		$this->defaultmenu['top']['login']['tooltip'] = "login";
 		$this->defaultmenu['top']['login']['logout'] = "1";
 		$this->defaultmenu['top']['login']['priority'] = "10";
-		$this->defaultmenu['top']['login']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
+        $this->defaultmenu['top']['login']['atagparams'] = "class=\"nav-link\"";
+		//$this->defaultmenu['top']['login']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
 
 		// logout
 		$this->defaultmenu['top']['logout']['name'] = $this->CLASS['translate']->_('logout');
@@ -51,7 +52,8 @@ class default_menu {
 		$this->defaultmenu['top']['logout']['tooltip'] = "logout";
 		$this->defaultmenu['top']['logout']['login'] = "1";
 		$this->defaultmenu['top']['logout']['priority'] = "90";
-		$this->defaultmenu['top']['logout']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
+        $this->defaultmenu['top']['logout']['atagparams'] = "class=\"nav-link\"";
+		//$this->defaultmenu['top']['logout']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
 
 		// roots
 		$this->defaultmenu['top']['roots']['name'] = $this->CLASS['translate']->_('roots');
@@ -60,7 +62,8 @@ class default_menu {
 		$this->defaultmenu['top']['roots']['login'] = "1";
 		$this->defaultmenu['top']['roots']['priority'] = "10";
 		$this->defaultmenu['top']['roots']['admin'] = "1";
-		$this->defaultmenu['top']['roots']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
+        $this->defaultmenu['top']['roots']['atagparams'] = "class=\"nav-link\"";
+		//$this->defaultmenu['top']['roots']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
 
 		// user
 		$this->defaultmenu['top']['user']['name'] = $this->CLASS['translate']->_('user');
@@ -69,7 +72,8 @@ class default_menu {
 		$this->defaultmenu['top']['user']['login'] = "1";
 		$this->defaultmenu['top']['user']['priority'] = "20";
 		$this->defaultmenu['top']['user']['admin'] = "1";
-		$this->defaultmenu['top']['user']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
+        $this->defaultmenu['top']['user']['atagparams'] = "class=\"nav-link\"";
+		//$this->defaultmenu['top']['user']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
 
 		// options
 		$this->defaultmenu['top']['options']['name'] = $this->CLASS['translate']->_('options');
@@ -77,7 +81,8 @@ class default_menu {
 		$this->defaultmenu['top']['options']['tooltip'] = "edit options";
 		$this->defaultmenu['top']['options']['login'] = "1";
 		$this->defaultmenu['top']['options']['priority'] = "30";
-		$this->defaultmenu['top']['options']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
+        $this->defaultmenu['top']['options']['atagparams'] = "class=\"nav-link\"";
+		//$this->defaultmenu['top']['options']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
 		// END TOP MENU
 
 		// BEGIN TREE NAVI

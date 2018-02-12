@@ -253,7 +253,7 @@
 
 	A:link, A:visited, A:hover, A:active {
 		font-family:verdana, arial, helvetica, sans-serif;
-		font-size: 11px;
+		/*font-size: 11px;*/
 		text-decoration: none;
 	}
 
