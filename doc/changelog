@@ -1,3 +1,7 @@
+20180212 - fhabermann
+* make knowledgeroot 7.2 compatible
+* added libsecure, fckeditor and tinymce as core extensions
+
 20131007 - fhabermann
 * using javascript only to delete files to prevent deletion of google or webcrawlers
 
