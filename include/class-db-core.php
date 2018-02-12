@@ -17,18 +17,6 @@ class db_core {
 		$this->CLASS =& $CLASS;
 	}
 
-	function connect() {
-
-	}
-
-	function close() {
-
-	}
-
-	function query() {
-
-	}
-
 	/**
 	 * secure query
 	 * this function will wrap all over sprintf - so see sprintf for help
