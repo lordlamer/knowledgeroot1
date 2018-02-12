@@ -92,7 +92,7 @@ class language {
 			$jsscript = "";
 		}
 
-		$out = '<select dojoType="dijit.form.Select" name="'.$name.'" '.$jsscript.'>'."\n";
+		$out = '<select class="form-control form-control-sm" name="'.$name.'" '.$jsscript.'>'."\n";
 		$selected = '';
 
 		asort ($this->locales);

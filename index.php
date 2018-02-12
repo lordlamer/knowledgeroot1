@@ -61,11 +61,29 @@ if ($CLASS['config']->base->charset != '') {
         echo $CLASS['kr_extension']->show_menu("top");
         ?>
 
-        <form class="form-inline my-2 my-lg-0" action="index.php" method="post">
+        <form class="form-inline my-2 my-lg-0" id="change_language" action="index.php" method="post" style="margin-right: 5px;">
+            <input type="hidden" name="action" value="change_language" />
+            <?php
+
+            if (!isset ($_SESSION['language'])) { $_SESSION['language'] = ''; }
+
+            echo $CLASS['language']->lang_dropdown("language", $_SESSION['language']);
+
+            if (!$CLASS['config']->tree->ajax) {
+                echo '<input class="button" type="submit" name="submit1" value="'.$CLASS['translate']->_('change').'" />'."\n";
+            }
+            ?>
+        </form>
+
+        <form class="form-inline my-2 my-lg-0" action="index.php" method="post" style="margin-right: 5px;">
             <input class="form-control mr-sm-2" type="text" name="search" placeholder="<?php echo $CLASS['translate']->_('Search'); ?>" aria-label="Search" value="<?php if(isset ($_GET['action']) && $_GET['action'] == "showsearch" && isset ($_GET['key']) && $_GET['key'] != "" && isset($_SESSION['search'][$_GET['key']])) { echo str_replace('&amp;quot;','&quot;',htmlspecialchars(stripslashes($_SESSION['search'][$_GET['key']]))); } ?>">
             <input type="hidden" name="submit" value="GO" />
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit"><?php echo $CLASS['translate']->_('GO'); ?></button>
         </form>
+
+        <span class="navbar-text">
+            <?php echo $CLASS['translate']->_('User')  . ":&nbsp;" . $_SESSION['user']; ?>
+        </span>
     </div>
 </nav>
 
@@ -75,52 +93,19 @@ if ($CLASS['config']->base->charset != '') {
         </span>
 </nav>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top:55px;">
-
-	<tr class="navigationpath">
-		<td class="navigation" colspan="2">
-			<div class="navigationleft">
-				<b><?php echo $CLASS['translate']->_('Path'); ?>:
-	<?php
+<nav aria-label="breadcrumb" style="margin-top:55px;">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i> </li>
+    <?php
 	  // show path
 	  if($CLASS['knowledgeroot']->checkRecursivPerm($_SESSION['cid'], $_SESSION['userid']) != 0) {
 	    echo $CLASS['path']->getPath($_SESSION['cid']);
-	  } else {
-	    echo "/";
 	  }
+	  ?>
+    </ol>
+</nav>
 
-	if (!isset ($_SESSION['user'])) { $_SESSION['user'] = ''; }
-	?>
-
-			</b>
-		</div>
-		<div class="navigationright"><?php echo $CLASS['translate']->_('User')  . ":&nbsp;" . $_SESSION['user']; ?>&nbsp;</div>
-		<div class="navigationmiddle">
-		</div>
-	<?php
-	if($CLASS['config']->misc->langdropdown) {
-	?>
-		<div class="navigationmiddle">
-		<form id="change_language" action="index.php" method="post">
-			<input type="hidden" name="action" value="change_language" />
-	<?php
-
-	if (!isset ($_SESSION['language'])) { $_SESSION['language'] = ''; }
-
-	echo $CLASS['language']->lang_dropdown("language", $_SESSION['language']);
-
-	if (!$CLASS['config']->tree->ajax) {
-		echo '<input class="button" type="submit" name="submit1" value="'.$CLASS['translate']->_('change').'" />'."\n";
-	}
-	?>
-		</form>
-		</div>
-	<?php
-	// end for langdropdown
-	}
-	?>
-		</td>
-	</tr>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
 
 	<tr>
 	 <td id="treecontainer">

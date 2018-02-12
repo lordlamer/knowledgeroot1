@@ -226,6 +226,9 @@ $CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/messagebox.js
 // add bootstrap
 $CLASS['kr_header']->addcsssrc(KR_INCLUDE_PREFIX."assets/bootstrap/css/bootstrap.min.css");
 
+// add fontawesome
+$CLASS['kr_header']->addcsssrc(KR_INCLUDE_PREFIX."assets/font-awesome/css/font-awesome.min.css");
+
 // check if contextmenus are enabled
 if($CLASS['config']->menu->context) {
 	// load js for contextmenus
