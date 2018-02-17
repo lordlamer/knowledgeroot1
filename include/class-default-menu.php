@@ -44,7 +44,6 @@ class default_menu {
 		$this->defaultmenu['top']['login']['logout'] = "1";
 		$this->defaultmenu['top']['login']['priority'] = "10";
         $this->defaultmenu['top']['login']['atagparams'] = "class=\"nav-link\"";
-		//$this->defaultmenu['top']['login']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
 
 		// logout
 		$this->defaultmenu['top']['logout']['name'] = $this->CLASS['translate']->_('logout');
@@ -53,7 +52,6 @@ class default_menu {
 		$this->defaultmenu['top']['logout']['login'] = "1";
 		$this->defaultmenu['top']['logout']['priority'] = "90";
         $this->defaultmenu['top']['logout']['atagparams'] = "class=\"nav-link\"";
-		//$this->defaultmenu['top']['logout']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
 
 		// roots
 		$this->defaultmenu['top']['roots']['name'] = $this->CLASS['translate']->_('roots');
@@ -63,7 +61,6 @@ class default_menu {
 		$this->defaultmenu['top']['roots']['priority'] = "10";
 		$this->defaultmenu['top']['roots']['admin'] = "1";
         $this->defaultmenu['top']['roots']['atagparams'] = "class=\"nav-link\"";
-		//$this->defaultmenu['top']['roots']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
 
 		// user
 		$this->defaultmenu['top']['user']['name'] = $this->CLASS['translate']->_('user');
@@ -73,7 +70,6 @@ class default_menu {
 		$this->defaultmenu['top']['user']['priority'] = "20";
 		$this->defaultmenu['top']['user']['admin'] = "1";
         $this->defaultmenu['top']['user']['atagparams'] = "class=\"nav-link\"";
-		//$this->defaultmenu['top']['user']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
 
 		// options
 		$this->defaultmenu['top']['options']['name'] = $this->CLASS['translate']->_('options');
@@ -82,7 +78,6 @@ class default_menu {
 		$this->defaultmenu['top']['options']['login'] = "1";
 		$this->defaultmenu['top']['options']['priority'] = "30";
         $this->defaultmenu['top']['options']['atagparams'] = "class=\"nav-link\"";
-		//$this->defaultmenu['top']['options']['wrap'] = '<li class="top-navigation-element {$CSS_CLASS}">|</li>';
 		// END TOP MENU
 
 		// BEGIN TREE NAVI
@@ -215,20 +210,6 @@ class default_menu {
 		$this->defaultmenu['content']['top']['wrap'] = "<div style=\"float: right;\" dojoType=\"dijit.MenuBarItem\" onclick=\"location.href='#top';\">|</div>";
 
 		// END CONTENT NAVI
-
-		// BEGIN CONTENT_LINE NAVI
-
-		// add drag drop
-		//$this->defaultmenu['contentline']['move']['name'] = $this->CLASS['translate']->_('move');
-		//$this->defaultmenu['contentline']['move']['link'] = "javascript:;";
-		//$this->defaultmenu['contentline']['move']['image'] = "images/drag.gif";
-		//$this->defaultmenu['contentline']['move']['atagparams'] = "id=\"contentdragicon_{\$ID}\"";
-		//$this->defaultmenu['contentline']['move']['wrap'] = "<div class=\"downarrow\">|<a id=\"contentdragid_{\$ID}\" href=\"#\"></a><script type=\"text/javascript\" language=\"javascript\">\nvar navig_agt=navigator.userAgent.toLowerCase();\nvar navig_ie=((navig_agt.indexOf(\"msie\")!=-1) && (navig_agt.indexOf(\"opera\")==-1));\nvar navig_ie8=(navig_ie && (navig_agt.indexOf(\"msie 8.\")!=-1));\nif((navigator.appName.toLowerCase() != \"opera\" && !document.all) || navig_ie8) {";
-		//$this->defaultmenu['contentline']['move']['wrap'] .= "new Draggable('contentdragid_{\$ID}', {handle: 'contentdragicon_{\$ID}', revert:true, ghosting: false, zindex: 900, starteffect:function() { if(\$('contenttitleid_{\$ID}').innerHTML != \"\") { Dragbox.show(\$('contenttitleid_{\$ID}').innerHTML); } else { Dragbox.show('".$this->CLASS['translate']->_('content')."'); } }, endeffect:function() { Dragbox.hide(); } });";
-		//$this->defaultmenu['contentline']['move']['wrap'] .= "} </script></div>";
-		//$this->defaultmenu['contentline']['move']['tooltip'] = $this->CLASS['translate']->_('move content');
-		//$this->defaultmenu['contentline']['move']['priority'] = "10";
-		// END CONTEN$this->CLASS['translate']->_LINE NAVI
 
 		// BEGIN TREEBOTTOM MENU
 		$this->defaultmenu['treebottom']['config']['wrap'] = "<ul id=\"treebottom\">|</ul>";
