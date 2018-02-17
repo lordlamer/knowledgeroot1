@@ -158,7 +158,7 @@ class default_menu {
 		// END PAGE NAVI
 
 		// BEGIN CONTENT NAVI
-		$this->defaultmenu['content']['config']['wrap'] = '<div style="height: 24px; border-left:0px; border-right:0px;" dojoType="dijit.MenuBar" region="top">|</div>';
+		$this->defaultmenu['content']['config']['wrap'] = '<div class="btn-group" role="group">|</div>';
 
 		// edit content
 		$this->defaultmenu['content']['editcontent']['name'] = $this->CLASS['translate']->_('edit');
@@ -166,7 +166,7 @@ class default_menu {
 		$this->defaultmenu['content']['editcontent']['priority'] = "10";
 		$this->defaultmenu['content']['editcontent']['contenttype'] = "text";
 		$this->defaultmenu['content']['editcontent']['nolink'] = "1";
-		$this->defaultmenu['content']['editcontent']['wrap'] = "<div dojoType=\"dijit.MenuBarItem\" onclick=\"location.href='index.php?id={\$PAGEID}&amp;eid={\$ID}'\">|</div>";
+		$this->defaultmenu['content']['editcontent']['wrap'] = "<div type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"location.href='index.php?id={\$PAGEID}&amp;eid={\$ID}'\">|</div>";
 
 		// delete content
 		$this->defaultmenu['content']['deletecontent']['name'] = $this->CLASS['translate']->_('delete');
@@ -174,7 +174,7 @@ class default_menu {
 		$this->defaultmenu['content']['deletecontent']['contentrights'] = "2";
 		$this->defaultmenu['content']['deletecontent']['priority'] = "20";
 		$this->defaultmenu['content']['deletecontent']['contenttype'] = "text";
-		$this->defaultmenu['content']['deletecontent']['wrap'] = "<div dojoType=\"dijit.MenuBarItem\" onclick=\"if(confirm('" . $this->CLASS['translate']->_('Do you really want to delete?') . "')) { location.href='index.php?id={\$PAGEID}&amp;delid={\$ID}'; } else { return false; }\">|</div>";
+		$this->defaultmenu['content']['deletecontent']['wrap'] = "<div type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"if(confirm('" . $this->CLASS['translate']->_('Do you really want to delete?') . "')) { location.href='index.php?id={\$PAGEID}&amp;delid={\$ID}'; } else { return false; }\">|</div>";
 
 		// move content
 		$this->defaultmenu['content']['movecontent']['name'] = $this->CLASS['translate']->_('move');
@@ -183,7 +183,7 @@ class default_menu {
 		$this->defaultmenu['content']['movecontent']['pagerights'] = "2";
 		$this->defaultmenu['content']['movecontent']['priority'] = "30";
 		$this->defaultmenu['content']['movecontent']['contenttype'] = "text";
-		$this->defaultmenu['content']['movecontent']['wrap'] = "<div dojoType=\"dijit.MenuBarItem\" onclick=\"window.document.forms.move.contentid.value='".'{$ID}'."'; window.document.forms.move.move.value='cmove'; window.document.forms.movecontent.contentid.value='".'{$ID}'."'; window.open('move.php','Knowledgeroot','width=310,height=400,menubar=yes,resizable=yes,scrollbars=yes');\">|</div>";
+		$this->defaultmenu['content']['movecontent']['wrap'] = "<div type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"window.document.forms.move.contentid.value='".'{$ID}'."'; window.document.forms.move.move.value='cmove'; window.document.forms.movecontent.contentid.value='".'{$ID}'."'; window.open('move.php','Knowledgeroot','width=310,height=400,menubar=yes,resizable=yes,scrollbars=yes');\">|</div>";
 
 		// print content
 		$this->defaultmenu['content']['printcontent']['name'] = $this->CLASS['translate']->_('print');
@@ -192,7 +192,7 @@ class default_menu {
 		$this->defaultmenu['content']['printcontent']['pagerights'] = "1";
 		$this->defaultmenu['content']['printcontent']['priority'] = "40";
 		$this->defaultmenu['content']['printcontent']['contenttype'] = "text";
-		$this->defaultmenu['content']['printcontent']['wrap'] = "<div dojoType=\"dijit.MenuBarItem\" onclick=\"window.open('print.php?contentid={\$ID}','Knowledgeroot','width=640,height=480,menubar=yes,resizable=yes,scrollbars=yes');\">|</div>";
+		$this->defaultmenu['content']['printcontent']['wrap'] = "<div type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"window.open('print.php?contentid={\$ID}','Knowledgeroot','width=640,height=480,menubar=yes,resizable=yes,scrollbars=yes');\">|</div>";
 
 		// add file
 		$this->defaultmenu['content']['addfile']['name'] = $this->CLASS['translate']->_('add file');
@@ -200,14 +200,16 @@ class default_menu {
 		$this->defaultmenu['content']['addfile']['contentrights'] = "2";
 		$this->defaultmenu['content']['addfile']['priority'] = "50";
 		$this->defaultmenu['content']['addfile']['contenttype'] = "text";
-		$this->defaultmenu['content']['addfile']['wrap'] = "<div dojoType=\"dijit.MenuBarItem\" onclick=\"return ShowById('fileform_".'{$ID}'."');\">|</div>";
+		$this->defaultmenu['content']['addfile']['wrap'] = "<div type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"return ShowById('fileform_".'{$ID}'."');\">|</div>";
 
 		// totop
+		/*
 		$this->defaultmenu['content']['top']['name'] = $this->CLASS['translate']->_('Top');
 		$this->defaultmenu['content']['top']['nolink'] = "1";
 		$this->defaultmenu['content']['top']['contentrights'] = "1";
 		$this->defaultmenu['content']['top']['priority'] = "60";
-		$this->defaultmenu['content']['top']['wrap'] = "<div style=\"float: right;\" dojoType=\"dijit.MenuBarItem\" onclick=\"location.href='#top';\">|</div>";
+		$this->defaultmenu['content']['top']['wrap'] = "<div style=\"float: right;\" type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"location.href='#top';\">|</div>";
+		*/
 
 		// END CONTENT NAVI
 

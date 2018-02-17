@@ -1408,7 +1408,23 @@ class knowledgeroot_content {
 
 					echo "<div class=\"ContentItem\" id=\"contentid_".$row['id']."\">\n
 					<!-- anchor --><a name=\"".$row['id']."\"></a>
-					<div class=\"showMe\" style=\"display:none;\" dojoType=\"dijit.TitlePane\" title=\"<b>".$titleText."</b>".(($this->CLASS['config']->content->showtitledetails) ? "&nbsp;($lastUpdated&nbsp;|&nbsp;$created)": "")."\" open=\"".((!$collapse) ? "true":"false")."\"".(($collapse) ? " href=\"content.php?contentid=".$row['id']."\"":"").">\n";
+					
+
+
+<div class=\"card\">
+    <h5 class=\"card-header\">
+        <a data-toggle=\"collapse\" href=\"#content-".$row['id']."\" aria-expanded=\"".((!$collapse) ? "true":"false")."\" aria-controls=\"content-".$row['id']."\" id=\"content-head-".$row['id']."\" class=\"d-block\">
+            <i class=\"fa fa-chevron-down pull-right\"></i>
+            ".$titleText.(($this->CLASS['config']->content->showtitledetails) ? "&nbsp;($lastUpdated&nbsp;|&nbsp;$created)": "")."
+        </a>
+    </h5>
+
+
+
+
+
+					
+					\n";
 					if(!$collapse) {
 					// add up and down arrows
 					if($mycontentrights == 2 && $mypagerights == 2) {
@@ -1416,7 +1432,7 @@ class knowledgeroot_content {
 							$this->CLASS['kr_extension']->menu['content']['movedown']['name'] = 'movedown';
 							$this->CLASS['kr_extension']->menu['content']['movedown']['nolink'] = '1';
 							$this->CLASS['kr_extension']->menu['content']['movedown']['priority'] = '60';
-							$this->CLASS['kr_extension']->menu['content']['movedown']['wrap'] = "<div style=\"height: 13px; float: right;\" dojoType=\"dijit.MenuBarItem\" onclick=\"location.href='index.php?movedown=".$row['id']."';\"><img src=\"images/down_arrow.gif\" /></div>";
+							$this->CLASS['kr_extension']->menu['content']['movedown']['wrap'] = "<div type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"location.href='index.php?movedown=".$row['id']."';\"><i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i></div>";
 						} else {
 							unset($this->CLASS['kr_extension']->menu['content']['movedown']);
 						}
@@ -1425,21 +1441,23 @@ class knowledgeroot_content {
 							$this->CLASS['kr_extension']->menu['content']['moveup']['name'] = 'moveup';
 							$this->CLASS['kr_extension']->menu['content']['moveup']['nolink'] = '1';
 							$this->CLASS['kr_extension']->menu['content']['moveup']['priority'] = '70';
-							$this->CLASS['kr_extension']->menu['content']['moveup']['wrap'] = "<div style=\"height: 13px; float: right;\" dojoType=\"dijit.MenuBarItem\" onclick=\"location.href='index.php?moveup=".$row['id']."';\"><img src=\"images/up_arrow.gif\" /></div>";
+							$this->CLASS['kr_extension']->menu['content']['moveup']['wrap'] = "<div type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"location.href='index.php?moveup=".$row['id']."';\"><i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i></div>";
 						} else {
 							unset($this->CLASS['kr_extension']->menu['content']['moveup']);
 						}
 					}
 
-					$this->CLASS['hooks']->setHook("kr_content","show_tree_content","show_content_menu_start");
 
-					// show content menu
-					echo $this->CLASS['kr_extension']->show_menu("content",$row['id'],$mypagerights,$mycontentrights,$row['type']);
-
-					$this->CLASS['hooks']->setHook("kr_content","show_tree_content","show_content_menu_end");
 					echo "
-						<div class=\"ContentBodyWrapper\" id=\"ContentCollapseWrapper".$row['id']."\">
-						<span class=\"ContentBody\">\n";
+    <div id=\"content-".$row['id']."\" class=\"collapse show\" aria-labelledby=\"content-head-".$row['id']."\">
+        <div class=\"card-body\">";
+
+                        $this->CLASS['hooks']->setHook("kr_content","show_tree_content","show_content_menu_start");
+
+                        // show content menu
+                        echo $this->CLASS['kr_extension']->show_menu("content",$row['id'],$mypagerights,$mycontentrights,$row['type']);
+
+                        $this->CLASS['hooks']->setHook("kr_content","show_tree_content","show_content_menu_end");
 
 					// check if content is an extension
 					if($row['type'] == "" || $row['type'] == "text") {
@@ -1480,9 +1498,7 @@ class knowledgeroot_content {
 						}
 					}
 
-					echo "</span>
-					</div>
-					\n";
+echo '</div><div class="card-footer">';
 
 					if($show_files == 1) {
 						$this->CLASS['hooks']->setHook("kr_content","show_tree_content","show_content_files_start");
@@ -1513,7 +1529,7 @@ class knowledgeroot_content {
 							$rows = $this->CLASS['cache']->load($hashkey);
 						}
 
-						echo '<div dojoType="dijit.layout.ContentPane">';
+						echo '<div>';
 
 						// read all select files
 						if(is_array($rows)) {
@@ -1533,9 +1549,9 @@ class knowledgeroot_content {
 								}
 	
 								if($mycontentrights == 2) {
-									echo "<a href=\"javascript:;\" onclick=\"if(confirm('" . $this->CLASS['translate']->_('Do you really want to delete?') . "')) { location.href='index.php?delfile=".$zeile['id']."'; } \"><img src=\"images/delete.gif\" title=\"".$this->CLASS['translate']->_('delete')."\" class=\"upload\" /></a>&nbsp;<a href=\"" . $downloadlink . "\" title=\"".$title."\"><img src=\"images/file.gif\" class=\"upload\" /> ".$zeile['filename']."</a>&nbsp;<font class=\"text\">[".getfilesize($zeile['filesize'])."]&nbsp;[".$title."]</font><br />\n";
+									echo "<a href=\"javascript:;\" onclick=\"if(confirm('" . $this->CLASS['translate']->_('Do you really want to delete?') . "')) { location.href='index.php?delfile=".$zeile['id']."'; } \"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>&nbsp;<a href=\"" . $downloadlink . "\" title=\"".$title."\"><i class=\"fa fa-cloud-download\" aria-hidden=\"true\"></i> ".$zeile['filename']."</a>&nbsp;<font class=\"text\">[".getfilesize($zeile['filesize'])."]&nbsp;[".$title."]</font><br />\n";
 								} else {
-									echo "<a href=\"".$downloadlink."\" title=\"".$title."\"><img src=\"images/file.gif\" class=\"upload\" /> ".$zeile['filename']."</a>&nbsp;<font class=\"text\">[".getfilesize($zeile['filesize'])."]&nbsp;[".$title."]</font><br />\n";
+									echo "<a href=\"".$downloadlink."\" title=\"".$title."\"><i class=\"fa fa-cloud-download\" aria-hidden=\"true\"></i> ".$zeile['filename']."</a>&nbsp;<font class=\"text\">[".getfilesize($zeile['filesize'])."]&nbsp;[".$title."]</font><br />\n";
 								}
 							}
 						}
@@ -1545,12 +1561,9 @@ class knowledgeroot_content {
 						$this->CLASS['hooks']->setHook("kr_content","show_tree_content","show_content_files_end");
 					}
 
-					$includeFileLink = false;
-
 					if($show_files == 1) {
 						// show form for adding new files
 						if($mycontentrights == 2) {
-							$includeFileLink = true;
 							echo "<div id=\"fileform_".$row['id']."\" style=\"display:none\">
 								<form class=\"AddFileForm\" action=\"index.php\" method=\"post\" enctype=\"multipart/form-data\">\n
 									<b>".$this->CLASS['translate']->_('add file')."</b>\n
@@ -1583,7 +1596,8 @@ class knowledgeroot_content {
 					}
 
 					echo "
-					</div>\n";
+					        </div>
+    </div>\n";
 				} // end of while
 
 				$this->CLASS['hooks']->setHook("kr_content","show_tree_content","show_page_menu_start");
