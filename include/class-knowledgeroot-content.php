@@ -756,7 +756,6 @@ class knowledgeroot_content {
 		<input type="hidden" name="'.session_name().'" value="'.session_id().'" />
 		<input type="hidden" name="login" value="login" />
 		<table class="loginform" border="0" cellspacing="0" cellpadding="0" width="300">
-			<tr><td><b style="color:#FFFFFF">Login</b></td></tr>
 			<tr><td>'.$this->CLASS['translate']->_('user').':</td><td align="right" style="padding:2px 2px 2px 2px;"><input dojoType="dijit.form.TextBox" type="text" name="user" value="" size="20" /></td></tr>
 			<tr><td>'.$this->CLASS['translate']->_('password').':</td><td align="right" style="padding:2px 2px 2px 2px;"><input dojoType="dijit.form.TextBox" type="password" name="password" value="" size="20" /></td></tr>';
 
@@ -1644,7 +1643,7 @@ dojo.addOnLoad(function(){
 			$this->CLASS['hooks']->setHook("kr_content","show_tree_content","welcome_msg_start");
 
 			// show welcome message
-			echo "<div class=\"welcome\">".$this->CLASS['translate']->_('Welcome to Knowledgeroot')."</div>\n";
+			echo "<div class=\"jumbotron\"><h1>".$this->CLASS['translate']->_('Welcome to Knowledgeroot')."</h1></div>\n";
 
 			$this->CLASS['hooks']->setHook("kr_content","show_tree_content","welcome_msg_end");
 		}

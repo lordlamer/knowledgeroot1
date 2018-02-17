@@ -86,42 +86,41 @@ class default_menu {
 		// END TOP MENU
 
 		// BEGIN TREE NAVI
-		$this->defaultmenu['tree']['config']['donothide'] = '1';
+        $this->defaultmenu['tree']['config']['wrap'] = '<div class="btn-group" role="group" style="display: flex;">|</div>';
+        $this->defaultmenu['tree']['config']['defaultelementwrap'] = '|';
+        $this->defaultmenu['tree']['config']['donothide'] = '1';
+        $this->defaultmenu['tree']['config']['css_class'] = 'nav-link';
 
 		// hide button
+		/*
 		$this->defaultmenu['tree']['hide']['name'] = $this->CLASS['translate']->_('hide menu');
 		$this->defaultmenu['tree']['hide']['image'] = "images/left.gif";
 		$this->defaultmenu['tree']['hide']['imagewidth'] = "22";
 		$this->defaultmenu['tree']['hide']['link'] = "javascript:;";
-		$this->defaultmenu['tree']['hide']['atagparams'] = "onclick=\"HideTree();\"";
-		$this->defaultmenu['tree']['hide']['wrap'] = "<td>|</td>";
+		$this->defaultmenu['tree']['hide']['atagparams'] = "onclick=\"HideTree();\" class=\"nav-link\"";
+		//$this->defaultmenu['tree']['hide']['wrap'] = "<td>|</td>";
 		$this->defaultmenu['tree']['hide']['priority'] = "10";
+		*/
 
 		// expand all
-		$this->defaultmenu['tree']['expand']['name'] = $this->CLASS['translate']->_('expand menu');
-		$this->defaultmenu['tree']['expand']['image'] = "images/plus.gif";
-		$this->defaultmenu['tree']['expand']['imagewidth'] = "22";
+        $this->defaultmenu['tree']['expand']['name'] = "<i class=\"fa fa-plus\" aria-hidden=\"true\"></i>";
+		$this->defaultmenu['tree']['expand']['tooltip'] = $this->CLASS['translate']->_('expand menu');
 		$this->defaultmenu['tree']['expand']['link'] = "javascript:;";
-		$this->defaultmenu['tree']['expand']['atagparams'] = "onclick=\"TreeExpand(".'{$ID}'.");\"";
-		$this->defaultmenu['tree']['expand']['wrap'] = "<td>|</td>";
+		$this->defaultmenu['tree']['expand']['atagparams'] = "onclick=\"TreeExpand(".'{$ID}'.");\" class=\"btn btn-secondary\" style=\"flex: 1;\"";
 		$this->defaultmenu['tree']['expand']['priority'] = "20";
 
 		// reload all
-		$this->defaultmenu['tree']['reload']['name'] = $this->CLASS['translate']->_('reload menu');
-		$this->defaultmenu['tree']['reload']['image'] = "images/reload.gif";
-		$this->defaultmenu['tree']['reload']['imagewidth'] = "22";
+        $this->defaultmenu['tree']['reload']['name'] = "<i class=\"fa fa-retweet\" aria-hidden=\"true\"></i>";
+		$this->defaultmenu['tree']['reload']['tooltip'] = $this->CLASS['translate']->_('reload menu');
 		$this->defaultmenu['tree']['reload']['link'] = "javascript:;";
-		$this->defaultmenu['tree']['reload']['atagparams'] = "onclick=\"TreeReload(".'{$ID}'.");\"";
-		$this->defaultmenu['tree']['reload']['wrap'] = "<td>|</td>";
+		$this->defaultmenu['tree']['reload']['atagparams'] = "onclick=\"TreeReload(".'{$ID}'.");\" class=\"btn btn-secondary\" style=\"flex: 1;\"";
 		$this->defaultmenu['tree']['reload']['priority'] = "30";
 
 		// collapse all
-		$this->defaultmenu['tree']['collapse']['name'] = $this->CLASS['translate']->_('collapse menu');
-		$this->defaultmenu['tree']['collapse']['image'] = "images/minus.gif";
-		$this->defaultmenu['tree']['collapse']['imagewidth'] = "22";
+        $this->defaultmenu['tree']['collapse']['name'] = "<i class=\"fa fa-minus\" aria-hidden=\"true\"></i>";
+		$this->defaultmenu['tree']['collapse']['tooltip'] = $this->CLASS['translate']->_('collapse menu');
 		$this->defaultmenu['tree']['collapse']['link'] = "javascript:;";
-		$this->defaultmenu['tree']['collapse']['atagparams'] = "onclick=\"TreeCollapse(".'{$ID}'.");\"";
-		$this->defaultmenu['tree']['collapse']['wrap'] = "<td>|</td>";
+		$this->defaultmenu['tree']['collapse']['atagparams'] = "onclick=\"TreeCollapse(".'{$ID}'.");\" class=\"btn btn-secondary\" style=\"flex: 1;\"";
 		$this->defaultmenu['tree']['collapse']['priority'] = "40";
 
 		// checking treestyle and slide
@@ -134,23 +133,26 @@ class default_menu {
 		}
 
 		// tree fixed
+		/*
 		$this->defaultmenu['tree']['fixed']['name'] = $this->CLASS['translate']->_('show menu');
 		$this->defaultmenu['tree']['fixed']['image'] = "images/fixed.gif";
 		$this->defaultmenu['tree']['fixed']['imagewidth'] = "22";
 		$this->defaultmenu['tree']['fixed']['link'] = "javascript:;";
-		$this->defaultmenu['tree']['fixed']['atagparams'] = "onclick=\"TreeFixed();\"";
-		$this->defaultmenu['tree']['fixed']['wrap'] = "<td><div id=\"treefixed\" ".$fixedstyle.">|</div>";
+		$this->defaultmenu['tree']['fixed']['atagparams'] = "onclick=\"TreeFixed();\" class=\"nav-link\"";
+		//$this->defaultmenu['tree']['fixed']['wrap'] = "<td><div id=\"treefixed\" ".$fixedstyle.">|</div>";
 		$this->defaultmenu['tree']['fixed']['priority'] = "40";
+		*/
 
 		// tree slide
+		/*
 		$this->defaultmenu['tree']['slide']['name'] = $this->CLASS['translate']->_('close menu');
 		$this->defaultmenu['tree']['slide']['image'] = "images/close.gif";
 		$this->defaultmenu['tree']['slide']['imagewidth'] = "22";
 		$this->defaultmenu['tree']['slide']['link'] = "javascript:;";
-		$this->defaultmenu['tree']['slide']['atagparams'] = "onclick=\"TreeSlide();\"";
-		$this->defaultmenu['tree']['slide']['wrap'] = "<div id=\"treeslide\" ".$slidestyle.">|</div></td>";
+		$this->defaultmenu['tree']['slide']['atagparams'] = "onclick=\"TreeSlide();\" class=\"nav-link\"";
+		//$this->defaultmenu['tree']['slide']['wrap'] = "<div id=\"treeslide\" ".$slidestyle.">|</div></td>";
 		$this->defaultmenu['tree']['slide']['priority'] = "41";
-
+		*/
 		// END TREE NAVI
 
 		// BEGIN PAGE NAVI

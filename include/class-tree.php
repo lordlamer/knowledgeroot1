@@ -331,7 +331,7 @@ class categoryTree {
    *
    */
   function buildTree( $rec_id ) {
-    echo "<table class=\"tree\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n";
+    echo "<table class=\"card\" class=\"tree\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n";
     $cats = $this->readCategories();
 
     $moveparam = '';
@@ -349,24 +349,12 @@ class categoryTree {
       }
 
       echo '
-        <tr><td class="treenavi">
-          <div>
-            <table width="100%" cellpadding="1" cellspacing="1">
-              <tr>
-        ';
-
-      // show tree menu
-      echo $this->CLASS['kr_extension']->show_menu("tree",$moveparam);
-
-      echo '
-              </tr>
-            </table>
-
-          </div>
+        <tr><td class="treenavi">        
+            ' . $this->CLASS['kr_extension']->show_menu("tree",$moveparam) . '            
         </td></tr>
       ';
       echo "<tr><td>\n";
-      echo "<div id=\"treeelements\">\n";
+      echo "<div class=\"\" id=\"treeelements\">\n";
       //echo "<div id=\"treeanchor\"></div>\n";
       echo "<table id=\"treeelementtable\" class=\"treeelements\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\">\n";
       echo $this->showAjaxTreePart( $this->getTreePart(0) );

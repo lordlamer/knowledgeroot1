@@ -98,8 +98,12 @@
 	}
 
 	td.treenavi {
-		border-bottom: 1px solid #9EB68E;
+		/* border-bottom: 1px solid #9EB68E; */
 		padding:0px 0px 0px 0px;
+	}
+
+	td.treenavi a {
+		color: #ffffff !important;
 	}
 
 	tr.navigationpath {
@@ -186,7 +190,7 @@
 	}
 
 	#treecontainer {
-		padding:10px 0px 5px 0px;
+		padding:0px 0px 5px 0px;
 		text-align: left;
 		vertical-align: top;
 		width:10px;
@@ -207,11 +211,11 @@
 
 	#tree {
 		padding:0px 0px 0px 10px;
-		margin:0px 10px 0px 0px;
+		margin:0px 0px 0px 0px;
 	}
 
 	table.tree {
-		border:1px solid #82A06D;
+		/* border:1px solid #82A06D; */
 		padding:0px;
 		background-color:#CFDBC7;
 		color: #CF3020;

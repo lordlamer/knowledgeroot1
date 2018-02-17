@@ -109,12 +109,6 @@ if ($CLASS['config']->base->charset != '') {
 
 	<tr>
 	 <td id="treecontainer">
-	   <!-- <a href="#" onClick="ShowHide('tree');">#</a> -->
-	  <div id="treeopener" <?php if($CLASS['config']->menu->type == "static") { echo "style=\"display:none;\""; } else { echo "style=\"display:block;\""; } ?>>
-	    <div id="treeshow">
-	      <a href="#" onclick="ShowTree();"><img id="treeshowimg" src="images/right.gif" width="22" alt="<?php echo $CLASS['translate']->_('show menu'); ?>" title="<?php echo $CLASS['translate']->_('show menu'); ?>" /></a>
-	    </div>
-	  </div>
 
 	   <div id="tree" <?php if($CLASS['config']->menu->type == "static") { echo "style=\"display:block;\""; } else { echo "style=\"display:none; position:absolute;\""; } ?>>
 	<?php
