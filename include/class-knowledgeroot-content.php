@@ -1403,18 +1403,10 @@ class knowledgeroot_content {
 						$collapse = false;
 					}
 
-					$mousecontext = "";
-
-					// check if contextmenu are enabled
-					if($this->CLASS['config']->menu->context == 1) {
-						// set mousecontext for rightclick menu
-						$mousecontext = " oncontextmenu=\"KnowledgerootMenu.show('mousemenu','contentcontext', ".$_SESSION['cid'].", ".$row['id']."); return false;\"";
-					}
-
 					$lastUpdated = $this->CLASS['translate']->_('Last modified by')." ". ($row['lastupdatedby'] != null ? $row['lastupdatedby'] : $this->CLASS['translate']->_('guest')) ." ".$this->CLASS['translate']->_('on')." ".$row['lastupdated'];
 					$created = $this->CLASS['translate']->_('created').": ". $row['createdate'];
 
-					echo "<div class=\"ContentItem\" id=\"contentid_".$row['id']."\"".$mousecontext.">\n
+					echo "<div class=\"ContentItem\" id=\"contentid_".$row['id']."\">\n
 					<!-- anchor --><a name=\"".$row['id']."\"></a>
 					<div class=\"showMe\" style=\"display:none;\" dojoType=\"dijit.TitlePane\" title=\"<b>".$titleText."</b>".(($this->CLASS['config']->content->showtitledetails) ? "&nbsp;($lastUpdated&nbsp;|&nbsp;$created)": "")."\" open=\"".((!$collapse) ? "true":"false")."\"".(($collapse) ? " href=\"content.php?contentid=".$row['id']."\"":"").">\n";
 					if(!$collapse) {

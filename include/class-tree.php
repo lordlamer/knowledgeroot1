@@ -539,14 +539,6 @@ class categoryTree {
 					$class_root_item = "class=\"tree\"";
 				}
 
-				$mousecontext = "";
-
-				// check if contextmenu are enabled
-				if($this->CLASS['config']->menu->context) {
-					// set mousecontext for rightclick menu
-					$mousecontext = " oncontextmenu=\"KnowledgerootMenu.show('mousemenu','pagecontext', ".$id."); return false;\"";
-				}
-
 				// set tooltip
 				if($this->CLASS['config']->tree->edittooltiptext == 1 && $title['tooltip'] != "") {
 					$tooltip = " title=\"".$title['tooltip']."\"";
@@ -559,7 +551,7 @@ class categoryTree {
 				} else if ($this->editor == TRUE) {
 					$out .= "<tr id=\"menu_".$id."\"><td ".$class_root_item." nowrap=\"nowrap\">".$spaces . (($this->CLASS['config']->tree->showcounter) ? "<span class=\"treecounter\">" . $itemcounter . ".</span> " : "") . "<a ".$class_act."id=\"alink_".$id."\" onclick=\"editorSelect('index.php?id=".$id."','".$title['title']."')\" href=\"#\">" .$title['title'] . "</a></td></tr>\n";
 				} else {
-					$out .= "<tr id=\"menu_".$id."\"><td ".$class_root_item." nowrap=\"nowrap\">".$spaces . (($this->CLASS['config']->tree->showcounter) ? "<span class=\"treecounter\">" . $itemcounter . ".</span> " : "") . "<a ".$class_act."id=\"alink_".$id."\" href=\"" . $this->makeLink($title) . "\"" . $mousecontext . $tooltip . '>' .(($this->isSymlink($id))? "&raquo;&nbsp;":"").$title['title'] . "</a></td></tr>\n";
+					$out .= "<tr id=\"menu_".$id."\"><td ".$class_root_item." nowrap=\"nowrap\">".$spaces . (($this->CLASS['config']->tree->showcounter) ? "<span class=\"treecounter\">" . $itemcounter . ".</span> " : "") . "<a ".$class_act."id=\"alink_".$id."\" href=\"" . $this->makeLink($title) . "\"" . $tooltip . '>' .(($this->isSymlink($id))? "&raquo;&nbsp;":"").$title['title'] . "</a></td></tr>\n";
 				}
 
 				// check if drag and drop is enabled

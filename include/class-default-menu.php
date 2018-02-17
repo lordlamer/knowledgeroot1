@@ -91,17 +91,6 @@ class default_menu {
         $this->defaultmenu['tree']['config']['donothide'] = '1';
         $this->defaultmenu['tree']['config']['css_class'] = 'nav-link';
 
-		// hide button
-		/*
-		$this->defaultmenu['tree']['hide']['name'] = $this->CLASS['translate']->_('hide menu');
-		$this->defaultmenu['tree']['hide']['image'] = "images/left.gif";
-		$this->defaultmenu['tree']['hide']['imagewidth'] = "22";
-		$this->defaultmenu['tree']['hide']['link'] = "javascript:;";
-		$this->defaultmenu['tree']['hide']['atagparams'] = "onclick=\"HideTree();\" class=\"nav-link\"";
-		//$this->defaultmenu['tree']['hide']['wrap'] = "<td>|</td>";
-		$this->defaultmenu['tree']['hide']['priority'] = "10";
-		*/
-
 		// expand all
         $this->defaultmenu['tree']['expand']['name'] = "<i class=\"fa fa-plus\" aria-hidden=\"true\"></i>";
 		$this->defaultmenu['tree']['expand']['tooltip'] = $this->CLASS['translate']->_('expand menu');
@@ -122,37 +111,6 @@ class default_menu {
 		$this->defaultmenu['tree']['collapse']['link'] = "javascript:;";
 		$this->defaultmenu['tree']['collapse']['atagparams'] = "onclick=\"TreeCollapse(".'{$ID}'.");\" class=\"btn btn-secondary\" style=\"flex: 1;\"";
 		$this->defaultmenu['tree']['collapse']['priority'] = "40";
-
-		// checking treestyle and slide
-		if($this->CLASS['config']->tree->type == "static") {
-			$fixedstyle = "style=\"display:none;\"";
-			$slidestyle = "style=\"display:block;\"";
-		} else {
-			$fixedstyle = "style=\"display:block;\"";
-			$slidestyle = "style=\"display:none;\"";
-		}
-
-		// tree fixed
-		/*
-		$this->defaultmenu['tree']['fixed']['name'] = $this->CLASS['translate']->_('show menu');
-		$this->defaultmenu['tree']['fixed']['image'] = "images/fixed.gif";
-		$this->defaultmenu['tree']['fixed']['imagewidth'] = "22";
-		$this->defaultmenu['tree']['fixed']['link'] = "javascript:;";
-		$this->defaultmenu['tree']['fixed']['atagparams'] = "onclick=\"TreeFixed();\" class=\"nav-link\"";
-		//$this->defaultmenu['tree']['fixed']['wrap'] = "<td><div id=\"treefixed\" ".$fixedstyle.">|</div>";
-		$this->defaultmenu['tree']['fixed']['priority'] = "40";
-		*/
-
-		// tree slide
-		/*
-		$this->defaultmenu['tree']['slide']['name'] = $this->CLASS['translate']->_('close menu');
-		$this->defaultmenu['tree']['slide']['image'] = "images/close.gif";
-		$this->defaultmenu['tree']['slide']['imagewidth'] = "22";
-		$this->defaultmenu['tree']['slide']['link'] = "javascript:;";
-		$this->defaultmenu['tree']['slide']['atagparams'] = "onclick=\"TreeSlide();\" class=\"nav-link\"";
-		//$this->defaultmenu['tree']['slide']['wrap'] = "<div id=\"treeslide\" ".$slidestyle.">|</div></td>";
-		$this->defaultmenu['tree']['slide']['priority'] = "41";
-		*/
 		// END TREE NAVI
 
 		// BEGIN PAGE NAVI
@@ -295,107 +253,6 @@ class default_menu {
 		}
 
 		// END TREEBOTTOM MENU
-
-		// BEGIN TREE CONTEXT MENU
-
-		// configure menu
-		$this->defaultmenu['pagecontext']['config']['wrap'] = "<table id=\"pagecontext\" class=\"contextmenu\" cellpadding=\"0\" cellspacing=\"0\">|</table>";
-
-		// new page
-		$this->defaultmenu['pagecontext']['newpage']['name'] = $this->CLASS['translate']->_('add new page');
-		$this->defaultmenu['pagecontext']['newpage']['link'] = 'index.php?id={$PAGEID}&action=newpage';
-		$this->defaultmenu['pagecontext']['newpage']['pagerights'] = "2";
-		$this->defaultmenu['pagecontext']['newpage']['priority'] = "10";
-		$this->defaultmenu['pagecontext']['newpage']['wrap'] = "<tr class=\"contextmenu-item-row\"><td class=\"contextmenu-item\">|</td><td class=\"contextmenu-item-img\"><img src=\"images/pages.gif\" /></td></tr>";
-
-		// edit page
-		$this->defaultmenu['pagecontext']['editpage']['name'] = $this->CLASS['translate']->_('edit page');
-		$this->defaultmenu['pagecontext']['editpage']['link'] = 'index.php?id={$PAGEID}&action=editpage';
-		$this->defaultmenu['pagecontext']['editpage']['pagerights'] = "2";
-		$this->defaultmenu['pagecontext']['editpage']['priority'] = "20";
-		$this->defaultmenu['pagecontext']['editpage']['wrap'] = "<tr class=\"contextmenu-item-row\"><td class=\"contextmenu-item\">|</td><td class=\"contextmenu-item-img\"><img src=\"images/pages.gif\" /></td></tr>";
-
-		// move page
-		$this->defaultmenu['pagecontext']['movepage']['name'] = $this->CLASS['translate']->_('move page');
-		$this->defaultmenu['pagecontext']['movepage']['link'] = "#";
-		$this->defaultmenu['pagecontext']['movepage']['atagparams'] = "onclick=\"window.document.forms.move.move.value='move'; window.open('move.php?type=page','Knowledgeroot','width=310,height=400,menubar=yes,resizable=yes,scrollbars=yes');\"";
-		$this->defaultmenu['pagecontext']['movepage']['pagerights'] = "2";
-		$this->defaultmenu['pagecontext']['movepage']['priority'] = "30";
-		$this->defaultmenu['pagecontext']['movepage']['wrap'] = "<tr class=\"contextmenu-item-row\"><td class=\"contextmenu-item\">|</td><td class=\"contextmenu-item-img\"><img src=\"images/pages.gif\" /></td></tr>";
-
-		// delete page
-		$this->defaultmenu['pagecontext']['deletepage']['name'] = $this->CLASS['translate']->_('delete page');
-		$this->defaultmenu['pagecontext']['deletepage']['link'] = "javascript:;";
-		$this->defaultmenu['pagecontext']['deletepage']['atagparams'] = "onclick=\"if(confirm('" . $this->CLASS['translate']->_('Do you really want to delete this page?') . "')) { location.href='index.php?delpage={\$PAGEID}'; } else { return false; }\"";
-		$this->defaultmenu['pagecontext']['deletepage']['pagerights'] = "2";
-		$this->defaultmenu['pagecontext']['deletepage']['priority'] = "40";
-		$this->defaultmenu['pagecontext']['deletepage']['wrap'] = "<tr class=\"contextmenu-item-row\"><td class=\"contextmenu-item\">|</td><td class=\"contextmenu-item-img\"><img src=\"images/pages.gif\" /></td></tr>";
-
-		// add empty line
-		$this->defaultmenu['pagecontext']['line']['name'] = "";
-		$this->defaultmenu['pagecontext']['line']['link'] = '';
-		$this->defaultmenu['pagecontext']['line']['pagerights'] = "2";
-		$this->defaultmenu['pagecontext']['line']['priority'] = "45";
-		$this->defaultmenu['pagecontext']['line']['wrap'] = "<tr class=\"contextmenu-line-row\"><td colspan=\"2\"><img src=\"images/clear.gif\" width=\"1\" height=\"1\" />|</td></tr>";
-
-		// create new content
-		$this->defaultmenu['pagecontext']['createcontent']['name'] = $this->CLASS['translate']->_('add new content');
-		$this->defaultmenu['pagecontext']['createcontent']['link'] = 'index.php?id={$PAGEID}&amp;action=newcontent';
-		$this->defaultmenu['pagecontext']['createcontent']['pagerights'] = "2";
-		$this->defaultmenu['pagecontext']['createcontent']['priority'] = "50";
-		$this->defaultmenu['pagecontext']['createcontent']['wrap'] = "<tr class=\"contextmenu-item-row\"><td class=\"contextmenu-item\">|</td><td class=\"contextmenu-item-img\"><img src=\"images/pages.gif\" /></td></tr>";
-		// END TREE CONTEXT MENU
-
-		// BEGIN CONTENT CONTEXT MENU
-		// configure menu
-		$this->defaultmenu['contentcontext']['config']['wrap'] = "<table id=\"pagecontext\" class=\"contextmenu\" cellpadding=\"0\" cellspacing=\"0\">|</table>";
-
-		// create new content
-		$this->defaultmenu['contentcontext']['createcontent']['name'] = $this->CLASS['translate']->_('add new content');
-		$this->defaultmenu['contentcontext']['createcontent']['link'] = 'index.php?id={$PAGEID}&amp;action=newcontent';
-		$this->defaultmenu['contentcontext']['createcontent']['pagerights'] = "2";
-		$this->defaultmenu['contentcontext']['createcontent']['priority'] = "10";
-		$this->defaultmenu['contentcontext']['createcontent']['wrap'] = "<tr class=\"contextmenu-item-row\"><td class=\"contextmenu-item\">|</td><td class=\"contextmenu-item-img\"><img src=\"images/pages.gif\" /></td></tr>";
-
-		// edit content
-		$this->defaultmenu['contentcontext']['editcontent']['name'] = $this->CLASS['translate']->_('edit content');
-		$this->defaultmenu['contentcontext']['editcontent']['link'] = 'index.php?id={$PAGEID}&amp;eid=';
-		$this->defaultmenu['contentcontext']['editcontent']['addid'] = "1";
-		$this->defaultmenu['contentcontext']['editcontent']['contentrights'] = "2";
-		$this->defaultmenu['contentcontext']['editcontent']['priority'] = "20";
-		$this->defaultmenu['contentcontext']['editcontent']['contenttype'] = "text";
-		$this->defaultmenu['contentcontext']['editcontent']['wrap'] = "<tr class=\"contextmenu-item-row\"><td class=\"contextmenu-item\">|</td><td class=\"contextmenu-item-img\"><img src=\"images/pages.gif\" /></td></tr>";
-
-		// delete content
-		$this->defaultmenu['contentcontext']['deletecontent']['name'] = $this->CLASS['translate']->_('delete content');
-		$this->defaultmenu['contentcontext']['deletecontent']['link'] = 'javascript:;';
-		$this->defaultmenu['contentcontext']['deletecontent']['atagparams'] = "onclick=\"if(confirm('" . $this->CLASS['translate']->_('Do you really want to delete?') . "')) { location.href='index.php?id={\$PAGEID}&amp;delid={\$ID}'; } else { return false; }\"";
-		$this->defaultmenu['contentcontext']['deletecontent']['contentrights'] = "2";
-		$this->defaultmenu['contentcontext']['deletecontent']['priority'] = "30";
-		$this->defaultmenu['contentcontext']['deletecontent']['contenttype'] = "text";
-		$this->defaultmenu['contentcontext']['deletecontent']['wrap'] = "<tr class=\"contextmenu-item-row\"><td class=\"contextmenu-item\">|</td><td class=\"contextmenu-item-img\"><img src=\"images/pages.gif\" /></td></tr>";
-
-		// move content
-		$this->defaultmenu['contentcontext']['movecontent']['name'] = $this->CLASS['translate']->_('move content');
-		$this->defaultmenu['contentcontext']['movecontent']['link'] = "#";
-		$this->defaultmenu['contentcontext']['movecontent']['atagparams'] = "onclick=\"window.document.forms.move.contentid.value='".'{$ID}'."'; window.document.forms.move.move.value='cmove'; window.open('move.php','Knowledgeroot','width=310,height=400,menubar=yes,resizable=no');\"";
-		$this->defaultmenu['contentcontext']['movecontent']['contentrights'] = "2";
-		$this->defaultmenu['contentcontext']['movecontent']['pagerights'] = "2";
-		$this->defaultmenu['contentcontext']['movecontent']['priority'] = "40";
-		$this->defaultmenu['contentcontext']['movecontent']['contenttype'] = "text";
-		$this->defaultmenu['contentcontext']['movecontent']['wrap'] = "<tr class=\"contextmenu-item-row\"><td class=\"contextmenu-item\">|</td><td class=\"contextmenu-item-img\"><img src=\"images/pages.gif\" /></td></tr>";
-
-		// add file
-		$this->defaultmenu['contentcontext']['addfile']['name'] = $this->CLASS['translate']->_('add file');
-		$this->defaultmenu['contentcontext']['addfile']['link'] = "#";
-		$this->defaultmenu['contentcontext']['addfile']['addid'] = "1";
-		$this->defaultmenu['contentcontext']['addfile']['atagparams'] = "onclick=\"return ShowById('fileform_".'{$ID}'."');\"";
-		$this->defaultmenu['contentcontext']['addfile']['contentrights'] = "2";
-		$this->defaultmenu['contentcontext']['addfile']['priority'] = "40";
-		$this->defaultmenu['contentcontext']['addfile']['contenttype'] = "text";
-		$this->defaultmenu['contentcontext']['addfile']['wrap'] = "<tr class=\"contextmenu-item-row\"><td class=\"contextmenu-item\">|</td><td class=\"contextmenu-item-img\"><img src=\"images/pages.gif\" /></td></tr>";
-
-		// END CONTENT CONTEXT MENU
 	}
 }
 
