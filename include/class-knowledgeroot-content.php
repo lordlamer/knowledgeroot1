@@ -1408,24 +1408,15 @@ class knowledgeroot_content {
 
 					echo "<div class=\"ContentItem\" id=\"contentid_".$row['id']."\">\n
 					<!-- anchor --><a name=\"".$row['id']."\"></a>
-					
-
-
 <div class=\"card\">
     <h5 class=\"card-header\">
-        <a data-toggle=\"collapse\" href=\"#content-".$row['id']."\" aria-expanded=\"".((!$collapse) ? "true":"false")."\" aria-controls=\"content-".$row['id']."\" id=\"content-head-".$row['id']."\" class=\"d-block\">
+        <a data-toggle=\"collapse\" href=\"#content-".$row['id']."\" aria-expanded=\"".((!$collapse) ? "true":"false")."\" aria-controls=\"content-".$row['id']."\" id=\"content-head-".$row['id']."\" class=\"d-block ".(($collapse) ? "collapsed":"")."\">
             <i class=\"fa fa-chevron-down pull-right\"></i>
             ".$titleText.(($this->CLASS['config']->content->showtitledetails) ? "&nbsp;($lastUpdated&nbsp;|&nbsp;$created)": "")."
         </a>
     </h5>
+\n";
 
-
-
-
-
-					
-					\n";
-					if(!$collapse) {
 					// add up and down arrows
 					if($mycontentrights == 2 && $mypagerights == 2) {
 						if ($maxcontent != $contentcounter) {
@@ -1449,7 +1440,7 @@ class knowledgeroot_content {
 
 
 					echo "
-    <div id=\"content-".$row['id']."\" class=\"collapse show\" aria-labelledby=\"content-head-".$row['id']."\">
+    <div id=\"content-".$row['id']."\" class=\"collapse ".((!$collapse) ? "show":"")."\" aria-labelledby=\"content-head-".$row['id']."\">
         <div class=\"card-body\">";
 
                         $this->CLASS['hooks']->setHook("kr_content","show_tree_content","show_content_menu_start");
@@ -1578,8 +1569,6 @@ class knowledgeroot_content {
 					// show content status bar
 					if($this->CLASS['config']->content->statusbar)
 						echo "<div class=\"card-footer text-muted\">".$lastUpdated."&nbsp;|&nbsp;".$created."</div>\n";
-
-					}
 
 					echo "</div>"; //content title pante end
 
