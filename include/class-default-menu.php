@@ -158,7 +158,7 @@ class default_menu {
 		// END PAGE NAVI
 
 		// BEGIN CONTENT NAVI
-		$this->defaultmenu['content']['config']['wrap'] = '<div class="btn-group" role="group">|</div>';
+		$this->defaultmenu['content']['config']['wrap'] = '<div class="btn-group" role="group" style="margin-bottom: 1rem;">|</div><p/>';
 
 		// edit content
 		$this->defaultmenu['content']['editcontent']['name'] = $this->CLASS['translate']->_('edit');

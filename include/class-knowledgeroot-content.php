@@ -1498,8 +1498,6 @@ class knowledgeroot_content {
 						}
 					}
 
-echo '</div><div class="card-footer">';
-
 					if($show_files == 1) {
 						$this->CLASS['hooks']->setHook("kr_content","show_tree_content","show_content_files_start");
 
@@ -1529,10 +1527,10 @@ echo '</div><div class="card-footer">';
 							$rows = $this->CLASS['cache']->load($hashkey);
 						}
 
-						echo '<div>';
-
 						// read all select files
 						if(is_array($rows)) {
+							echo '<div class="alert alert-secondary" style="margin-bottom: 0;">';
+
 							foreach($rows as $zeile) {
 								$title = "";
 								if($zeile['owner'] == NULL || $zeile['owner'] == 0 || $zeile['owner'] == "") {
@@ -1554,9 +1552,9 @@ echo '</div><div class="card-footer">';
 									echo "<a href=\"".$downloadlink."\" title=\"".$title."\"><i class=\"fa fa-cloud-download\" aria-hidden=\"true\"></i> ".$zeile['filename']."</a>&nbsp;<font class=\"text\">[".getfilesize($zeile['filesize'])."]&nbsp;[".$title."]</font><br />\n";
 								}
 							}
-						}
 
-						echo '</div>';
+                            echo '</div>';
+						}
 
 						$this->CLASS['hooks']->setHook("kr_content","show_tree_content","show_content_files_end");
 					}
@@ -1564,20 +1562,22 @@ echo '</div><div class="card-footer">';
 					if($show_files == 1) {
 						// show form for adding new files
 						if($mycontentrights == 2) {
-							echo "<div id=\"fileform_".$row['id']."\" style=\"display:none\">
+							echo "<div id=\"fileform_".$row['id']."\" style=\"display:none\" class=\"alert alert-success\">
 								<form class=\"AddFileForm\" action=\"index.php\" method=\"post\" enctype=\"multipart/form-data\">\n
 									<b>".$this->CLASS['translate']->_('add file')."</b>\n
 									<input type=\"hidden\" name=\"upload\" value=\"yes\" />
 									<input type=\"hidden\" name=\"contentid\" value=\"".$row['id']."\" />
 									<input type=\"file\" name=\"datei\" />&nbsp;\n
-									<input class=\"button\" type=\"submit\" name=\"submit\" value=\"".$this->CLASS['translate']->_('add')."\" />
+									<input class=\"btn btn-primary\" type=\"submit\" name=\"submit\" value=\"".$this->CLASS['translate']->_('add')."\" />
 								</form></div>";
 						}
 					}
 
+					echo '</div>';
+
 					// show content status bar
 					if($this->CLASS['config']->content->statusbar)
-						echo "<div class=\"content_statusbar\">".$lastUpdated."&nbsp;|&nbsp;".$created."</div>\n";
+						echo "<div class=\"card-footer text-muted\">".$lastUpdated."&nbsp;|&nbsp;".$created."</div>\n";
 
 					}
 
@@ -1595,9 +1595,7 @@ echo '</div><div class="card-footer">';
 						$firstcontent = 0;
 					}
 
-					echo "
-					        </div>
-    </div>\n";
+					echo "</div>\n";
 				} // end of while
 
 				$this->CLASS['hooks']->setHook("kr_content","show_tree_content","show_page_menu_start");

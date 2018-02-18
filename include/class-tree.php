@@ -331,7 +331,7 @@ class categoryTree {
    *
    */
   function buildTree( $rec_id ) {
-    echo "<table class=\"card\" class=\"tree\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n";
+    echo "<table class=\"card\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">\n";
     $cats = $this->readCategories();
 
     $moveparam = '';
