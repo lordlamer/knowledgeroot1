@@ -554,20 +554,6 @@ class categoryTree {
 					$out .= "<tr id=\"menu_".$id."\"><td ".$class_root_item." nowrap=\"nowrap\">".$spaces . (($this->CLASS['config']->tree->showcounter) ? "<span class=\"treecounter\">" . $itemcounter . ".</span> " : "") . "<a ".$class_act."id=\"alink_".$id."\" href=\"" . $this->makeLink($title) . "\"" . $tooltip . '>' .(($this->isSymlink($id))? "&raquo;&nbsp;":"").$title['title'] . "</a></td></tr>\n";
 				}
 
-				// check if drag and drop is enabled
-				if($this->CLASS['config']->menu->dragdrop && $this->move != TRUE && $this->editor != TRUE) {
-					// add javascript for drag and drop
-					$out .= '<script type="text/javascript" language="javascript">';
-					$out .= 'var navig_agt=navigator.userAgent.toLowerCase();
-var navig_ie=((navig_agt.indexOf("msie")!=-1) && (navig_agt.indexOf("opera")==-1));
-var navig_ie8=(navig_ie && (navig_agt.indexOf("msie 8.")!=-1));';
-					$out .= 'if((navigator.appName.toLowerCase() != "opera" && !document.all) || navig_ie8) {';
-					$out .= "new Draggable('menu_".$id."', {handle: 'alink_".$id."', revert:true, ghosting: false, zindex: 900, starteffect:function() { Dragbox.show(\$('alink_'+".$id.").innerHTML); }, endeffect:function() { Dragbox.hide(); }  });";
-					$out .= "Droppables.add('alink_".$id."', {hoverclass: 'menudraghover', onDrop: function(element) { var regdrag = /.*(menu)_[0-9]+.*/; regdrag.exec(element.id); if(RegExp.\$1 == 'menu') { var reg = /.*alink_([0-9]+).*/; reg.exec(element.innerHTML); AjaxMoveTree(RegExp.\$1, ".$id."); } else { var reg = /.*contentdragid_([0-9]+).*/; reg.exec(element.id); AjaxMoveContent(RegExp.\$1, ".$id."); } } });";
-					$out .= '}';
-					$out .= "</script>\n";
-				}
-
 				if ((isset ($this->open[$id]) && $this->open[$id] == 1) || $this->expand == 1 || $this->doexpand == 1) {
 					if($this->editor == TRUE) {
 						$out .= $this->getContentTitleOfPage($id,$indent+1,$imagePrefix);
