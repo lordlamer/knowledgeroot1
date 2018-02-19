@@ -96,7 +96,7 @@ class knowledgeroot_themes {
 	 */
 	function theme_dropdown($default = "", $name = "theme") {
 		$out = "";
-		$out .= "<select dojoType=\"dijit.form.Select\" name=\"".$name."\">\n";
+		$out .= "<select class=\"form-control form-control-sm\" name=\"".$name."\">\n";
 
 		foreach($this->themes as $key => $value) {
 			$selected = $default == $value['name'] ? "selected=\"selected\"" : "";

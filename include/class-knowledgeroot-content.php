@@ -849,22 +849,36 @@ class knowledgeroot_content {
 		$this->CLASS['hooks']->setHook("kr_content","show_options","start");
 
 		echo '
+<div class="card">
+  <div class="card-header">
+    '.$this->CLASS['translate']->_('change options').'
+  </div>
+  <div class="card-body">
 		<form action="index.php" method="post">
 		<input type="hidden" name="action" value="options" />
-		<div dojoType="dijit.TitlePane" title="<b>'.$this->CLASS['translate']->_('change options').'</b>">
 
-		<table style="padding:5px;" border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr><td width="20%">'.$this->CLASS['translate']->_('new password').':</td><td align="left" style="padding:2px 2px 2px 2px;"><input dojoType="dijit.form.TextBox" type="password" name="password" value="" /></td></tr>
-			<tr><td>'.$this->CLASS['translate']->_('confirm password').':</td><td align="left" style="padding:2px 2px 2px 2px;"><input dojoType="dijit.form.TextBox" type="password" name="password1" value="" /></td></tr>
-			<tr><td>'.$this->CLASS['translate']->_('theme').':</td><td align="left" style="padding:2px 2px 2px 2px;">'.$this->CLASS['themes']->theme_dropdown($_SESSION['theme']).'</td></tr>
-			<tr><td>'.$this->CLASS['translate']->_('language').':</td><td align="left" style="padding:2px 2px 2px 2px;">'.$this->CLASS['language']->lang_dropdown("language",$_SESSION['language'],"", false).'</td></tr>
-		</table>
+		  <div class="form-group">
+			<label for="password">'.$this->CLASS['translate']->_('new password').'</label>
+			<input type="password" class="form-control" name="password" id="password" placeholder="'.$this->CLASS['translate']->_('new password').'">
+		  </div>
+		  <div class="form-group">
+			<label for="password1">'.$this->CLASS['translate']->_('confirm password').'</label>
+			<input type="password" class="form-control" name="password1" id="password1" placeholder="'.$this->CLASS['translate']->_('confirm password').'">
+		  </div>
+		  <div class="form-group">
+			<label for="theme">'.$this->CLASS['translate']->_('theme').'</label>
+			'.$this->CLASS['themes']->theme_dropdown($_SESSION['theme']).'
+		  </div>
+		  <div class="form-group">
+			<label for="language">'.$this->CLASS['translate']->_('language').'</label>
+			'.$this->CLASS['language']->lang_dropdown("language",$_SESSION['language'],"", false).'
+		  </div>
 
-		</div>
-
-		<button dojoType="dijit.form.Button" type="submit" name="submit">'.$this->CLASS['translate']->_('save').'</button>
+		<button class="btn btn-primary" type="submit" name="submit">'.$this->CLASS['translate']->_('save').'</button>
 
 		</form>
+	</div>
+</div>
 		';
 
 		$this->CLASS['hooks']->setHook("kr_content","show_options","end");
