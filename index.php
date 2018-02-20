@@ -38,14 +38,11 @@ if ($CLASS['config']->base->charset != '') {
   $CLASS['kr_header']->show_header();
 ?>
 </head>
-<body class="claro" <?php if($CLASS['config']->menu->type == "slide") { echo "onload=\"Hide('tree');\""; } ?>>
+<body class="claro">
 
 <div style="display: none;" id="messagebox">
-  <div id="msg" class="loading"><?php echo $CLASS['translate']->_('loading...'); ?></div>
+  <div id="msg" class="loading" class="card"><?php echo $CLASS['translate']->_('loading...'); ?></div>
 </div>
-
-<div id="mousemenu" style="display: none; position: absolute;">&nbsp;</div>
-<div id="dragbox" style="display: none; position: absolute;">&nbsp;</div>
 
 <a name="top"></a>
 
@@ -107,7 +104,7 @@ if ($CLASS['config']->base->charset != '') {
 	<tr>
 	 <td id="treecontainer">
 
-	   <div id="tree" <?php if($CLASS['config']->menu->type == "static") { echo "style=\"display:block;\""; } else { echo "style=\"display:none; position:absolute;\""; } ?>>
+	   <div id="tree" style="display:block;">
 	<?php
 	  // show tree
 	  if (isset ($_SESSION['open'])) {
@@ -128,19 +125,6 @@ if ($CLASS['config']->base->charset != '') {
 </table>
 
 <?php
-  // show developer toolbar
-  if($CLASS['config']->development->toolbar) {
-    echo "<div id=\"footer\">\n";
-    echo "<p>"."\n";
-    echo "developer toolbar: <a href=\"http://forum.linuxdelta.de\" target=\"_blank\">forum</a>"."\n";
-    echo "<a href=\"http://lists.knowledgeroot.org/cgi-bin/mailman/listinfo\" target=\"_blank\">mailinglist</a>"."\n";
-    echo "<a href=\"http://www.knowledgeroot.org\" target=\"_blank\">project page</a>"."\n";
-    echo "<a href=\"http://trac.knowledgeroot.org\" target=\"_blank\">bug tracker</a>"."\n";
-    echo $CLASS['kr_extension']->show_menu("toolbar");
-    echo "</p>"."\n";
-    echo "</div>\n";
-  }
-
   // do last cleanups
   $_SESSION['firstrun'] = 0;
 

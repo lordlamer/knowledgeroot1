@@ -25,7 +25,7 @@ class knowledgeroot_header {
 	/**
 	 * @param string $messagetype
 	 */
-	var $messagetype = "notice"; // default messagetype
+	var $messagetype = "success"; // default messagetype
 
 	/**
 	 * init/start class
@@ -1496,16 +1496,16 @@ class knowledgeroot_header {
 		$this->CLASS['hooks']->setHook("kr_header","show_messages","start");
 
 		if($this->messages != "") {
-			$js = '
-			<script language="javascript" type="text/javascript">
-				onload = function() {
-				ShowMessage("'.$this->messages.'","'.$this->messagetype.'");
-				setTimeout("HideMessage()", 5000);
-				}
-			</script>
+			$code = '
+			<div class="alert alert-'.$this->messagetype.'" role="alert">
+			  '.$this->messages.'
+			    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
 			';
 
-			echo $js;
+			echo $code;
 		}
 
 		$this->CLASS['hooks']->setHook("kr_header","show_messages","end");
@@ -1518,7 +1518,7 @@ class knowledgeroot_header {
 	function addmessage($msg) {
 		$this->CLASS['hooks']->setHook("kr_header","addmessage","start");
 
-		$this->messagetype = "notice";
+		$this->messagetype = "success";
 		$this->messages .= $msg . "&nbsp;";
 
 		$this->CLASS['hooks']->setHook("kr_header","addmessage","end");
