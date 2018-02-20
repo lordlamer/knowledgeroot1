@@ -69,9 +69,6 @@ if ($CLASS['config']->base->charset != '') {
 
             echo $CLASS['language']->lang_dropdown("language", $_SESSION['language']);
 
-            if (!$CLASS['config']->tree->ajax) {
-                echo '<input class="button" type="submit" name="submit1" value="'.$CLASS['translate']->_('change').'" />'."\n";
-            }
             ?>
         </form>
 

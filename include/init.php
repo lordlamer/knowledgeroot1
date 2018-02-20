@@ -161,14 +161,6 @@ $CLASS['themes']->start($CLASS);
 // init email notification class
 $CLASS['notification'] = new knowledgeroot_notification($CLASS);
 
-// check for safari and konqueror
-// this is a short fix beacause the ajaxtree does not work in opera and konqueror
-if($CLASS['config']->tree->ajax) {
-	if(isset($_SERVER['HTTP_USER_AGENT']) && (preg_match("/.*[Kk]onqueror.*/",$_SERVER['HTTP_USER_AGENT']) || preg_match("/.*[Ss]afari.*/",$_SERVER['HTTP_USER_AGENT']))) {
-		$CLASS['config']->tree->ajax = false;
-	}
-}
-
 // load rte editor class
 $CLASS['rte'] = new rte($CLASS);
 
