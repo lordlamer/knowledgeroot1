@@ -75,14 +75,8 @@ switch($CLASS['config']->db->adapter) {
 	case 'pgsql':
 		require_once($base_path."include/class-pgsql.php");
 		break;
-	case 'mdb2':
-		require_once($base_path."include/class-mdb2.php");
-		break;
 	case 'sqlite':
 		require_once($base_path."include/class-sqlite.php");
-		break;
-	case 'oracle':
-		require_once($base_path."include/class-oracle.php");
 		break;
 }
 
@@ -207,11 +201,11 @@ if(!defined("KR_INCLUDE_PREFIX")) {
 
 $CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."assets/jquery/jquery.min.js");
 $CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."assets/bootstrap/js/bootstrap.min.js");
-$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/prototype.js");
-$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/scriptaculous.js");
+//$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/prototype.js");
+//$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/scriptaculous.js");
 //$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/effects.js");
 //$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/dragdrop.js");
-$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/showhide.js");
+//$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/showhide.js");
 $CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/ajax-tree.js");
 $CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/messagebox.js");
 
@@ -220,17 +214,6 @@ $CLASS['kr_header']->addcsssrc(KR_INCLUDE_PREFIX."assets/bootstrap/css/bootstrap
 
 // add fontawesome
 $CLASS['kr_header']->addcsssrc(KR_INCLUDE_PREFIX."assets/font-awesome/css/font-awesome.min.css");
-
-// check if contextmenus are enabled
-if($CLASS['config']->menu->context) {
-	// load js for contextmenus
-	$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/knowledgeroot-menu.js");
-}
-
-// add js for dragbox if dragdrop is enabled
-if($CLASS['config']->menu->dragdrop) {
-	$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/dragbox.js");
-}
 
 // add loadingmessage for messagebox
 $CLASS['kr_header']->addjs("var msgboxloading = '".$CLASS['translate']->_('loading...')."';");

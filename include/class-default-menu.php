@@ -200,7 +200,7 @@ class default_menu {
 		$this->defaultmenu['content']['addfile']['contentrights'] = "2";
 		$this->defaultmenu['content']['addfile']['priority'] = "50";
 		$this->defaultmenu['content']['addfile']['contenttype'] = "text";
-		$this->defaultmenu['content']['addfile']['wrap'] = "<div type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"return ShowById('fileform_".'{$ID}'."');\">|</div>";
+		$this->defaultmenu['content']['addfile']['wrap'] = "<div type=\"button\" class=\"btn btn-sm btn-outline-secondary\" onclick=\"$('#fileform_".'{$ID}'."').show();\">|</div>";
 
 		// totop
 		/*

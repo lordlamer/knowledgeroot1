@@ -41,7 +41,7 @@ if ($CLASS['config']->base->charset != '') {
 <body class="claro">
 
 <div style="display: none;" id="messagebox">
-  <div id="msg" class="loading" class="card"><?php echo $CLASS['translate']->_('loading...'); ?></div>
+  <div id="msg" class="loading"><?php echo $CLASS['translate']->_('loading...'); ?></div>
 </div>
 
 <a name="top"></a>

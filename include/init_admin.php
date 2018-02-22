@@ -84,14 +84,8 @@ switch($CLASS['config']->db->adapter) {
 	case 'pgsql':
 		require_once($base_path."include/class-pgsql.php");
 		break;
-	case 'mdb2':
-		require_once($base_path."include/class-mdb2.php");
-		break;
 	case 'sqlite':
 		require_once($base_path."include/class-sqlite.php");
-		break;
-	case 'oracle':
-		require_once($base_path."include/class-oracle.php");
 		break;
 }
 

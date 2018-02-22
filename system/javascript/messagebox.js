@@ -5,21 +5,12 @@
  * 20080103
  */
 
-	var ShowMessage = function(msg, type) {
-		$("messagebox").style.display = "block";
-		$("msg").className = type;
-		$("msg").innerHTML = msg;
-		
-		if(type == "warning") {
-			Effect.Shake('messagebox');
-		}
-		
-	}
+var ShowMessage = function(msg, type) {
+	$("messagebox").show();
+	$("msg").attr("class", type);
+	$("msg").html(msg);
+}
 
-	var HideMessage = function(type) {
-		if(type != "loading") {
-			Effect.BlindUp('messagebox',{duration:1.0});
-		} else {
-			$("messagebox").style.display = "none";
-		}
-	}
+var HideMessage = function(type) {
+	$("messagebox").hide();
+}
