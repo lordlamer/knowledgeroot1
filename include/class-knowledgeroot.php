@@ -186,7 +186,13 @@ class knowledgeroot {
 				<tr><td>'.$this->CLASS['translate']->_('user').':</td><td style="padding:2px 2px 2px 2px;">' . $users . '</td><td>'.$this->CLASS['translate']->_('userrights').':</td><td>' . $userrights . '</td></tr>
 				<tr><td>'.$this->CLASS['translate']->_('group').':</td><td>' . $groups . '</td><td>'.$this->CLASS['translate']->_('grouprights').':</td><td>' . $grouprights . '</td></tr>
 				<tr><td colspan="2">&nbsp;</td><td>'.$this->CLASS['translate']->_('otherrights').':</td><td>' . $otherrights . '</td></tr>
-				<tr id="rightpaneladdmultiplerights"><td colspan="4" align="center"><button dojoType="dijit.form.Button" onclick="rights.addUserRightLine();" type="button" name="adduserrights">'.$this->CLASS['translate']->_('Add Userrights').'</button>&nbsp;<button dojoType="dijit.form.Button" onclick="rights.addGroupRightLine();" type="button" name="addgrouprights">'.$this->CLASS['translate']->_('Add Grouprights').'</button></td></tr>
+				<tr id="rightpaneladdmultiplerights">
+					<td colspan="4" align="center">
+						<button class="btn btn-outline-secondary btn-sm" onclick="rights.addUserRightLine();" type="button" name="adduserrights">'.$this->CLASS['translate']->_('Add Userrights').'</button>
+						&nbsp;
+						<button class="btn btn-outline-secondary btn-sm" onclick="rights.addGroupRightLine();" type="button" name="addgrouprights">'.$this->CLASS['translate']->_('Add Grouprights').'</button>
+					</td>
+				</tr>
 			</table>
 			';
 		$out .= "</div>\n";
@@ -277,9 +283,9 @@ class knowledgeroot {
 			</script>
 			';
 
-		$out .= "<input dojoType=\"dijit.form.CheckBox\" type=\"checkbox\" name=\"subinheritrights\" value=\"1\" />".$this->CLASS['translate']->_('enable inherit rights for subpages and contents')."<br />\n";
-		$out .= "<input dojoType=\"dijit.form.CheckBox\" type=\"checkbox\" name=\"subinheritrightseditable\" value=\"1\" />".$this->CLASS['translate']->_('enable edit of rights for these pages and contents')."<br />\n";
-		$out .= "<input dojoType=\"dijit.form.CheckBox\" type=\"checkbox\" name=\"subinheritrightsdisable\" value=\"1\" />".$this->CLASS['translate']->_('disable inherit rights for subpages and contents')."<br />\n";
+		$out .= "<input class=\"form-check-input\" type=\"checkbox\" name=\"subinheritrights\" value=\"1\" />".$this->CLASS['translate']->_('enable inherit rights for subpages and contents')."<br />\n";
+		$out .= "<input class=\"form-check-input\" type=\"checkbox\" name=\"subinheritrightseditable\" value=\"1\" />".$this->CLASS['translate']->_('enable edit of rights for these pages and contents')."<br />\n";
+		$out .= "<input class=\"form-check-input\" type=\"checkbox\" name=\"subinheritrightsdisable\" value=\"1\" />".$this->CLASS['translate']->_('disable inherit rights for subpages and contents')."<br />\n";
 
 		$out .= "<div class=\"rightpanel\" style=\"padding:10px 0px 0px 0px;\">\n";
 		$out .= '
@@ -287,7 +293,13 @@ class knowledgeroot {
 				<tr><td>'.$this->CLASS['translate']->_('user').':</td><td style="padding:2px 2px 2px 2px;">' . $users . '</td><td>'.$this->CLASS['translate']->_('userrights').':</td><td>' . $userrights . '</td></tr>
 				<tr><td>'.$this->CLASS['translate']->_('group').':</td><td>' . $groups . '</td><td>'.$this->CLASS['translate']->_('grouprights').':</td><td>' . $grouprights . '</td></tr>
 				<tr><td colspan="2">&nbsp;</td><td>'.$this->CLASS['translate']->_('otherrights').':</td><td>' . $otherrights . '</td></tr>
-				<tr id="subinheritrightpaneladdmultiplerights"><td colspan="4" align="center"><button dojoType="dijit.form.Button" onclick="subinheritrightsjs.addUserRightLine();" type="button" name="subinheritadduserrights">'.$this->CLASS['translate']->_('Add Userrights').'</button>&nbsp;<button dojoType="dijit.form.Button" onclick="subinheritrightsjs.addGroupRightLine();" type="button" name="subinheritaddgrouprights">'.$this->CLASS['translate']->_('Add Grouprights').'</button></td></tr>
+				<tr id="subinheritrightpaneladdmultiplerights">
+					<td colspan="4" align="center">
+						<button class="btn btn-outline-secondary btn-sm" onclick="subinheritrightsjs.addUserRightLine();" type="button" name="subinheritadduserrights">'.$this->CLASS['translate']->_('Add Userrights').'</button>
+						&nbsp;
+						<button class="btn btn-outline-secondary btn-sm" onclick="subinheritrightsjs.addGroupRightLine();" type="button" name="subinheritaddgrouprights">'.$this->CLASS['translate']->_('Add Grouprights').'</button>
+					</td>
+				</tr>
 			</table>
 			';
 		$out .= "</div>\n";
@@ -346,7 +358,7 @@ class knowledgeroot {
 		$recursivhtml = '';
 		if($recursiv == 1) {
 			$recursivhtml = "<tr><td colspan=\"4\">".$this->CLASS['translate']->_('set recursiv')."?&nbsp;\n";
-			$recursivhtml .= "<select name=\"recursiv\" dojoType=\"dijit.form.Select\" dojoType=\"dijit.form.Select\">\n";
+			$recursivhtml .= "<select name=\"recursiv\" class=\"form-control form-control-sm\">\n";
 			$recursivhtml .= "\t<option value=\"\">".$this->CLASS['translate']->_('no')."</option>\n";
 			$recursivhtml .= "\t<option value=\"1\">".$this->CLASS['translate']->_('yes')."</option>\n";
 			$recursivhtml .= "</select>\n";
@@ -420,7 +432,13 @@ class knowledgeroot {
 				<tr><td>'.$this->CLASS['translate']->_('group').':</td><td>' . $groups . '</td><td>'.$this->CLASS['translate']->_('grouprights').':</td><td>' . $grouprights . '</td></tr>
 				<tr><td colspan="2">&nbsp;</td><td>'.$this->CLASS['translate']->_('otherrights').':</td><td>' . $otherrights . '</td></tr>
 				'.$mrightsout.'
-				<tr id="rightpaneladdmultiplerights"><td colspan="4" align="center"><button dojoType="dijit.form.Button" onclick="rights.addUserRightLine();" type="button" name="adduserrights">'.$this->CLASS['translate']->_('Add Userrights').'</button>&nbsp;<button dojoType="dijit.form.Button" onclick="rights.addGroupRightLine();" type="button" name="addgrouprights">'.$this->CLASS['translate']->_('Add Grouprights').'</button></td></tr>
+				<tr id="rightpaneladdmultiplerights">
+					<td colspan="4" align="center">
+						<button class="btn btn-outline-secondary btn-sm" onclick="rights.addUserRightLine();" type="button" name="adduserrights">'.$this->CLASS['translate']->_('Add Userrights').'</button>
+						&nbsp;
+						<button class="btn btn-outline-secondary btn-sm" onclick="rights.addGroupRightLine();" type="button" name="addgrouprights">'.$this->CLASS['translate']->_('Add Grouprights').'</button>
+					</td>
+				</tr>
 				'.$recursivhtml.'
 			</table>
 			';
@@ -562,7 +580,13 @@ class knowledgeroot {
 				<tr><td>'.$this->CLASS['translate']->_('group').':</td><td>' . $groups . '</td><td>'.$this->CLASS['translate']->_('grouprights').':</td><td>' . $grouprights . '</td></tr>
 				<tr><td colspan="2">&nbsp;</td><td>'.$this->CLASS['translate']->_('otherrights').':</td><td>' . $otherrights . '</td></tr>
 				'.$mrightsout.'
-				<tr id="subinheritrightpaneladdmultiplerights"><td colspan="4" align="center"><button dojoType="dijit.form.Button" onclick="subinheritrightsjs.addUserRightLine();" type="button" name="subinheritadduserrights">'.$this->CLASS['translate']->_('Add Userrights').'</button>&nbsp;<button dojoType="dijit.form.Button" onclick="subinheritrightsjs.addGroupRightLine();" type="button" name="subinheritaddgrouprights">'.$this->CLASS['translate']->_('Add Grouprights').'</button></td></tr>
+				<tr id="subinheritrightpaneladdmultiplerights">
+					<td colspan="4" align="center">
+						<button class="btn btn-outline-secondary btn-sm" onclick="subinheritrightsjs.addUserRightLine();" type="button" name="subinheritadduserrights">'.$this->CLASS['translate']->_('Add Userrights').'</button>
+						&nbsp;
+						<button class="btn btn-outline-secondary btn-sm" onclick="subinheritrightsjs.addGroupRightLine();" type="button" name="subinheritaddgrouprights">'.$this->CLASS['translate']->_('Add Grouprights').'</button>
+					</td>
+				</tr>
 			</table>
 			';
 		$out .= "</div>\n";
@@ -834,7 +858,7 @@ class knowledgeroot {
 		$defaultno = ($default==0) ? " selected=\"selected\"" : "";
 		$defaultyes = ($default==1) ? " selected=\"selected\"" : "";
 
-		$out = "<select name=\"".$name."\" dojoType=\"dijit.form.Select\">\n";
+		$out = "<select name=\"".$name."\" class=\"form-control form-control-sm\">\n";
 		$out .= "\t<option value=\"0\"" . $defaultno . ">".$this->CLASS['translate']->_('no')."</option>\n";
 		$out .= "\t<option value=\"1\"" . $defaultyes . ">".$this->CLASS['translate']->_('yes')."</option>\n";
 		$out .= "</select>\n";
@@ -937,9 +961,9 @@ class knowledgeroot {
 	 */
 	function groupDropDown($name, $default = "", $multiple = false, $defaultgroups = array()) {
 		if($multiple == true) {
-			$out = "<select name=\"".$name."\" multiple=\"multiple\" size=\"5\" dojoType=\"dijit.form.MultiSelect\">\"";
+			$out = "<select name=\"".$name."\" multiple=\"multiple\" size=\"5\" class=\"form-control form-control-sm\">\"";
 		} else {
-			$out = "<select name=\"".$name."\" dojoType=\"dijit.form.Select\">\"";
+			$out = "<select name=\"".$name."\" class=\"form-control form-control-sm\">\"";
 		}
 
 		$res = $this->CLASS['db']->query("SELECT id,name FROM groups");
@@ -983,7 +1007,7 @@ class knowledgeroot {
 	 * @return string return html dropdown with rights
 	 */
 	function rightDropDown($name,$default = "") {
-		$out = "<select name=\"".$name."\" dojoType=\"dijit.form.Select\">\n";
+		$out = "<select name=\"".$name."\" class=\"form-control form-control-sm\">\n";
 
 		$selected1 = $default == 2 ? "selected=\"selected\"" : "";
 		$selected2 = $default == 1 ? "selected=\"selected\"" : "";
@@ -1856,7 +1880,7 @@ class knowledgeroot {
 			$this->userdropdowncache = $cache;
 		}
 
-		$users = "\n<select name=\"".$name."\" dojoType=\"dijit.form.Select\">\n";
+		$users = "\n<select name=\"".$name."\" class=\"form-control form-control-sm\">\n";
 		foreach($cache as $key => $value) {
 			// clean value
 			$value = str_replace("\r\n", "", $value);
@@ -1894,7 +1918,7 @@ class knowledgeroot {
 			$this->groupdropdowncache = $cache;
 		}
 
-		$groups = "\n<select name=\"".$name."\" dojoType=\"dijit.form.Select\">\n";
+		$groups = "\n<select name=\"".$name."\" class=\"form-control form-control-sm\">\n";
 		foreach($cache as $key => $value) {
 			if($groupid != "" && $key == $groupid) {
 				$groups .= "\t<option value=\"".$key."\" selected=\"selected\">".$value."</option>\n";
