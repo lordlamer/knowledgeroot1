@@ -80,7 +80,7 @@ class knowledgeroot_content {
 			echo "<button class=\"btn btn-primary\" type=\"submit\" name=\"saveandclose\" value=\"saveandclose\">".$this->CLASS['translate']->_('save and close')."</button>\n";
 			echo "<button class=\"btn btn-secondary\" type=\"submit\" name=\"close\" value=\"close\">".$this->CLASS['translate']->_('close')."</button>\n";
 
-			echo "<br />";
+			echo "<p />";
 
 			echo '<div class="card">';
 			echo '
@@ -171,11 +171,15 @@ class knowledgeroot_content {
 
 			echo '</div>';
 
-			//echo "<br /><br />\n";
+			echo "<p />\n";
+			echo "<p />\n";
+
 			echo "<button class=\"btn btn-primary\" type=\"submit\" name=\"save\" value=\"save\">".$this->CLASS['translate']->_('save')."</button>\n";
 			echo "<button class=\"btn btn-primary\" type=\"submit\" name=\"saveandclose\" value=\"saveandclose\">".$this->CLASS['translate']->_('save and close')."</button>\n";
 			echo "<button class=\"btn btn-secondary\" type=\"submit\" name=\"close\" value=\"close\">".$this->CLASS['translate']->_('close')."</button>\n";
 			echo "</form>";
+
+            echo "<p />\n";
 
 			$this->CLASS['hooks']->setHook("kr_content","new_content","end");
 		}
