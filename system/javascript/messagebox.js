@@ -6,11 +6,11 @@
  */
 
 var ShowMessage = function(msg, type) {
-	$("messagebox").show();
-	$("msg").attr("class", type);
-	$("msg").html(msg);
+	$("#messagebox").show();
+	$("#msg").attr("class", type);
+	$("#msg").html(msg);
 }
 
 var HideMessage = function(type) {
-	$("messagebox").hide();
+	$("#messagebox").hide();
 }
