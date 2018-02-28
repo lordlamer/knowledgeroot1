@@ -144,8 +144,8 @@ class knowledgeroot {
 			$otherrights = $this->rightDropDown("otherrights",$otherright);
 		}
 
-		$userrightsline = "<tr id=\"multiplerights_{ID}\"><td>".$this->CLASS['translate']->_('user')."</td><td style=\"padding:2px 2px 2px 2px;\">".$musers."</td><td>".$this->CLASS['translate']->_('userrights')."</td><td>".$muserrights."&nbsp;<img style=\"cursor:pointer\" src=\"images/delete.gif\" alt=\"\" onclick=\"rights.delRightLine({ID})\" /></td></tr>";
-		$grouprightsline = "<tr id=\"multiplerights_{ID}\"><td>".$this->CLASS['translate']->_('group')."</td><td style=\"padding:2px 2px 2px 2px;\">".$mgroups."</td><td>".$this->CLASS['translate']->_('grouprights')."</td><td>".$mgrouprights."&nbsp;<img style=\"cursor:pointer\" src=\"images/delete.gif\" alt=\"\" onclick=\"rights.delRightLine({ID})\" /></td></tr>";
+		$userrightsline = "<tr id=\"multiplerights_{ID}\"><td><button type=\"button\" class=\"btn btn-danger\" onclick=\"rights.delRightLine({ID})\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></button>&nbsp;".$this->CLASS['translate']->_('user')."</td><td style=\"padding:2px 2px 2px 2px;\">".$musers."</td><td>".$this->CLASS['translate']->_('userrights')."</td><td>".$muserrights."</td></tr>";
+		$grouprightsline = "<tr id=\"multiplerights_{ID}\"><td><button type=\"button\" class=\"btn btn-danger\" onclick=\"rights.delRightLine({ID})\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></button>&nbsp;".$this->CLASS['translate']->_('group')."</td><td style=\"padding:2px 2px 2px 2px;\">".$mgroups."</td><td>".$this->CLASS['translate']->_('grouprights')."</td><td>".$mgrouprights."</td></tr>";
 
 		$userrightsline = str_replace("\n","", $userrightsline);
 		$grouprightsline = str_replace("\n","", $grouprightsline);
@@ -161,8 +161,7 @@ class knowledgeroot {
 						line = line.replace(/\{ID\}/g, this.counter);
 						elementId = "multiplerights_" + this.counter;
 						this.counter++;
-						new Insertion.Before("rightpaneladdmultiplerights", line);
-						dojo.parser.parse(dojo.byId(elementId));
+						$("#rightpaneladdmultiplerights").before(line);
 					},
 
 					addGroupRightLine: function () {
@@ -170,19 +169,19 @@ class knowledgeroot {
 						line = line.replace(/\{ID\}/g, this.counter);
 						elementId = "multiplerights_" + this.counter;
 						this.counter++;
-						new Insertion.Before("rightpaneladdmultiplerights", line);
-						dojo.parser.parse(dojo.byId(elementId));
+						$("#rightpaneladdmultiplerights").before(line);
 					},
 
 					delRightLine: function(id) {
-						removeElement("multiplerights_"+id);
+						$("#multiplerights_"+id).remove();
 					}
 				}
 			</script>
 			';
 		$out .= "<div class=\"rightpanel\" style=\"padding:10px 0px 0px 0px;\">\n";
 		$out .= '
-			<table style="border: 1px solid #000000;" border="0" cellspacing="1" cellpadding="1" width="600">
+			<div class="card"><div class="card-body">
+			<table class="table table-hover table-sm">
 				<tr><td>'.$this->CLASS['translate']->_('user').':</td><td style="padding:2px 2px 2px 2px;">' . $users . '</td><td>'.$this->CLASS['translate']->_('userrights').':</td><td>' . $userrights . '</td></tr>
 				<tr><td>'.$this->CLASS['translate']->_('group').':</td><td>' . $groups . '</td><td>'.$this->CLASS['translate']->_('grouprights').':</td><td>' . $grouprights . '</td></tr>
 				<tr><td colspan="2">&nbsp;</td><td>'.$this->CLASS['translate']->_('otherrights').':</td><td>' . $otherrights . '</td></tr>
@@ -194,6 +193,7 @@ class knowledgeroot {
 					</td>
 				</tr>
 			</table>
+			</div></div>
 			';
 		$out .= "</div>\n";
 		return $out;
@@ -246,8 +246,8 @@ class knowledgeroot {
 			$otherrights = $this->rightDropDown("subinheritotherrights",$otherright);
 		}
 
-		$userrightsline = "<tr id=\"subinheritmultiplerights_{ID}\"><td>".$this->CLASS['translate']->_('user')."</td><td style=\"padding:2px 2px 2px 2px;\">".$musers."</td><td>".$this->CLASS['translate']->_('userrights')."</td><td>".$muserrights."&nbsp;<img style=\"cursor:pointer\" src=\"images/delete.gif\" alt=\"\" onclick=\"subinheritrightsjs.delRightLine({ID})\" /></td></tr>";
-		$grouprightsline = "<tr id=\"subinheritmultiplerights_{ID}\"><td>".$this->CLASS['translate']->_('group')."</td><td style=\"padding:2px 2px 2px 2px;\">".$mgroups."</td><td>".$this->CLASS['translate']->_('grouprights')."</td><td>".$mgrouprights."&nbsp;<img style=\"cursor:pointer\" src=\"images/delete.gif\" alt=\"\" onclick=\"subinheritrightsjs.delRightLine({ID})\" /></td></tr>";
+		$userrightsline = "<tr id=\"subinheritmultiplerights_{ID}\"><td><button type=\"button\" class=\"btn btn-danger\" onclick=\"subinheritrightsjs.delRightLine({ID})\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></button>&nbsp;".$this->CLASS['translate']->_('user')."</td><td style=\"padding:2px 2px 2px 2px;\">".$musers."</td><td>".$this->CLASS['translate']->_('userrights')."</td><td>".$muserrights."</td></tr>";
+		$grouprightsline = "<tr id=\"subinheritmultiplerights_{ID}\"><td><button type=\"button\" class=\"btn btn-danger\" onclick=\"subinheritrightsjs.delRightLine({ID})\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></button>&nbsp;".$this->CLASS['translate']->_('group')."</td><td style=\"padding:2px 2px 2px 2px;\">".$mgroups."</td><td>".$this->CLASS['translate']->_('grouprights')."</td><td>".$mgrouprights."</td></tr>";
 
 		$userrightsline = str_replace("\n","", $userrightsline);
 		$grouprightsline = str_replace("\n","", $grouprightsline);
@@ -263,8 +263,7 @@ class knowledgeroot {
 						line = line.replace(/\{ID\}/g, this.counter);
 						elementId = "subinheritmultiplerights_" + this.counter;
 						this.counter++;
-						new Insertion.Before("subinheritrightpaneladdmultiplerights", line);
-						dojo.parser.parse(dojo.byId(elementId));
+						$("#subinheritrightpaneladdmultiplerights").before(line);
 					},
 
 					addGroupRightLine: function () {
@@ -272,12 +271,11 @@ class knowledgeroot {
 						line = line.replace(/\{ID\}/g, this.counter);
 						elementId = "subinheritmultiplerights_" + this.counter;
 						this.counter++;
-						new Insertion.Before("subinheritrightpaneladdmultiplerights", line);
-						dojo.parser.parse(dojo.byId(elementId));
+						$("#subinheritrightpaneladdmultiplerights").before(line);
 					},
 
 					delRightLine: function(id) {
-						removeElement("subinheritmultiplerights_"+id);
+						$("#subinheritmultiplerights_"+id).remove();
 					}
 				}
 			</script>
@@ -289,7 +287,8 @@ class knowledgeroot {
 
 		$out .= "<div class=\"rightpanel\" style=\"padding:10px 0px 0px 0px;\">\n";
 		$out .= '
-			<table style="border: 1px solid #000000;" border="0" cellspacing="1" cellpadding="1" width="600">
+			<div class="card"><div class="card-body">
+			<table class="table table-hover table-sm">
 				<tr><td>'.$this->CLASS['translate']->_('user').':</td><td style="padding:2px 2px 2px 2px;">' . $users . '</td><td>'.$this->CLASS['translate']->_('userrights').':</td><td>' . $userrights . '</td></tr>
 				<tr><td>'.$this->CLASS['translate']->_('group').':</td><td>' . $groups . '</td><td>'.$this->CLASS['translate']->_('grouprights').':</td><td>' . $grouprights . '</td></tr>
 				<tr><td colspan="2">&nbsp;</td><td>'.$this->CLASS['translate']->_('otherrights').':</td><td>' . $otherrights . '</td></tr>
@@ -301,6 +300,7 @@ class knowledgeroot {
 					</td>
 				</tr>
 			</table>
+			</div></div>
 			';
 		$out .= "</div>\n";
 		return $out;
@@ -330,8 +330,6 @@ class knowledgeroot {
 			$row = $this->CLASS['db']->fetch_assoc($res);
 		}
 
-
-
 		if($_SESSION['rightedit'] != 1 && $_SESSION['admin'] == 0) {
 			//you have no rights
 			return "";
@@ -357,7 +355,8 @@ class knowledgeroot {
 
 		$recursivhtml = '';
 		if($recursiv == 1) {
-			$recursivhtml = "<tr><td colspan=\"4\">".$this->CLASS['translate']->_('set recursiv')."?&nbsp;\n";
+			$recursivhtml = "<tr><td>".$this->CLASS['translate']->_('set recursiv')."?&nbsp;\n";
+            $recursivhtml .= "</td><td colspan=\"3\">\n";
 			$recursivhtml .= "<select name=\"recursiv\" class=\"form-control form-control-sm\">\n";
 			$recursivhtml .= "\t<option value=\"\">".$this->CLASS['translate']->_('no')."</option>\n";
 			$recursivhtml .= "\t<option value=\"1\">".$this->CLASS['translate']->_('yes')."</option>\n";
@@ -368,8 +367,8 @@ class knowledgeroot {
 		$multiplerights = "";
 		$multiplerightsid = 0;
 
-		$userrightsline = "<tr id=\"multiplerights_{ID}\"><td>".$this->CLASS['translate']->_('user')."</td><td style=\"padding:2px 2px 2px 2px;\">".$musers."</td><td>".$this->CLASS['translate']->_('userrights')."</td><td>".$muserrights."&nbsp;<img style=\"cursor:pointer\" src=\"images/delete.gif\" alt=\"\" onclick=\"rights.delRightLine({ID})\" /></td></tr>";
-		$grouprightsline = "<tr id=\"multiplerights_{ID}\"><td>".$this->CLASS['translate']->_('group')."</td><td style=\"padding:2px 2px 2px 2px;\">".$mgroups."</td><td>".$this->CLASS['translate']->_('grouprights')."</td><td>".$mgrouprights."&nbsp;<img style=\"cursor:pointer\" src=\"images/delete.gif\" alt=\"\" onclick=\"rights.delRightLine({ID})\" /></td></tr>";
+		$userrightsline = "<tr id=\"multiplerights_{ID}\"><td><button type=\"button\" class=\"btn btn-danger\" onclick=\"rights.delRightLine({ID})\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></button>&nbsp;".$this->CLASS['translate']->_('user')."</td><td style=\"padding:2px 2px 2px 2px;\">".$musers."</td><td>".$this->CLASS['translate']->_('userrights')."</td><td>".$muserrights."</td></tr>";
+		$grouprightsline = "<tr id=\"multiplerights_{ID}\"><td><button type=\"button\" class=\"btn btn-danger\" onclick=\"rights.delRightLine({ID})\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></button>&nbsp;".$this->CLASS['translate']->_('group')."</td><td style=\"padding:2px 2px 2px 2px;\">".$mgroups."</td><td>".$this->CLASS['translate']->_('grouprights')."</td><td>".$mgrouprights."</td></tr>";
 
 		$userrightsline = str_replace("\n","", $userrightsline);
 		$grouprightsline = str_replace("\n","", $grouprightsline);
@@ -406,8 +405,7 @@ class knowledgeroot {
 						line = line.replace(/\{ID\}/g, this.counter);
 						elementId = "multiplerights_" + this.counter;
 						this.counter++;
-						new Insertion.Before("rightpaneladdmultiplerights", line);
-						dojo.parser.parse(dojo.byId(elementId));
+						$("#rightpaneladdmultiplerights").before(line);
 					},
 
 					addGroupRightLine: function () {
@@ -415,19 +413,19 @@ class knowledgeroot {
 						line = line.replace(/\{ID\}/g, this.counter);
 						elementId = "multiplerights_" + this.counter;
 						this.counter++;
-						new Insertion.Before("rightpaneladdmultiplerights", line);
-						dojo.parser.parse(dojo.byId(elementId));
+						$("#rightpaneladdmultiplerights").before(line);
 					},
 
 					delRightLine: function(id) {
-						removeElement("multiplerights_"+id);
+						$("#multiplerights_"+id).remove();
 					}
 				}
 			</script>
 			';
 		$out .= "<div class=\"rightpanel\" style=\"padding:10px 0px 0px 0px;\">\n";
 		$out .= '
-			<table style="border: 1px solid #000000;" border="0" cellspacing="1" cellpadding="1" width="600">
+			<div class="card"><div class="card-body">
+			<table class="table table-hover table-sm">
 				<tr><td>'.$this->CLASS['translate']->_('user').':</td><td style="padding:2px 2px 2px 2px;">' . $users . '</td><td>'.$this->CLASS['translate']->_('userrights').':</td><td>' . $userrights . '</td></tr>
 				<tr><td>'.$this->CLASS['translate']->_('group').':</td><td>' . $groups . '</td><td>'.$this->CLASS['translate']->_('grouprights').':</td><td>' . $grouprights . '</td></tr>
 				<tr><td colspan="2">&nbsp;</td><td>'.$this->CLASS['translate']->_('otherrights').':</td><td>' . $otherrights . '</td></tr>
@@ -441,6 +439,7 @@ class knowledgeroot {
 				</tr>
 				'.$recursivhtml.'
 			</table>
+			</div></div>
 			';
 		$out .= "</div>\n";
 
@@ -474,8 +473,6 @@ class knowledgeroot {
 		if($anz == 1) {
 			$row = $this->CLASS['db']->fetch_assoc($res);
 		}
-
-
 
 		if($_SESSION['rightedit'] != 1 && $_SESSION['admin'] == 0) {
 			//you have no rights
@@ -512,8 +509,8 @@ class knowledgeroot {
 		$multiplerights = "";
 		$multiplerightsid = 0;
 
-		$userrightsline = "<tr id=\"subinheritmultiplerights_{ID}\"><td>".$this->CLASS['translate']->_('user')."</td><td style=\"padding:2px 2px 2px 2px;\">".$musers."</td><td>".$this->CLASS['translate']->_('userrights')."</td><td>".$muserrights."&nbsp;<img style=\"cursor:pointer\" src=\"images/delete.gif\" alt=\"\" onclick=\"subinheritrights.delRightLine({ID})\" /></td></tr>";
-		$grouprightsline = "<tr id=\"subinheritmultiplerights_{ID}\"><td>".$this->CLASS['translate']->_('group')."</td><td style=\"padding:2px 2px 2px 2px;\">".$mgroups."</td><td>".$this->CLASS['translate']->_('grouprights')."</td><td>".$mgrouprights."&nbsp;<img style=\"cursor:pointer\" src=\"images/delete.gif\" alt=\"\" onclick=\"subinheritrights.delRightLine({ID})\" /></td></tr>";
+		$userrightsline = "<tr id=\"subinheritmultiplerights_{ID}\"><td><button type=\"button\" class=\"btn btn-danger\" onclick=\"subinheritrightsjs.delRightLine({ID})\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></button>&nbsp;".$this->CLASS['translate']->_('user')."</td><td style=\"padding:2px 2px 2px 2px;\">".$musers."</td><td>".$this->CLASS['translate']->_('userrights')."</td><td>".$muserrights."</td></tr>";
+		$grouprightsline = "<tr id=\"subinheritmultiplerights_{ID}\"><td><button type=\"button\" class=\"btn btn-danger\" onclick=\"subinheritrightsjs.delRightLine({ID})\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></button>&nbsp;".$this->CLASS['translate']->_('group')."</td><td style=\"padding:2px 2px 2px 2px;\">".$mgroups."</td><td>".$this->CLASS['translate']->_('grouprights')."</td><td>".$mgrouprights."</td></tr>";
 
 		$userrightsline = str_replace("\n","", $userrightsline);
 		$grouprightsline = str_replace("\n","", $grouprightsline);
@@ -550,8 +547,7 @@ class knowledgeroot {
 						line = line.replace(/\{ID\}/g, this.counter);
 						elementId = "subinheritmultiplerights_" + this.counter;
 						this.counter++;
-						new Insertion.Before("subinheritrightpaneladdmultiplerights", line);
-						dojo.parser.parse(dojo.byId(elementId));
+						$("#subinheritrightpaneladdmultiplerights").before(line);
 					},
 
 					addGroupRightLine: function () {
@@ -559,23 +555,23 @@ class knowledgeroot {
 						line = line.replace(/\{ID\}/g, this.counter);
 						elementId = "subinheritmultiplerights_" + this.counter;
 						this.counter++;
-						new Insertion.Before("subinheritrightpaneladdmultiplerights", line);
-						dojo.parser.parse(dojo.byId(elementId));
+						$("#subinheritrightpaneladdmultiplerights").before(line);
 					},
 
 					delRightLine: function(id) {
-						removeElement("subinheritmultiplerights_"+id);
+						$("#subinheritmultiplerights_"+id).remove();
 					}
 				}
 			</script>
 			';
-		$out .= "<input type=\"checkbox\" name=\"subinheritrights\" value=\"1\" ".$subinheritscheck."/>".$this->CLASS['translate']->_('enable inherit rights for subpages and contents')."<br />\n";
-		$out .= "<input type=\"checkbox\" name=\"subinheritrightseditable\" value=\"1\" ".$subinheritsenablecheck."/>".$this->CLASS['translate']->_('enable edit of rights for these pages and contents')."<br />\n";
-		$out .= "<input type=\"checkbox\" name=\"subinheritrightsdisable\" value=\"1\" ".$subinheritsdisablecheck."/>".$this->CLASS['translate']->_('disable inherit rights for subpages and contents')."<br />\n";
+		$out .= "<input class=\"form-check-input\" type=\"checkbox\" name=\"subinheritrights\" value=\"1\" ".$subinheritscheck."/>".$this->CLASS['translate']->_('enable inherit rights for subpages and contents')."<br />\n";
+		$out .= "<input class=\"form-check-input\" type=\"checkbox\" name=\"subinheritrightseditable\" value=\"1\" ".$subinheritsenablecheck."/>".$this->CLASS['translate']->_('enable edit of rights for these pages and contents')."<br />\n";
+		$out .= "<input class=\"form-check-input\" type=\"checkbox\" name=\"subinheritrightsdisable\" value=\"1\" ".$subinheritsdisablecheck."/>".$this->CLASS['translate']->_('disable inherit rights for subpages and contents')."<br />\n";
 
 		$out .= "<div class=\"rightpanel\" style=\"padding:10px 0px 0px 0px;\">\n";
 		$out .= '
-			<table style="border: 1px solid #000000;" border="0" cellspacing="1" cellpadding="1" width="600">
+			<div class="card"><div class="card-body">
+			<table class="table table-hover table-sm">
 				<tr><td>'.$this->CLASS['translate']->_('user').':</td><td style="padding:2px 2px 2px 2px;">' . $users . '</td><td>'.$this->CLASS['translate']->_('userrights').':</td><td>' . $userrights . '</td></tr>
 				<tr><td>'.$this->CLASS['translate']->_('group').':</td><td>' . $groups . '</td><td>'.$this->CLASS['translate']->_('grouprights').':</td><td>' . $grouprights . '</td></tr>
 				<tr><td colspan="2">&nbsp;</td><td>'.$this->CLASS['translate']->_('otherrights').':</td><td>' . $otherrights . '</td></tr>
@@ -588,6 +584,7 @@ class knowledgeroot {
 					</td>
 				</tr>
 			</table>
+			</div></div>
 			';
 		$out .= "</div>\n";
 
