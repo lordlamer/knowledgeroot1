@@ -19,9 +19,7 @@
         });
 
         $("#menuimg_"+id).attr("src",path + "images/minus.jpg");
-        $("#linkid_"+id).on("click", function() {
-            AjaxMenuClose(id,move,path,editor);
-        });
+        document.getElementById("linkid_"+id).onclick = function () { AjaxMenuClose(id,move,path,editor); };
 	}
 
 	function AjaxMenuClose(id,move,path,editor) {
@@ -39,9 +37,7 @@
         });
 
         $("#menuimg_"+id).attr("src",path + "images/plus.jpg");
-        $("#linkid_"+id).on("click", function() {
-            AjaxMenuOpen(id,move,path,editor);
-        });
+        document.getElementById("linkid_"+id).onclick = function () { AjaxMenuOpen(id,move,path,editor); };
 	}
 
 	var showOpen = function(r) {
