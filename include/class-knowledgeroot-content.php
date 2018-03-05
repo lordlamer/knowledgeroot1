@@ -828,43 +828,76 @@ class knowledgeroot_content {
 
 		// rechte checken -> adminrechte
 		echo '
-		<div class="createroot">
 		<form action="index.php" method="post">
 		<input type="hidden" name="action" value="createroot" />
 		<input type="hidden" name="'.session_name().'" value="'.session_id().'" />
 
-		<button dojoType="dijit.form.Button" type="submit" name="submit">'.$this->CLASS['translate']->_('create').'</button>
+		<button class="btn btn-primary" type="submit" name="submit">'.$this->CLASS['translate']->_('create').'</button>
 
-		<div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:550px;">
-		<div id="tab1" dojoType="dijit.layout.ContentPane" title="'.$this->CLASS['translate']->_('site').'">
-		<table border="0" cellspacing="1" cellpadding="1" width="300">
-			<tr><td>'.$this->CLASS['translate']->_('name').':</td><td style="padding:2px 2px 2px 2px;" colspan="3"><input dojoType="dijit.form.TextBox" type="text" name="title" value="" size="20" /></td></tr>';
+		<p />
 
-		echo '    <tr><td>'.$this->CLASS['translate']->_('alias').':</td><td style="padding:2px 2px 2px 2px;" colspan="3"><input dojoType="dijit.form.TextBox" type="text" name="alias" value="" size="20" /></td></tr>';
+		<div class="card">
 
-		// check for tooltip
+		  <div class="card-header">
+			<ul class="nav nav-tabs card-header-tabs" role="tablist">
+			  <li class="nav-item">
+				<a class="nav-link active" id="content-tab" data-toggle="tab" href="#content" role="tab" aria-controls="content" aria-selected="true">'.$this->CLASS['translate']->_('site').'</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" id="permissions-tab" data-toggle="tab" href="#permissions" role="tab" aria-controls="permissions" aria-selected="false">'.$this->CLASS['translate']->_('permissions').'</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" id="inherit-permissions-tab" data-toggle="tab" href="#inherit-permissions" role="tab" aria-controls="inherit-permissions" aria-selected="false">'.$this->CLASS['translate']->_('inherit permissions').'</a>
+			  </li>
+			</ul>
+		  </div>
+		  <div class="card-body">
+			<div class="tab-content">
+			<div class="tab-pane fade show active" id="content" role="tabpanel" aria-labelledby="content-tab">
+			
+			  <div class="form-group">
+				<label for="titleText">'.$this->CLASS['translate']->_('name').'</label>
+				<input type="text" class="form-control" id="titleText" aria-describedby="titleText" name="title">
+			  </div>
+			  
+			  <div class="form-group">
+				<label for="aliasText">'.$this->CLASS['translate']->_('alias').'</label>
+				<input type="text" class="form-control" id="aliasText" aria-describedby="aliasText" name="alias">
+			  </div>
+			  ';
+
+        // check for tooltip
 		if($this->CLASS['config']->tree->edittooltiptext == 1) {
-			echo '    <tr><td>'.$this->CLASS['translate']->_('tooltip').':</td><td style="padding:2px 2px 2px 2px;" colspan="3"><input dojoType="dijit.form.TextBox" type="text" name="tooltip" value="" size="20" /></td></tr>';
-		}
+            echo '
+			  <div class="form-group">
+				<label for="tooltipText">' . $this->CLASS['translate']->_('tooltip') . '</label>
+				<input type="text" class="form-control" id="tooltipText" aria-describedby="tooltipText" name="tooltip">
+			  </div>
+			';
+        }
 
 		// check for order
 		if($this->CLASS['config']->tree->order == 1) {
-			echo "<tr><td>".$this->CLASS['translate']->_('priority').":</td><td><input dojoType=\"dijit.form.TextBox\" type=\"text\" name=\"sorting\" value=\"0\" /></td></tr>\n";
+			echo '
+			  <div class="form-group">
+				<label for="sortingText">' . $this->CLASS['translate']->_('priority') . '</label>
+				<input type="text" class="form-control" id="sortingText" aria-describedby="sortingText" name="sorting" value="0">
+			  </div>
+			';
 		}
 
-		echo '</table></div>';
+		echo '</div>';
 
 		if(!empty($_SESSION['userid'])) {
-			echo '<div id="tab2" dojoType="dijit.layout.ContentPane" title="'.$this->CLASS['translate']->_('permissions').'">';
+			echo '<div class="tab-pane fade" id="permissions" role="tabpanel" aria-labelledby="permissions-tab">';
 			echo $this->CLASS['knowledgeroot']->rightpanel($_SESSION['userid']);
 			echo "</div>\n";
-			echo '<div id="tab3" dojoType="dijit.layout.ContentPane" title="'.$this->CLASS['translate']->_('inherit permissions').'">';
+			echo '<div class="tab-pane fade" id="inherit-permissions" role="tabpanel" aria-labelledby="inherit-permissions-tab">';
 			echo $this->CLASS['knowledgeroot']->rightpanelsubinherit($_SESSION['userid']);
 			echo "</div>\n";
 		}
 
-		echo '</div></form>
-		</div>
+		echo '</div></div></div></form>
 		';
 
 		$this->CLASS['hooks']->setHook("kr_content","create_root","end");

@@ -281,9 +281,11 @@ class knowledgeroot {
 			</script>
 			';
 
+		$out .= "<div class=\"card\"><div class=\"card-body\">";
 		$out .= "<input class=\"form-check-input\" type=\"checkbox\" name=\"subinheritrights\" value=\"1\" />".$this->CLASS['translate']->_('enable inherit rights for subpages and contents')."<br />\n";
 		$out .= "<input class=\"form-check-input\" type=\"checkbox\" name=\"subinheritrightseditable\" value=\"1\" />".$this->CLASS['translate']->_('enable edit of rights for these pages and contents')."<br />\n";
 		$out .= "<input class=\"form-check-input\" type=\"checkbox\" name=\"subinheritrightsdisable\" value=\"1\" />".$this->CLASS['translate']->_('disable inherit rights for subpages and contents')."<br />\n";
+        $out .= "</div></div>";
 
 		$out .= "<div class=\"rightpanel\" style=\"padding:10px 0px 0px 0px;\">\n";
 		$out .= '
