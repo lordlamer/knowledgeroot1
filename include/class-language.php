@@ -87,7 +87,7 @@ class language {
 		}
 
 		if($this->CLASS['config']->tree->ajax && $submitOnChange) {
-			$jsscript = "onchange=\"\$('change_language').submit();\"";
+			$jsscript = "onchange=\"\$('#change_language').submit();\"";
 		} else {
 			$jsscript = "";
 		}
