@@ -379,7 +379,7 @@ class knowledgeroot_content {
 			// show warning if another user is editing this content
 			if($this->CLASS['knowledgeroot']->isOpenContent($_GET['eid'],$_SESSION['userid'])) {
 				echo '
-				<div id="contentwarning">
+				<div class="alert alert-danger" role="alert">
 				'.$this->CLASS['translate']->_('Another user is already editing this content!').'
 				</div>
 				';
@@ -387,31 +387,58 @@ class knowledgeroot_content {
 
 			// show content
 			echo "<form action=\"index.php\" method=\"post\">";
+
 			echo "<input type=\"hidden\" name=\"editid\" value=\"".$_GET['eid']."\" />\n";
 			echo "<input type=\"hidden\" name=\"submit\" value=\"submit\" />\n";
-			echo "<button dojoType=\"dijit.form.Button\" type=\"submit\" name=\"save\" value=\"save\">".$this->CLASS['translate']->_('save')."</button>\n";
-			echo "<button dojoType=\"dijit.form.Button\" type=\"submit\" name=\"saveandclose\" value=\"saveandclose\">".$this->CLASS['translate']->_('save and close')."</button>\n";
-			echo "<button dojoType=\"dijit.form.Button\" type=\"submit\" name=\"close\" value=\"close\">".$this->CLASS['translate']->_('close')."</button>\n";
+
+			echo "<button class=\"btn btn-primary\" type=\"submit\" name=\"save\" value=\"save\">".$this->CLASS['translate']->_('save')."</button>\n";
+			echo "<button class=\"btn btn-primary\" type=\"submit\" name=\"saveandclose\" value=\"saveandclose\">".$this->CLASS['translate']->_('save and close')."</button>\n";
+			echo "<button class=\"btn btn-secondary\" type=\"submit\" name=\"close\" value=\"close\">".$this->CLASS['translate']->_('close')."</button>\n";
+
+            echo "<p />";
 
 			$res = $this->CLASS['db']->query(sprintf("SELECT * FROM content WHERE id=%d ORDER BY id ASC",$_GET['eid']));
 
 			while($row = $this->CLASS['db']->fetch_assoc($res)) {
 				echo "<input type=\"hidden\" name=\"belongsto\" value=\"".$row['belongs_to']."\" />\n";
-				echo "<br />";
-				echo '<div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:550px;">';
-				echo '<script>dojo.byId(\'mainTabContainer\').style.width=(parseInt(dojo.byId(\'contentcontainer\').offsetWidth) - 50) + \'px\';</script>';
-				echo '<div id="tab1" dojoType="dijit.layout.ContentPane" title="'.$this->CLASS['translate']->_('content').'">';
 
-				if ($this->CLASS['config']->content->showtitle)
-					echo "<br />".$this->CLASS['translate']->_('title')."&nbsp;<input dojoType=\"dijit.form.TextBox\" style=\"width:400px;\" type=\"text\" name=\"title\" value=\"" . $row['title'] . "\" size=\"50\" /><br />\n";
+                echo '<div class="card">';
+                echo '
+			  <div class="card-header">
+				<ul class="nav nav-tabs card-header-tabs" role="tablist">
+				  <li class="nav-item">
+					<a class="nav-link active" id="content-tab" data-toggle="tab" href="#content" role="tab" aria-controls="content" aria-selected="true">'.$this->CLASS['translate']->_('content').'</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" id="permissions-tab" data-toggle="tab" href="#permissions" role="tab" aria-controls="permissions" aria-selected="false">'.$this->CLASS['translate']->_('permissions').'</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" id="informations-tab" data-toggle="tab" href="#informations" role="tab" aria-controls="informations" aria-selected="false">'.$this->CLASS['translate']->_('informations').'</a>
+				  </li>
+				</ul>
+			  </div>
+			  <div class="card-body">
+			  	<div class="tab-content">
+			  		<div class="tab-pane fade show active" id="content" role="tabpanel" aria-labelledby="content-tab">
+			';
+
+				if ($this->CLASS['config']->content->showtitle) {
+                    echo "
+                  <div class=\"form-group\">
+					<label for=\"content_title\">" . $this->CLASS['translate']->_('Title') . "</label>
+					<input type=\"text\" class=\"form-control\" id=\"content_title\" aria-describedby=\"title\" name=\"title\" value=\"" . $row['title'] . "\">
+				  </div>
+                ";
+                }
 
 				// position
 				$resp = $this->CLASS['db']->squery("SELECT id, title FROM content WHERE belongs_to=%d AND deleted=0 ORDER BY sorting ASC", $_SESSION['cid']);
 				$cnt = $this->CLASS['db']->num_rows($resp);
 
 				if($cnt > 0) {
-					echo '<br />'.$this->CLASS['translate']->_('Position').'&nbsp;';
-					echo '<select name="position" dojoType="dijit.form.Select">';
+					echo '<div class="form-group">';
+					echo '<label for="content_position">'.$this->CLASS['translate']->_('Position').'</label>';
+					echo '<select name="position" id="content_position" class="form-control form-control-sm">';
 					echo "<option value=\"\">" . $this->CLASS['translate']->_('do not change')."</option>";
 					echo "<option value=\"first\">&larr; ".$this->CLASS['translate']->_('first')."</option>";
 					while($rowp = $this->CLASS['db']->fetch_assoc($resp)) {
@@ -425,17 +452,15 @@ class knowledgeroot_content {
 
 						echo "<option value=\"".$rowp['id']."\">&larr; ".sprintf($this->CLASS['translate']->_('after %s'), $title)."</option>";
 					}
-					echo '</select><br />';
+					echo '</select></div>';
 				}
 
 				$this->CLASS['hooks']->setHook("kr_content","edit_content","show");
 
-				echo "<br />\n";
-
 				// show content in rte editor
 				echo $this->CLASS['rte']->show($row['content']);
 				echo '</div>';
-				echo '<div id="tab2" dojoType="dijit.layout.ContentPane" title="'.$this->CLASS['translate']->_('permissions').'">';
+				echo '<div class="tab-pane fade" id="permissions" role="tabpanel" aria-labelledby="permissions-tab">';
 				// check for inheritrights
 				$inheritrights = $this->CLASS['knowledgeroot']->getInheritRights($_SESSION['cid']);
 
@@ -446,15 +471,16 @@ class knowledgeroot_content {
 
 				//check rights
 				if((!empty($_SESSION['userid']) && $show_rights == 1) || (isset($_SESSION['admin']) && $_SESSION['admin'] == 1)) {
-					echo "<br /><br />\n";
 					echo $this->CLASS['knowledgeroot']->editRightPanel("content",$_GET['eid'],$row['owner'],$row['group'],$row['userrights'].$row['grouprights'].$row['otherrights']);
 				}
 				echo '</div>';
-				echo '<div id="tab3" dojoType="dijit.layout.ContentPane" title="'.$this->CLASS['translate']->_('informations').'">';
+				echo '<div class="tab-pane fade" id="informations" role="tabpanel" aria-labelledby="informations-tab">';
 				$lastChangedBy = $this->CLASS['knowledgeroot']->getOwner($row['lastupdatedby']);
 				echo $this->CLASS['translate']->_('created at') . ': ' . $row['createdate'] . '<br />';
 				echo $this->CLASS['translate']->_('last changed by') . ': ' . (($lastChangedBy != '') ? $lastChangedBy : $this->CLASS['translate']->_('guest')) . '<br />';
 				echo $this->CLASS['translate']->_('last changed at') . ': ' . $row['lastupdated'] . '<br />';
+				echo '</div>';
+				echo '</div>';
 				echo '</div>';
 				$this->CLASS['hooks']->setHook("kr_content","edit_content","show_tab");
 				echo '</div>';
@@ -462,11 +488,15 @@ class knowledgeroot_content {
 
 			$this->CLASS['hooks']->setHook("kr_content","edit_content","show_after");
 
-			echo "<br /><br />\n";
-			echo "<button dojoType=\"dijit.form.Button\" type=\"submit\" name=\"save\" value=\"save\">".$this->CLASS['translate']->_('save')."</button>\n";
-			echo "<button dojoType=\"dijit.form.Button\" type=\"submit\" name=\"saveandclose\" value=\"saveandclose\">".$this->CLASS['translate']->_('save and close')."</button>\n";
-			echo "<button dojoType=\"dijit.form.Button\" type=\"submit\" name=\"close\" value=\"close\">".$this->CLASS['translate']->_('close')."</button>\n";
+            echo "<p />";
+            echo "<p />";
+
+			echo "<button class=\"btn btn-primary\" type=\"submit\" name=\"save\" value=\"save\">".$this->CLASS['translate']->_('save')."</button>\n";
+			echo "<button class=\"btn btn-primary\" type=\"submit\" name=\"saveandclose\" value=\"saveandclose\">".$this->CLASS['translate']->_('save and close')."</button>\n";
+			echo "<button class=\"btn btn-secondary\" type=\"submit\" name=\"close\" value=\"close\">".$this->CLASS['translate']->_('close')."</button>\n";
+
 			echo "</form>\n";
+            echo "<p />";
 
 			$this->CLASS['hooks']->setHook("kr_content","edit_content","end");
 		}
