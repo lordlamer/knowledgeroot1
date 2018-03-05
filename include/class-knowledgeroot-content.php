@@ -193,52 +193,113 @@ class knowledgeroot_content {
 			$this->CLASS['hooks']->setHook("kr_content","new_page","start");
 
 			echo "<form action=\"index.php\" method=\"post\">";
-			echo "<button dojoType=\"dijit.form.Button\" type=\"submit\" name=\"submit\" value=\"submit\">".$this->CLASS['translate']->_('create page')."</button>";
+			echo "<button class=\"btn btn-primary\" type=\"submit\" name=\"submit\" value=\"submit\">".$this->CLASS['translate']->_('create page')."</button>";
+			echo "<p />";
 			echo "<input type=\"hidden\" name=\"belongsto\" value=\"".$_SESSION['cid']."\" />";
-			echo '<div style="height:100%; margin-top:10px;">';
-			echo '<div id="mainTabContainer" dojoType="dijit.layout.TabContainer" style="height:550px;">';
-			echo '<script>dojo.byId(\'mainTabContainer\').style.width=(parseInt(dojo.byId(\'contentcontainer\').offsetWidth) - 50) + \'px\';</script>';
-			echo '<div id="tab1" dojoType="dijit.layout.ContentPane" title="'.$this->CLASS['translate']->_('site').'">';
-			echo "<table border=\"0\" cellspacing=\"1\" cellpadding=\"1\" width=\"450\">\n";
-			echo "<tr><td>" .$this->CLASS['translate']->_('page name') . ":</td><td><input type=\"hidden\" name=\"newpage\" value=\"new\" /><input dojoType=\"dijit.form.TextBox\" type=\"text\" name=\"title\" value=\"\" /></td></tr>";
+
+			echo '
+					<div class="card">
+
+		  <div class="card-header">
+			<ul class="nav nav-tabs card-header-tabs" role="tablist">
+			  <li class="nav-item">
+				<a class="nav-link active" id="content-tab" data-toggle="tab" href="#content" role="tab" aria-controls="content" aria-selected="true">'.$this->CLASS['translate']->_('site').'</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" id="permissions-tab" data-toggle="tab" href="#permissions" role="tab" aria-controls="permissions" aria-selected="false">'.$this->CLASS['translate']->_('permissions').'</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" id="inherit-permissions-tab" data-toggle="tab" href="#inherit-permissions" role="tab" aria-controls="inherit-permissions" aria-selected="false">'.$this->CLASS['translate']->_('inherit permissions').'</a>
+			  </li>
+			</ul>
+		  </div>
+		  <div class="card-body">
+			<div class="tab-content">
+				<div class="tab-pane fade show active" id="content" role="tabpanel" aria-labelledby="content-tab">
+			';
+
+            echo "
+                  <div class=\"form-group\">
+					<label for=\"page_title\">" . $this->CLASS['translate']->_('page name') . "</label>
+					<input type=\"hidden\" name=\"newpage\" value=\"new\" />
+					<input type=\"text\" class=\"form-control\" id=\"page_title\" aria-describedby=\"page_title\" name=\"title\" value=\"\">
+				  </div>
+                ";
 
 			// automatically open the created page
 			$auto_open = isset($_SESSION['auto_open']) && $_SESSION['auto_open'] == true ? "checked='checked'" : "";
 
-			echo "<tr><td colspan=\"2\"><input dojoType=\"dijit.form.CheckBox\" type=\"checkbox\" name=\"auto_open\" $auto_open value=\"true\" /><span style='vertical-align:middle'> ".$this->CLASS['translate']->_('automatically open the created page') . "</span></td></tr>\n";
+            echo "
+				  <div class=\"form-check\">
+					<input type=\"checkbox\" class=\"form-check-input\" name=\"auto_open\" id=\"auto_open\" $auto_open value=\"true\">
+					<label class=\"form-check-label\" for=\"auto_open\">".$this->CLASS['translate']->_('automatically open the created page') . "</label>
+				  </div>
+                ";
 
 			// check for rights to show/edit alias
 			if($this->CLASS['config']->misc->pagealias->use == 1 && (($this->CLASS['config']->misc->pagealias->rights == 2 && isset ($_SESSION['admin']) and $_SESSION['admin'] == 1) || ($this->CLASS['config']->misc->pagealias->rights == 1 && $_SESSION['userid'] != 0) || ($this->CLASS['config']->misc->pagealias->rights == 0))) {
-				echo "<tr><td>" . $this->CLASS['translate']->_('page alias') . ":</td><td><input dojoType=\"dijit.form.TextBox\" type=\"text\" name=\"alias\" value=\"\" /></td></tr>\n";
+                echo "
+                  <div class=\"form-group\">
+					<label for=\"page_alias\">" . $this->CLASS['translate']->_('page alias') . "</label>
+					<input type=\"text\" class=\"form-control\" id=\"page_alias\" aria-describedby=\"page_alias\" name=\"alias\" value=\"\">
+				  </div>
+                ";
 			}
 
 			// default content position
-			echo "<tr><td>".$this->CLASS['translate']->_('default position for content').":</td><td><select dojoType=\"dijit.form.Select\" name=\"defaultcontentposition\"><option value=\"0\">".$this->CLASS['translate']->_('at beginning')."</option><option value=\"1\">".$this->CLASS['translate']->_('at the end')."</option></select></td></tr>\n";
+            echo "
+                  <div class=\"form-group\">
+					<label for=\"defaultcontentposition\">" . $this->CLASS['translate']->_('default position for content') . "</label>
+					<select class=\"form-control form-control-sm\" name=\"defaultcontentposition\">
+						<option value=\"0\">".$this->CLASS['translate']->_('at beginning')."</option>
+						<option value=\"1\">".$this->CLASS['translate']->_('at the end')."</option>
+					</select>
+				  </div>
+                ";
 
 			// icon
-			echo "<tr><td>".$this->CLASS['translate']->_('icon').":</td><td><img id=\"selected-icon\" src=\"\">&nbsp;<input type=\"hidden\" id=\"treeicon\" name=\"treeicon\" value=\"\" /><button dojoType=\"dijit.form.Button\" onclick=\"window.open('icon.php','Knowledgeroot','width=310,height=400,menubar=yes,resizable=yes,scrollbars=yes');\" type=\"button\" name=\"icon\">".$this->CLASS['translate']->_('select icon')."</button></td></tr>\n";
+            echo "
+                  <div class=\"form-group\">
+					<label for=\"icon\">" . $this->CLASS['translate']->_('icon') . "</label>
+					<input type=\"hidden\" id=\"treeicon\" name=\"treeicon\" value=\"\" />
+					<button class=\"btn btn-secondary\" onclick=\"window.open('icon.php','Knowledgeroot','width=310,height=400,menubar=yes,resizable=yes,scrollbars=yes');\" type=\"button\" name=\"icon\">".$this->CLASS['translate']->_('select icon')."</button>
+				  </div>
+                ";
 
 			// symlink
 			if(isset($this->CLASS['config']->tree->symlink) && $this->CLASS['config']->tree->symlink == 1) {
-				echo "<tr><td>".$this->CLASS['translate']->_('Symlink').":</td><td><input dojoType=\"dijit.form.TextBox\" type=\"text\" id=\"symlink\" name=\"symlink\" value=\"\" /></td></tr>\n";
+                echo "
+                  <div class=\"form-group\">
+					<label for=\"symlink\">" . $this->CLASS['translate']->_('Symlink') . "</label>
+					<input type=\"text\" class=\"form-control\" id=\"symlink\" aria-describedby=\"symlink\" name=\"symlink\" value=\"\">
+				  </div>
+                ";
 			}
 
 			// check for tooltip
 			if($this->CLASS['config']->tree->edittooltiptext == 1) {
-				echo "<tr><td>" . $this->CLASS['translate']->_('tooltip') . ":</td><td><input dojoType=\"dijit.form.TextBox\" type=\"text\" name=\"tooltip\" value=\"\" /></td></tr>\n";
+                echo "
+                  <div class=\"form-group\">
+					<label for=\"tooltip\">" . $this->CLASS['translate']->_('tooltip') . "</label>
+					<input type=\"text\" class=\"form-control\" id=\"tooltip\" aria-describedby=\"tooltip\" name=\"tooltip\" value=\"\">
+				  </div>
+                ";
 			}
 
 			// check for order
 			if($this->CLASS['config']->tree->order == 1) {
-				echo "<tr><td>".$this->CLASS['translate']->_('priority').":</td><td><input dojoType=\"dijit.form.TextBox\" type=\"text\" name=\"sorting\" value=\"0\" /></td></tr>\n";
+                echo "
+                  <div class=\"form-group\">
+					<label for=\"priority\">" . $this->CLASS['translate']->_('priority') . "</label>
+					<input type=\"text\" class=\"form-control\" id=\"sorting\" aria-describedby=\"priority\" name=\"alias\" value=\"0\">
+				  </div>
+                ";
 			}
 
 			$this->CLASS['hooks']->setHook("kr_content","new_page","show");
 
-			echo "</table>\n";
-
 			echo '</div>';
-			echo '<div id="tab2" dojoType="dijit.layout.ContentPane" title="'.$this->CLASS['translate']->_('permissions').'">';
+			echo '<div class="tab-pane fade" id="permissions" role="tabpanel" aria-labelledby="permissions-tab">';
 			// check for inheritrights
 			$inheritrights = $this->CLASS['knowledgeroot']->getInheritRights($_SESSION['cid']);
 
@@ -253,7 +314,7 @@ class knowledgeroot_content {
 			}
 
 			echo '</div>';
-			echo '<div id="tab3" dojoType="dijit.layout.ContentPane" title="'.$this->CLASS['translate']->_('inherit permissions').'">';
+			echo '<div class="tab-pane fade" id="inherit-permissions" role="tabpanel" aria-labelledby="inherit-permissions-tab">';
 
 
 			if(isset ($_SESSION['admin']) and $_SESSION['admin'] == 1) {
@@ -263,9 +324,10 @@ class knowledgeroot_content {
 			$this->CLASS['hooks']->setHook("kr_content","new_page","show_tab");
 			echo '</div>';
 			echo '</div>';
+            echo '</div>';
 
-			echo '<br /><br />';
-			echo "<button dojoType=\"dijit.form.Button\" type=\"submit\" name=\"submit\" value=\"submit\">".$this->CLASS['translate']->_('create page')."</button>";
+			echo '<p /><p />';
+			echo "<button class=\"btn btn-primary\" type=\"submit\" name=\"submit\" value=\"submit\">".$this->CLASS['translate']->_('create page')."</button>";
 			echo "</form>";
 
 			$this->CLASS['hooks']->setHook("kr_content","new_page","end");
