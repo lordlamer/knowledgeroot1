@@ -1652,7 +1652,7 @@ class knowledgeroot_content {
     <h5 class=\"card-header\">
         <a data-toggle=\"collapse\" href=\"#content-".$row['id']."\" aria-expanded=\"".((!$collapse) ? "true":"false")."\" aria-controls=\"content-".$row['id']."\" id=\"content-head-".$row['id']."\" class=\"d-block ".(($collapse) ? "collapsed":"")."\">
             <i class=\"fa fa-chevron-down pull-right\"></i>
-            ".$titleText.(($this->CLASS['config']->content->showtitledetails) ? "&nbsp;($lastUpdated&nbsp;|&nbsp;$created)": "")."
+            ".$titleText."
         </a>
     </h5>
 \n";
