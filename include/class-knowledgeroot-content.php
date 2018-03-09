@@ -375,7 +375,6 @@ class knowledgeroot_content {
                 echo "
                   <div class=\"form-group\">
 					<label for=\"page_title\">" . $this->CLASS['translate']->_('page name') . "</label>
-					<input type=\"hidden\" name=\"newpage\" value=\"new\" />
 					<input type=\"text\" class=\"form-control\" id=\"title\" aria-describedby=\"page_title\" name=\"title\" value=\"".$row['title']."\">
 				  </div>
                 ";
