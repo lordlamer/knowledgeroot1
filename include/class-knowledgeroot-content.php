@@ -1104,86 +1104,25 @@ class knowledgeroot_content {
 	function list_users() {
 		$this->CLASS['hooks']->setHook("kr_content","list_users","start");
 
-		// list users
 		echo '
-<style type="text/css">
-  @import "system/javascript/dojo/dojox/grid/resources/Grid.css";
-  @import "system/javascript/dojo/dojox/grid/resources/claroGrid.css";
-
-  .dojoxGrid table {
-    margin: 0;
-  }
-</style>
-
-		<script>
-        var layoutUsers = [
-            [{
-            field: "id",
-            name: "'.$this->CLASS['translate']->_('id').'",
-            hidden: true,
-            width: 10
-        },
-	{
-            field: "name",
-            name: "'.$this->CLASS['translate']->_('name').'",
-            width: 10
-        },
-        {
-            field: "default_group",
-            name: "'.$this->CLASS['translate']->_('default group').'",
-            width: 10
-        },
-        {
-            field: "default_rights",
-            name: "'.$this->CLASS['translate']->_('default rights').'",
-            width: \'auto\'
-        },
-        {
-            field: "admin",
-            name: "'.$this->CLASS['translate']->_('admin').'",
-            width: \'auto\'
-        },
-        {
-            field: "edit_rights",
-            name: "'.$this->CLASS['translate']->_('edit rights').'",
-            width: \'auto\'
-        },
-        {
-            field: "enabled",
-            name: "'.$this->CLASS['translate']->_('enabled').'",
-            width: \'auto\'
-        }]];
-
-        var layoutGroups = [
-            [{
-            field: "id",
-            name: "'.$this->CLASS['translate']->_('id').'",
-            hidden: true,
-            width: 10
-        },
-	{
-            field: "name",
-            name: "'.$this->CLASS['translate']->_('name').'",
-            width: 10
-        }]];
-		</script>
-		<div style="margin-bottom:20px;" dojoType="dijit.TitlePane" title="<b>'.$this->CLASS['translate']->_('user').'</b>" open="true">
-		<div style="border-left:0px; border-right:0px;" dojoType="dijit.MenuBar" region="top">
-			<div dojoType="dijit.MenuBarItem" onclick="location.href=\'index.php?action=adduser\'">'.$this->CLASS['translate']->_('add user').'</div>
-			<div dojoType="dijit.MenuBarItem" onclick="editUser();">'.$this->CLASS['translate']->_('edit user').'</div>
-			<div dojoType="dijit.MenuBarItem" onclick="deleteUser();">'.$this->CLASS['translate']->_('delete user').'</div>
-		</div>
-		<div dojoType="dojox.data.HtmlStore" dataId="userList" jsId="gridStore">
-		<table id="userList" style="display:none;">
+		<div class="card">
+		  <div class="card-header">
+			'.$this->CLASS['translate']->_('user').'
+		  </div>
+		  <div class="card-body">
+		  <a class="btn btn-primary" href="index.php?action=adduser">'.$this->CLASS['translate']->_('add user').'</a>
+		  <p />
+		<table id="userList" class="table table-striped table-hover table-sm">
 			<thead>
 			<tr>
-					<th field="id">id</th>
-					<th field="name">name</th>
-					<th field="default_group">default_group</th>
-					<th field="default_rights">default_rights</th>
-					<th field="admin">admin</th>
-					<th field="edit_rights">edit_rights</th>
-					<th field="enabled">enabled</th>
+					<th>'.$this->CLASS['translate']->_('id').'</th>
+					<th>'.$this->CLASS['translate']->_('name').'</th>
+					<th>'.$this->CLASS['translate']->_('default group').'</th>
+					<th>'.$this->CLASS['translate']->_('default rights').'</th>
+					<th>'.$this->CLASS['translate']->_('admin').'</th>
+					<th>'.$this->CLASS['translate']->_('edit rights').'</th>
+					<th>'.$this->CLASS['translate']->_('enabled').'</th>
+					<th></th>
 			</tr>
 			</thead>
 			<tbody>
@@ -1200,156 +1139,58 @@ class knowledgeroot_content {
 				<td>".$this->CLASS['knowledgeroot']->yesno($row['admin'])."</td>
 				<td>".$this->CLASS['knowledgeroot']->yesno($row['rightedit'])."</td>
 				<td>".$this->CLASS['knowledgeroot']->yesno($row['enabled'])."</td>
-				<td>[<a href=\"index.php?action=edituser&amp;uid=".$row['id']."\">".$this->CLASS['translate']->_('edit')."</a>]&nbsp;[<a href=\"index.php?action=deluser&amp;uid=".$row['id']."\" onclick=\"return confirm('" . $this->CLASS['translate']->_('Do you really want to delete this user?') . "');\">".$this->CLASS['translate']->_('delete')."</a>]</td>
+				<td>
+					<a class=\"btn btn-secondary\" href=\"index.php?action=edituser&amp;uid=".$row['id']."\">".$this->CLASS['translate']->_('edit')."</a>
+					<a class=\"btn btn-danger\" href=\"index.php?action=deluser&amp;uid=".$row['id']."\" onclick=\"return confirm('" . $this->CLASS['translate']->_('Do you really want to delete this user?') . "');\">".$this->CLASS['translate']->_('delete')."</a>
+				</td>
 			</tr>\n";
 		}
 
 		echo '
 		</tbody>
 		</table>
+			</div>
 		</div>
-
-		<script>
-		function editUser() {
-                    var items = grid.selection.getSelected();
-                    if (items.length) {
-                        // Iterate through the list of selected items.
-                        // The current item is available in the variable
-                        // "selectedItem" within the following function:
-                        dojo.forEach(items, function(selectedItem) {
-                            if (selectedItem !== null) {
-                                // Iterate through the list of attributes of each item.
-                                // The current attribute is available in the variable
-                                // "attribute" within the following function:
-                                dojo.forEach(grid.store.getAttributes(selectedItem), function(attribute) {
-                                    // Get the value of the current attribute:
-                                    var value = grid.store.getValues(selectedItem, attribute);
-					if(attribute == \'id\') {
-						location.href = \'index.php?action=edituser&uid=\'+value;
-						return;
-					}
-                                }); // end forEach
-                            } // end if
-                        }); // end forEach
-                    } // end if
-		}
-		function deleteUser() {
-                    var items = grid.selection.getSelected();
-                    if (items.length) {
-                        // Iterate through the list of selected items.
-                        // The current item is available in the variable
-                        // "selectedItem" within the following function:
-                        dojo.forEach(items, function(selectedItem) {
-                            if (selectedItem !== null) {
-                                // Iterate through the list of attributes of each item.
-                                // The current attribute is available in the variable
-                                // "attribute" within the following function:
-                                dojo.forEach(grid.store.getAttributes(selectedItem), function(attribute) {
-                                    // Get the value of the current attribute:
-                                    var value = grid.store.getValues(selectedItem, attribute);
-					if(attribute == \'id\' && confirm(\''.$this->CLASS['translate']->_('Do you really want to delete this user?').'\')) {
-						location.href = \'index.php?action=deluser&uid=\'+value;
-						return;
-					}
-                                }); // end forEach
-                            } // end if
-                        }); // end forEach
-                    } // end if
-		}
-		</script>
-
-		<div style="width: 100%; height: 200px;">
-		    <div id="grid" jsId="grid" dojoType="dojox.grid.DataGrid" onDblClick="editUser();" selectionMode="single" store="gridStore" structure="layoutUsers" query="{}"></div>
-		</div>
-</div>
 		';
 
-		// list groups
-		echo '
-		<div dojoType="dijit.TitlePane" title="<b>'.$this->CLASS['translate']->_('groups').'</b>" open="true">
-		<div style="border-left:0px; border-right:0px;" dojoType="dijit.MenuBar" region="top">
-			<div dojoType="dijit.MenuBarItem" onclick="location.href=\'index.php?action=addgroup\'">'.$this->CLASS['translate']->_('add group').'</div>
-			<div dojoType="dijit.MenuBarItem" onclick="editGroup();">'.$this->CLASS['translate']->_('edit group').'</div>
-			<div dojoType="dijit.MenuBarItem" onclick="deleteGroup();">'.$this->CLASS['translate']->_('delete group').'</div>
-		</div>
-		<div dojoType="dojox.data.HtmlStore" dataId="groupList" jsId="gridStore2">
-		<table id="groupList" style="display:none;">
+		echo '<p />';
+
+        echo '
+		<div class="card">
+		  <div class="card-header">
+			'.$this->CLASS['translate']->_('groups').'
+		  </div>
+		  <div class="card-body">
+		  <a class="btn btn-primary" href="index.php?action=addgroup">'.$this->CLASS['translate']->_('add group').'</a>
+		  <p />
+		<table id="userList" class="table table-striped table-hover table-sm">
 			<thead>
 			<tr>
-					<th field="id">id</th>
-					<th field="name">name</th>
+					<th>'.$this->CLASS['translate']->_('id').'</th>
+					<th>'.$this->CLASS['translate']->_('name').'</th>
+					<th></th>
 			</tr>
 			</thead>
 			<tbody>
 		';
 
-		$res = $this->CLASS['db']->query("SELECT * FROM groups ORDER BY name");
-		while($row = $this->CLASS['db']->fetch_assoc($res)) {
-			echo "
+        $res = $this->CLASS['db']->query("SELECT * FROM groups ORDER BY name");
+        while($row = $this->CLASS['db']->fetch_assoc($res)) {
+            echo "
 			<tr>
 				<td>".$row['id']."</td>
 				<td>".$row['name']."</td>
-				<td>[<a href=\"index.php?action=editgroup&amp;gid=".$row['id']."\">".$this->CLASS['translate']->_('edit')."</a>]&nbsp;[<a href=\"index.php?action=delgroup&amp;gid=".$row['id']."\" onclick=\"return confirm('" . $this->CLASS['translate']->_('Do you really want to delete this group?') . "');\">".$this->CLASS['translate']->_('delete')."</a>]</td></tr>\n";
-		}
+				<td>
+					<a class=\"btn btn-secondary\" href=\"index.php?action=editgroup&amp;gid=".$row['id']."\">".$this->CLASS['translate']->_('edit')."</a>
+					<a class=\"btn btn-danger\" href=\"index.php?action=delgroup&amp;gid=".$row['id']."\" onclick=\"return confirm('" . $this->CLASS['translate']->_('Do you really want to delete this group?') . "');\">".$this->CLASS['translate']->_('delete')."</a>
+				</td>
+			</tr>\n";
+        }
 
-		echo '
+        echo '
 		</tbody>
 		</table>
-		</div>
-
-		<script>
-		function editGroup() {
-                    var items = grid2.selection.getSelected();
-                    if (items.length) {
-                        // Iterate through the list of selected items.
-                        // The current item is available in the variable
-                        // "selectedItem" within the following function:
-                        dojo.forEach(items, function(selectedItem) {
-                            if (selectedItem !== null) {
-                                // Iterate through the list of attributes of each item.
-                                // The current attribute is available in the variable
-                                // "attribute" within the following function:
-                                dojo.forEach(grid2.store.getAttributes(selectedItem), function(attribute) {
-                                    // Get the value of the current attribute:
-                                    var value = grid2.store.getValues(selectedItem, attribute);
-					if(attribute == \'id\') {
-						location.href = \'index.php?action=editgroup&gid=\'+value;
-						return;
-					}
-                                }); // end forEach
-                            } // end if
-                        }); // end forEach
-                    } // end if
-		}
-		function deleteGroup() {
-                    var items = grid2.selection.getSelected();
-                    if (items.length) {
-                        // Iterate through the list of selected items.
-                        // The current item is available in the variable
-                        // "selectedItem" within the following function:
-                        dojo.forEach(items, function(selectedItem) {
-                            if (selectedItem !== null) {
-                                // Iterate through the list of attributes of each item.
-                                // The current attribute is available in the variable
-                                // "attribute" within the following function:
-                                dojo.forEach(grid2.store.getAttributes(selectedItem), function(attribute) {
-                                    // Get the value of the current attribute:
-                                    var value = grid2.store.getValues(selectedItem, attribute);
-					if(attribute == \'id\' && confirm(\''.$this->CLASS['translate']->_('Do you really want to delete this group?').'\')) {
-						location.href = \'index.php?action=delgroup&gid=\'+value;
-						return;
-					}
-                                }); // end forEach
-                            } // end if
-                        }); // end forEach
-                    } // end if
-		}
-		</script>
-
-
-		<div style="width: 100%; height: 200px;">
-		    <div id="grid2" jsId="grid2" dojoType="dojox.grid.DataGrid" onDblClick="editGroup();" selectionMode="single" store="gridStore2" structure="layoutGroups" query="{}"></div>
-		</div>
+			</div>
 		</div>
 		';
 
