@@ -1390,20 +1390,32 @@ class knowledgeroot_content {
 		if($anz == 1) {
 			$row = $this->CLASS['db']->fetch_assoc($res);
 			echo '
-				<div dojoType="dijit.TitlePane" title="<b>'.$this->CLASS['translate']->_('edit group').'</b>">
-				<form action="index.php" method="post">
-				<input type="hidden" name="action" value="editgroup" />
-				<input type="hidden" name="gid" value="'.$row['id'].'" />
-				<table border="0" cellpadding="1" cellspacing="3">
-				<tr><td>'.$this->CLASS['translate']->_('name').': </td><td><input dojoType="dijit.form.TextBox" type="text" name="name" value="'.$row['name'].'" /></td></tr>
+		<div class="card">
+		  <div class="card-header">
+			'.$this->CLASS['translate']->_('add group').'
+		  </div>
+		  <div class="card-body">
+		
+			<form action="index.php" method="post">
+			<input type="hidden" name="action" value="editgroup" />
+			<input type="hidden" name="gid" value="'.$row['id'].'" />
+
+		  <div class="form-group">
+			<label for="name">' . $this->CLASS['translate']->_('name') . '</label>
+			<input type="text" class="form-control" aria-describedby="name" name="name" value="'.$row['name'].'">
+		  </div>
 			';
 
 			$this->CLASS['hooks']->setHook("kr_content","edit_group","show");
 
-			echo '    <tr><td></td><td><button dojoType="dijit.form.Button" type="submit" name="submit">'.$this->CLASS['translate']->_('save').'</button></td></tr>
-				</table>
+			echo '
+		  <div class="form-group">
+		  	<button class="btn btn-primary" name="submit" type="submit">'.$this->CLASS['translate']->_('save').'</button>
+		  </div>
+			
 				</form>
-				</div>
+		  </div>
+		 </div>
 			';
 		}
 
