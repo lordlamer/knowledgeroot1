@@ -1280,14 +1280,7 @@ class knowledgeroot_content {
 		echo '
 			</div>
 		</div>
-		
 		';
-
-		echo '<script type="text/javascript">
-		<!--
-		document.adduserformular.name.focus();
-		//-->
-		</script>'."\n";
 
 		$this->CLASS['hooks']->setHook("kr_content","add_user","end");
 	}
@@ -1355,27 +1348,32 @@ class knowledgeroot_content {
 		$this->CLASS['hooks']->setHook("kr_content","add_group","start");
 
 		echo '
-		<div dojoType="dijit.TitlePane" title="<b>'.$this->CLASS['translate']->_('add group').'</b>">
+		<div class="card">
+		  <div class="card-header">
+			'.$this->CLASS['translate']->_('add group').'
+		  </div>
+		  <div class="card-body">
+		
 		<form action="index.php" method="post" name="addgroupformular">
 			<input type="hidden" name="action" value="addgroup" />
-			<table border="0" cellpadding="1" cellspacing="3">
-			<tr><td>'.$this->CLASS['translate']->_('name').': </td><td><input dojoType="dijit.form.TextBox" type="text" name="name" value="" /></td></tr>
+
+		  <div class="form-group">
+			<label for="name">' . $this->CLASS['translate']->_('name') . '</label>
+			<input type="text" class="form-control" aria-describedby="name" name="name" value="">
+		  </div>
 		';
 
 		$this->CLASS['hooks']->setHook("kr_content","add_group","show");
 
 		echo '
-			<tr><td></td><td><button dojoType="dijit.form.Button" type="submit" name="submit">'.$this->CLASS['translate']->_('save').'</button></td></tr>
-			</table>
-			</form>
-			</div>
+		  <div class="form-group">
+		  	<button class="btn btn-primary" name="submit" type="submit">'.$this->CLASS['translate']->_('save').'</button>
+		  </div>
+			
+				</form>
+		  </div>
+		 </div>
 		';
-
-		echo '<script type="text/javascript">
-		<!--
-		document.addgroupformular.name.focus();
-		//-->
-		</script>'."\n";
 
 		$this->CLASS['hooks']->setHook("kr_content","add_group","end");
 	}
