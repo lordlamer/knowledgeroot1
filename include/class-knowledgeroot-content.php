@@ -1240,7 +1240,7 @@ class knowledgeroot_content {
 		  
 		  <div class="form-group">
 			<label for="edit rights">' . $this->CLASS['translate']->_('edit rights') . '</label>
-			' . $this->CLASS['knowledgeroot']->yesnodropdown("enabled") . '
+			' . $this->CLASS['knowledgeroot']->yesnodropdown("rightedit") . '
 		  </div>
 		  
 		  <div class="form-group">
@@ -1269,15 +1269,15 @@ class knowledgeroot_content {
 			<label for="others">' . $this->CLASS['translate']->_('others') . '</label>
 			'.$this->CLASS['knowledgeroot']->rightDropDown("otherrights",1).'
 		  </div>
-		  
-		  <div class="form-group">
-		  	<button class="btn btn-primary" name="submit" type="submit">'.$this->CLASS['translate']->_('save').'</button>
-		  </div>
 		';
 
 		$this->CLASS['hooks']->setHook("kr_content","add_user","show");
 
 		echo '
+		  <div class="form-group">
+		  	<button class="btn btn-primary" name="submit" type="submit">'.$this->CLASS['translate']->_('save').'</button>
+		  </div>
+
 			</div>
 		</div>
 		';
@@ -1307,34 +1307,83 @@ class knowledgeroot_content {
 			}
 
 			echo '
-				<div dojoType="dijit.TitlePane" title="<b>'.$this->CLASS['translate']->_('edit user').'</b>">
-
+		<div class="card">
+		  <div class="card-header">
+			'.$this->CLASS['translate']->_('add user').'
+		  </div>
+		  <div class="card-body">
+		
 				<form action="index.php" method="post">
 				<input type="hidden" name="action" value="edituser" />
 				<input type="hidden" name="uid" value="'.$row['id'].'" />
 
-				<table border="0" cellpadding="1" cellspacing="3">
-				<tr><td>'.$this->CLASS['translate']->_('name').': </td><td><input dojoType="dijit.form.TextBox" type="text" name="name" value="'.$row['name'].'" /></td></tr>
-				<tr><td>'.$this->CLASS['translate']->_('password').': </td><td><input dojoType="dijit.form.TextBox" type="password" name="password" value="" /></td></tr>
-				<tr><td>'.$this->CLASS['translate']->_('theme').': </td><td>' . $this->CLASS['themes']->theme_dropdown($row['theme']) . '</td></tr>
-				<tr><td>'.$this->CLASS['translate']->_('default group').': </td><td>' . $this->CLASS['knowledgeroot']->groupdropdown("defaultgroup",$row['defaultgroup']) . '</td></tr>
-				<tr><td>'.$this->CLASS['translate']->_('admin').': </td><td>' . $this->CLASS['knowledgeroot']->yesnodropdown("admin", $row['admin']) . '</td></tr>
-				<tr><td>'.$this->CLASS['translate']->_('edit rights').': </td><td>' . $this->CLASS['knowledgeroot']->yesnodropdown("rightedit",$row['rightedit']) . '</td></tr>
-				<tr><td>'.$this->CLASS['translate']->_('enabled').': </td><td>' . $this->CLASS['knowledgeroot']->yesnodropdown("enabled",$row['enabled']) . '</td></tr>
-				<tr><td valign="top">'.$this->CLASS['translate']->_('groups').': </td><td>' . $this->CLASS['knowledgeroot']->groupDropDown("groups[]","",true,$grouparr) . ' </td></tr>
-				<tr><td>'.$this->CLASS['translate']->_('default rights').': </td><td></td></tr>
-				<tr><td>&nbsp; '.$this->CLASS['translate']->_('user').': </td><td>'.$this->CLASS['knowledgeroot']->rightDropDown("userrights",substr($row['defaultrights'],0,1)).'</td></tr>
-				<tr><td>&nbsp; '.$this->CLASS['translate']->_('group').': </td><td>'.$this->CLASS['knowledgeroot']->rightDropDown("grouprights",substr($row['defaultrights'],1,1)).'</td></tr>
-				<tr><td>&nbsp; '.$this->CLASS['translate']->_('others').': </td><td>'.$this->CLASS['knowledgeroot']->rightDropDown("otherrights",substr($row['defaultrights'],2,1)).'</td></tr>
+		  <div class="form-group">
+			<label for="name">' . $this->CLASS['translate']->_('name') . '</label>
+			<input type="text" class="form-control" aria-describedby="name" name="name" value="'.$row['name'].'">
+		  </div>
+		  
+		  <div class="form-group">
+			<label for="password">' . $this->CLASS['translate']->_('password') . '</label>
+			<input type="password" class="form-control" aria-describedby="password" name="password" value="">
+		  </div>
+		  
+		  <div class="form-group">
+			<label for="theme">' . $this->CLASS['translate']->_('theme') . '</label>
+			' . $this->CLASS['themes']->theme_dropdown($row['theme']) . '
+		  </div>
+		  
+		  <div class="form-group">
+			<label for="default group">' . $this->CLASS['translate']->_('default group') . '</label>
+			' . $this->CLASS['knowledgeroot']->groupdropdown("defaultgroup",$row['defaultgroup']) . '
+		  </div>
+		  
+		  <div class="form-group">
+			<label for="default group">' . $this->CLASS['translate']->_('admin') . '</label>
+			' . $this->CLASS['knowledgeroot']->yesnodropdown("admin", $row['admin']) . '
+		  </div>
+		  
+		  <div class="form-group">
+			<label for="edit rights">' . $this->CLASS['translate']->_('edit rights') . '</label>
+			' . $this->CLASS['knowledgeroot']->yesnodropdown("rightedit",$row['rightedit']) . '
+		  </div>
+		  
+		  <div class="form-group">
+			<label for="enabled">' . $this->CLASS['translate']->_('enabled') . '</label>
+			' . $this->CLASS['knowledgeroot']->yesnodropdown("enabled",$row['enabled']) . '
+		  </div>
+		  
+		  <div class="form-group">
+			<label for="groups">' . $this->CLASS['translate']->_('groups') . '</label>
+			' . $this->CLASS['knowledgeroot']->groupDropDown("groups[]","",true,$grouparr) . '
+		  </div>
+		  
+		  <h3>'.$this->CLASS['translate']->_('default rights').'</h3>
+		  
+		  <div class="form-group">
+			<label for="user">' . $this->CLASS['translate']->_('user') . '</label>
+			'.$this->CLASS['knowledgeroot']->rightDropDown("userrights",substr($row['defaultrights'],0,1)).'
+		  </div>
+		  
+		  <div class="form-group">
+			<label for="group">' . $this->CLASS['translate']->_('group') . '</label>
+			'.$this->CLASS['knowledgeroot']->rightDropDown("grouprights",substr($row['defaultrights'],1,1)).'
+		  </div>
+		  
+		  <div class="form-group">
+			<label for="others">' . $this->CLASS['translate']->_('others') . '</label>
+			'.$this->CLASS['knowledgeroot']->rightDropDown("otherrights",substr($row['defaultrights'],2,1)).'
+		  </div>
 			';
 
 			$this->CLASS['hooks']->setHook("kr_content","edit_user","show");
 
 			echo '
-				<tr><td></td><td><button dojoType="dijit.form.Button" type="submit" name="submit">'.$this->CLASS['translate']->_('save').'</button></td></tr>
-				</table>
-				</form>
-				</div>
+		  <div class="form-group">
+		  	<button class="btn btn-primary" name="submit" type="submit">'.$this->CLASS['translate']->_('save').'</button>
+		  </div>
+
+			</div>
+		</div>
 			';
 		}
 
