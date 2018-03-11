@@ -1798,16 +1798,6 @@ class knowledgeroot_content {
 				$this->CLASS['hooks']->setHook("kr_content","show_tree_content","no_content_end");
 			}
 
-			echo "
-<script>
-dojo.addOnLoad(function(){
-  dojo.query(\".showMe\").forEach(function(node, index, arr){
-	node.style.display = 'block';
-  });
-});
-</script>
-			";
-
 			// form for move page
 			echo "<form name=\"move\" action=\"index.php\" method=\"post\">\n";
 			echo "<input type=\"hidden\" name=\"move\" value=\"move\" />\n";
