@@ -14,19 +14,24 @@ $CLASS['tree']->start($CLASS,'move',"#");
 
 if($CLASS['config']->base->charset != '') {
 	header("Content-Type: text/html; charset=".$CLASS['config']->base->charset);
-	echo '<?xml version="1.0" encoding="'.$CLASS['config']->base->charset.'"?>';
-} else {
-	echo '<?xml version="1.0" encoding="iso-8859-1"?>';
 }
 ?>
-<!DOCTYPE html
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!doctype html>
+<html lang="en">
 <head>
 <?php
 	$CLASS['kr_header']->show_header();
 ?>
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        body {
+            /* Margin bottom by footer height */
+            margin-top: 60px;
+        }
+    </style>
 </head>
 <body>
 
@@ -34,14 +39,17 @@ if($CLASS['config']->base->charset != '') {
 	<div id="msg" class="loading"><?php echo $CLASS['translate']->_('loading...'); ?></div>
 </div>
 
-<div class="movetitle">
-<?php echo $CLASS['translate']->_('move to'); ?>
-</div>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="border-bottom: 3px solid #F88529;">
+        <a class="navbar-brand" href="#"><?php echo $CLASS['translate']->_("move to"); ?></a>
+    </nav>
+</header>
+
 <?php
 if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1 && isset($_GET['type']) && $_GET['type'] == "page") {
 ?>
 <div id="toroot">
-<input class="button" onclick="window.opener.document.forms.move.to.value = '0'; window.opener.document.forms.move.submit(); window.close();" type="button" name="submit" value="<?php echo $CLASS['translate']->_('move to root'); ?>">
+<input class="btn btn-primary" onclick="window.opener.document.forms.move.to.value = '0'; window.opener.document.forms.move.submit(); window.close();" type="button" name="submit" value="<?php echo $CLASS['translate']->_('move to root'); ?>">
 </div>
 <?php
 }
@@ -86,7 +94,7 @@ echo $CLASS['translate']->_("Move content to other page:");
 	while($row = $CLASS['db']->fetch_assoc($res)) {
 		if($CLASS['knowledgeroot']->getContentRights($row['id'],$_SESSION['userid']) != 0) {
 			if($first)
-				echo "<a style=\"font-size: 16px; font-weight: bold;\" href=\"javascript:;\" onclick=\"moveContentOnPage('".$row['id']."', 'before');\">&larr;</a><br>\n";
+				echo "<a class=\"btn btn-secondary\" href=\"javascript:;\" onclick=\"moveContentOnPage('".$row['id']."', 'before');\"><i class=\"fa fa-arrow-left\" aria-hidden=\"true\"></i></a><br>\n";
 
 			if($row['title'] != "") {
 				echo $row['title'] . "<br/>\n";
@@ -94,7 +102,7 @@ echo $CLASS['translate']->_("Move content to other page:");
 				echo "Id: " . $row['id'] . "<br/>\n";
 			}
 
-			echo "<a style=\"font-size: 16px; font-weight: bold;\" href=\"javascript:;\" onclick=\"moveContentOnPage('".$row['id']."', 'after');\">&larr;</a><br>\n";
+			echo "<a class=\"btn btn-secondary\" href=\"javascript:;\" onclick=\"moveContentOnPage('".$row['id']."', 'after');\"><i class=\"fa fa-arrow-left\" aria-hidden=\"true\"></i></a><br>\n";
 
 			$first = false;
 		}
@@ -102,7 +110,7 @@ echo $CLASS['translate']->_("Move content to other page:");
 ?>
 </div>
 <div id="toroot">
-<input class="button" onclick="window.close();" type="button" name="submit" value="<?php echo $CLASS['translate']->_('close window'); ?>">
+<input class="btn btn-primary" onclick="window.close();" type="button" name="submit" value="<?php echo $CLASS['translate']->_('close window'); ?>">
 </div>
 </body>
 </html>
