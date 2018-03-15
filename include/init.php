@@ -201,11 +201,6 @@ if(!defined("KR_INCLUDE_PREFIX")) {
 
 $CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."assets/jquery/jquery.min.js");
 $CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."assets/bootstrap/js/bootstrap.min.js");
-//$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/prototype.js");
-//$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/scriptaculous.js");
-//$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/effects.js");
-//$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/dragdrop.js");
-//$CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/showhide.js");
 $CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/ajax-tree.js");
 $CLASS['kr_header']->addjssrc(KR_INCLUDE_PREFIX."system/javascript/messagebox.js");
 
