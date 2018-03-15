@@ -1,34 +1,36 @@
 <?php
 header("Content-Type: text/html; charset=UTF-8");
-echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 ?>
-<!DOCTYPE html
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!doctype html>
+<html lang="en">
 	<head>
 		<title>Knowledgeroot Installation</title>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<!-- load the dojo toolkit base -->
-		<script type="text/javascript" src="system/javascript/dojo/dojo/dojo.js"
-			djConfig="parseOnLoad:true, isDebug:false">
-		</script>
+        <script src="assets/jquery/jquery.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" type="text/css" />
+        <script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
-		<style type="text/css">
-			@import "system/javascript/dojo/dijit/themes/claro/claro.css";
-		</style>
-
-		<script type="text/javascript">
-			dojo.require("dijit.form.Button");
-			dojo.require("dijit.form.Form");
-			dojo.require("dijit.form.TextBox");
-			dojo.require("dijit.form.ValidationTextBox");
-			dojo.require("dijit.form.Select");
-		</script>
+        <style>
+            html {
+                position: relative;
+                min-height: 100%;
+            }
+            body {
+                /* Margin bottom by footer height */
+                margin-top: 60px;
+            }
+        </style>
 	</head>
-<body class="claro">
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="border-bottom: 3px solid #F88529;">
+        <a class="navbar-brand" href="#">Knowledgeroot Update</a>
+    </nav>
+</header>
+
 <?php
 include_once("include/class-knowledgeroot-installer.php");
 

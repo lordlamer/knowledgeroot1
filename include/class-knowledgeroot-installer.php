@@ -236,9 +236,9 @@ class knowledgeroot_installer {
 
 		$out = "";
 		$out .= '
+		<div class="container">
 		<form action="install.php" method="post">
-		<table align="center" width="548" cellpadding="1" cellspacing="1" border="0">
-		<tr><td><img src="images/knowledgeroot-install.png"></td></tr>
+		<table class="table table-striped table-sm" align="center" width="548" cellpadding="1" cellspacing="1" border="0">
 		';
 
 		if($_POST['db_type'] == "pgsql") {
@@ -261,30 +261,30 @@ class knowledgeroot_installer {
 		if($this->isFileWriteable($this->file_config) && $_POST['write_config'] == 1 && $this->writeFileContent($this->getConfigContent($_POST['db_type'],$_POST['db_host'],$_POST['db_user'],$_POST['db_pass'],$_POST['db_database'],$_POST['db_schema'],$_POST['db_encoding'],$_POST['admin_user'],$_POST['admin_pass'],$config),$this->file_config)) {
 			$out .= "<tr><td>Config (".$this->file_config.") was written!</td></tr>\n";
 		} else {
-			$out .= '<tr><td>Create ' . $this->file_config . ' and put the following content in it:<br><textarea cols="50" rows="20">'. $this->getConfigContent($_POST['db_type'],$_POST['db_host'],$_POST['db_user'],$_POST['db_pass'],$_POST['db_database'],$_POST['db_schema'],$_POST['db_encoding'],$_POST['admin_user'],$_POST['admin_pass'],$config) ."</textarea></td></tr>\n";
+			$out .= '<tr><td>Create ' . $this->file_config . ' and put the following content in it:<br><textarea class="form-control" cols="50" rows="20">'. $this->getConfigContent($_POST['db_type'],$_POST['db_host'],$_POST['db_user'],$_POST['db_pass'],$_POST['db_database'],$_POST['db_schema'],$_POST['db_encoding'],$_POST['admin_user'],$_POST['admin_pass'],$config) ."</textarea></td></tr>\n";
 		}
 
 		// delete install
 		if(isset($_POST['delete_install']) && $_POST['delete_install'] == 1 && $this->isFileDeleteable($this->file_install) && @unlink($this->file_install)) {
 			$out .= "<tr><td>Install file (".$this->file_install.") was deleted!</td></tr>\n";
 		} else {
-			$out .= "<tr><td style=\"color:#ff0000;\">Delete installation file (".$this->file_install.")!</td></tr>\n";
+			$out .= "<tr><td class=\"table-danger\">Delete installation file (".$this->file_install.")!</td></tr>\n";
 		}
 
 		// delete update
 		if(isset($_POST['delete_update']) && $_POST['delete_update'] == 1 && $this->isFileDeleteable($this->file_update) && @unlink($this->file_update)) {
 			$out .= "<tr><td>Update file (".$this->file_update.") was deleted!</td></tr>\n";
 		} else {
-			$out .= "<tr><td style=\"color:#ff0000;\">Delete update file (".$this->file_update.")!</td></tr>\n";
+			$out .= "<tr><td class=\"table-danger\">Delete update file (".$this->file_update.")!</td></tr>\n";
 		}
 
-		$out .= "<tr bgcolor=\"#94AA83\"><td style=\"padding:10px 10px 10px 10px; font-weight:bold;\">Congratulation you have installed Knowledgeroot successfully!</td></tr>\n";
-		$out .= "<tr bgcolor=\"#94AA83\"><td style=\"padding:0px 10px 20px 10px;\">For help and more documentation visit the <a href=\"http://www.knowledgeroot.org\">Knowledgeroot project page</a> or the <a href=\"http://forum.linuxdelta.de\">forum</a>.</td></tr>\n";
+		$out .= "<tr class=\"table-success\"><td style=\"padding:10px 10px 10px 10px; font-weight:bold;\">Congratulation you have installed Knowledgeroot successfully!</td></tr>\n";
+		$out .= "<tr class=\"table-success\"><td style=\"padding:0px 10px 20px 10px;\">For help and more documentation visit the <a href=\"http://www.knowledgeroot.org\">Knowledgeroot project page</a> or the <a href=\"http://forum.linuxdelta.de\">forum</a>.</td></tr>\n";
 
-		$out .= "<tr bgcolor=\"#94AA83\"><td style=\"padding:0px 10px 20px 10px;\">Link to Frontend: <a href=\"index.php\">Frontend</a></td></tr>\n";
-		$out .= "<tr bgcolor=\"#94AA83\"><td style=\"padding:0px 10px 20px 10px;\">Link to Backend: <a href=\"admin/index.php\">Backend</a></td></tr>\n";
+		$out .= "<tr class=\"table-success\"><td style=\"padding:0px 10px 20px 10px;\">Link to Frontend: <a href=\"index.php\">Frontend</a></td></tr>\n";
+		$out .= "<tr class=\"table-success\"><td style=\"padding:0px 10px 20px 10px;\">Link to Backend: <a href=\"admin/index.php\">Backend</a></td></tr>\n";
 
-		$out .= "</table>\n";
+		$out .= "</table></div>\n";
 
 		return $out;
 	}
@@ -292,9 +292,9 @@ class knowledgeroot_installer {
 	function doUpdate() {
 		$out = "";
 		$out .= '
-		<form dojoType="dijit.form.Form" action="install.php" method="post">
-		<table align="center" width="548" cellpadding="1" cellspacing="1" border="0">
-		<tr><td><img src="images/knowledgeroot-install.png"></td></tr>
+		<div class="container">
+		<form action="install.php" method="post">
+		<table class="table table-striped table-sm" align="center" width="548" cellpadding="1" cellspacing="1" border="0">
 		';
 
 		$config = new Zend_Config_Ini($this->file_config_dist, null, array('allowModifications' => true));
@@ -315,37 +315,31 @@ class knowledgeroot_installer {
 		// set baseurl
 		$config->base->base_url = $_POST['baseurl'];
 
-		// set version in database
-		//$this->setVersion($this->CLASS['config']->db->adapter);
-
-		// copy all config vars to table settings
-		//$this->CLASS['knowledgeroot']->setConfigArr($this->CLASS['vars']);
-
 		// write config.php
 		if($this->isFileWriteable($this->file_config) && $_POST['write_config'] == 1 && $this->writeFileContent($this->getConfigContent($this->CLASS['vars']['db']['type'],$this->CLASS['vars']['db']['host'],$this->CLASS['vars']['db']['user'],$this->CLASS['vars']['db']['pass'],$this->CLASS['vars']['db']['database'],$this->CLASS['vars']['db']['schema'],$this->CLASS['vars']['db']['encoding'],"","",$config),$this->file_config)) {
 			$out .= "<tr><td>Config (".$this->file_config.") was written!</td></tr>\n";
 		} else {
-			$out .= '<tr><td>Create ' . $this->file_config . ' and put the following content in it:<br><textarea cols="50" rows="20">'. $this->getConfigContent($this->CLASS['vars']['db']['type'],$this->CLASS['vars']['db']['host'],$this->CLASS['vars']['db']['user'],$this->CLASS['vars']['db']['pass'],$this->CLASS['vars']['db']['database'],$this->CLASS['vars']['db']['schema'],$this->CLASS['vars']['db']['encoding'],"","",$config) ."</textarea></td></tr>\n";
+			$out .= '<tr><td>Create ' . $this->file_config . ' and put the following content in it:<br><textarea class="form-control" cols="50" rows="20">'. $this->getConfigContent($this->CLASS['vars']['db']['type'],$this->CLASS['vars']['db']['host'],$this->CLASS['vars']['db']['user'],$this->CLASS['vars']['db']['pass'],$this->CLASS['vars']['db']['database'],$this->CLASS['vars']['db']['schema'],$this->CLASS['vars']['db']['encoding'],"","",$config) ."</textarea></td></tr>\n";
 		}
 
 		// delete install
 		if(isset($_POST['delete_install']) && $_POST['delete_install'] == 1 && $this->isFileDeleteable($this->file_install) && @unlink($this->file_install)) {
 			$out .= "<tr><td>Install file (".$this->file_install.") was deleted!</td></tr>\n";
 		} else {
-			$out .= "<tr><td style=\"color:#ff0000;\">Delete installation file (".$this->file_install.")!</td></tr>\n";
+			$out .= "<tr><td class=\"table-danger\">Delete installation file (".$this->file_install.")!</td></tr>\n";
 		}
 
 		// delete update
 		if(isset($_POST['delete_update']) && $_POST['delete_update'] == 1 && $this->isFileDeleteable($this->file_update) && @unlink($this->file_update)) {
 			$out .= "<tr><td>Update file (".$this->file_update.") was deleted!</td></tr>\n";
 		} else {
-			$out .= "<tr><td style=\"color:#ff0000;\">Delete update file (".$this->file_update.")!</td></tr>\n";
+			$out .= "<tr><td class=\"table-danger\">Delete update file (".$this->file_update.")!</td></tr>\n";
 		}
 
-		$out .= "<tr bgcolor=\"#94AA83\"><td style=\"padding:10px 10px 10px 10px; font-weight:bold;\">Congratulation you have updated Knowledgeroot successfully!</td></tr>";
-		$out .= "<tr bgcolor=\"#94AA83\"><td style=\"padding:0px 10px 20px 10px;\">For help and more documentation visit the <a href=\"http://www.knowledgeroot.org\">Knowledgeroot project page</a> or the <a href=\"http://forum.linuxdelta.de\">forum</a>.</td></tr>";
+		$out .= "<tr class=\"table-success\"><td style=\"padding:10px 10px 10px 10px; font-weight:bold;\">Congratulation you have updated Knowledgeroot successfully!</td></tr>";
+		$out .= "<tr class=\"table-success\"><td style=\"padding:0px 10px 20px 10px;\">For help and more documentation visit the <a href=\"http://www.knowledgeroot.org\">Knowledgeroot project page</a> or the <a href=\"http://forum.linuxdelta.de\">forum</a>.</td></tr>";
 
-		$out .= "</table>\n";
+		$out .= "</table></div>\n";
 
 		return $out;
 	}
@@ -408,76 +402,84 @@ class knowledgeroot_installer {
 		$content .= '
 		<script type="text/javascript">
 			function changeDbType() {
-				switch(dijit.byId(\'dbtype\').value) {
+				switch($(\'#dbtype\').val()) {
 					case "mysql":
 					case "mysqli":
-						dojo.byId(\'host\').style.visibility = "visible";
-						dojo.byId(\'user\').style.visibility = "visible";
-						dojo.byId(\'password\').style.visibility = "visible";
-						dojo.byId(\'dbname\').style.visibility = "visible";
-						dojo.byId(\'dbschema\').style.visibility = "hidden";
-						dojo.byId(\'dbencoding\').style.visibility = "hidden";
+						$(\'#host\').show();
+						$(\'#user\').show();
+						$(\'#password\').show();
+						$(\'#dbname\').show();
+						$(\'#dbschema\').hide();
+						$(\'#dbencoding\').hide();
 						break;
 
 					case "pgsql":
-						dojo.byId(\'host\').style.visibility = "visible";
-						dojo.byId(\'user\').style.visibility = "visible";
-						dojo.byId(\'password\').style.visibility = "visible";
-						dojo.byId(\'dbname\').style.visibility = "visible";
-						dojo.byId(\'dbschema\').style.visibility = "visible";
-						dojo.byId(\'dbencoding\').style.visibility = "visible";
+						$(\'#host\').show();
+						$(\'#user\').show();
+						$(\'#password\').show();
+						$(\'#dbname\').show();
+						$(\'#dbschema\').show();
+						$(\'#dbencoding\').show();
 						break;
 
 					case "sqlite":
-						dojo.byId(\'host\').style.visibility = "hidden";
-						dojo.byId(\'user\').style.visibility = "hidden";
-						dojo.byId(\'password\').style.visibility = "hidden";
-						dojo.byId(\'dbname\').style.visibility = "visible";
-						dojo.byId(\'dbschema\').style.visibility = "hidden";
-						dojo.byId(\'dbencoding\').style.visibility = "hidden";
+						$(\'#host\').hide();
+						$(\'#user\').hide();
+						$(\'#password\').hide();
+						$(\'#dbname\').show();
+						$(\'#dbschema\').hide();
+						$(\'#dbencoding\').hide();
 						break;
 				}
 			}
+			
+			$(function(){
+   				changeDbType();
+			});
 		</script>
-		<form dojoType="dijit.form.Form" action="install.php" method="post">
-		<table align="center" width="548" cellpadding="1" cellspacing="1" border="0">
-		<tr><td colspan="2"><img src="images/knowledgeroot-install.png"></td></tr>
-		<tr>
-			<td style="padding:4px 4px 25px 4px;" colspan="2"><h2>Welcome to the installation of Knowledgeroot.</h2>
+		<div class="container">
+		<form action="install.php" method="post">
+		
+		<div class="jumbotron">
+		  <h1 class="display-4">Welcome to the installation of Knowledgeroot.</h1>
+		  <p class="lead">
 			Now, we need some informations from you to install Knowledgeroot. Fill out
 			the following form and click "Start Installation" to install Knowledgeroot.
-			</td>
-		</tr>
-		<tr><td>Base URL:</td><td><input dojoType="dijit.form.TextBox" type="text" name="baseurl" value="'.((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != '') ? 'https://' : 'http://').$this->getBaseUrl().'"></td></tr>
+		  </p>
+		</div>
+		
+		<table class="table table-striped table-sm">
+		<tr><td>Base URL:</td><td><input class="form-control" type="text" name="baseurl" value="'.((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != '') ? 'https://' : 'http://').$this->getBaseUrl().'"></td></tr>
 		<tr><td>Type of database:</td><td>
-			<select dojoType="dijit.form.Select" id="dbtype" name="db_type" onchange="changeDbType();">
+			<select class="form-control" id="dbtype" name="db_type" onchange="changeDbType();">
 				<option value="mysql" selected="selected">MySQL</option>
 				<option value="mysqli">MySQL (mysqli)</option>
 				<option value="pgsql">PostgreSQL</option>
 				<option value="sqlite">SQLite</option>
 			</select>
 		</td></tr>
-		<tr id="host"><td>Database host:</td><td><input dojoType="dijit.form.TextBox" type="text" name="db_host" value=""></td></tr>
-		<tr id="user"><td>Database user:</td><td><input dojoType="dijit.form.TextBox" type="text" name="db_user" value=""></td></tr>
-		<tr id="password"><td>Database password:</td><td><input dojoType="dijit.form.TextBox" type="text" name="db_pass" value=""></td></tr>
-		<tr id="dbname"><td>Database name:</td><td><input dojoType="dijit.form.TextBox" type="text" name="db_database" value=""></td></tr>
-		<tr><td>Create database?</td><td><select dojoType="dijit.form.Select" name="db_create"><option value="0" selected="selected">no</option><option value="1">yes</option></select></td></tr>
-		<tr id="dbschema" style="visibility:hidden;"><td>Database schema (only Postgresql):</td><td><input dojoType="dijit.form.TextBox" type="text" name="db_schema" value=""></td></tr>
-		<tr id="dbencoding" style="visibility:hidden;"><td>Database encoding (only Postgresql):</td><td><input dojoType="dijit.form.TextBox" type="text" name="db_encoding" value=""></td></tr>
-		<tr><td>Username for Adminbackend:</td><td><input dojoType="dijit.form.TextBox" type="text" name="admin_user" value=""></td></tr>
-		<tr><td>Password for Adminbackend:</td><td><input dojoType="dijit.form.TextBox" type="text" name="admin_pass" value=""></td></tr>';
+		<tr id="host"><td>Database host:</td><td><input class="form-control" type="text" name="db_host" value=""></td></tr>
+		<tr id="user"><td>Database user:</td><td><input class="form-control" type="text" name="db_user" value=""></td></tr>
+		<tr id="password"><td>Database password:</td><td><input class="form-control" type="text" name="db_pass" value=""></td></tr>
+		<tr id="dbname"><td>Database name:</td><td><input class="form-control" type="text" name="db_database" value=""></td></tr>
+		<tr><td>Create database?</td><td><select class="form-control" name="db_create"><option value="0" selected="selected">no</option><option value="1">yes</option></select></td></tr>
+		<tr id="dbschema"><td>Database schema (only Postgresql):</td><td><input class="form-control" type="text" name="db_schema" value=""></td></tr>
+		<tr id="dbencoding"><td>Database encoding (only Postgresql):</td><td><input class="form-control" type="text" name="db_encoding" value=""></td></tr>
+		<tr><td>Username for Adminbackend:</td><td><input class="form-control" type="text" name="admin_user" value=""></td></tr>
+		<tr><td>Password for Adminbackend:</td><td><input class="form-control" type="text" name="admin_pass" value=""></td></tr>';
 
 		if($this->isFileWriteable($this->file_config)) {
-			$content .= '<tr><td>Write config?</td><td><select dojoType="dijit.form.Select" name="write_config"><option value="0">no</option><option value="1" selected="selected">yes</option></select></td></tr>';
+			$content .= '<tr><td>Write config?</td><td><select class="form-control" name="write_config"><option value="0">no</option><option value="1" selected="selected">yes</option></select></td></tr>';
 		} else {
 			$content .= '<tr><td>Write config?</td><td>cannot write config file</td></tr>';
 		}
 
-		$content .= '<tr bgcolor="#FF5D5D"><td>Delete install.php?</td><td><select dojoType="dijit.form.Select" name="delete_install"><option value="0">no</option><option value="1" selected="selected">yes</option></select></td></tr>';
-		$content .= '<tr bgcolor="#FF5D5D"><td>Delete update.php?</td><td><select dojoType="dijit.form.Select" name="delete_update"><option value="0">no</option><option value="1" selected="selected">yes</option></select></td></tr>';
+		$content .= '<tr class="table-danger"><td>Delete install.php?</td><td><select class="form-control" name="delete_install"><option value="0">no</option><option value="1" selected="selected">yes</option></select></td></tr>';
+		$content .= '<tr class="table-danger"><td>Delete update.php?</td><td><select class="form-control" name="delete_update"><option value="0">no</option><option value="1" selected="selected">yes</option></select></td></tr>';
 
-		$content .= '	<tr bgcolor="#94AA83"><td colspan="2" align="center"><button dojoType="dijit.form.Button" name="submit" type="submit">Start Intallation</button></td></tr>
+		$content .= '	<tr class="table-success"><td colspan="2" align="center"><button class="btn btn-primary" name="submit" type="submit">Start Intallation</button></td></tr>
 		</table>
+		</div>
 		';
 
 		return $content;
@@ -486,28 +488,32 @@ class knowledgeroot_installer {
 	function getUpdateForm() {
 		$content = '';
 		$content .= '
-		<form dojoType="dijit.form.Form" action="update.php" method="post">
-		<table align="center" width="548" cellpadding="1" cellspacing="1" border="0">
-		<tr><td colspan="2"><img src="images/knowledgeroot-install.png"></td></tr>
-		<tr>
-			<td style="padding:4px 4px 25px 4px;" colspan="2"><h2>Welcome to the update of Knowledgeroot.</h2>
-			Now, we need some informations from you to update Knowledgeroot. Fill out
+		<div class="container">
+		<form action="update.php" method="post">
+		
+		<div class="jumbotron">
+		  <h1 class="display-4">Welcome to the update of Knowledgeroot.</h1>
+		  <p class="lead">
+		  	Now, we need some informations from you to update Knowledgeroot. Fill out
 			the following form an click "Start Update" to update Knowledgeroot.
-			</td>
-		</tr>
-		<tr><td>Base URL:</td><td><input dojoType="dijit.form.TextBox" type="text" name="baseurl" value="'.((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != '') ? 'https://' : 'http://').$this->getBaseUrl().'"></td></tr>';
+		  </p>
+		</div>
+		
+		<table class="table table-striped table-sm">
+		<tr><td>Base URL:</td><td><input class="form-control" type="text" name="baseurl" value="'.((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != '') ? 'https://' : 'http://').$this->getBaseUrl().'"></td></tr>';
 
 		if($this->isFileWriteable($this->file_config)) {
-			$content .= '<tr><td>Write config?</td><td><select dojoType="dijit.form.Select" name="write_config"><option value="0">no</option><option value="1" selected="selected">yes</option></select></td></tr>';
+			$content .= '<tr><td>Write config?</td><td><select class="form-control" name="write_config"><option value="0">no</option><option value="1" selected="selected">yes</option></select></td></tr>';
 		} else {
 			$content .= '<tr><td>Write config?</td><td>cannot write config file</td></tr>';
 		}
 
-		$content .= '<tr bgcolor="#FF5D5D"><td>Delete install.php?</td><td><select dojoType="dijit.form.Select" name="delete_install"><option value="0">no</option><option value="1" selected="selected">yes</option></select></td></tr>';
-		$content .= '<tr bgcolor="#FF5D5D"><td>Delete update.php?</td><td><select dojoType="dijit.form.Select" name="delete_update"><option value="0">no</option><option value="1" selected="selected">yes</option></select></td></tr>';
+		$content .= '<tr class="table-danger"><td>Delete install.php?</td><td><select class="form-control" name="delete_install"><option value="0">no</option><option value="1" selected="selected">yes</option></select></td></tr>';
+		$content .= '<tr class="table-danger"><td>Delete update.php?</td><td><select class="form-control" name="delete_update"><option value="0">no</option><option value="1" selected="selected">yes</option></select></td></tr>';
 
-		$content .= '	<tr bgcolor="#94AA83"><td colspan="2" align="center"><button dojoType="dijit.form.Button" name="submit" type="submit">Start Update</button></td></tr>
+		$content .= '	<tr class="table-success"><td colspan="2" align="center"><button class="btn btn-primary" name="submit" type="submit">Start Update</button></td></tr>
 		</table>
+		</div>
 		';
 
 		return $content;
