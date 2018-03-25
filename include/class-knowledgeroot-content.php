@@ -653,7 +653,11 @@ class knowledgeroot_content {
 		echo $this->CLASS['translate']->_('Search for') . " <b>'" . stripslashes($searchword) . "'</b><br /><br />";
 
 		// contentsearch
-		echo "<h3>" . $this->CLASS['translate']->_('Content') . ":</h3>\n";
+		echo '<div class="card">
+  <div class="card-header">
+    '.$this->CLASS['translate']->_('Content').'
+  </div>
+  <div class="card-body">';
 
 		$this->CLASS['hooks']->setHook("kr_content","show_search","content_search_start");
 
@@ -736,8 +740,18 @@ class knowledgeroot_content {
 			$x = 0;
 			while($row = $this->CLASS['db']->fetch_assoc($res)) {
 				if($this->CLASS['knowledgeroot']->checkRecursivPerm($row['belongs_to'],$_SESSION['userid']) != 0) {
-					echo $this->CLASS['path']->getPath($row['belongs_to']) . "&nbsp;/&nbsp;". (($row['title'] != "") ? "\"<a href=\"index.php?highlight=".urlencode(str_replace(" ",",",$originalsearchword))."&amp;id=" . $row['belongs_to'] . "#" . $row['id'] . "\">".$row['title']."</a>\"&nbsp;" : "") ."[<a href=\"index.php?highlight=".urlencode(str_replace(" ",",",$originalsearchword))."&amp;id=" . $row['belongs_to'] . "&amp;oc=".$row['id']."#" . $row['id'] . "\">" . $this->CLASS['translate']->_('show') . "</a>]<br />\n";
+					echo '<ol class="breadcrumb"><li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i> </li>';
+					echo $this->CLASS['path']->getPath($row['belongs_to']);
+
+					if($row['title'] != "")
+						echo "<li class=\"breadcrumb-item\">\"<a href=\"index.php?highlight=".urlencode(str_replace(" ",",",$originalsearchword))."&amp;id=" . $row['belongs_to'] . "#" . $row['id'] . "\">".$row['title']."</a>\"</li>&nbsp;";
+
+					echo "<li class=\"breadcrumb-item\"><a class=\"btn btn-sm btn-outline-secondary\" href=\"index.php?highlight=".urlencode(str_replace(" ",",",$originalsearchword))."&amp;id=" . $row['belongs_to'] . "&amp;oc=".$row['id']."#" . $row['id'] . "\">" . $this->CLASS['translate']->_('show') . "</a></li>";
+
+					echo '</ol>';
+
 					$x++;
+
 				}
 			}
 
@@ -750,10 +764,14 @@ class knowledgeroot_content {
 
 		$this->CLASS['hooks']->setHook("kr_content","show_search","content_search_end");
 
-		echo "<hr>\n";
+		echo "</div></div></p>";
 
 		// tree search
-		echo "<h3>" . $this->CLASS['translate']->_('Menu') . ":</h3>\n";
+        echo '<div class="card">
+  <div class="card-header">
+    '.$this->CLASS['translate']->_('Menu').'
+  </div>
+  <div class="card-body">';
 
 		$this->CLASS['hooks']->setHook("kr_content","show_search","tree_search_start");
 
@@ -814,8 +832,10 @@ class knowledgeroot_content {
 			$x = 0;
 			while($row = $this->CLASS['db']->fetch_assoc($res)) {
 				if($this->CLASS['knowledgeroot']->checkRecursivPerm($row['id'], $_SESSION['userid']) != 0) {
-				echo $this->CLASS['path']->getPath($row['id']) . "<br />\n";
-				$x++;
+					echo '<ol class="breadcrumb"><li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i> </li>';
+					echo $this->CLASS['path']->getPath($row['id']) . "<br />\n";
+					echo '</ol>';
+					$x++;
 				}
 			}
 
@@ -828,10 +848,14 @@ class knowledgeroot_content {
 
 		$this->CLASS['hooks']->setHook("kr_content","show_search","tree_search_end");
 
-		echo "<hr>\n";
+		echo "</div></div></p>";
 
 		// file search
-		echo "<h3>" . $this->CLASS['translate']->_('Files') . ":</h3>\n";
+        echo '<div class="card">
+  <div class="card-header">
+    '.$this->CLASS['translate']->_('Files').'
+  </div>
+  <div class="card-body">';
 
 		$this->CLASS['hooks']->setHook("kr_content","show_search","file_search_start");
 
@@ -906,8 +930,11 @@ class knowledgeroot_content {
 
 				// show file
 				if($this->CLASS['knowledgeroot']->checkRecursivPerm($row['tid'], $_SESSION['userid']) != 0) {
+					echo '<ol class="breadcrumb"><li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i> </li>';
 					echo $this->CLASS['path']->getPath($row['tid']) . "&nbsp;/\n";
-					echo "<a href=\"index.php?download=".$row['id']."\" title=\"".$title."\"><img src=\"images/file.gif\" class=\"upload\" /> ".$row['filename']."</a>&nbsp;<font class=\"text\">[".getfilesize($row['filesize'])."]&nbsp;[".$title."]</font><br />\n";
+					echo "<a href=\"index.php?download=".$row['id']."\" title=\"".$title."\"><i class=\"fa fa-download\"></i> ".$row['filename']."</a>&nbsp;";
+					echo "<span class=\"badge badge-info\">".getfilesize($row['filesize'])."</span>&nbsp;<span class=\"badge badge-info\">".$title."</span>";
+					echo '</ol>';
 					$x++;
 				}
 			}
@@ -920,6 +947,8 @@ class knowledgeroot_content {
 		}
 
 		$this->CLASS['hooks']->setHook("kr_content","show_search","file_search_end");
+
+		echo "</div></div>";
 
 		$this->CLASS['hooks']->setHook("kr_content","show_search","end");
 	}
