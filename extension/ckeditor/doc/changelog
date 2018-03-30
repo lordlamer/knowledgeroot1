@@ -1,0 +1,15 @@
+20180330 - fhabermann
+* migrate to ckeditor 4.9.1
+
+20091031 - fhabermann
+* new upstream version 2.6.5
+
+20090920 - fhabermann
+* make fckeditor runable for opera (Closes: #143)
+
+20090707 - fhabermann
+* added knowledgeroot config stuff to php connector
+* fixed path problems
+
+20090706 - fhabermann
+* added new fckeditor version 2.6.4.1 that fixes security bugs
