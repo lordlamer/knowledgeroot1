@@ -395,7 +395,7 @@
 		padding: 0px 0px 0px 0px;
 	}
 
-	/* BEGIN styles for fckeditor/tinymce integration */
+	/* BEGIN styles for ckeditor/tinymce integration */
 	.Bold
 	{
 		font-weight: bold;
@@ -423,7 +423,7 @@
 		font-family: 'Courier New' , Monospace;
 		background-color: #FFF;
 	}
-	/* END styles for fckeditor integration */
+	/* END styles for ckeditor integration */
 
 	#footer {
 		position: fixed;
