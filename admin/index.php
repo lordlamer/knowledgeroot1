@@ -15,29 +15,35 @@ if(!is_file("../config/app.ini")) {
 // load requiered files
 require_once("../include/init_admin.php");
 
-echo '<?xml version="1.0" encoding="utf-8"?>';
+if ($CLASS['config']->base->charset != '') {
+    header("Content-Type: text/html; charset=".$CLASS['config']->base->charset);
+}
+
 ?>
-<!DOCTYPE html
-     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!doctype html>
+<html lang="en">
 <head>
 	<link rel="stylesheet" href="admin.css" type="text/css" />
 <?php
 	$CLASS['kr_header']->show_header();
 ?>
-	<!-- load the dojo toolkit base -->
-	<style type="text/css">
-		@import "../system/javascript/dojo/dijit/themes/claro/claro.css";
-		@import "../system/javascript/dojo/dojo/resources/dojo.css";
-	</style>
-	<script type="text/javascript">
-		dojo.require("dijit.layout.SplitContainer");
-		dojo.require("dijit.layout.LayoutContainer");
-		dojo.require("dijit.layout.ContentPane");
-		dojo.require("dijit.form.DropDownButton");
-		dojo.require("dijit.TooltipDialog");
-	</script>
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        body {
+            /* Margin bottom by footer height */
+            margin-top: 60px;
+        }
+
+        .form-signin {
+            width: 100%;
+            max-width: 360px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <?php
 // show login?
@@ -49,41 +55,41 @@ if (isset ($_POST['login']) and $_POST['login'] == "true") {
 
 if($CLASS['config']->admin->loginhash == '' || !isset ($_SESSION['passhash']) or $_SESSION['passhash'] == "" || $_SESSION['passhash'] != $CLASS['config']->admin->loginhash) {
 ?>
-<body class="claro login">
-<p id="toplogin"><a href="<?php echo $CLASS['config']->base->base_url; ?>">&larr; <?php echo $CLASS['translate']->_('Back to Knowledgeroot'); ?></a></p>
+<body class="hold-transition login-page">
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="border-bottom: 3px solid #F88529;">
+        <a class="navbar-brand" href="<?php echo $CLASS['config']->base->base_url; ?>"><i class="fa fa-arrow-left" aria-hidden="true"></i> <?php echo $CLASS['translate']->_("Back to Knowledgeroot"); ?></a>
+    </nav>
+</header>
 
-<!-- show login -->
-<div id="login"><h1><a href="http://www.knowledgeroot.org" title="<?php echo $CLASS['translate']->_('Powered by Knowledgeroot'); ?>">Knowledgeroot</a></h1>
-<form class="login" action="index.php" method="post" name="loginformular">
-<input type="hidden" name="login" value="true" />
-
-<div id="loginform">
-	<div id="loginuser"><?php echo $CLASS['translate']->_('Username'); ?>:</div><div id="loginuserfield"><input class="input" type="text" name="user" value="" /></div>
-	<div id="loginpass"><?php echo $CLASS['translate']->_('Password'); ?>:</div><div id="loginpassfield"><input class="input" type="password" name="pass" value="" /></div>
-	<div id="loginsubmit"><input class="button" type="submit" name="submit" value="<?php echo $CLASS['translate']->_('login'); ?>" /></div>
-<?php
-if (isset ($_POST['login']) and $_POST['login'] == "true" && $_POST['user'] != "" && $_POST['pass'] != "") {
-	echo "<div id=\"loginhash\">loginhash: ".md5($_POST['user'] . $_POST['pass'])."</div>\n";
-}
-?>
-	<div data-dojo-type="dijit.form.DropDownButton">
-		<span><?php echo $CLASS['translate']->_('Forgot password?'); ?></span>
-		<div data-dojo-type="dijit.TooltipDialog" id="tooltipDlg" data-dojo-props='title:"Enter Login information"'>
-			<?php echo $CLASS['translate']->_('To reset the admin password you need to make a new login.<br /> After that you see a loginhash at the bottom. Copy this hash value to your app.ini in section admin.'); ?>
-		</div>
-	</div>
-</div>
-
-</form>
-</div>
-
-<script type="text/javascript">
-	<!--
-	try{document.loginformular.user.focus();}catch(e){}
-
-	//-->
-</script>
-
+<div class="form-signin">
+    <h1>Knowledgeroot</h1>
+    <form class="login" action="index.php" method="post" name="loginformular">
+        <input type="hidden" name="login" value="true" />
+        <div class="form-group has-feedback">
+            <input type="text" class="form-control" placeholder="<?php echo $CLASS['translate']->_('Username'); ?>" name="user" id="user">
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <input type="password" class="form-control" placeholder="<?php echo $CLASS['translate']->_('Password'); ?>" name="pass" id="pass">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-flat"><?php echo $CLASS['translate']->_('login'); ?></button>
+    </form>
+    <p/>
+    <?php
+    if (isset ($_POST['login']) and $_POST['login'] == "true" && $_POST['user'] != "" && $_POST['pass'] != "") {
+        echo "<div class=\"alert alert-warning\">loginhash: ".md5($_POST['user'] . $_POST['pass'])."</div>\n";
+    }
+    ?>
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading"><?php echo $CLASS['translate']->_('Forgot password?'); ?></h4>
+        <p>
+            <?php echo $CLASS['translate']->_('To reset the admin password you need to make a new login.<br /> After that you see a loginhash at the bottom. Copy this hash value to your app.ini in section admin.'); ?>
+        </p>
+    </div>
+</div><!-- /.login-box-body -->
+</div><!-- /.login-box -->
 
 <?php
 } else {

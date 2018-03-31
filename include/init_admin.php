@@ -166,6 +166,7 @@ if($CLASS['config']->base->charset != "") {
 // add javascript to htmlheader
 $CLASS['kr_header']->addjssrc("../assets/jquery/jquery.min.js");
 $CLASS['kr_header']->addjssrc("../assets/bootstrap/js/bootstrap.min.js");
+
 $CLASS['kr_header']->addjssrc("../system/javascript/prototype.js");
 $CLASS['kr_header']->addjssrc("../system/javascript/scriptaculous.js");
 $CLASS['kr_header']->addjssrc("../system/javascript/effects.js");
@@ -176,6 +177,9 @@ $CLASS['kr_header']->addjssrc("../system/javascript/messagebox.js");
 
 // add bootstrap
 $CLASS['kr_header']->addcsssrc("../assets/bootstrap/css/bootstrap.min.css");
+
+// add fontawesome
+$CLASS['kr_header']->addcsssrc("../assets/font-awesome/css/font-awesome.min.css");
 
 // start all extensions
 $CLASS['kr_extension']->start_extensions();
