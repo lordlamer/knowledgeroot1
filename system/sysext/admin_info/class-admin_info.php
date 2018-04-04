@@ -42,33 +42,50 @@ class admin_info extends extension_base {
 	// show informations
 	function show_info() {
 		include($this->CLASS['config']->base->base_path.'/include/version.php');
-		$out = '
-    <script type="text/javascript">
-        dojo.require("dijit.TitlePane");
-    </script>
-';
-		$out .= '<div style="width: 100%">';
-		$out .= '<div style="text-align:center; font-size: 20px; font-weight: bold;">';
+		$out = '';
+		$out .= '<div  class="jumbotron">';
+		$out .= '<h1 class="display-4">';
 		$out .= 'Knowledgeroot ' . $version;
-		$out .= '</div>';
-		$out .= '<div style="text-align:center; font-size: 16px; font-weight: bold;">';
+		$out .= '</h1>';
+		$out .= '<p class="lead">';
 		$out .= 'Knowledgeroot Knowledgebase';
+		$out .= '</p>';
+        $out .= '</div>';
+
+        $out .= '</p>';
+
+		$out .= '<div class="card">';
+        $out .= '<div class="card-header">';
+		$out .= 'Environment';
 		$out .= '</div>';
-		$out .= '<div style="font-size: 14px; font-weight: bold;">';
-		$out .= 'Overview';
-		$out .= '</div>';
-		$out .= '<div dojoType="dijit.TitlePane" title="Environment">';
+        $out .= '<div class="card-body">';
 		$out .= 'PHP Version: '.PHP_VERSION.'<br />';
 		$out .= 'OS: '.PHP_OS.'<br />';
 		$out .= 'Server Software: '.$_SERVER['SERVER_SOFTWARE'].'<br />';
-		$out .= '</div><br />';
-		$out .= '<div dojoType="dijit.TitlePane" title="Database">';
+		$out .= '</div>';
+        $out .= '</div>';
+
+        $out .= '</p>';
+
+        $out .= '<div class="card">';
+        $out .= '<div class="card-header">';
+        $out .= 'Database';
+        $out .= '</div>';
+        $out .= '<div class="card-body">';
 		$out .= 'Type: '.$this->CLASS['config']->db->adapter.'<br />';
 		$out .= 'Host: '.$this->CLASS['config']->db->params->host.'<br />';
 		$out .= 'User: '.$this->CLASS['config']->db->params->username.'<br />';
 		$out .= 'Databasename: '.$this->CLASS['config']->db->params->dbname.'<br />';
-		$out .= '</div><br />';
-		$out .= '<div dojoType="dijit.TitlePane" title="Extensions">';
+        $out .= '</div>';
+        $out .= '</div>';
+
+        $out .= '</p>';
+
+        $out .= '<div class="card">';
+        $out .= '<div class="card-header">';
+        $out .= 'Extensions';
+        $out .= '</div>';
+        $out .= '<div class="card-body">';
 		$out .= 'Active Extensions: <br />';
 		$res = $this->CLASS['db']->query('SELECT keyname FROM extensions WHERE active=1');
 		$first = true;
@@ -80,8 +97,16 @@ class admin_info extends extension_base {
 				$out .= ', ' . $row['keyname'];
 			}
 		}
-		$out .= '</div><br />';
-		$out .= '<div dojoType="dijit.TitlePane" title="Statistic">';
+        $out .= '</div>';
+        $out .= '</div>';
+
+        $out .= '</p>';
+
+        $out .= '<div class="card">';
+        $out .= '<div class="card-header">';
+        $out .= 'Statistic';
+        $out .= '</div>';
+        $out .= '<div class="card-body">';
 		$res = $this->CLASS['db']->query('SELECT count(id) as anz FROM users WHERE deleted=0');
 		$row = $this->CLASS['db']->fetch_assoc($res);
 		$out .= 'Users: '.$row['anz'].'<br />';
@@ -97,8 +122,10 @@ class admin_info extends extension_base {
 		$res = $this->CLASS['db']->query('SELECT count(id) as anz FROM files WHERE deleted=0');
 		$row = $this->CLASS['db']->fetch_assoc($res);
 		$out .= 'Files: '.$row['anz'].'<br />';
-		$out .= '</div><br />';
-		$out .= '</div>';
+        $out .= '</div>';
+        $out .= '</div>';
+
+        $out .= '</p>';
 
 		return $out;
 	}

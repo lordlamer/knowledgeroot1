@@ -167,11 +167,6 @@ if($CLASS['config']->base->charset != "") {
 $CLASS['kr_header']->addjssrc("../assets/jquery/jquery.min.js");
 $CLASS['kr_header']->addjssrc("../assets/bootstrap/js/bootstrap.min.js");
 
-$CLASS['kr_header']->addjssrc("../system/javascript/prototype.js");
-$CLASS['kr_header']->addjssrc("../system/javascript/scriptaculous.js");
-$CLASS['kr_header']->addjssrc("../system/javascript/effects.js");
-$CLASS['kr_header']->addjssrc("../system/javascript/dragdrop.js");
-$CLASS['kr_header']->addjssrc("../system/javascript/showhide.js");
 $CLASS['kr_header']->addjssrc("../system/javascript/ajax-tree.js");
 $CLASS['kr_header']->addjssrc("../system/javascript/messagebox.js");
 
@@ -183,13 +178,6 @@ $CLASS['kr_header']->addcsssrc("../assets/font-awesome/css/font-awesome.min.css"
 
 // start all extensions
 $CLASS['kr_extension']->start_extensions();
-
-// add dojo to html header for loading
-$CLASS['kr_header']->addheader('
-<!-- load the dojo toolkit base -->
-<script type="text/javascript" src="../system/javascript/dojo/dojo/dojo.js"
- djConfig="parseOnLoad:true, isDebug:false"></script>
-');
 
 // add hook
 $CLASS['hooks']->setHook("init_admin","init","end");

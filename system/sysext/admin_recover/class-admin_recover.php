@@ -35,7 +35,7 @@ class admin_recover extends extension_base {
 			if(isset($_POST['username']) && $_POST['username'] != '' && isset($_POST['password']) && $_POST['password'] != '') {
 				$content .= $this->createUser($_POST['username'], $_POST['password']);
 			} else {
-				$content .= $this->_('Could not create user');
+				$content .= '<div class="alert alert-danger" role="alert">'.$this->_('Could not create user').'</div>';
 			}
 		}
 
@@ -45,64 +45,69 @@ class admin_recover extends extension_base {
 	// show informations
 	function show_info() {
 		$out = '
-<script type="text/javascript">
-	dojo.require("dijit.form.Select");
-	dojo.require("dijit.form.Button");
-	dojo.require("dijit.TooltipDialog");
-	dojo.require("dijit.form.TextBox");
-	dojo.require("dijit.TitlePane");
-</script>
-<div style="font-size: 14px; font-weight: bold;">
+<h2>
 '.$this->_('Add new users or edit existing users').'
-</div>
-<div style="margin-top:10px;" dojoType="dijit.TitlePane" title="'.$this->_('Edit existing user').'">
+</h2>
+<div class="card">
+  <div class="card-header">
+    '.$this->_('Edit existing user').'
+  </div>
+  <div class="card-body">
 	<form action="index.php" method="post" id="reset_password">
 	<input type="hidden" name="action" value="admin_recover_reset_password" />
-	<select name="userid" dojoType="dijit.form.Select">
-';
-		$res = $this->CLASS['db']->query("SELECT id,name FROM users WHERE deleted=0");
-		while($row = $this->CLASS['db']->fetch_assoc($res)) {
-			$out .= '<option value="'.$row['id'].'">'.$row['name'].'</option>';
-		}
+	<div class="form-group">
+		<label for="userid">'.$this->_('User').'</label>
+		<select name="userid" class="form-control">
+	';
+			$res = $this->CLASS['db']->query("SELECT id,name FROM users WHERE deleted=0");
+			while($row = $this->CLASS['db']->fetch_assoc($res)) {
+				$out .= '<option value="'.$row['id'].'">'.$row['name'].'</option>';
+			}
 
-		$out .= '
-	</select>
-	<input dojoType=dijit.form.TextBox type="password" id="password" name="password">
-	<button dojoType="dijit.form.Button" onclick="document.getElementById(\'reset_password\').submit();">
+			$out .= '
+		</select>
+	</div>	
+	<div class="form-group">
+		<label for="password">'.$this->_('Password').'</label>
+		<input class="form-control" type="password" id="password" name="password" placeholder="password">	
+	</div>
+	<div class="form-group">
+	<button class="btn btn-outline-secondary" onclick="document.getElementById(\'reset_password\').submit();">
 	'.$this->_('set new password').'
 	</button>
+	</div>
 	</form>
+  </div>
 </div>
-<div style="margin-top:10px;" dojoType="dijit.TitlePane" title="'.$this->_('Create new user').'">
+
+</p>
+
+<div class="card">
+  <div class="card-header">
+    '.$this->_('Create new user').'
+  </div>
+  <div class="card-body">
 	<form action="index.php" method="post" id="create_user">
 	<input type="hidden" name="action" value="admin_recover_create_user" />
-	<input type="hidden" id="create_username" name="username" value="" />
-	<input type="hidden" id="create_password" name="password" value="" />
-<button dojoType="dijit.form.DropDownButton">
-	<span>'.$this->_('Add new admin user').'</span>
-	<div dojoType="dijit.TooltipDialog" id="tooltipDlg" title="'.$this->_('Enter Login information').'" execute="dojo.byId(\'create_username\').value = dojo.byId(\'user\').value; dojo.byId(\'create_password\').value = dojo.byId(\'pwd\').value; dojo.byId(\'create_user\').submit();">
-		<table>
-			<tr>
-				<td><label for="user">'.$this->_('User').':</label></td>
 
-				<td><input dojoType="dijit.form.TextBox" type="text" id="user" name="user" value=""></td>
-			</tr>
-			<tr>
-				<td><label for="pwd">'.$this->_('Password').':</label></td>
-				<td><input dojoType="dijit.form.TextBox" type="password" id="pwd" name="pwd" value=""></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-				<button dojoType=dijit.form.Button type="submit" name="submit">'.$this->_('create').'</button>
-			</tr>
-		</table>
+	<div class="form-group">
+	    <label for="username">'.$this->_('User').'</label>
+    	<input type="text" class="form-control" id="username" name="username" value="" placeholder="user">
 	</div>
-
-</button>
-
+	
+	<div class="form-group">
+	    <label for="password">'.$this->_('Password').'</label>
+    	<input type="password" class="form-control" id="password" name="password" placeholder="password">
+	</div>
+	
+	<div class="form-group">
+		<button class="btn btn-outline-secondary" type="submit" name="submit">'.$this->_('create').'</button>
+	</div>
+	
 	</form>
+  </div>
 </div>
-		';
+';
 
 		return $out;
 	}
@@ -111,9 +116,9 @@ class admin_recover extends extension_base {
 		$out = "";
 
 		if($this->updateUser($userid, $password)) {
-			$out .= $this->_('Password was set');
+			$out .= '<div class="alert alert-success" role="alert">'.$this->_('Password was set').'</div>';
 		} else {
-			$out .= $this->_('Could not set password');
+			$out .= '<div class="alert alert-danger" role="alert">'.$this->_('Could not set password').'</div>';
 		}
 
 		return $out;
@@ -123,9 +128,9 @@ class admin_recover extends extension_base {
 		$out = "";
 
 		if($this->createAdminUser($name, $password)) {
-			$out .= $this->_('Created user');
+			$out .= '<div class="alert alert-success" role="alert">'.$this->_('Created user').'</div>';
 		} else {
-			$out .= $this->_('Could not create user');
+			$out .= '<div class="alert alert-danger" role="alert">'.$this->_('Could not create user').'</div>';
 		}
 
 		return $out;

@@ -94,37 +94,35 @@ if($CLASS['config']->admin->loginhash == '' || !isset ($_SESSION['passhash']) or
 <?php
 } else {
 ?>
-<body class="claro">
+<body>
 
 <div style="display: none;" id="messagebox">
   <div id="msg" class="loading">lade...</div>
 </div>
 
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" style="border-bottom: 3px solid #F88529;">
+        <a class="navbar-brand" href="javascript:;">Knowledgeroot</a>
+    </nav>
+</header>
+
+
 <!-- show content -->
-        <div dojoType="dijit.layout.LayoutContainer" layoutChildPriority="top-bottom" style="width: 100%; height: 100%;">
-            <div dojoType="dijit.layout.ContentPane" layoutAlign="top" style="height:50px; border-bottom: 1px solid #000000;">
-		<div id="logo"><img src="../images/knowledgeroot.jpg" /></div>
-		<div id="title"></div>
-            </div>
-            <div dojoType="dijit.layout.SplitContainer" orientation="horizontal" sizerWidth="7" activeSizing="0"
-                 isActiveResize="0" layoutAlign="client" >
-
-                <div dojoType="dijit.layout.ContentPane" id="leftpane" sizeMin="230" sizeShare="1"
-                     style="padding: 10px 10px 10px 10px; background-color: #A2AAB8;">
-
-<?php
-$CLASS['kr_extension']->show_admin_menu("admin");
-?>
-                </div>
-
-                    <div dojoType="dijit.layout.ContentPane" id="downpane" sizeMin="20" sizeShare="30" style="padding: 10px 10px 10px 10px; background-color: #EFEFF4;">
-<?php
-$CLASS['kr_extension']->show_ext_content();
-?>
-                    </div>
-                </div>
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <?php
+            $CLASS['kr_extension']->show_admin_menu("admin");
+            ?>
         </div>
+        <div class="col-10">
+            <?php
+            $CLASS['kr_extension']->show_ext_content();
+            ?>
+        </div>
+    </div>
+</div>
+
 <?php
 }
 	// show querys - only for debug
