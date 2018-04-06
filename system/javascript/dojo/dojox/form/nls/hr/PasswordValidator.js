@@ -1,1 +1,0 @@
-({"badPasswordMessage":"Neispravna lozinka.","nomatchMessage":"Lozinke se ne podudaraju."})
