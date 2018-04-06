@@ -547,9 +547,9 @@ class knowledgeroot_extension {
 
 			// make normal link
 			if($parent != "") {
-				$link = "<div class=\"submenuitem\"><a href=\"" . $this->menu[$name][$key]['link'] . "\"" . $target . $title . $atagparams . ">" . $this->menu[$name][$key]['name'] . "</a></div>";
+				$link = "<a class=\"list-group-item list-group-item-action list-group-item-light\" href=\"" . $this->menu[$name][$key]['link'] . "\"" . $target . $title . $atagparams . "><i class=\"fa fa-minus\" aria-hidden=\"true\"></i> " . $this->menu[$name][$key]['name'] . "</a>";
 			} else {
-				$link = "<div class=\"menuitem\"><a href=\"" . $this->menu[$name][$key]['link'] . "\"" . $target . $title . $atagparams . ">" . $this->menu[$name][$key]['name'] . "</a></div>";
+				$link = "<a class=\"list-group-item list-group-item-action\" href=\"" . $this->menu[$name][$key]['link'] . "\"" . $target . $title . $atagparams . ">" . $this->menu[$name][$key]['name'] . "</a>";
 			}
 
 			// set priority

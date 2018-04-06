@@ -110,11 +110,11 @@ if($CLASS['config']->admin->loginhash == '' || !isset ($_SESSION['passhash']) or
 <!-- show content -->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-2">
+        <ul class="list-group">
             <?php
             $CLASS['kr_extension']->show_admin_menu("admin");
             ?>
-        </div>
+        </ul>
         <div class="col-10">
             <?php
             $CLASS['kr_extension']->show_ext_content();
