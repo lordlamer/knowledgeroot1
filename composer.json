@@ -1,0 +1,31 @@
+{
+	"name": "lordlamer/knowledgeroot1",
+	"description": "Knowledgeroot Knowledgebase",
+	"keywords": ["knowledgeroot", "knowledgebase"],
+	"homepage": "http://www.knowledgeroot.org",
+	"type": "application",
+	"license": "GPL",
+	"authors": [
+		{
+			"name": "Frank Habermann",
+			"email": "lordlamer@lordlamer.de",
+			"homepage": "http://www.lordlamer.de"
+		}
+	],
+
+	"repositories": [
+	    {
+		"type": "composer",
+		"url": "https://packages.zendframework.com/"
+	    }
+	],
+
+	"require": {
+		"slim/slim": "^3.0",
+		"twig/twig": "^2.0",
+		"swiftmailer/swiftmailer": "^6.0",
+		"pimple/pimple": "~3.0",
+		"doctrine/dbal": "v2.*",
+		"zendframework/zend-loader": "^2.5"
+	}
+}
