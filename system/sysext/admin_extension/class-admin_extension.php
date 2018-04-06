@@ -92,9 +92,11 @@ class admin_extension extends extension_base {
 		$out = "";
 		$keynames = array();
 
-		$out .= "<div class=\"extension_list_header\">Extensions</div>\n";
-		$out .= "<table class=\"extension_list\" cellpadding=\"2\" cellspacing=\"1\">\n";
-		$out .= "<tr class=\"extension_list_title\"><td>title</td><td>keyname</td><td>version</td><td>sys</td><td>DL</td><td>state</td><td>action</td></tr>";
+		$out .= "<h2>Extensions</h2>\n";
+		$out .= "<table class=\"table table-striped table-hover table-bordered table-sm\" cellpadding=\"2\" cellspacing=\"1\">\n";
+		$out .= "<tr>";
+		$out .= "<th>title</th><th>keyname</th><th>version</th><th>sys</th><th>DL</th><th>state</th><th>action</th>";
+		$out .= "</tr>";
 
 		// select extensions from db
 		$ext_db = array();
@@ -127,14 +129,14 @@ class admin_extension extends extension_base {
 
 							// install or enable or disable ext
 							if(isset($ext_db[$file]['active']) and $ext_db[$file]['active'] == "1") {
-								$action = "<a href=\"index.php?action=show_ext&amp;do=admin_extension_disable_ext&amp;ext=".$file."\" alt=\"disable\" title=\"disable\">disable</a>";
-								$css_class = "extension_list_action_disable";
+								$action = "<a class=\"btn btn-warning\" href=\"index.php?action=show_ext&amp;do=admin_extension_disable_ext&amp;ext=".$file."\" alt=\"disable\" title=\"disable\">disable</a>";
+								$css_class = "";
 							} elseif(isset($ext_db[$file]['active']) and $ext_db[$file]['active'] == "0") {
-								$action = "<a href=\"index.php?action=show_ext&amp;do=admin_extension_enable_ext&amp;ext=".$file."\" alt=\"enable\" title=\"enable\">enable</a>";
-								$css_class = "extension_list_action_enable";
+								$action = "<a class=\"btn btn-success\" href=\"index.php?action=show_ext&amp;do=admin_extension_enable_ext&amp;ext=".$file."\" alt=\"enable\" title=\"enable\">enable</a>";
+								$css_class = "";
 							} else {
-								$action = "<a href=\"index.php?action=show_ext&amp;do=admin_extension_install_ext&amp;ext=".$file."\" alt=\"install\" title=\"install\">install</a>";
-								$css_class = "extension_list_action_install";
+								$action = "<a class=\"btn btn-info\" href=\"index.php?action=show_ext&amp;do=admin_extension_install_ext&amp;ext=".$file."\" alt=\"install\" title=\"install\">install</a>";
+								$css_class = "";
 							}
 
 							// save sys extensions
@@ -142,7 +144,17 @@ class admin_extension extends extension_base {
 								$action = "";
 							}
 
-							$out .= "\t<tr class=\"".$css_class."\"><td>".$CONF['title']."</td><td>".$file."</td><td>".$CONF['version']."</td><td>".(($ext_path == $this->CLASS['config']->base->base_path . "system/sysext/") ? "X" : "")."</td><td><a href=\"index.php?action=ext_download&name=" . $file . "\"><img src=\"../" . $this->myPath . "res/download.png\" alt=\"download\" title=\"download\" border=\"0\" /></a></td><td class=\"extension_list_state_".$CONF['state']."\">".$CONF['state']."</td><td>".$action."</td></tr>\n";
+							$out .= "<tr class=\"".$css_class."\">";
+							$out .= "<td>".$CONF['title']."</td>";
+							$out .= "<td>".$file."</td>";
+							$out .= "<td>".$CONF['version']."</td>";
+							$out .= "<td>".(($ext_path == $this->CLASS['config']->base->base_path . "system/sysext/") ? "<i class=\"fa fa-check\" aria-hidden=\"true\"></i>" : "")."</td>";
+							$out .= "<td><a href=\"index.php?action=ext_download&name=" . $file . "\">";
+							$out .= "<i class=\"fa fa-download\" aria-hidden=\"true\"></i>";
+							$out .= "</a></td>";
+							$out .= "<td class=\"extension_list_state_".$CONF['state']."\">".$CONF['state']."</td>";
+							$out .= "<td>".$action."</td>";
+							$out .= "</tr>";
 
 							unset($CONF);
 						}
@@ -184,22 +196,42 @@ class admin_extension extends extension_base {
 	// show import extensions
 	function show_import_ext() {
 		$out = '
-			<fieldset>
-				<legend>Upload Extension File directly</legend>
+			<div class="card">
+				<div class="card-header">
+				Upload Extension File directly
+				</div>
+				<div class="card-body">
+
 			<form action="index.php" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="action" value="import_ext">
-				Extension to import (.krx):<input type="file" name="extension"><br>
-				Overwrite existing files: <input type="checkbox" name="overwrite" value="true"><br>
-				<input type="submit" name="submit" value="import">
+				  <div class="form-group">
+					<label for="extension">Extension to import (.krx)</label>
+					<input type="file" name="extension">
+				</div>
+				
+				  <div class="form-check">
+					<input class="form-check-input" type="checkbox" name="overwrite" value="true">
+					<label for="overwrite">Overwrite existing files</label>
+				</div>
+			
+				<div class="form-group">
+					<input class="btn btn-primary" type="submit" name="submit" value="import">
+				</div>
 			</form>
 
-			</fieldset>
+			</div>
+			</div>
+			
+			<p />
 
-			<fieldset>
-				<legend>Import from online repository</legend>
+			<div class="card">
+				<div class="card-header">
+				Import from online repository
+				</div>
+				<div class="card-body">
 			<form action="index.php" method="post">
 				<input type="hidden" name="action" value="fetch_rep_list">
-				<input type="submit" name="submit" value="update repository list">
+				<input class="btn btn-primary" type="submit" name="submit" value="update repository list">
 			</form>
 		';
 
@@ -210,13 +242,16 @@ class admin_extension extends extension_base {
 			$ext_db[$row['keyname']]['active'] = $row['active'];
 		}
 
-		$out .= "<table class=\"extension_list\" cellpadding=\"2\" cellspacing=\"1\">\n";
-		$out .= "<tr class=\"extension_list_title\"><td>title</td><td>keyname</td><td>version</td><td>current version</td><td>DL</td><td>state</td><td>action</td></tr>";
-
 		$cache_file = $this->CLASS['config']->base->base_path . "/" . $this->CLASS['config']->upload->path . "admin_ext_rep_list.cache";
 
 		if(is_file($cache_file)) {
-			$out .= "last repository update: " . date ("F d Y H:i:s.", filemtime($cache_file)) . "<br>\n";
+			$out .= "<p />";
+            $out .= "<div class=\"alert alert-info\" role=\"alert\">";
+            $out .= "last repository update: " . date ("F d Y H:i:s.", filemtime($cache_file));
+            $out .= "</div>\n";
+
+            $out .= "<table class=\"table table-striped table-bordered table-sm table-hover\">\n";
+            $out .= "<tr><th>title</th><th>keyname</th><th>version</th><th>current version</th><th>DL</th><th>state</th><th>action</th></tr>";
 
 			$cache = file($cache_file);
 			$file_content = "";
@@ -229,11 +264,11 @@ class admin_extension extends extension_base {
 			if(is_array($ext_arr)) {
 				foreach($ext_arr as $key => $value) {
 					if(isset($ext_db[$key]['active']) and $ext_db[$key]['active'] == "1") {
-						$css_class = "extension_list_action_disable";
+						$css_class = "table-warning";
 					} elseif(isset($ext_db[$key]['active']) and $ext_db[$key]['active'] == "0") {
-						$css_class = "extension_list_action_enable";
+						$css_class = "table-success";
 					} else {
-						$css_class = "extension_list_action_install";
+						$css_class = "";
 					}
 
 					$cur_version = "";
@@ -245,14 +280,27 @@ class admin_extension extends extension_base {
 						unset($CONF);
 					}
 
-					$action = "<a href=\"index.php?action=import_online_extension&amp;ext=".$key."\">import</a>";
+					$action = "<a href=\"index.php?action=import_online_extension&amp;ext=".$key."\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i></a>";
 					$dl_ext_ling = $this->CONF['repository-server'] . "index.php?action=kx_ext_fetch_extension&keyname=".$key;
-					$out .= "\t<tr class=\"".$css_class."\"><td>".$ext_arr[$key]['title']."</td><td>".$key."</td><td>".$ext_arr[$key]['version']."</td><td>".$cur_version."</td><td><a href=\"".$dl_ext_ling."\"><img src=\"../" . $this->myPath . "res/download.png\" alt=\"download\" title=\"download\" border=\"0\" /></a></td><td class=\"extension_list_state_".$ext_arr[$key]['state']."\">".$ext_arr[$key]['state']."</td><td>".$action."</td></tr>\n";
+					$out .= "\t<tr class=\"".$css_class."\">";
+					$out .= "<td>".$ext_arr[$key]['title']."</td>";
+					$out .= "<td>".$key."</td>";
+					$out .= "<td>".$ext_arr[$key]['version']."</td>";
+					$out .= "<td>".$cur_version."</td>";
+					$out .= "<td><a href=\"".$dl_ext_ling."\">";
+					$out .= "<i class=\"fa fa-download\" aria-hidden=\"true\"></i>";
+					$out .= "</a></td>";
+					$out .= "<td class=\"extension_list_state_".$ext_arr[$key]['state']."\">".$ext_arr[$key]['state']."</td>";
+					$out .= "<td>".$action."</td>";
+					$out .= "</tr>\n";
 				}
 			}
 		}
 
-		$out .= "</table></fieldset>";
+		$out .= "</table>";
+		$out .= "</div>";
+        $out .= "</div>";
+        $out .= "<p />";
 
 		return $out;
 	}
@@ -268,8 +316,8 @@ class admin_extension extends extension_base {
 				<form action="index.php" method="post">
 					<input type="hidden" name="action" value="import_online_extension">
 					<input type="hidden" name="ext" value="'.$keyname.'">
-					overwrite? <input type="checkbox" name="overwrite" value="1"><br />
-					<input type="submit" name="submit" value="import">
+					overwrite? <input class="form-check-input" type="checkbox" name="overwrite" value="1"><br />
+					<input class="btn btn-primary" type="submit" name="submit" value="import">
 				</form>
 			';
 		} else {
@@ -425,8 +473,8 @@ class admin_extension extends extension_base {
 			$out .= "</div>";
 
 			$out .= '
-				Do SQL?<input type="checkbox" name="performsql" value="1" checked="checked">
-				<input type="submit" name="submit" value="Install">
+				Do SQL?<input class="form-check-input" type="checkbox" name="performsql" value="1" checked="checked">
+				<input class="btn btn-primary" type="submit" name="submit" value="Install">
 				</form>
 			';
 		} else {
@@ -683,5 +731,3 @@ class admin_extension extends extension_base {
 	}
 
 }
-
-?>
