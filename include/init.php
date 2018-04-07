@@ -1,4 +1,7 @@
 <?php
+
+use Pimple\Container;
+
 /**
  *
  *
@@ -7,22 +10,11 @@
  * @version $Id: init.php 1159 2011-07-20 20:47:07Z lordlamer $
  */
 
-/**
- * autoloader function for classes
- * @param string $class name of class
- */
-function __autoload($class) {
-        Zend_Loader::loadClass($class);
-}
-
 // base path
 $base_path = realpath(dirname(__FILE__).'/../') . '/';
 
-// set include path
-set_include_path($base_path . '/lib/' . PATH_SEPARATOR . get_include_path());
-
 // load required files
-require_once('Zend/Loader.php');
+require_once($base_path."vendor/autoload.php");
 require_once($base_path."include/version.php");
 require_once($base_path."include/class-session.php");
 require_once($base_path."include/class-runtime.php");
@@ -43,6 +35,7 @@ require_once($base_path."include/class-hooks.php");
 require_once($base_path."include/class-rte.php");
 require_once($base_path."include/class-db-result.php");
 require_once($base_path."include/class-db-core.php");
+require_once($base_path."include/class-db-dbal.php");
 require_once($base_path."include/class-highlight.php");
 require_once($base_path."include/class-search-string-parser.php");
 
@@ -64,21 +57,8 @@ $CLASS['error']->start($CLASS);
 // define runtimer
 $CLASS['runtime'] = new runtime();
 
-// load databaseclass
-switch($CLASS['config']->db->adapter) {
-	case 'mysql':
-		require_once($base_path."include/class-mysql.php");
-		break;
-	case 'mysqli':
-		require_once($base_path."include/class-mysqli.php");
-		break;
-	case 'pgsql':
-		require_once($base_path."include/class-pgsql.php");
-		break;
-	case 'sqlite':
-		require_once($base_path."include/class-sqlite.php");
-		break;
-}
+// pimple di container
+$CLASS['container'] = new Container();
 
 // check if database class is loaded
 if(!class_exists('db', false)) {
@@ -99,7 +79,7 @@ $CLASS['db'] = new db();
 $CLASS['db']->start($CLASS);
 
 // connect to database
-$CLASS['db']->connect($CLASS['config']->db->params->host,$CLASS['config']->db->params->username,$CLASS['config']->db->params->password,$CLASS['config']->db->params->dbname,$CLASS['config']->db->schema,$CLASS['config']->db->encoding);
+$CLASS['db']->connect($CLASS['config']->db->adapter, $CLASS['config']->db->params->host,$CLASS['config']->db->params->username,$CLASS['config']->db->params->password,$CLASS['config']->db->params->dbname,$CLASS['config']->db->schema,$CLASS['config']->db->encoding);
 
 // init cache
 if(!is_dir($base_path.$CLASS['config']->cache->path)) {

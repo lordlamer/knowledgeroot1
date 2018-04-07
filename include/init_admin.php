@@ -7,14 +7,6 @@
  * @version $Id: init_admin.php 993 2010-12-23 23:11:54Z lordlamer $
  */
 
-/**
- * autoloader function for classes
- * @param string $class name of class
- */
-function __autoload($class) {
-        Zend_Loader::loadClass($class);
-}
-
 // get base url for session name
 $baseurl = $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
 preg_match("/(.*\/).*/", $baseurl, $url_arr);
@@ -25,11 +17,8 @@ if($url_arr[1] == "") {
 
 $base_path = realpath(dirname(__FILE__).'/../') . '/';
 
-// set include path
-set_include_path($base_path . '/lib/' . PATH_SEPARATOR . get_include_path());
-
 // load required files
-require_once('Zend/Loader.php');
+require_once($base_path."vendor/autoload.php");
 require_once($base_path."include/version.php");
 require_once($base_path."include/class-session.php");
 require_once($base_path."include/class-runtime.php");
@@ -43,6 +32,7 @@ require_once($base_path."include/class-error.php");
 require_once($base_path."include/class-hooks.php");
 require_once($base_path."include/class-db-result.php");
 require_once($base_path."include/class-db-core.php");
+require_once($base_path."include/class-db-dbal.php");
 
 // this is the variable where all classes are in
 $CLASS = array();
@@ -73,28 +63,6 @@ $CLASS['error']->start($CLASS);
 // set base paths
 $CLASS['config']->admin->base_path = $base_path . "admin/";
 
-// load databaseclass
-switch($CLASS['config']->db->adapter) {
-	case 'mysql':
-		require_once($base_path."include/class-mysql.php");
-		break;
-	case 'mysqli':
-		require_once($base_path."include/class-mysqli.php");
-		break;
-	case 'pgsql':
-		require_once($base_path."include/class-pgsql.php");
-		break;
-	case 'sqlite':
-		require_once($base_path."include/class-sqlite.php");
-		break;
-}
-
-// check if database class is loaded
-if(!class_exists('db', false)) {
-        echo "Could not load database class. Check your name for the database adapter!\n";
-        exit();
-}
-
 // init hooks
 $CLASS['hooks'] = new hooks();
 $CLASS['hooks']->start($CLASS);
@@ -104,7 +72,7 @@ $CLASS['db'] = new db();
 $CLASS['db']->start($CLASS);
 
 // connect to database
-$CLASS['db']->connect($CLASS['config']->db->params->host,$CLASS['config']->db->params->username,$CLASS['config']->db->params->password,$CLASS['config']->db->params->dbname,$CLASS['config']->db->schema,$CLASS['config']->db->encoding);
+$CLASS['db']->connect($CLASS['config']->db->adapter, $CLASS['config']->db->params->host,$CLASS['config']->db->params->username,$CLASS['config']->db->params->password,$CLASS['config']->db->params->dbname,$CLASS['config']->db->schema,$CLASS['config']->db->encoding);
 
 // init cache
 if(!is_dir($base_path . $CLASS['config']->cache->path)) {

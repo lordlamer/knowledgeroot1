@@ -26,6 +26,6 @@
 		"swiftmailer/swiftmailer": "^6.0",
 		"pimple/pimple": "~3.0",
 		"doctrine/dbal": "v2.*",
-		"zendframework/zend-loader": "^2.5"
+		"zendframework/zendframework1": "^1.12"
 	}
 }
