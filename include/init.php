@@ -60,11 +60,33 @@ $CLASS['runtime'] = new runtime();
 // pimple di container
 $CLASS['container'] = new Container();
 
-// check if database class is loaded
-if(!class_exists('db', false)) {
-	echo "Could not load database class. Check your name for the database adapter!\n";
-	exit();
-}
+// init twig
+$loader = new Twig_Loader_Filesystem($base_path.'system/templates');
+$CLASS['container']['twig'] = new Twig_Environment($loader, array(
+    'cache' => $base_path.$CLASS['config']->cache->path,
+));
+
+
+// init slim
+/*
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+
+$configuration = [
+    'settings' => [
+        'displayErrorDetails' => false,
+    ],
+];
+$c = new \Slim\Container($configuration);
+$app = new \Slim\App($c);
+$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
+    $name = $args['name'];
+    $response->getBody()->write("Hello, $name");
+
+    return $response;
+});
+$app->run();
+*/
 
 // init hooks
 $CLASS['hooks'] = new hooks();

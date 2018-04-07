@@ -1,4 +1,7 @@
 <?php
+
+use Pimple\Container;
+
 /**
  *
  *
@@ -62,6 +65,15 @@ $CLASS['error']->start($CLASS);
 
 // set base paths
 $CLASS['config']->admin->base_path = $base_path . "admin/";
+
+// pimple di container
+$CLASS['container'] = new Container();
+
+// init twig
+$loader = new Twig_Loader_Filesystem($base_path.'system/templates');
+$CLASS['container']['twig'] = new Twig_Environment($loader, array(
+    'cache' => $base_path.$CLASS['config']->cache->path,
+));
 
 // init hooks
 $CLASS['hooks'] = new hooks();

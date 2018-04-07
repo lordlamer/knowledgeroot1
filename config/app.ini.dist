@@ -57,7 +57,7 @@ html = true
 
 [cache]
 options.caching = false
-path = cache/
+path = "data/cache/"
 options.lifetime = 7200
 options.automatic_serialization = true
 

@@ -4,7 +4,7 @@
 	"keywords": ["knowledgeroot", "knowledgebase"],
 	"homepage": "http://www.knowledgeroot.org",
 	"type": "application",
-	"license": "GPL",
+	"license": "GPL-V2",
 	"authors": [
 		{
 			"name": "Frank Habermann",

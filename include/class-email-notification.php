@@ -217,9 +217,6 @@ class knowledgeroot_notification {
 			$mail->send($transport);
 
 			return true;
-		} catch(Zend_Mail_Transport_Exception $e) {
-			$this->CLASS['error']->log('Could not send email: ' . $e->getMessage());
-			return false;
 		} catch(Exception $e) {
 			$this->CLASS['error']->log('Could not send email: ' . $e->getMessage());
 			return false;
