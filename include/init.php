@@ -61,10 +61,12 @@ $CLASS['runtime'] = new runtime();
 $CLASS['container'] = new Container();
 
 // init twig
+/*
 $loader = new Twig_Loader_Filesystem($base_path.'system/templates');
 $CLASS['container']['twig'] = new Twig_Environment($loader, array(
     'cache' => $base_path.$CLASS['config']->cache->path,
 ));
+*/
 
 
 // init slim
