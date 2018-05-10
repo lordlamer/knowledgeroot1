@@ -435,7 +435,7 @@ class knowledgeroot_content {
                     echo "
                   <div class=\"form-group\">
 					<label for=\"priority\">" . $this->CLASS['translate']->_('priority') . "</label>
-					<input type=\"text\" class=\"form-control\" id=\"sorting\" aria-describedby=\"priority\" name=\"alias\" value=\"".$row['sorting']."\">
+					<input type=\"text\" class=\"form-control\" id=\"sorting\" aria-describedby=\"priority\" name=\"sorting\" value=\"".$row['sorting']."\">
 				  </div>
                 ";
 				}
