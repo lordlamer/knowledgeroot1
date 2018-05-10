@@ -13,6 +13,8 @@ $base_path = realpath(dirname(__FILE__).'/../') . '/';
 // set include path
 set_include_path($base_path . '/lib/' . PATH_SEPARATOR . get_include_path());
 
+require_once($base_path."vendor/autoload.php");
+
 require_once('Zend/Loader.php');
 
 /**
