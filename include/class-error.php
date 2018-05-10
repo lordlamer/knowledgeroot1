@@ -164,7 +164,7 @@ class knowledgeroot_error {
 	 */
 	function view_array($array_in) {
 		if (is_array($array_in)) {
-			$result='<table border="1" cellpadding="1" cellspacing="0" bgcolor="white">';
+			$result='<table class="table table-striped table-bordered table-hover table-sm">';
 			if (!count($array_in))	{$result.= '<tr><td><font face="Verdana,Arial" size="1"><b>'.htmlspecialchars("EMPTY!").'</b></font></td></tr>';}
 			while (list($key,$val)=each($array_in))	{
 				$result.= '<tr><td><font face="Verdana,Arial" size="1">'.htmlspecialchars((string)$key).'</font></td><td>';
