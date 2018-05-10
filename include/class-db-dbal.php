@@ -39,6 +39,8 @@ class db extends db_core {
 
         $this->connection = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $doctrineConfig);
 
+        $this->dbtype = str_replace("pdo_","", $adapter);
+
         return $this->connection;
     }
 
