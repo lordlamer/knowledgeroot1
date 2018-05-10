@@ -130,7 +130,7 @@ if ($CLASS['config']->base->charset != '') {
 
   // show querys - only for debug
   if($CLASS['config']->development->sqldebug) {
-    echo "querys: " . $CLASS['db']->querys;
+    echo "<span class=\"badge badge-primary\">Queries: " . $CLASS['db']->querys . "</span>";
     echo $CLASS['error']->view_array($CLASS['db']->query_cache);
   }
 
