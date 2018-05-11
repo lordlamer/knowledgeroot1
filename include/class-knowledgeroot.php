@@ -463,8 +463,7 @@ class knowledgeroot {
 	 * @return string return rightpanel as html
 	 */
 	function editRightPanelSubInherit($table,$belongsto,$subinheritrights,$subinheritsrightsenable,$subinheritsrightsdisable,$userid,$groupid,$subuserrights,$subgrouprights,$subotherrights) {
-		//if(empty($userid)) {
-		if((isset($_SESSION['admin']) && $_SESSION['admin'] != 1) || $userid == "") {
+		if((isset($_SESSION['admin']) && $_SESSION['admin'] != 1) || strlen($userid) == 0) {
 			// you have no rights
 			return "";
 		}
