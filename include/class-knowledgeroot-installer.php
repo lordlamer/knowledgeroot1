@@ -16,6 +16,9 @@ set_include_path($base_path . '/lib/' . PATH_SEPARATOR . get_include_path());
 require_once($base_path."vendor/autoload.php");
 
 require_once('Zend/Loader.php');
+require_once($base_path."include/class-db-result.php");
+require_once($base_path."include/class-db-core.php");
+require_once($base_path."include/class-db-dbal.php");
 
 /**
  * This Class inerhits functions for installation of knowledgeroot
@@ -53,6 +56,8 @@ class knowledgeroot_installer {
 	var $CLASS = array();
 
 	var $db_connection = "";
+
+	var $db = null;
 
 	function mainInstall() {
 		$out = "";
@@ -93,84 +98,24 @@ class knowledgeroot_installer {
 	}
 
 	function doInstallConnect() {
-		if($_POST['db_type'] == "pgsql") {
+		$this->db = new db();
+
+		if($_POST['db_type'] == "pdo_pgsql") {
 			if($_POST['db_create'] == 1) {
-				if($this->isPgsqlConnect($_POST['db_host'],$_POST['db_user'],$_POST['db_pass'],"template1",$_POST['db_schema'],$_POST['db_encoding'])) {
-					$res = pg_query($this->db_connection,"CREATE DATABASE \"" . $_POST['db_database'] . "\"" . ($_POST['db_encoding'] != "" ? " WITH ENCODING='".$_POST['db_encoding']."'" : ""));
-
-					pg_close($this->db_connection);
-
-					if(!$res ) {
-						$this->error_msg = "Could not create database!";
-						return 0;
-					}
-
-					if(!$this->isPgsqlConnect($_POST['db_host'],$_POST['db_user'],$_POST['db_pass'],$_POST['db_database'],$_POST['db_schema'],$_POST['db_encoding'])) {
-						$this->error_msg = "Could not connect to database!";
-						return 0;
-					}
-				} else {
-					$this->error_msg = "Could not connect to database!";
-					return 0;
-				}
-			} else {
-				if(!$this->isPgsqlConnect($_POST['db_host'],$_POST['db_user'],$_POST['db_pass'],$_POST['db_database'],$_POST['db_schema'],$_POST['db_encoding'])) {
-					$this->error_msg = "Could not connect to database!";
-					return 0;
-				}
+				$this->db->connect($_POST['db_type'], $_POST['db_host'], $_POST['db_user'], $_POST['db_pass'], "template1", "", "");
+				$this->db->query("CREATE DATABASE \"" . $_POST['db_database'] . "\"" . ($_POST['db_encoding'] != "" ? " WITH ENCODING='".$_POST['db_encoding']."'" : ""));
 			}
-		} elseif($_POST['db_type'] == "mysql") {
-			if($_POST['db_create'] == 1) {
-				if(!$this->isMysqlConnect($_POST['db_host'],$_POST['db_user'],$_POST['db_pass'])) {
-					$this->error_msg = "Could not connect to database!";
-					return 0;
-				}
 
-				$res = mysql_query("CREATE DATABASE `".$_POST['db_database']."`", $this->db_connection);
+			$this->db->connect($_POST['db_type'], $_POST['db_host'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_database'], "", "");
+		} elseif($_POST['db_type'] == "pdo_mysql" || $_POST['db_type'] == "mysqli") {
+            if($_POST['db_create'] == 1) {
+				$this->db->connect($_POST['db_type'], $_POST['db_host'], $_POST['db_user'], $_POST['db_pass'], null, "", "");
+				$this->db->query("CREATE DATABASE `".$_POST['db_database']."`");
+            }
 
-				if(!$res) {
-					$this->error_msg = "Could not create database!";
-					return 0;
-				}
-
-				if(!$this->isMysqlConnect($_POST['db_host'],$_POST['db_user'],$_POST['db_pass'],$_POST['db_database'])) {
-					$this->error_msg = "Could not connect to database!";
-					return 0;
-				}
-			} else {
-				if(!$this->isMysqlConnect($_POST['db_host'],$_POST['db_user'],$_POST['db_pass'],$_POST['db_database'])) {
-					$this->error_msg = "Could not connect to database!";
-					return 0;
-				}
-			}
-		} elseif($_POST['db_type'] == "mysqli") {
-			if($_POST['db_create'] == 1) {
-				if(!$this->isMysqliConnect($_POST['db_host'],$_POST['db_user'],$_POST['db_pass'])) {
-					$this->error_msg = "Could not connect to database!";
-					return 0;
-				}
-
-				$res = mysqli_query($this->db_connection, "CREATE DATABASE `".$_POST['db_database']."`");
-
-				if(!$res) {
-					$this->error_msg = "Could not create database!";
-					return 0;
-				}
-
-				if(!$this->isMysqliConnect($_POST['db_host'],$_POST['db_user'],$_POST['db_pass'],$_POST['db_database'])) {
-					$this->error_msg = "Could not connect to database!";
-					return 0;
-				}
-			} else {
-				if(!$this->isMysqliConnect($_POST['db_host'],$_POST['db_user'],$_POST['db_pass'],$_POST['db_database'])) {
-					$this->error_msg = "Could not connect to database!";
-					return 0;
-				}
-			}
-		} elseif($_POST['db_type'] == "sqlite") {
-			if(!$this->isSqliteConnect($_POST['db_host'],$_POST['db_user'],$_POST['db_pass'],$_POST['db_database'])) {
-				return 0;
-			}
+			$this->db->connect($_POST['db_type'], $_POST['db_host'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_database'], "", "");
+		} elseif($_POST['db_type'] == "pdo_sqlite") {
+			$this->db->connect($_POST['db_type'], $_POST['db_host'], $_POST['db_user'], $_POST['db_pass'], $_POST['db_database'], "", "");
 		} else {
 			return 0;
 		}
@@ -243,11 +188,11 @@ class knowledgeroot_installer {
 		<table class="table table-striped table-sm" align="center" width="548" cellpadding="1" cellspacing="1" border="0">
 		';
 
-		if($_POST['db_type'] == "pgsql") {
+		if($_POST['db_type'] == "pdo_pgsql") {
 			$dump_file = $this->file_pgsql_dump;
-		} else if($_POST['db_type'] == "mysql" || $_POST['db_type'] == "mysqli") {
+		} else if($_POST['db_type'] == "pdo_mysql" || $_POST['db_type'] == "mysqli") {
 			$dump_file = $this->file_mysql_dump;
-		} else if($_POST['db_type'] == "sqlite") {
+		} else if($_POST['db_type'] == "pdo_sqlite") {
 			$dump_file = $this->file_sqlite_dump;
 
 		} else {
@@ -454,10 +399,10 @@ class knowledgeroot_installer {
 		<tr><td>Base URL:</td><td><input class="form-control" type="text" name="baseurl" value="'.((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != '') ? 'https://' : 'http://').$this->getBaseUrl().'"></td></tr>
 		<tr><td>Type of database:</td><td>
 			<select class="form-control" id="dbtype" name="db_type" onchange="changeDbType();">
-				<option value="mysql" selected="selected">MySQL</option>
+				<option value="pdo_mysql" selected="selected">MySQL (pdo)</option>
 				<option value="mysqli">MySQL (mysqli)</option>
-				<option value="pgsql">PostgreSQL</option>
-				<option value="sqlite">SQLite</option>
+				<option value="pdo_pgsql">PostgreSQL (pdo)</option>
+				<option value="pdo_sqlite">SQLite (pdo)</option>
 			</select>
 		</td></tr>
 		<tr id="host"><td>Database host:</td><td><input class="form-control" type="text" name="db_host" value=""></td></tr>
@@ -585,15 +530,6 @@ class knowledgeroot_installer {
 		return 0;
 	}
 
-        /**
-         * Check if a update is required
-         * @param string $dbtype
-         * @return bool
-         */
-        function shouldRunUpdate($dbtype) {
-                return true;
-        }
-
 	/**
 	* Removes comment lines and splits up large sql files into individual queries
 	*
@@ -680,7 +616,7 @@ class knowledgeroot_installer {
 			// We are not in a string, first check for delimiter...
 			elseif ($char == ';') {
 			// if delimiter found, add the parsed part to the returned array
-			$ret[]      = array('query' => substr($sql, 0, $i), 'empty' => $nothing);
+			$ret[]        = array('query' => substr($sql, 0, $i), 'empty' => $nothing);
 			$nothing    = TRUE;
 			$sql        = ltrim(substr($sql, min($i + 1, $sql_len)));
 			$sql_len    = strlen($sql);
@@ -727,7 +663,7 @@ class knowledgeroot_installer {
 	function readSqlDump($file) {
 		if (is_file($file) && is_readable($file)) {
 			$ret = array ();
-			$sqlsplit = '';
+			$sqlsplit = array();
 			$fileContent = file_get_contents($file);
 			$this->PMA_splitSqlFile($sqlsplit, $fileContent, '');
 
@@ -746,21 +682,7 @@ class knowledgeroot_installer {
 	function doSql($arr, $dbtype) {
 		if(is_array($arr)) {
 			foreach($arr as $key => $value) {
-				if($dbtype == "pgsql") {
-					pg_query($this->db_connection, $value);
-				}
-
-				if($dbtype == "mysql") {
-					mysql_query($value, $this->db_connection);
-				}
-
-				if($dbtype == "mysqli") {
-					mysqli_query($this->db_connection, $value);
-				}
-
-				if($dbtype == "sqlite") {
-					sqlite_query($this->db_connection, $value);
-				}
+				$this->db->query($value);
 			}
 		}
 
@@ -807,66 +729,6 @@ class knowledgeroot_installer {
 			$url_arr[1] = $_SERVER['HTTP_HOST'];
 
 		return $url_arr[1];
-	}
-
-	/**
-	 * write baseurl to database
-	 *
-	 * @param string $baseurl base url
-	 * @param string $dbtype db type
-	 */
-	function setBaseUrl($baseurl, $dbtype) {
-		$sql = "UPDATE settings SET value='".$baseurl."' WHERE name='baseurl'";
-		$this->doSql(array($sql), $dbtype);
-	}
-
-	/**
-	 * Check if a small update is required
-	 * @param string $dbtype
-	 * @return bool
-	 */
-	function shouldRunSmallUpdate($dbtype) {
-		if($dbtype == "mysql") {
-			$res = @mysql_query("SELECT id FROM settings WHERE name='knowledgeroot.showlogo'");
-		} elseif($dbtype == "mysqli") {
-			$res = @mysqli_query("SELECT id FROM settings WHERE name='knowledgeroot.showlogo'");
-		} elseif($dbtype == "pgsql") {
-			$res = @pg_query("SELECT id FROM settings WHERE name='knowledgeroot.showlogo'");
-		} else {
-			return false;
-		}
-
-		if(!$res) {
-			// should run normal update
-			return false;
-		} else {
-			if($dbtype == "mysql") $count = mysql_num_rows($res);
-			elseif($dbtype == "mysqli") $count = mysqli_num_rows($res);
-			else $count = pg_num_rows($res);
-
-			if($count == 1) return true;
-			// do not run update
-			return false;
-		}
-	}
-
-	function setVersion($dbtype) {
-		require_once('version.php');
-		if($dbtype == "pgsql") {
-			pg_query($this->db_connection, "UPDATE settings SET value='".$version."' WHERE name='version'");
-		}
-
-		if($dbtype == "mysql") {
-			mysql_query("UPDATE settings SET value='".$version."' WHERE name='version'", $this->db_connection);
-		}
-
-		if($dbtype == "mysqli") {
-			mysqli_query($this->db_connection, "UPDATE settings SET value='".$version."' WHERE name='version'");
-		}
-
-		if($dbtype == "sqlite") {
-			sqlite_query($this->db_connection, "UPDATE settings SET value='".$version."' WHERE name='version'");
-		}
 	}
 }
 ?>
