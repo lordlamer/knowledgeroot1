@@ -43,6 +43,7 @@ class ComposerStaticInit179c5ec75f0738159ec197d03b4f7358
         ),
         'D' => 
         array (
+            'Doctrine\\DBAL\\' => 14,
             'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\' => 16,
         ),
@@ -85,6 +86,10 @@ class ComposerStaticInit179c5ec75f0738159ec197d03b4f7358
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
         ),
+        'Doctrine\\DBAL\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL',
+        ),
         'Doctrine\\Common\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
@@ -119,10 +124,6 @@ class ComposerStaticInit179c5ec75f0738159ec197d03b4f7358
         ),
         'D' => 
         array (
-            'Doctrine\\DBAL\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/dbal/lib',
-            ),
             'Doctrine\\Common\\Lexer\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
