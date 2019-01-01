@@ -1,4 +1,5 @@
 <?php
+die("DISABLED - It is not necessary to update! See release logs for more informations! https://github.com/lordlamer/knowledgeroot1/releases ");
 header("Content-Type: text/html; charset=UTF-8");
 ?>
 <!doctype html>
