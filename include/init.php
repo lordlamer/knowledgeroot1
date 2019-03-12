@@ -61,13 +61,13 @@ $CLASS['runtime'] = new runtime();
 $CLASS['container'] = new Container();
 
 // init twig
-/*
-$loader = new Twig_Loader_Filesystem($base_path.'system/templates');
-$CLASS['container']['twig'] = new Twig_Environment($loader, array(
+$loader = new \Twig\Loader\FilesystemLoader($base_path.'system/templates');
+$CLASS['container']['twig'] = new \Twig\Environment($loader, [
     'cache' => $base_path.$CLASS['config']->cache->path,
-));
-*/
+]);
 
+// use translation extension for twig
+$CLASS['container']['twig']->addExtension(new Twig_Extensions_Extension_I18n());
 
 // init slim
 /*
@@ -146,6 +146,13 @@ if(isset($_SESSION['language']) && $_SESSION['language'] != '' && (is_file($base
 	$CLASS['translate'] = new Zend_Translate('gettext', $base_path.'system/language/'.$CLASS['config']->base->locale .'.UTF8/LC_MESSAGES/knowledgeroot.mo', $CLASS['config']->base->locale);
 } else {
 	$CLASS['translate'] = new Zend_Translate('gettext', $base_path.'system/language/en_US.UTF8/LC_MESSAGES/knowledgeroot.mo', 'en_US');
+}
+
+// if gettext function not exists use our translate
+if (!function_exists('gettext')) {
+    function gettext($value) {
+        return $GLOBALS['CLASS']['translate']->_($value);
+    }
 }
 
 // init language
@@ -229,4 +236,3 @@ if(isset($version))
 
 // add hook
 $CLASS['hooks']->setHook("init","init","end");
-?>
