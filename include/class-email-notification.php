@@ -210,7 +210,7 @@ class knowledgeroot_notification {
         $mailBody .= '</div>
 </body>
 </html>';
-exit($mailBody);
+
         return $mailBody;
     }
 
