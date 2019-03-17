@@ -37,6 +37,24 @@ class pathTree {
     }
   }
 
+    /**
+     * return path of a treeid for email
+     */
+    function getEmailPath($id = "0", $urlPrefix = '') {
+        if($id == "") { $id = "0"; }
+        $treeRecord = $this->getTreeRecord($id);
+        if($treeRecord != null)  {
+            if($treeRecord->belongs_to == "0") {
+                return "/ <a href=\"" . $urlPrefix . "index.php?id=".$treeRecord->id."\">".$treeRecord->title."</a>";
+            } else {
+                $path = $this->getEmailPath($treeRecord->belongs_to, $urlPrefix);
+                return $path . " / <a href=\"" . $urlPrefix . "index.php?id=".$treeRecord->id."\">" . $treeRecord->title."</a>";
+            }
+        } else {
+            return "/ ";
+        }
+    }
+
   /**
    * return path of a treeid without htmlcontent
    */

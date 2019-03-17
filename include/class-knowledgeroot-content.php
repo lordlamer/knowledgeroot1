@@ -959,45 +959,11 @@ class knowledgeroot_content {
 	function show_login() {
 		$this->CLASS['hooks']->setHook("kr_content","show_login","start");
 
-		echo '
-<div class="card">
-  <div class="card-header">
-    '.$this->CLASS['translate']->_('login').'
-  </div>
-  <div class="card-body">
-
-		<form action="index.php" method="post" name="loginformular">
-		<input type="hidden" name="'.session_name().'" value="'.session_id().'" />
-		<input type="hidden" name="login" value="login" />
-		
-		  <div class="form-group">
-			<label for="user">'.$this->CLASS['translate']->_('user').'</label>
-			<input type="text" class="form-control" name="user" id="user" aria-describedby="emailHelp" placeholder="'.$this->CLASS['translate']->_('user').'">
-		  </div>
-		  <div class="form-group">
-			<label for="password">'.$this->CLASS['translate']->_('password').'</label>
-			<input type="password" class="form-control" name="password" id="password" placeholder="'.$this->CLASS['translate']->_('password').'">
-		  </div>
-		  ';
-
-		$this->CLASS['hooks']->setHook("kr_content","show_login","before_submit");
-
-		echo '<button class="btn btn-primary" type="submit" name="loginbutton">'.$this->CLASS['translate']->_('login').'</button>';
-
-		$this->CLASS['hooks']->setHook("kr_content","show_login","after_submit");
-
-		echo '
-		</form>
-
-  </div>
-</div>
-		';
-
-		echo '<script type="text/javascript">
-		<!--
-		document.loginformular.user.focus();
-		//-->
-		</script>'."\n";
+		echo $this->CLASS['container']['twig']->render('login.html', [
+			'session_name' => session_name(),
+			'session_id' => session_id(),
+			'translate' => $this->CLASS['translate']
+		]);
 
 		$this->CLASS['hooks']->setHook("kr_content","show_login","end");
 	}
