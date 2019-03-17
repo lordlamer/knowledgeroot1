@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="card-header">
+        {% trans "login" %}
+    </div>
+    <div class="card-body">
+
+        <form action="index.php" method="post" name="loginformular">
+            <input type="hidden" name="{{session_name}}" value="{{session_id}}" />
+            <input type="hidden" name="login" value="login" />
+
+            <div class="form-group">
+                <label for="user">{% trans "user" %}</label>
+                <input type="text" class="form-control" name="user" id="user" aria-describedby="emailHelp" placeholder="{% trans "user" %}">
+            </div>
+            <div class="form-group">
+                <label for="password">{% trans "password" %}</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="{% trans "password" %}">
+            </div>
+
+            <button class="btn btn-primary" type="submit" name="loginbutton">{% trans "login" %}</button>
+
+        </form>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    <!--
+    document.loginformular.user.focus();
+    //-->
+</script>
