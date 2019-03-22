@@ -1531,7 +1531,7 @@ class knowledgeroot_header {
 	function addwarning($msg) {
 		$this->CLASS['hooks']->setHook("kr_header","addwarning","start");
 
-		$this->messagetype = "error";
+		$this->messagetype = "danger";
 		$this->messages .= $msg . "&nbsp;";
 
 		$this->CLASS['hooks']->setHook("kr_header","addwarning","end");
