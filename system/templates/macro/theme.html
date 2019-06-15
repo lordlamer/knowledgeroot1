@@ -1,0 +1,7 @@
+{% macro themeDropDown(themes, default = "", name = "theme") %}
+<select class="form-control form-control-sm" name="{{ name }}">
+    {% for theme in themes %}
+    <option value="{{ theme.name }}"{% if default == theme.name %} selected{% endif %}>{{ theme.name }}</option>
+    {% endfor %}
+</select>
+{% endmacro %}
