@@ -8,7 +8,7 @@
  */
 class knowledgeroot_themes {
 	var $CLASS;
-	var $theme = array();
+	var $themes = array();
 	var $default_theme = "green";
 	var $use_theme = "";
 	var $theme_folder = "system/themes/";
@@ -28,6 +28,15 @@ class knowledgeroot_themes {
 		if($this->CLASS['config']->base->theme != '') {
 			$this->use_theme = $this->CLASS['config']->base->theme;
 		}
+	}
+
+	/**
+	 * get themes as array
+	 *
+	 * @return array
+	 */
+	function getThemes() {
+		return $this->themes;
 	}
 
 	/**
