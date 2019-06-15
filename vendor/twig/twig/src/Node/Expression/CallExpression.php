@@ -125,7 +125,7 @@ abstract class CallExpression extends AbstractExpression
                 $named = true;
                 $name = $this->normalizeName($name);
             } elseif ($named) {
-                throw new SyntaxError(sprintf('Positional arguments cannot be used after named arguments for %s "%s".', $callType, $callName), $this->getTemplateLine(), null, null, false);
+                throw new SyntaxError(sprintf('Positional arguments cannot be used after named arguments for %s "%s".', $callType, $callName), $this->getTemplateLine(), $this->getSourceContext());
             }
 
             $parameters[$name] = $node;
@@ -146,7 +146,7 @@ abstract class CallExpression extends AbstractExpression
             throw new \LogicException($message);
         }
 
-        $callableParameters = $this->getCallableParameters($callable, $isVariadic);
+        list($callableParameters, $isPhpVariadic) = $this->getCallableParameters($callable, $isVariadic);
         $arguments = [];
         $names = [];
         $missingArguments = [];
@@ -157,14 +157,14 @@ abstract class CallExpression extends AbstractExpression
 
             if (\array_key_exists($name, $parameters)) {
                 if (\array_key_exists($pos, $parameters)) {
-                    throw new SyntaxError(sprintf('Argument "%s" is defined twice for %s "%s".', $name, $callType, $callName), $this->getTemplateLine(), null, null, false);
+                    throw new SyntaxError(sprintf('Argument "%s" is defined twice for %s "%s".', $name, $callType, $callName), $this->getTemplateLine(), $this->getSourceContext());
                 }
 
                 if (\count($missingArguments)) {
                     throw new SyntaxError(sprintf(
                         'Argument "%s" could not be assigned for %s "%s(%s)" because it is mapped to an internal PHP function which cannot determine default value for optional argument%s "%s".',
                         $name, $callType, $callName, implode(', ', $names), \count($missingArguments) > 1 ? 's' : '', implode('", "', $missingArguments)
-                    ), $this->getTemplateLine(), null, null, false);
+                    ), $this->getTemplateLine(), $this->getSourceContext());
                 }
 
                 $arguments = array_merge($arguments, $optionalArguments);
@@ -186,12 +186,12 @@ abstract class CallExpression extends AbstractExpression
                     $missingArguments[] = $name;
                 }
             } else {
-                throw new SyntaxError(sprintf('Value for argument "%s" is required for %s "%s".', $name, $callType, $callName), $this->getTemplateLine(), null, null, false);
+                throw new SyntaxError(sprintf('Value for argument "%s" is required for %s "%s".', $name, $callType, $callName), $this->getTemplateLine(), $this->getSourceContext());
             }
         }
 
         if ($isVariadic) {
-            $arbitraryArguments = new ArrayExpression([], -1);
+            $arbitraryArguments = $isPhpVariadic ? new VariadicExpression([], -1) : new ArrayExpression([], -1);
             foreach ($parameters as $key => $value) {
                 if (\is_int($key)) {
                     $arbitraryArguments->addElement($value);
@@ -216,10 +216,14 @@ abstract class CallExpression extends AbstractExpression
                 }
             }
 
-            throw new SyntaxError(sprintf(
-                'Unknown argument%s "%s" for %s "%s(%s)".',
-                \count($parameters) > 1 ? 's' : '', implode('", "', array_keys($parameters)), $callType, $callName, implode(', ', $names)
-            ), $unknownParameter ? $unknownParameter->getTemplateLine() : $this->getTemplateLine(), null, null, false);
+            throw new SyntaxError(
+                sprintf(
+                    'Unknown argument%s "%s" for %s "%s(%s)".',
+                    \count($parameters) > 1 ? 's' : '', implode('", "', array_keys($parameters)), $callType, $callName, implode(', ', $names)
+                ),
+                $unknownParameter ? $unknownParameter->getTemplateLine() : $this->getTemplateLine(),
+                $unknownParameter ? $unknownParameter->getSourceContext() : $this->getSourceContext()
+            );
         }
 
         return $arguments;
@@ -230,11 +234,11 @@ abstract class CallExpression extends AbstractExpression
         return strtolower(preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\d])([A-Z])/'], ['\\1_\\2', '\\1_\\2'], $name));
     }
 
-    private function getCallableParameters($callable, $isVariadic)
+    private function getCallableParameters($callable, bool $isVariadic): array
     {
         list($r) = $this->reflectCallable($callable);
         if (null === $r) {
-            return [];
+            return [[], false];
         }
 
         $parameters = $r->getParameters();
@@ -252,10 +256,14 @@ abstract class CallExpression extends AbstractExpression
                 array_shift($parameters);
             }
         }
+        $isPhpVariadic = false;
         if ($isVariadic) {
             $argument = end($parameters);
             if ($argument && $argument->isArray() && $argument->isDefaultValueAvailable() && [] === $argument->getDefaultValue()) {
                 array_pop($parameters);
+            } elseif ($argument && $argument->isVariadic()) {
+                array_pop($parameters);
+                $isPhpVariadic = true;
             } else {
                 $callableName = $r->name;
                 if ($r instanceof \ReflectionMethod) {
@@ -266,7 +274,7 @@ abstract class CallExpression extends AbstractExpression
             }
         }
 
-        return $parameters;
+        return [$parameters, $isPhpVariadic];
     }
 
     private function reflectCallable($callable)

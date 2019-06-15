@@ -22,7 +22,7 @@ class NameExpression extends AbstractExpression
         '_charset' => '$this->env->getCharset()',
     ];
 
-    public function __construct($name, $lineno)
+    public function __construct(string $name, int $lineno)
     {
         parent::__construct([], ['name' => $name, 'is_defined_test' => false, 'ignore_strict_check' => false, 'always_defined' => false], $lineno);
     }
@@ -36,13 +36,20 @@ class NameExpression extends AbstractExpression
         if ($this->getAttribute('is_defined_test')) {
             if ($this->isSpecial()) {
                 $compiler->repr(true);
+            } elseif (\PHP_VERSION_ID >= 700400) {
+                $compiler
+                    ->raw('array_key_exists(')
+                    ->string($name)
+                    ->raw(', $context)')
+                ;
             } else {
                 $compiler
                     ->raw('(isset($context[')
                     ->string($name)
                     ->raw(']) || array_key_exists(')
                     ->string($name)
-                    ->raw(', $context))');
+                    ->raw(', $context))')
+                ;
             }
         } elseif ($this->isSpecial()) {
             $compiler->raw($this->specialVars[$name]);

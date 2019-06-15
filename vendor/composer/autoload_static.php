@@ -50,9 +50,9 @@ class ComposerStaticInit179c5ec75f0738159ec197d03b4f7358
         ),
         'D' => 
         array (
-            'Doctrine\\Common\\Inflector\\' => 26,
+            'Doctrine\\DBAL\\' => 14,
+            'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Cache\\' => 22,
-            'Doctrine\\Common\\Annotations\\' => 28,
             'Doctrine\\Common\\' => 16,
         ),
     );
@@ -110,21 +110,21 @@ class ComposerStaticInit179c5ec75f0738159ec197d03b4f7358
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
         ),
-        'Doctrine\\Common\\Inflector\\' => 
+        'Doctrine\\DBAL\\' => 
         array (
-            0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
+            0 => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL',
+        ),
+        'Doctrine\\Common\\Lexer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer',
         ),
         'Doctrine\\Common\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
         ),
-        'Doctrine\\Common\\Annotations\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/doctrine/annotations/lib/Doctrine/Common/Annotations',
-        ),
         'Doctrine\\Common\\' => 
         array (
-            0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
+            0 => __DIR__ . '/..' . '/doctrine/event-manager/lib/Doctrine/Common',
         ),
     );
 
@@ -152,21 +152,6 @@ class ComposerStaticInit179c5ec75f0738159ec197d03b4f7358
             'Pimple' => 
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
-            ),
-        ),
-        'D' => 
-        array (
-            'Doctrine\\DBAL\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/dbal/lib',
-            ),
-            'Doctrine\\Common\\Lexer\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
-            ),
-            'Doctrine\\Common\\Collections\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/collections/lib',
             ),
         ),
     );

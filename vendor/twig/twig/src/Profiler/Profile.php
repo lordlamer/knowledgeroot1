@@ -30,7 +30,7 @@ class Profile implements \IteratorAggregate, \Serializable
     private $ends = [];
     private $profiles = [];
 
-    public function __construct($template = 'main', $type = self::ROOT, $name = 'main')
+    public function __construct(string $template = 'main', string $type = self::ROOT, string $name = 'main')
     {
         if (__CLASS__ !== \get_class($this)) {
             @trigger_error('Overriding '.__CLASS__.' is deprecated since Twig 2.4.0 and the class will be final in 3.0.', E_USER_DEPRECATED);
@@ -90,7 +90,7 @@ class Profile implements \IteratorAggregate, \Serializable
     /**
      * Returns the duration in microseconds.
      *
-     * @return int
+     * @return float
      */
     public function getDuration()
     {
@@ -164,12 +164,28 @@ class Profile implements \IteratorAggregate, \Serializable
 
     public function serialize()
     {
-        return serialize([$this->template, $this->name, $this->type, $this->starts, $this->ends, $this->profiles]);
+        return serialize($this->__serialize());
     }
 
     public function unserialize($data)
     {
-        list($this->template, $this->name, $this->type, $this->starts, $this->ends, $this->profiles) = unserialize($data);
+        $this->__unserialize(unserialize($data));
+    }
+
+    /**
+     * @internal
+     */
+    public function __serialize()
+    {
+        return [$this->template, $this->name, $this->type, $this->starts, $this->ends, $this->profiles];
+    }
+
+    /**
+     * @internal
+     */
+    public function __unserialize(array $data)
+    {
+        list($this->template, $this->name, $this->type, $this->starts, $this->ends, $this->profiles) = $data;
     }
 }
 
