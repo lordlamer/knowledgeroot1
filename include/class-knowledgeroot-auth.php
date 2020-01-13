@@ -99,6 +99,7 @@ class knowledgeroot_auth {
 			}
 		}
 
+		// https://github.com/lordlamer/knowledgeroot-obsolete/blob/master/lib/Knowledgeroot/Password.php
 		$user = addslashes($this->user);
 		$pass = md5(addslashes($_POST['password']));
 
