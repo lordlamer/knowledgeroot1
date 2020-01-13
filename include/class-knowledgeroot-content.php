@@ -1198,6 +1198,14 @@ class knowledgeroot_content {
 	function add_user() {
 		$this->CLASS['hooks']->setHook("kr_content","add_user","start");
 
+		/*
+		echo $this->CLASS['container']['twig']->render('user/add.html', [
+			'themes' => $this->CLASS['themes']->getThemes(),
+			'session_id' => session_id(),
+			'translate' => $this->CLASS['translate']
+		]);
+		*/
+
 		echo '
 		<div class="card">
 		  <div class="card-header">
