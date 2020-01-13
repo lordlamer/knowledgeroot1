@@ -1,2 +1,2 @@
 <?php
-	$version = "1.9";
+	$version = "1.10";
