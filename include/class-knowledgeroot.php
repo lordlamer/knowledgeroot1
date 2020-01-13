@@ -651,7 +651,7 @@ class knowledgeroot {
 		}
 
 		// check if user is admin, if yes then give full rights
-		if($rowuser['admin'] == 1) {
+		if(isset($rowuser['admin']) && $rowuser['admin'] == 1) {
 			return 2;
 		}
 
@@ -674,11 +674,11 @@ class knowledgeroot {
 			$rowpage = $this->tree_cache_rights[$pageid];
 		}
 
-		if($rowpage['owner'] == $rowuser['id']) {
+		if(isset($rowpage['owner']) && isset($rowuser['id']) && $rowpage['owner'] == $rowuser['id']) {
 			return $rowpage['userrights'];
 		}
 
-		if($rowpage['group'] == $rowuser['defaultgroup']) {
+		if(isset($rowpage['group']) && isset($rowuser['defaultgroup']) && $rowpage['group'] == $rowuser['defaultgroup']) {
 			return $rowpage['grouprights'];
 		}
 
