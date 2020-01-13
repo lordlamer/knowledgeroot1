@@ -1820,7 +1820,7 @@ class knowledgeroot_content {
 			$this->CLASS['hooks']->setHook("kr_content","show_tree_content","welcome_msg_start");
 
 			// show welcome message
-			echo "<div class=\"jumbotron\"><h1>".$this->CLASS['translate']->_('Welcome to Knowledgeroot')."</h1></div>\n";
+			echo "<div class=\"jumbotron well-lg\" style=\"border-left: 5px solid #178EC7; padding-top: 40px; padding-bottom: 40px;\"><h1 style=\"font-weight:bold;\">".$this->CLASS['translate']->_('Welcome to Knowledgeroot')."</h1></div>\n";
 
 			$this->CLASS['hooks']->setHook("kr_content","show_tree_content","welcome_msg_end");
 		}
