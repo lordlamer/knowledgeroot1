@@ -2,8 +2,12 @@
 
 namespace Doctrine\DBAL\Driver;
 
+use Doctrine\DBAL\Driver\PDO\Exception;
+
 /**
- * Tiny wrapper for PDOException instances to implement the {@link DriverException} interface.
+ * @deprecated Use {@link Exception} instead
+ *
+ * @psalm-immutable
  */
 class PDOException extends \PDOException implements DriverException
 {

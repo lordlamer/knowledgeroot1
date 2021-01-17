@@ -17,7 +17,7 @@ separator using the additional arguments:
 
 To format negative numbers or math calculation, wrap the previous statement
 with parentheses (needed because of Twig's :ref:`precedence of operators
-<twig-expressions>`:
+<twig-expressions>`):
 
 .. code-block:: twig
 
@@ -33,9 +33,7 @@ options of:
 * ``.`` as the decimal point.
 * ``,`` as the thousands separator.
 
-These defaults can be changed through the core extension:
-
-.. code-block:: php
+These defaults can be changed through the core extension::
 
     $twig = new \Twig\Environment($loader);
     $twig->getExtension(\Twig\Extension\CoreExtension::class)->setNumberFormat(3, '.', ',');
