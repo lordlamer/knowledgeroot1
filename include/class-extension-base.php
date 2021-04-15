@@ -38,7 +38,7 @@ class extension_base {
 	/**
 	 * init/start class
 	 */
-	function __contruct(&$CLASS) {
+	public function __construct(&$CLASS) {
 		$this->CLASS =& $CLASS;
 
 		// load GET and POST
