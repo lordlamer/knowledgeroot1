@@ -82,18 +82,16 @@ class knowledgeroot {
 	 * @return	array
 	 */
 	function addSlashesOnArray(&$theArray)	{
-		if(get_magic_quotes_gpc() == 0) {
-			if (is_array($theArray))	{
-				reset($theArray);
-				while(list($Akey,$AVal)=each($theArray))	{
-					if (is_array($AVal))	{
-						$this->addSlashesOnArray($theArray[$Akey]);
-					} else {
-						$theArray[$Akey] = addslashes($AVal);
-					}
+		if (is_array($theArray))	{
+			reset($theArray);
+			while(list($Akey,$AVal)=each($theArray))	{
+				if (is_array($AVal))	{
+					$this->addSlashesOnArray($theArray[$Akey]);
+				} else {
+					$theArray[$Akey] = addslashes($AVal);
 				}
-				reset($theArray);
 			}
+			reset($theArray);
 		}
 	}
 

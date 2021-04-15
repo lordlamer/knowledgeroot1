@@ -49,19 +49,6 @@ class extension_base {
 	}
 
 	/**
-	 *
-	 */
-	function extension_base(&$CLASS) {
-		$this->CLASS =& $CLASS;
-
-		// load GET and POST
-		if(isset($_GET[get_class($this)])) $this->GET = $_GET[get_class($this)];
-		if(isset($_POST[get_class($this)])) $this->GET = $_POST[get_class($this)];
-
-		return 0;
-	}
-
-	/**
 	 * default functon for start
 	 */
 	function main() {

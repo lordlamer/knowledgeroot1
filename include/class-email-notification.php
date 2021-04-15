@@ -12,7 +12,7 @@ class knowledgeroot_notification {
 	/**
 	 * start mailnotification
 	 */
-	function knowledgeroot_notification(&$CLASS) {
+	function __construct(&$CLASS) {
 		$this->CLASS =& $CLASS;
 		$this->config = $this->CLASS['config']->email;
 	}
