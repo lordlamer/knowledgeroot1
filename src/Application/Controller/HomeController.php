@@ -12,16 +12,36 @@ namespace Knowledgeroot\Application\Controller;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Knowledgeroot\Application\UseCase\Home\ShowDashboardUseCase;
+use Twig\Environment;
 
 /**
  * Handles homepage requests
  */
 class HomeController
 {
+    public function __construct(
+        private ShowDashboardUseCase $showDashboardUseCase,
+        private Environment $twig
+    ) {}
+
     /**
-     * Homepage - returns simple JSON for now
+     * Homepage/Dashboard (HTML)
      */
     public function index(Request $request, Response $response): Response
+    {
+        $result = $this->showDashboardUseCase->execute();
+
+        $html = $this->twig->render('home/dashboard.html.twig', $result->toArray());
+
+        $response->getBody()->write($html);
+        return $response->withHeader('Content-Type', 'text/html');
+    }
+
+    /**
+     * API info endpoint (JSON)
+     */
+    public function apiInfo(Request $request, Response $response): Response
     {
         $data = [
             'message' => 'Welcome to Knowledgeroot API',
@@ -41,7 +61,7 @@ class HomeController
                 'Category API' => [
                     'GET /api/categories/tree' => 'Get category tree (hierarchical)',
                     'GET /api/categories/{id}' => 'Get category by ID',
-                    'GET /api/categories/{parentId}/children' => 'Get children of category',
+                    'GET /api/categories/{id}/children' => 'Get children of category',
                     'GET /api/categories/{id}/path' => 'Get category path (breadcrumb)',
                 ],
             ]

@@ -127,4 +127,22 @@ class ContentService
         $content->deactivate();
         $this->contentRepository->save($content);
     }
+
+    /**
+     * Get recently changed content
+     *
+     * @param int $limit Maximum number of items to return
+     * @return array Array of Content entities
+     */
+    public function getRecentlyChangedContent(int $limit = 10): array
+    {
+        $allContent = $this->contentRepository->findAll();
+
+        // Sort by changed_at descending
+        usort($allContent, function($a, $b) {
+            return $b->getChangedAt() <=> $a->getChangedAt();
+        });
+
+        return array_slice($allContent, 0, $limit);
+    }
 }

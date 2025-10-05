@@ -1,0 +1,167 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Dashboard - Knowledgeroot{% endblock %}
+
+{% block content %}
+    {# Welcome Header #}
+    <header class="mb-5">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-4">
+                    <i class="fas fa-book text-primary"></i>
+                    Welcome to Knowledgeroot
+                </h1>
+                <p class="lead text-muted">Your centralized knowledge management system</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a href="/content/create" class="btn btn-primary btn-lg">
+                    <i class="fas fa-plus"></i> Create Content
+                </a>
+            </div>
+        </div>
+    </header>
+
+    {# Root Categories Section #}
+    {% if root_categories|length > 0 %}
+        <section class="mb-5">
+            <h2 class="mb-4">
+                <i class="fas fa-folder-open"></i> Browse Categories
+            </h2>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                {% for category in root_categories %}
+                    <div class="col">
+                        <div class="card h-100 shadow-sm hover-card">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    {% if category.icon %}
+                                        <i class="fas fa-{{ category.icon }} fa-3x text-primary"></i>
+                                    {% else %}
+                                        <i class="fas fa-folder fa-3x text-warning"></i>
+                                    {% endif %}
+                                </div>
+                                <h5 class="card-title">
+                                    <a href="/category/{{ category.id }}" class="text-decoration-none stretched-link">
+                                        {{ category.name }}
+                                    </a>
+                                </h5>
+                                {% if category.description %}
+                                    <p class="card-text text-muted small">
+                                        {{ category.description|slice(0, 80) }}{% if category.description|length > 80 %}...{% endif %}
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+
+    {# Recent Content Section #}
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>
+                <i class="fas fa-clock"></i> Recent Updates
+            </h2>
+            <a href="/search" class="btn btn-outline-secondary">
+                <i class="fas fa-search"></i> Search All
+            </a>
+        </div>
+
+        {% if recent_content|length > 0 %}
+            <div class="list-group shadow-sm">
+                {% for content in recent_content %}
+                    <a href="/content/{{ content.id }}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between align-items-start">
+                            <div class="flex-grow-1">
+                                <h5 class="mb-1">
+                                    <i class="fas fa-file-alt text-primary me-2"></i>
+                                    {{ content.name }}
+                                </h5>
+                                {% if content.description %}
+                                    <p class="mb-2 text-muted">
+                                        {{ content.description|slice(0, 150) }}{% if content.description|length > 150 %}...{% endif %}
+                                    </p>
+                                {% endif %}
+                                <small class="text-muted">
+                                    <i class="fas fa-user"></i> User #{{ content.user_id }}
+                                </small>
+                            </div>
+                            <div class="text-end ms-3">
+                                <small class="text-muted d-block">
+                                    <i class="fas fa-calendar"></i>
+                                    {{ content.created_at|date('Y-m-d') }}
+                                </small>
+                                <small class="text-muted d-block">
+                                    <i class="fas fa-edit"></i>
+                                    {{ content.changed_at|date('Y-m-d H:i') }}
+                                </small>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                No content available yet. Start by creating your first knowledge article!
+            </div>
+        {% endif %}
+    </section>
+
+    {# Quick Stats (Optional) #}
+    <section class="mb-5">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card border-primary shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-folder fa-2x text-primary mb-2"></i>
+                        <h3 class="card-title">{{ root_categories|length }}</h3>
+                        <p class="card-text text-muted">Root Categories</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-success shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-file-alt fa-2x text-success mb-2"></i>
+                        <h3 class="card-title">{{ recent_content|length }}</h3>
+                        <p class="card-text text-muted">Recent Articles</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-info shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-book fa-2x text-info mb-2"></i>
+                        <h3 class="card-title">v2.0</h3>
+                        <p class="card-text text-muted">Knowledgeroot</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+.hover-card {
+    transition: all 0.3s ease-in-out;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    content: "";
+}
+</style>
+{% endblock %}
