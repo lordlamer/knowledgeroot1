@@ -1,0 +1,100 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ category.name }} - Knowledgeroot{% endblock %}
+
+{% block breadcrumb %}
+    {% include 'components/breadcrumb.html.twig' with {'category_path': category_path} %}
+{% endblock %}
+
+{% block content %}
+    {# Category Header #}
+    <header class="mb-4">
+        <h1>
+            {% if category.icon %}
+                <i class="fas fa-{{ category.icon }}"></i>
+            {% endif %}
+            {{ category.name }}
+        </h1>
+
+        {% if category.description %}
+            <p class="lead text-muted">{{ category.description }}</p>
+        {% endif %}
+    </header>
+
+    {# Child Categories (Subfolders) #}
+    {% if child_categories|length > 0 %}
+        <section class="mb-5">
+            <h3><i class="fas fa-folder-open"></i> Subcategories</h3>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {% for child in child_categories %}
+                    <div class="col">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="/category/{{ child.id }}" class="text-decoration-none">
+                                        {% if child.icon %}
+                                            <i class="fas fa-{{ child.icon }} text-primary"></i>
+                                        {% else %}
+                                            <i class="fas fa-folder text-warning"></i>
+                                        {% endif %}
+                                        {{ child.name }}
+                                    </a>
+                                </h5>
+                                {% if child.description %}
+                                    <p class="card-text text-muted small">
+                                        {{ child.description|slice(0, 100) }}{% if child.description|length > 100 %}...{% endif %}
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+
+    {# Content List #}
+    <section>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3><i class="fas fa-file-alt"></i> Content</h3>
+            <a href="/content/create?category={{ category.id }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> New Content
+            </a>
+        </div>
+
+        {% if contents|length > 0 %}
+            <div class="list-group">
+                {% for content in contents %}
+                    <a href="/content/{{ content.id }}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">
+                                <i class="fas fa-file-alt text-primary me-2"></i>
+                                {{ content.name }}
+                            </h5>
+                            <small class="text-muted">
+                                <i class="fas fa-clock"></i>
+                                {{ content.changed_at|date('Y-m-d H:i') }}
+                            </small>
+                        </div>
+
+                        {% if content.description %}
+                            <p class="mb-1 text-muted">
+                                {{ content.description|slice(0, 200) }}{% if content.description|length > 200 %}...{% endif %}
+                            </p>
+                        {% endif %}
+
+                        <small class="text-muted">
+                            <i class="fas fa-user"></i> User #{{ content.user_id }}
+                        </small>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                No content in this category yet.
+                <a href="/content/create?category={{ category.id }}" class="alert-link">Create the first one!</a>
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}

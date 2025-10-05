@@ -12,7 +12,8 @@ namespace Knowledgeroot\Application\Controller;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Knowledgeroot\Domain\Content\Service\ContentService;
+use Knowledgeroot\Application\UseCase\Content\ShowContentUseCase;
+use Knowledgeroot\Application\UseCase\Content\ListContentByCategoryUseCase;
 use Twig\Environment;
 
 /**
@@ -21,49 +22,110 @@ use Twig\Environment;
 class ContentController
 {
     public function __construct(
-        private ContentService $contentService,
+        private ShowContentUseCase $showContentUseCase,
+        private ListContentByCategoryUseCase $listContentByCategoryUseCase,
         private Environment $twig
     ) {}
 
     /**
-     * Show single content item
+     * Show single content item (HTML)
      */
     public function show(Request $request, Response $response, array $args): Response
     {
         $id = (int) $args['id'];
-        $content = $this->contentService->getContentById($id);
 
-        if (!$content) {
+        try {
+            $result = $this->showContentUseCase->execute($id);
+
+            $html = $this->twig->render('content/show.html.twig', $result->toArray());
+
+            $response->getBody()->write($html);
+            return $response->withHeader('Content-Type', 'text/html');
+
+        } catch (\DomainException $e) {
+            $html = $this->twig->render('error/404.html.twig', [
+                'message' => $e->getMessage()
+            ]);
+
+            $response->getBody()->write($html);
+            return $response
+                ->withHeader('Content-Type', 'text/html')
+                ->withStatus(404);
+        }
+    }
+
+    /**
+     * Show single content item (JSON API)
+     */
+    public function showApi(Request $request, Response $response, array $args): Response
+    {
+        $id = (int) $args['id'];
+
+        try {
+            $result = $this->showContentUseCase->execute($id);
+
+            $response->getBody()->write(json_encode($result->toArray()));
+            return $response->withHeader('Content-Type', 'application/json');
+
+        } catch (\DomainException $e) {
             $response->getBody()->write(json_encode([
-                'error' => 'Content not found',
+                'error' => $e->getMessage(),
                 'id' => $id
             ]));
             return $response
                 ->withHeader('Content-Type', 'application/json')
                 ->withStatus(404);
         }
-
-        // Return JSON for API
-        $response->getBody()->write(json_encode($content->toArray()));
-        return $response->withHeader('Content-Type', 'application/json');
     }
 
     /**
-     * List all content in a category
+     * List all content in a category (HTML)
      */
     public function listByCategory(Request $request, Response $response, array $args): Response
     {
         $categoryId = (int) $args['categoryId'];
-        $contents = $this->contentService->getContentsByCategory($categoryId);
 
-        $data = array_map(fn($content) => $content->toArray(), $contents);
+        try {
+            $result = $this->listContentByCategoryUseCase->execute($categoryId);
 
-        $response->getBody()->write(json_encode([
-            'category_id' => $categoryId,
-            'count' => count($data),
-            'items' => $data
-        ]));
+            $html = $this->twig->render('content/list.html.twig', $result->toArray());
 
-        return $response->withHeader('Content-Type', 'application/json');
+            $response->getBody()->write($html);
+            return $response->withHeader('Content-Type', 'text/html');
+
+        } catch (\DomainException $e) {
+            $html = $this->twig->render('error/404.html.twig', [
+                'message' => $e->getMessage()
+            ]);
+
+            $response->getBody()->write($html);
+            return $response
+                ->withHeader('Content-Type', 'text/html')
+                ->withStatus(404);
+        }
+    }
+
+    /**
+     * List all content in a category (JSON API)
+     */
+    public function listByCategoryApi(Request $request, Response $response, array $args): Response
+    {
+        $categoryId = (int) $args['categoryId'];
+
+        try {
+            $result = $this->listContentByCategoryUseCase->execute($categoryId);
+
+            $response->getBody()->write(json_encode($result->toArray()));
+            return $response->withHeader('Content-Type', 'application/json');
+
+        } catch (\DomainException $e) {
+            $response->getBody()->write(json_encode([
+                'error' => $e->getMessage(),
+                'category_id' => $categoryId
+            ]));
+            return $response
+                ->withHeader('Content-Type', 'application/json')
+                ->withStatus(404);
+        }
     }
 }

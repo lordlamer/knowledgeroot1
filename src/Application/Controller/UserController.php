@@ -13,6 +13,8 @@ namespace Knowledgeroot\Application\Controller;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Knowledgeroot\Domain\User\Service\UserService;
+use Knowledgeroot\Application\UseCase\Auth\LoginUseCase;
+use Twig\Environment;
 
 /**
  * Handles HTTP requests for user operations
@@ -20,7 +22,9 @@ use Knowledgeroot\Domain\User\Service\UserService;
 class UserController
 {
     public function __construct(
-        private UserService $userService
+        private UserService $userService,
+        private LoginUseCase $loginUseCase,
+        private Environment $twig
     ) {}
 
     /**
@@ -63,7 +67,76 @@ class UserController
     }
 
     /**
-     * Authenticate user (login)
+     * Show login form (HTML)
+     */
+    public function loginForm(Request $request, Response $response): Response
+    {
+        $html = $this->twig->render('auth/login.html.twig', [
+            'error' => null,
+            'username' => ''
+        ]);
+
+        $response->getBody()->write($html);
+        return $response->withHeader('Content-Type', 'text/html');
+    }
+
+    /**
+     * Process login form submission (HTML)
+     */
+    public function loginSubmit(Request $request, Response $response): Response
+    {
+        $body = $request->getParsedBody();
+        $username = $body['username'] ?? '';
+        $password = $body['password'] ?? '';
+
+        if (empty($username) || empty($password)) {
+            $html = $this->twig->render('auth/login.html.twig', [
+                'error' => 'Username and password are required',
+                'username' => $username
+            ]);
+
+            $response->getBody()->write($html);
+            return $response
+                ->withHeader('Content-Type', 'text/html')
+                ->withStatus(400);
+        }
+
+        try {
+            $result = $this->loginUseCase->execute($username, $password);
+
+            if (!$result->isSuccess()) {
+                $html = $this->twig->render('auth/login.html.twig', [
+                    'error' => $result->getError(),
+                    'username' => $username
+                ]);
+
+                $response->getBody()->write($html);
+                return $response
+                    ->withHeader('Content-Type', 'text/html')
+                    ->withStatus(401);
+            }
+
+            // TODO: Set session, redirect to dashboard
+            // For now, redirect to home
+            return $response
+                ->withHeader('Location', '/')
+                ->withStatus(302);
+
+        } catch (\Exception $e) {
+            $html = $this->twig->render('auth/login.html.twig', [
+                'error' => 'An error occurred during login',
+                'username' => $username
+            ]);
+
+            $response->getBody()->write($html);
+            return $response
+                ->withHeader('Content-Type', 'text/html')
+                ->withStatus(500);
+        }
+    }
+
+    /**
+     * Authenticate user (JSON API)
      */
     public function login(Request $request, Response $response): Response
     {
@@ -81,11 +154,11 @@ class UserController
         }
 
         try {
-            $user = $this->userService->authenticate($username, $password);
+            $result = $this->loginUseCase->execute($username, $password);
 
-            if (!$user) {
+            if (!$result->isSuccess()) {
                 $response->getBody()->write(json_encode([
-                    'error' => 'Invalid credentials or inactive account'
+                    'error' => $result->getError()
                 ]));
                 return $response
                     ->withHeader('Content-Type', 'application/json')
@@ -95,7 +168,7 @@ class UserController
             // Successful login
             $response->getBody()->write(json_encode([
                 'message' => 'Login successful',
-                'user' => $user->toArray()
+                'user' => $result->getUser()->toArray()
             ]));
             return $response->withHeader('Content-Type', 'application/json');
 

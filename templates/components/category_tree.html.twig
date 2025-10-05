@@ -1,0 +1,54 @@
+{# Category Tree Navigation Component #}
+
+<div class="category-tree">
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-2 mb-1 text-muted">
+        <span>Categories</span>
+    </h6>
+
+    <ul class="nav flex-column">
+        {% if category_tree is defined and category_tree %}
+            {{ _self.render_tree(category_tree, current_category_id|default(null)) }}
+        {% else %}
+            <li class="nav-item">
+                <span class="nav-link text-muted">Loading...</span>
+            </li>
+        {% endif %}
+    </ul>
+</div>
+
+{# Recursive macro for tree rendering #}
+{% macro render_tree(nodes, current_id) %}
+    {% for node in nodes %}
+        <li class="nav-item">
+            <a class="nav-link {% if node.id == current_id %}active{% endif %}"
+               href="/category/{{ node.id }}">
+                {% if node.icon %}
+                    <i class="fas fa-{{ node.icon }}"></i>
+                {% else %}
+                    <i class="fas fa-folder"></i>
+                {% endif %}
+                {{ node.name }}
+                {% if node.children is defined and node.children|length > 0 %}
+                    <i class="fas fa-chevron-down float-end"></i>
+                {% endif %}
+            </a>
+
+            {# Recursively render children #}
+            {% if node.children is defined and node.children|length > 0 %}
+                <ul class="nav flex-column ms-3">
+                    {{ _self.render_tree(node.children, current_id) }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endmacro %}
+
+<style>
+.category-tree .nav-link {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+.category-tree .nav .nav {
+    font-size: 0.85rem;
+}
+</style>

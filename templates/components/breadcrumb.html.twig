@@ -1,0 +1,24 @@
+{# Breadcrumb Component #}
+
+{% if category_path is defined and category_path|length > 0 %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </li>
+            {% for category in category_path %}
+                {% if loop.last %}
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {{ category.name }}
+                    </li>
+                {% else %}
+                    <li class="breadcrumb-item">
+                        <a href="/category/{{ category.id }}">{{ category.name }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </nav>
+{% endif %}
