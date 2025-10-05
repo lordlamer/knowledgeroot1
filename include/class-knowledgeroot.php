@@ -83,15 +83,13 @@ class knowledgeroot {
 	 */
 	function addSlashesOnArray(&$theArray)	{
 		if (is_array($theArray))	{
-			reset($theArray);
-			while(list($Akey,$AVal)=each($theArray))	{
+			foreach ($theArray as $Akey => &$AVal) {
 				if (is_array($AVal))	{
-					$this->addSlashesOnArray($theArray[$Akey]);
+					$this->addSlashesOnArray($AVal);
 				} else {
-					$theArray[$Akey] = addslashes($AVal);
+					$AVal = addslashes($AVal);
 				}
 			}
-			reset($theArray);
 		}
 	}
 
@@ -1589,7 +1587,7 @@ class knowledgeroot {
 				$SN_A = explode('/',strrev($this->getEnv('SCRIPT_NAME')));
 				$SFN_A = explode('/',strrev($SFN));
 				$acc = array();
-				while(list($kk,$vv)=each($SN_A))	{
+				foreach ($SN_A as $kk => $vv) {
 					if (!strcmp($SFN_A[$kk],$vv))	{
 						$acc[] = $vv;
 					} else break;
@@ -1683,11 +1681,10 @@ class knowledgeroot {
 	 */
 	function revExplode($delim, $string, $count=0)	{
 		$temp = explode($delim,strrev($string),$count);
-		while(list($key,$val)=each($temp))	{
+		foreach ($temp as $key => $val) {
 			$temp[$key]=strrev($val);
 		}
 		$temp=array_reverse($temp);
-		reset($temp);
 		return $temp;
 	}
 

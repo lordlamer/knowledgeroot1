@@ -21,12 +21,25 @@
 	],
 
 	"require": {
-		"slim/slim": "^3.0",
-		"twig/twig": "^2.0",
-		"swiftmailer/swiftmailer": "^6.0",
-		"pimple/pimple": "~3.0",
-		"doctrine/dbal": "~2.0",
-		"zendframework/zendframework1": "^1.12",
-		"twig/extensions": "^1.5"
+		"php": "^8.2",
+		"slim/slim": "^4.14",
+		"slim/psr7": "^1.7",
+		"twig/twig": "^3.14",
+		"symfony/mailer": "^7.1",
+		"pimple/pimple": "^3.5",
+		"doctrine/dbal": "^3.9",
+		"laminas/laminas-config": "^3.9",
+		"laminas/laminas-i18n": "^2.28",
+		"laminas/laminas-cache": "^3.12",
+		"laminas/laminas-cache-storage-adapter-filesystem": "^2.4",
+		"twig/intl-extra": "^3.14"
+	},
+	"require-dev": {
+		"phpstan/phpstan": "^1.12"
+	},
+	"autoload": {
+		"psr-4": {
+			"Knowledgeroot\\": "src/"
+		}
 	}
 }

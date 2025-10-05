@@ -1956,7 +1956,7 @@ class knowledgeroot_header {
 				$SN_A = explode('/',strrev($this->getIndpEnv('SCRIPT_NAME')));
 				$SFN_A = explode('/',strrev($SFN));
 				$acc = array();
-				while(list($kk,$vv)=each($SN_A))  {
+				foreach ($SN_A as $kk => $vv) {
 					if (!strcmp($SFN_A[$kk],$vv))  {
 						$acc[] = $vv;
 					} else break;
@@ -2026,11 +2026,9 @@ class knowledgeroot_header {
 				REMOTE_HOST,
 				HTTP_USER_AGENT,
 				HTTP_ACCEPT_LANGUAGE');
-				reset($envTestVars);
-				while(list(,$v)=each($envTestVars))  {
+				foreach ($envTestVars as $v) {
 					$out[trim($v)]=$this->getIndpEnv(trim($v));
 				}
-				reset($out);
 				return $out;
 			break;
 		}
@@ -2071,11 +2069,10 @@ class knowledgeroot_header {
 	 */
 	function revExplode($delim, $string, $count=0)  {
 		$temp = explode($delim,strrev($string),$count);
-		while(list($key,$val)=each($temp))  {
+		foreach ($temp as $key => $val) {
 			$temp[$key]=strrev($val);
 		}
 		$temp=array_reverse($temp);
-		reset($temp);
 		return $temp;
 	}
 

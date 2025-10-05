@@ -703,12 +703,11 @@ class knowledgeroot_installer {
 	function addSlashesOnArray(&$theArray)	{
 		if(get_magic_quotes_gpc() == 0) {
 			if (is_array($theArray))	{
-				reset($theArray);
-				while(list($Akey,$AVal)=each($theArray))	{
+				foreach ($theArray as $Akey => &$AVal) {
 					if (is_array($AVal))	{
-						$this->addSlashesOnArray($theArray[$Akey]);
+						$this->addSlashesOnArray($AVal);
 					} else {
-						$theArray[$Akey] = addslashes($AVal);
+						$AVal = addslashes($AVal);
 					}
 				}
 				reset($theArray);

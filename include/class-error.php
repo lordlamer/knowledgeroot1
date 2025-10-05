@@ -166,10 +166,10 @@ class knowledgeroot_error {
 		if (is_array($array_in)) {
 			$result='<table class="table table-striped table-bordered table-hover table-sm">';
 			if (!count($array_in))	{$result.= '<tr><td><font face="Verdana,Arial" size="1"><b>'.htmlspecialchars("EMPTY!").'</b></font></td></tr>';}
-			while (list($key,$val)=each($array_in))	{
+			foreach ($array_in as $key => $val) {
 				$result.= '<tr><td><font face="Verdana,Arial" size="1">'.htmlspecialchars((string)$key).'</font></td><td>';
-				if (is_array($array_in[$key]))	{
-					$result.=$this->view_array($array_in[$key]);
+				if (is_array($val))	{
+					$result.=$this->view_array($val);
 				} else
 					$result.= '<font face="Verdana,Arial" size="1" color="red">'.nl2br(htmlspecialchars((string)$val)).'<br /></font>';
 				$result.= '</td></tr>';
