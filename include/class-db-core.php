@@ -1,14 +1,14 @@
 <?php
 
 class db_core {
-	var $dbtype = "";
-	var $dbname = "";
+	public $dbtype = "";
+	public $dbname = "";
 
-	var $CLASS = null;
-	var $connection = null;
-	var $lastquery = "";
-	var $querys = 0;
-	var $query_cache = array();
+	public $CLASS = null;
+	public $connection = null;
+	public $lastquery = "";
+	public $querys = 0;
+	public $query_cache = array();
 
 	/**
 	 * init/start class

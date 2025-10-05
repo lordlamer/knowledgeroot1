@@ -13,13 +13,13 @@
  * @example echo $contenttime = $CLASS['runtime']->getTime();
  */
 class runtime {
-	var $starttime = 0;
-	var $stoptime = 0;
-	var $runtime = 0;
+	public $starttime = 0;
+	public $stoptime = 0;
+	public $runtime = 0;
 
-	var $startArr = array();
-	var $stopArr = array();
-	var $runArr = array();
+	public $startArr = array();
+	public $stopArr = array();
+	public $runArr = array();
 
 	/**
 	 * start timer

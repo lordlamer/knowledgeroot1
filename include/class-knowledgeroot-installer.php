@@ -28,36 +28,36 @@ require_once($base_path."include/class-db-dbal.php");
  * @version $Id: class-knowledgeroot-installer.php 1066 2011-05-05 21:41:45Z lordlamer $
  */
 class knowledgeroot_installer {
-	var $file_config = "config/app.ini";
-	var $file_config_old = "config/config.inc.php";
-	var $file_config_dist = "config/app.ini.dist";
-	var $file_install = "install.php";
-	var $file_update = "update.php";
-	var $file_pgsql_dump = "dumps/postgre.sql";
-	var $file_mysql_dump = "dumps/mysql.sql";
-	var $file_sqlite_dump = "dumps/sqlite.sql";
-	var $file_pgsql_upgrade_dump = "dumps/upgrade_postgre.sql";
-	var $file_mysql_upgrade_dump = "dumps/upgrade_mysql.sql";
-	var $file_sqlite_upgrade_dump = "dumps/upgrade_sqlite.sql";
-	var $file_class_knowledgeroot = "include/class-knowledgeroot.php";
-	var $file_class_knowledgeroot_error = "include/class-error.php";
-	var $file_class_mysql = "include/class-mysql.php";
-	var $file_class_mysqli = "include/class-mysqli.php";
-	var $file_class_pgsql = "include/class-pgsql.php";
-	var $file_class_sqlite = "include/class-sqlite.php";
-	var $file_class_db_core ="include/class-db-core.php";
-	var $file_class_db_result = "include/class-db-result.php";
+	public $file_config = "config/app.ini";
+	public $file_config_old = "config/config.inc.php";
+	public $file_config_dist = "config/app.ini.dist";
+	public $file_install = "install.php";
+	public $file_update = "update.php";
+	public $file_pgsql_dump = "dumps/postgre.sql";
+	public $file_mysql_dump = "dumps/mysql.sql";
+	public $file_sqlite_dump = "dumps/sqlite.sql";
+	public $file_pgsql_upgrade_dump = "dumps/upgrade_postgre.sql";
+	public $file_mysql_upgrade_dump = "dumps/upgrade_mysql.sql";
+	public $file_sqlite_upgrade_dump = "dumps/upgrade_sqlite.sql";
+	public $file_class_knowledgeroot = "include/class-knowledgeroot.php";
+	public $file_class_knowledgeroot_error = "include/class-error.php";
+	public $file_class_mysql = "include/class-mysql.php";
+	public $file_class_mysqli = "include/class-mysqli.php";
+	public $file_class_pgsql = "include/class-pgsql.php";
+	public $file_class_sqlite = "include/class-sqlite.php";
+	public $file_class_db_core ="include/class-db-core.php";
+	public $file_class_db_result = "include/class-db-result.php";
 
-	var $base_path = "";
+	public $base_path = "";
 
-	var $error_msg = "";
+	public $error_msg = "";
 
-	var $CONFIG = array();
-	var $CLASS = array();
+	public $CONFIG = array();
+	public $CLASS = array();
 
-	var $db_connection = "";
+	public $db_connection = "";
 
-	var $db = null;
+	public $db = null;
 
 	function mainInstall() {
 		$out = "";
@@ -701,16 +701,15 @@ class knowledgeroot_installer {
 	 * @return	array
 	 */
 	function addSlashesOnArray(&$theArray)	{
-		if(get_magic_quotes_gpc() == 0) {
-			if (is_array($theArray))	{
-				foreach ($theArray as $Akey => &$AVal) {
-					if (is_array($AVal))	{
-						$this->addSlashesOnArray($AVal);
-					} else {
-						$AVal = addslashes($AVal);
-					}
+		// Note: get_magic_quotes_gpc() removed in PHP 8.0, always returns false in PHP 7.4+
+		// Magic quotes are disabled by default since PHP 5.4
+		if (is_array($theArray))	{
+			foreach ($theArray as $Akey => &$AVal) {
+				if (is_array($AVal))	{
+					$this->addSlashesOnArray($AVal);
+				} else {
+					$AVal = addslashes($AVal);
 				}
-				reset($theArray);
 			}
 		}
 	}

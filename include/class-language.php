@@ -7,15 +7,15 @@
  * @version $Id: class-language.php 1159 2011-07-20 20:47:07Z lordlamer $
  */
 class language {
-	var $CLASS = array();
-	var $default_lang = "en_US.UTF8";
-	var $get = array(); // array with languagetokens
+	public $CLASS = array();
+	public $default_lang = "en_US.UTF8";
+	public $get = array(); // array with languagetokens
 
-	var $sys = array(); // array with syslanguagetokens
+	public $sys = array(); // array with syslanguagetokens
 
-	var $lang = ""; // loaded language
+	public $lang = ""; // loaded language
 
-	var $locales = array();
+	public $locales = array();
 
 	/**
 	 * init/start class

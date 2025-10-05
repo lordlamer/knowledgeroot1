@@ -10,7 +10,7 @@ class knowledgeroot_content {
 	/**
 	 * @param array $CLASS reference to global $CLASS var
 	 */
-	var $CLASS;
+	public $CLASS;
 
 	/**
 	 * init/start class

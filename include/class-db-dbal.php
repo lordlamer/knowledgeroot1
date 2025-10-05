@@ -12,8 +12,8 @@
  * @author fhabermann
  */
 class db extends db_core {
-    var $dbtype = "dbal";
-    var $dbname = "";
+    public $dbtype = "dbal";
+    public $dbname = "";
 
     /**
      * Make a Connect to the mysql Server

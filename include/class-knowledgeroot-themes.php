@@ -7,11 +7,11 @@
  * @version $Id: class-knowledgeroot-themes.php 1159 2011-07-20 20:47:07Z lordlamer $
  */
 class knowledgeroot_themes {
-	var $CLASS;
-	var $themes = array();
-	var $default_theme = "green";
-	var $use_theme = "";
-	var $theme_folder = "system/themes/";
+	public $CLASS;
+	public $themes = array();
+	public $default_theme = "green";
+	public $use_theme = "";
+	public $theme_folder = "system/themes/";
 
 	/**
 	 * init/start class

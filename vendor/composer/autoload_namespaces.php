@@ -6,8 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Zend_' => array($vendorDir . '/zendframework/zendframework1/library'),
-    'Twig_Extensions_' => array($vendorDir . '/twig/extensions/lib'),
-    'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Pimple' => array($vendorDir . '/pimple/pimple/src'),
 );

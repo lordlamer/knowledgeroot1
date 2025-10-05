@@ -10,22 +10,22 @@ class knowledgeroot_header {
 	/**
 	 * @param array $CLASS reference to global $CLASS var
 	 */
-	var $CLASS;
+	public $CLASS;
 
 	/**
 	 * @param string $messages string with messages that will be displayed on top of page
 	 */
-	var $messages = "";
+	public $messages = "";
 
 	/**
 	 * @param string $htmlheader string with tags that will be included in html header
 	 */
-	var $htmlheader = "";
+	public $htmlheader = "";
 
 	/**
 	 * @param string $messagetype
 	 */
-	var $messagetype = "success"; // default messagetype
+	public $messagetype = "success"; // default messagetype
 
 	/**
 	 * init/start class

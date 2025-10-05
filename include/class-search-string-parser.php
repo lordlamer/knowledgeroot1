@@ -17,43 +17,43 @@ class Search_String_Parser {
 	 * word that is used for or conditions
 	 * @var $parserOrWord string
 	 */
-	var $parserOrWord = 'OR';
+	public $parserOrWord = 'OR';
 
 	/**
 	 * char that is used for phrases
 	 * @var $parserQuoteChar string
 	 */
-	var $parserQuoteChar = '"';
+	public $parserQuoteChar = '"';
 
 	/**
 	 * char that is used for splitting words
 	 * @var $parserWordSplitChar string
 	 */
-	var $parserWordSplitChar = ' ';
+	public $parserWordSplitChar = ' ';
 
 	/**
 	 * char that is used for prohibiting words
 	 * @var $parserQuoteChar string
 	 */
-	var $parserNotWordChar = '-';
+	public $parserNotWordChar = '-';
 
 	/**
 	 * data store for and words
 	 * @var $_and array
 	 */
-	var $_and = null;
+	public $_and = null;
 
 	/**
 	 * data store for or words
 	 * @var $_or array
 	 */
-	var $_or = null;
+	public $_or = null;
 
 	/**
 	 * data store for not words
 	 * @var $_not array
 	 */
-	var $_not = null;
+	public $_not = null;
 
 	/**
 	 * parse the search string

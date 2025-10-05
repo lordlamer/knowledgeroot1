@@ -10,57 +10,57 @@ class knowledgeroot {
 	/**
 	 * @param array $CLASS reference to global CLASS var
 	 */
-	var $CLASS;
+	public $CLASS;
 
 	/**
 	 * @param array $tree_right_cache cache for rights in tree
 	 */
-	var $tree_right_cache = array();
+	public $tree_right_cache = array();
 
 	/**
 	 * @param array $content_right_cache cache for rigths in content
 	 */
-	var $content_right_cache = array();
+	public $content_right_cache = array();
 
 	/**
 	 * @param array $user_right_cache cache for rights in user
 	 */
-	var $user_right_cache = array();
+	public $user_right_cache = array();
 
 	/**
 	 * @param array $user_group_cache cache for rights in group
 	 */
-	var $user_group_cache = array();
+	public $user_group_cache = array();
 
 	/**
 	 * @param array $group_cache cache for group
 	 */
-	var $group_cache = array();
+	public $group_cache = array();
 
 	/**
 	 * @param array $groups_cache cache for groups
 	 */
-	var $groups_cache = array();
+	public $groups_cache = array();
 
 	/**
 	 * @param array $recursiv_page_perm_cache cache for recursiv page rights
 	 */
-	var $recursiv_page_perm_cache = array();
+	public $recursiv_page_perm_cache = array();
 
 	/**
 	 * @param array $inerhitpagerights_cache cache for interhitpagerights
 	 */
-	var $inerhitpagerights_cache = array();
+	public $inerhitpagerights_cache = array();
 
 	/**
 	 * @param array $userdropdowncache cache for userdropdown
 	 */
-	var $userdropdowncache = null;
+	public $userdropdowncache = null;
 
 	/**
 	 * @param array $groupdropdowncache cache for groupdropdown
 	 */
-	var $groupdropdowncache = null;
+	public $groupdropdowncache = null;
 
 	/**
 	 * init/start class

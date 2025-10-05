@@ -6,26 +6,26 @@ class highlight {
 	 * This should be used when the string does not contain HTML
 	 * (off by default)
 	 */
-	var $STR_HIGHLIGHT_SIMPLE = 1;
+	public $STR_HIGHLIGHT_SIMPLE = 1;
 
 	/**
 	 * Only match whole words in the string
 	 * (off by default)
 	 */
-	var $STR_HIGHLIGHT_WHOLEWD = 2;
+	public $STR_HIGHLIGHT_WHOLEWD = 2;
 
 	/**
 	 * Case sensitive matching
 	 * (off by default)
 	 */
-	var $STR_HIGHLIGHT_CASESENS = 4;
+	public $STR_HIGHLIGHT_CASESENS = 4;
 
 	/**
 	 * Overwrite links if matched
 	 * This should be used when the replacement string is a link
 	 * (off by default)
 	 */
-	var $STR_HIGHLIGHT_STRIPLINKS = 8;
+	public $STR_HIGHLIGHT_STRIPLINKS = 8;
 
 	/**
 	 * Highlight a string in text without corrupting HTML tags

@@ -6,12 +6,18 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    '25072dd6e2470089de65ae7bf11d3109' => $vendorDir . '/symfony/polyfill-php72/bootstrap.php',
+    '9b38cf48e83f5d8f60375221cd213eee' => $vendorDir . '/phpstan/phpstan/bootstrap.php',
+    'c9d07b32a2e02bc0fc582d4f0c1b56cc' => $vendorDir . '/laminas/laminas-servicemanager/src/autoload.php',
+    '6e3fae29631ef280660b3cdad06f25a8' => $vendorDir . '/symfony/deprecation-contracts/function.php',
     'e69f7f6ee287b969198c3c9d6777bd38' => $vendorDir . '/symfony/polyfill-intl-normalizer/bootstrap.php',
-    '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => $vendorDir . '/symfony/polyfill-mbstring/bootstrap.php',
     'f598d06aa772fa33d905e87be6398fb1' => $vendorDir . '/symfony/polyfill-intl-idn/bootstrap.php',
+    '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => $vendorDir . '/symfony/polyfill-mbstring/bootstrap.php',
     '320cde22f66dd4f5d3fd621d3e88b98f' => $vendorDir . '/symfony/polyfill-ctype/bootstrap.php',
+    'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
+    '7b11c4dc42b3b3023073cb14e519683c' => $vendorDir . '/ralouphie/getallheaders/src/getallheaders.php',
     '253c157292f75eb38082b5acb06f3f01' => $vendorDir . '/nikic/fast-route/src/functions.php',
-    'def43f6c87e4f8dfd0c9e1b1bab14fe8' => $vendorDir . '/symfony/polyfill-iconv/bootstrap.php',
-    '2c102faa651ef8ea5874edb585946bce' => $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
+    '89efb1254ef2d1c5d80096acd12c4098' => $vendorDir . '/twig/twig/src/Resources/core.php',
+    'ffecb95d45175fd40f75be8a23b34f90' => $vendorDir . '/twig/twig/src/Resources/debug.php',
+    'c7baa00073ee9c61edf148c51917cfb4' => $vendorDir . '/twig/twig/src/Resources/escaper.php',
+    'f844ccf1d25df8663951193c3fc307c8' => $vendorDir . '/twig/twig/src/Resources/string_loader.php',
 );

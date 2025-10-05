@@ -7,8 +7,8 @@
  * @version $Id: class-tree.php 1039 2011-04-09 19:07:36Z lordlamer $
  */
 class pathTree {
-  var $CLASS;
-  var $cache = array(); // cache of tree records indexed by tree id
+  public $CLASS;
+  public $cache = array(); // cache of tree records indexed by tree id
 
 
   /**
@@ -193,28 +193,28 @@ class pathTree {
  * @version $Id: class-tree.php 1039 2011-04-09 19:07:36Z lordlamer $
  */
 class categoryTree {
-  var $out = array(); // elemts for the user
-  var $allelements = array(); // all elements in the table
-  var $myelements = array();
+  public $out = array(); // elemts for the user
+  public $allelements = array(); // all elements in the table
+  public $myelements = array();
 
-  var $open = array();
+  public $open = array();
 
-  var $firstrun = 0;
-  var $expand = 0;
-  var $doexpand = 0;
-  var $targetfile = "index.php";
-  var $move = FALSE;
-  var $editor = FALSE;
+  public $firstrun = 0;
+  public $expand = 0;
+  public $doexpand = 0;
+  public $targetfile = "index.php";
+  public $move = FALSE;
+  public $editor = FALSE;
 
-  var $CLASS;
-  var $category = array();
+  public $CLASS;
+  public $category = array();
 
-  var $userid = 0;
-  var $groupid = 0;
+  public $userid = 0;
+  public $groupid = 0;
 
-  var $admin = 0;
+  public $admin = 0;
 
-  var $firstrootelement = 1; // used to check if the first rootelement is shown
+  public $firstrootelement = 1; // used to check if the first rootelement is shown
 
   /**
    * init/start class

@@ -8,32 +8,32 @@
  */
 class extension_base {
 	// global class array
-	var $CLASS = array();
+	public $CLASS = array();
 
 	// var for options from extension/config.php
-	var $CONF = array();
+	public $CONF = array();
 
 	// show addfiles for this extension
 	// default is disabled
-	var $show_addedfiles = 0;
+	public $show_addedfiles = 0;
 
 	// array for the menu items
-	var $menu = array();
+	public $menu = array();
 
 	// array with langtokens for this extension
-	var $getLang = array();
+	public $getLang = array();
 
 	// array with post data for this extension - index.php?extname[varname]=test - so varname will be available in this GET
-	var $GET = array();
+	public $GET = array();
 
 	// array with post data for this extension - index.php?extname[varname]=test - so varname will be available in this POST
-	var $POST = array();
+	public $POST = array();
 
 	// Path to the extension (relativ)
-	var $myPath = "";
+	public $myPath = "";
 
 	// Path in system for extension (absolute)
-	var $myAbsolutePath = "";
+	public $myAbsolutePath = "";
 
 	/**
 	 * init/start class

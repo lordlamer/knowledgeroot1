@@ -11,25 +11,25 @@ class rte extends extension_base {
 	 * cols for textarea
 	 * @param integer $cols
 	 */
-	var $cols = 75;
+	public $cols = 75;
 
 	/**
 	 * rows for textare
 	 * @param integer $rows
 	 */
-	var $rows = 20;
+	public $rows = 20;
 
 	/**
 	 * id for textarea
 	 * @param string $id
 	 */
-	var $id = "";
+	public $id = "";
 
 	/**
 	 * name for textarea
 	 * @param string $name
 	 */
-	var $name = "content";
+	public $name = "content";
 
 	/**
 	 * Show Text in a textare

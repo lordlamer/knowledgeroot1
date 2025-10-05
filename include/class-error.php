@@ -10,28 +10,28 @@ class knowledgeroot_error {
 	/**
 	 * array $CLASS global array to access all classes
 	 */
-	var $CLASS = array();
+	public $CLASS = array();
 
 	/**
 	 * array $CONF config array
 	 */
-	var $CONF = array();
+	public $CONF = array();
 
 	/**
 	 * bool $showBrOnScreen enable/disable output of br tags for screen messages
 	 */
-	var $showBrOnScreen = true;
+	public $showBrOnScreen = true;
 
 	/**
 	 * bool $setPhpError enable/disable changing php error configuration
 	 */
-	var $setPhpError = false;
+	public $setPhpError = false;
 
 	/**
 	 * string $setPhpErrorReporting set the php error reporting
 	 * for developement use E_ALL and for stable production use E_ALL & ~E_NOTICE 
 	 */
-	var $setPhpErrorReporting = E_ALL;
+	public $setPhpErrorReporting = E_ALL;
 
 	/**
 	 * init/start class

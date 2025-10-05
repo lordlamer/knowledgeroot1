@@ -8,8 +8,8 @@
  */
 class default_menu {
 
-	var $CLASS;
-	var $defaultmenu = array();
+	public $CLASS;
+	public $defaultmenu = array();
 
 	/**
 	 * init/start class

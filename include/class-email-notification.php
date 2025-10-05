@@ -6,8 +6,8 @@
  * @author Frank Habermann
  */
 class knowledgeroot_notification {
-	var $CLASS = array();
-	var $config = null;
+	public $CLASS = array();
+	public $config = null;
 
 	/**
 	 * start mailnotification

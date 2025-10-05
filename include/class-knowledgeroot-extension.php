@@ -7,12 +7,12 @@
  * @version $Id: class-knowledgeroot-extension.php 1006 2011-03-24 20:34:20Z lordlamer $
  */
 class knowledgeroot_extension {
-	var $CLASS = array();
+	public $CLASS = array();
 
-	var $menu = array(); // var for the menu
+	public $menu = array(); // var for the menu
 
-	var $content = ""; // content that should be displayed in the mainframe
-	var $default_content = ""; // will be shown if content is empty
+	public $content = ""; // content that should be displayed in the mainframe
+	public $default_content = ""; // will be shown if content is empty
 
 	/**
 	 * init/start class

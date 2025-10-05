@@ -13,26 +13,26 @@ class knowledgeroot_auth {
 	 * DELETE FROM users_login WHERE Differenz zwischen time()-lasttrydate > X
 	 */
 
-	var $CLASS;
+	public $CLASS;
 
 	/**
 	 * Benutzername
 	 * @access protected
 	 */
-	var $user = '';
+	public $user = '';
 
 	/**
 	 * Benutzer-ID
 	 * @access protected
 	 */
-	var $userid = 0;
+	public $userid = 0;
 
 	/**
 	 * lasttrydate
 	 * mittels PHP-Funktion time() gespeicherter Wert
 	 * @access protected
 	 */
-	var $lasttrydate = 0;
+	public $lasttrydate = 0;
 
 	/**
 	 * Wartezeit
@@ -40,7 +40,7 @@ class knowledgeroot_auth {
 	 * Versuch und zweitem Versuch < lasttrydate + $CONFIG['login']['delay'] ist.
 	 * @access protected
 	 */
-	var $wartezeit = false;
+	public $wartezeit = false;
 
 	/**
 	 * Account Sperre
@@ -48,13 +48,13 @@ class knowledgeroot_auth {
 	 * mehr ermoeglicht.
 	 * @access protected
 	 */
-	var $loginblock = false;
+	public $loginblock = false;
 
 	/**
 	 * Loginversucheszaehler
 	 * @access protected
 	 */
-	var $login_trial = 0;
+	public $login_trial = 0;
 
 	/**
 	 * garbage collector time
@@ -65,7 +65,7 @@ class knowledgeroot_auth {
 	 * @access private
 	 * @param  int  time in seconds
 	 */
-	var $gc_time = 6000;
+	public $gc_time = 6000;
 
 	/**
 	 * init/start class

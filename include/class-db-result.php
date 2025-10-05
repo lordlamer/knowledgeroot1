@@ -11,19 +11,19 @@ class db_result {
 	 * reference to all classes
 	 * @param array $CLASS
 	 */
-	var $CLASS = null;
+	public $CLASS = null;
 
 	/**
 	 * result of query
 	 * @param resource $result
 	 */
-	var $result = null;
+	public $result = null;
 
 	/**
 	 * query that was used
 	 * @param string $query
 	 */
-	var $query = "";
+	public $query = "";
 
 	/**
 	 * constructor for php5

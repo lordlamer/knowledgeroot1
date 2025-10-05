@@ -10,12 +10,12 @@ class ajax_xml {
 	/**
 	 * array $CLASS global array with classes
 	 */
-	var $CLASS = array();
+	public $CLASS = array();
 
 	/**
 	 * string $xmlcode var with xmlcode to return
 	 */
-	var $xmlcode = "";
+	public $xmlcode = "";
 
 	/**
 	 * init/start class

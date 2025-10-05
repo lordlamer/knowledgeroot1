@@ -10,12 +10,12 @@ class hooks {
 	/**
 	 * array $CLASS reference to global $CLASS variable
 	 */
-	var $CLASS;
+	public $CLASS;
 
 	/**
 	 * array $hooks array that is used to save the hooks
 	 */
-	var $hooks = array();
+	public $hooks = array();
 	
 	/**
 	 * init/start class

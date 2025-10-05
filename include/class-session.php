@@ -10,42 +10,42 @@ class session {
 	/**
 	 * array $CLASS global array to access all classes
 	 */
-	var $CLASS = array();
+	public $CLASS = array();
 
 	/**
 	 * bool $handle enable to handle lifetime and checks of session
 	 */
-	var $handle = false;
+	public $handle = false;
 
 	/**
 	 * int $lifetime session lifetime in minutes
 	 */
-	var $lifetime = 60;
+	public $lifetime = 60;
 
 	/**
 	 * string $name session name
 	 */
-	var $name = "";
+	public $name = "";
 
 	/**
 	 * string $id session id
 	 */
-	var $id = "";
+	public $id = "";
 
 	/**
 	 * bool $checkBrowser check session for same browser?
 	 */
-	var $checkBrowser = false;
+	public $checkBrowser = false;
 
 	/**
 	 * bool $checkIP check session for same ip?
 	 */
-	var $checkIP = false;
+	public $checkIP = false;
 
 	/**
 	 * bool $onlyCookie only allow cookies?
 	 */
-	var $onlyCookies = false;
+	public $onlyCookies = false;
 
 	/**
 	 * init/start class
