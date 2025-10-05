@@ -14,6 +14,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Knowledgeroot\Domain\User\Service\UserService;
 use Knowledgeroot\Application\UseCase\Auth\LoginUseCase;
+use Knowledgeroot\Infrastructure\Session\SessionManager;
 use Twig\Environment;
 
 /**
@@ -24,6 +25,7 @@ class UserController
     public function __construct(
         private UserService $userService,
         private LoginUseCase $loginUseCase,
+        private SessionManager $sessionManager,
         private Environment $twig
     ) {}
 
@@ -71,8 +73,15 @@ class UserController
      */
     public function loginForm(Request $request, Response $response): Response
     {
+        // If already logged in, redirect to home
+        if ($this->sessionManager->isLoggedIn()) {
+            return $response
+                ->withHeader('Location', '/')
+                ->withStatus(302);
+        }
+
         $html = $this->twig->render('auth/login.html.twig', [
-            'error' => null,
+            'error' => $this->sessionManager->getFlash('error'),
             'username' => ''
         ]);
 
@@ -88,6 +97,7 @@ class UserController
         $body = $request->getParsedBody();
         $username = $body['username'] ?? '';
         $password = $body['password'] ?? '';
+        $remember = isset($body['remember']);
 
         if (empty($username) || empty($password)) {
             $html = $this->twig->render('auth/login.html.twig', [
@@ -116,10 +126,18 @@ class UserController
                     ->withStatus(401);
             }
 
-            // TODO: Set session, redirect to dashboard
-            // For now, redirect to home
+            // Login successful - create session
+            $user = $result->getUser();
+            $this->sessionManager->login($user, $remember);
+
+            // Set flash message
+            $this->sessionManager->setFlash('success', 'Welcome back, ' . $user->getUsername() . '!');
+
+            // Check if there's a redirect URL from before login
+            $redirectUrl = $this->sessionManager->getFlash('redirect_after_login', '/');
+
             return $response
-                ->withHeader('Location', '/')
+                ->withHeader('Location', $redirectUrl)
                 ->withStatus(302);
 
         } catch (\Exception $e) {
@@ -133,6 +151,19 @@ class UserController
                 ->withHeader('Content-Type', 'text/html')
                 ->withStatus(500);
         }
+    }
+
+    /**
+     * Logout (HTML)
+     */
+    public function logout(Request $request, Response $response): Response
+    {
+        $this->sessionManager->logout();
+        $this->sessionManager->setFlash('success', 'You have been logged out successfully.');
+
+        return $response
+            ->withHeader('Location', '/login')
+            ->withStatus(302);
     }
 
     /**

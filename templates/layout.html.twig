@@ -92,10 +92,10 @@
 
                 {# User Menu #}
                 <ul class="navbar-nav">
-                    {% if app.user is defined and app.user %}
+                    {% if is_logged_in and current_user %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user"></i> {{ app.user.username }}
+                                <i class="fas fa-user"></i> {{ current_user.username }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="/profile"><i class="fas fa-user-circle"></i> Profile</a></li>
@@ -131,14 +131,21 @@
                 {% block breadcrumb %}{% endblock %}
 
                 {# Flash Messages #}
-                {% if messages is defined %}
-                    {% for type, message_list in messages %}
-                        {% for message in message_list %}
-                            <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
-                                {{ message }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                        {% endfor %}
+                {% if flash_messages is defined and flash_messages %}
+                    {% for type, message in flash_messages %}
+                        <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                            {% if type == 'success' %}
+                                <i class="fas fa-check-circle"></i>
+                            {% elseif type == 'error' %}
+                                <i class="fas fa-exclamation-circle"></i>
+                            {% elseif type == 'warning' %}
+                                <i class="fas fa-exclamation-triangle"></i>
+                            {% elseif type == 'info' %}
+                                <i class="fas fa-info-circle"></i>
+                            {% endif %}
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
                     {% endfor %}
                 {% endif %}
 

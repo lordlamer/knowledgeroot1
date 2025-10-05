@@ -77,6 +77,12 @@ return function (Container $container) {
         return $translator;
     });
 
+    // Session Manager
+    $container->set(
+        \Knowledgeroot\Infrastructure\Session\SessionManager::class,
+        \DI\autowire(\Knowledgeroot\Infrastructure\Session\SessionManager::class)
+    );
+
     // Twig Template Engine
     $container->set(Environment::class, function (ContainerInterface $c) {
         $config = $c->get('config');
@@ -159,6 +165,17 @@ return function (Container $container) {
     $container->set(
         \Knowledgeroot\Application\UseCase\Home\ShowDashboardUseCase::class,
         \DI\autowire(\Knowledgeroot\Application\UseCase\Home\ShowDashboardUseCase::class)
+    );
+
+    // Middleware
+    $container->set(
+        \Knowledgeroot\Infrastructure\Middleware\AuthenticationMiddleware::class,
+        \DI\autowire(\Knowledgeroot\Infrastructure\Middleware\AuthenticationMiddleware::class)
+    );
+
+    $container->set(
+        \Knowledgeroot\Infrastructure\Middleware\TwigContextMiddleware::class,
+        \DI\autowire(\Knowledgeroot\Infrastructure\Middleware\TwigContextMiddleware::class)
     );
 
     // Controllers
