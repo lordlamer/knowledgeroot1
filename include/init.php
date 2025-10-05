@@ -1,7 +1,5 @@
 <?php
 
-use Pimple\Container;
-
 /**
  *
  *
@@ -15,6 +13,14 @@ $base_path = realpath(dirname(__FILE__).'/../') . '/';
 
 // load required files
 require_once($base_path."vendor/autoload.php");
+
+// use statements must come after autoload
+use Pimple\Container;
+use Laminas\Config\Reader\Ini as IniReader;
+use Laminas\Config\Config;
+use Laminas\Cache\StorageFactory;
+use Laminas\I18n\Translator\Translator;
+use Twig\Extra\Intl\IntlExtension;
 require_once($base_path."include/version.php");
 require_once($base_path."include/class-session.php");
 require_once($base_path."include/class-runtime.php");
@@ -48,9 +54,6 @@ if(!is_file($base_path.'config/app.ini')) {
 }
 
 // init config
-use Laminas\Config\Reader\Ini as IniReader;
-use Laminas\Config\Config;
-
 $reader = new IniReader();
 $configArray = $reader->fromFile($base_path.'config/app.ini');
 $CLASS['config'] = new Config($configArray, true);
@@ -72,7 +75,6 @@ $CLASS['container']['twig'] = new \Twig\Environment($loader, [
 ]);
 
 // use translation extension for twig - Twig 3 uses twig/intl-extra
-use Twig\Extra\Intl\IntlExtension;
 $CLASS['container']['twig']->addExtension(new IntlExtension());
 
 // init slim
@@ -119,7 +121,6 @@ if(!is_writeable($base_path.$CLASS['config']->cache->path)) {
 	die('Cache path is not writeable:'.$base_path.$CLASS['config']->cache->path);
 }
 // init cache - Laminas Cache
-use Laminas\Cache\StorageFactory;
 $CLASS['cache'] = StorageFactory::factory([
     'adapter' => [
         'name' => 'filesystem',
@@ -150,8 +151,6 @@ if(!$CLASS['session']->checkSession()) {
 }
 
 // init gettext - Laminas I18n Translator
-use Laminas\I18n\Translator\Translator;
-
 $CLASS['translate'] = new Translator();
 $CLASS['translate']->setCache($CLASS['cache']);
 
