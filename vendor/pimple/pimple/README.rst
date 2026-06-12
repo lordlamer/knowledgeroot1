@@ -3,6 +3,12 @@ Pimple
 
 .. caution::
 
+    Pimple is now closed for changes. No new features will be added and no
+    cosmetic changes will be accepted either. The only accepted changes are
+    compatibility with newer PHP versions and security issue fixes.
+
+.. caution::
+
     This is the documentation for Pimple 3.x. If you are using Pimple 1.x, read
     the `Pimple 1.x documentation`_. Reading the Pimple 1.x code is also a good
     way to learn more about how to create a simple Dependency Injection
@@ -46,13 +52,9 @@ object:
 .. code-block:: php
 
     // define some services
-    $container['session_storage'] = function ($c) {
-        return new SessionStorage('SESSION_ID');
-    };
+    $container['session_storage'] = fn($c) => new SessionStorage('SESSION_ID');
 
-    $container['session'] = function ($c) {
-        return new Session($c['session_storage']);
-    };
+    $container['session'] = fn($c) => new Session($c['session_storage']);
 
 Notice that the anonymous function has access to the current container
 instance, allowing references to other services or parameters.
@@ -80,9 +82,7 @@ anonymous function with the ``factory()`` method
 
 .. code-block:: php
 
-    $container['session'] = $container->factory(function ($c) {
-        return new Session($c['session_storage']);
-    });
+    $container['session'] = $container->factory(fn($c) => new Session($c['session_storage']));
 
 Now, each call to ``$container['session']`` returns a new instance of the
 session.
@@ -103,9 +103,7 @@ If you change the ``session_storage`` service definition like below:
 
 .. code-block:: php
 
-    $container['session_storage'] = function ($c) {
-        return new $c['session_storage_class']($c['cookie_name']);
-    };
+    $container['session_storage'] = fn($c) => new $c['session_storage_class']($c['cookie_name']);
 
 You can now easily change the cookie name by overriding the
 ``cookie_name`` parameter instead of redefining the service
@@ -120,9 +118,7 @@ parameters:
 
 .. code-block:: php
 
-    $container['random_func'] = $container->protect(function () {
-        return rand();
-    });
+    $container['random_func'] = $container->protect(fn() => rand());
 
 Modifying Services after Definition
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -133,9 +129,7 @@ run on your service just after it is created:
 
 .. code-block:: php
 
-    $container['session_storage'] = function ($c) {
-        return new $c['session_storage_class']($c['cookie_name']);
-    };
+    $container['session_storage'] = fn($c) => new $c['session_storage_class']($c['cookie_name']);
 
     $container->extend('session_storage', function ($storage, $c) {
         $storage->...();
@@ -181,9 +175,7 @@ raw access to this function, you can use the ``raw()`` method:
 
 .. code-block:: php
 
-    $container['session'] = function ($c) {
-        return new Session($c['session_storage']);
-    };
+    $container['session'] = fn($c) => new Session($c['session_storage']);
 
     $sessionFunction = $container->raw('session');
 
@@ -207,9 +199,7 @@ methods:
     use Pimple\Psr11\Container as PsrContainer;
 
     $container = new Container();
-    $container['service'] = function ($c) {
-        return new Service();
-    };
+    $container['service'] = fn($c) => new Service();
     $psr11 = new PsrContainer($container);
 
     $controller = function (PsrContainer $container) {
@@ -259,13 +249,9 @@ registered under the name ``dispatcher``:
         }
     }
 
-    $container['logger'] = function ($c) {
-        return new Monolog\Logger();
-    };
-    $container['dispatcher'] = function () {
-        return new EventDispatcher();
-    };
-
+    $container['logger'] = fn($c) => new Monolog\Logger();
+    $container['dispatcher'] = fn($c) => new EventDispatcher();
+    
     $container['service'] = function ($c) {
         $locator = new ServiceLocator($c, array('logger', 'event_dispatcher' => 'dispatcher'));
 
@@ -302,7 +288,7 @@ when iterated over:
         public function canAccess($resource)
         {
             foreach ($this->voters as $voter) {
-                if (true === $voter->canAccess($resource) {
+                if (true === $voter->canAccess($resource)) {
                     return true;
                 }
             }
@@ -313,14 +299,8 @@ when iterated over:
 
     $container = new Container();
 
-    $container['voter1'] = function ($c) {
-        return new SomeVoter();
-    }
-    $container['voter2'] = function ($c) {
-        return new SomeOtherVoter($c['auth']);
-    }
-    $container['auth'] = function ($c) {
-        return new AuthorizationService(new ServiceIterator($c, array('voter1', 'voter2'));
-    }
+    $container['voter1'] = fn($c) => new SomeVoter();
+    $container['voter2'] = fn($c) => new SomeOtherVoter($c['auth']);
+    $container['auth'] = fn ($c) => new AuthorizationService(new ServiceIterator($c, array('voter1', 'voter2'));
 
 .. _Pimple 1.x documentation: https://github.com/silexphp/Pimple/tree/1.1

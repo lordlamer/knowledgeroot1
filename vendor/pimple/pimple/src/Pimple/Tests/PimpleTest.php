@@ -26,12 +26,15 @@
 
 namespace Pimple\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
 use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 
 /**
  * @author Igor Wiedler <igor@wiedler.ch>
  */
-class PimpleTest extends \PHPUnit_Framework_TestCase
+class PimpleTest extends TestCase
 {
     public function testWithString()
     {
@@ -99,29 +102,29 @@ class PimpleTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorInjection()
     {
-        $params = array('param' => 'value');
+        $params = ['param' => 'value'];
         $pimple = new Container($params);
 
         $this->assertSame($params['param'], $pimple['param']);
     }
 
-    /**
-     * @expectedException \Pimple\Exception\UnknownIdentifierException
-     * @expectedExceptionMessage Identifier "foo" is not defined.
-     */
     public function testOffsetGetValidatesKeyIsPresent()
     {
+        $this->expectException(\Pimple\Exception\UnknownIdentifierException::class);
+        $this->expectExceptionMessage('Identifier "foo" is not defined.');
+
         $pimple = new Container();
         echo $pimple['foo'];
     }
 
     /**
      * @group legacy
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Identifier "foo" is not defined.
      */
     public function testLegacyOffsetGetValidatesKeyIsPresent()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Identifier "foo" is not defined.');
+
         $pimple = new Container();
         echo $pimple['foo'];
     }
@@ -149,6 +152,7 @@ class PimpleTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider serviceDefinitionProvider
      */
+    #[DataProvider('serviceDefinitionProvider')]
     public function testShare($service)
     {
         $pimple = new Container();
@@ -166,6 +170,7 @@ class PimpleTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider serviceDefinitionProvider
      */
+    #[DataProvider('serviceDefinitionProvider')]
     public function testProtect($service)
     {
         $pimple = new Container();
@@ -184,7 +189,9 @@ class PimpleTest extends \PHPUnit_Framework_TestCase
     public function testRaw()
     {
         $pimple = new Container();
-        $pimple['service'] = $definition = $pimple->factory(function () { return 'foo'; });
+        $pimple['service'] = $definition = $pimple->factory(function () {
+            return 'foo';
+        });
         $this->assertSame($definition, $pimple->raw('service'));
     }
 
@@ -198,26 +205,33 @@ class PimpleTest extends \PHPUnit_Framework_TestCase
     public function testFluentRegister()
     {
         $pimple = new Container();
-        $this->assertSame($pimple, $pimple->register($this->getMockBuilder('Pimple\ServiceProviderInterface')->getMock()));
+
+        $stub = new class implements ServiceProviderInterface {
+            public function register(Container $pimple)
+            {
+            }
+        };
+
+        $this->assertSame($pimple, $pimple->register($stub));
     }
 
-    /**
-     * @expectedException \Pimple\Exception\UnknownIdentifierException
-     * @expectedExceptionMessage Identifier "foo" is not defined.
-     */
     public function testRawValidatesKeyIsPresent()
     {
+        $this->expectException(\Pimple\Exception\UnknownIdentifierException::class);
+        $this->expectExceptionMessage('Identifier "foo" is not defined.');
+
         $pimple = new Container();
         $pimple->raw('foo');
     }
 
     /**
      * @group legacy
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Identifier "foo" is not defined.
      */
     public function testLegacyRawValidatesKeyIsPresent()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Identifier "foo" is not defined.');
+
         $pimple = new Container();
         $pimple->raw('foo');
     }
@@ -225,6 +239,7 @@ class PimpleTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider serviceDefinitionProvider
      */
+    #[DataProvider('serviceDefinitionProvider')]
     public function testExtend($service)
     {
         $pimple = new Container();
@@ -254,43 +269,53 @@ class PimpleTest extends \PHPUnit_Framework_TestCase
 
     public function testExtendDoesNotLeakWithFactories()
     {
-        if (extension_loaded('pimple')) {
+        if (\extension_loaded('pimple')) {
             $this->markTestSkipped('Pimple extension does not support this test');
         }
         $pimple = new Container();
 
-        $pimple['foo'] = $pimple->factory(function () { return; });
-        $pimple['foo'] = $pimple->extend('foo', function ($foo, $pimple) { return; });
+        $pimple['foo'] = $pimple->factory(function () {
+            return;
+        });
+        $pimple['foo'] = $pimple->extend('foo', function ($foo, $pimple) {
+            return;
+        });
         unset($pimple['foo']);
 
         $p = new \ReflectionProperty($pimple, 'values');
-        $p->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $p->setAccessible(true);
+        }
         $this->assertEmpty($p->getValue($pimple));
 
         $p = new \ReflectionProperty($pimple, 'factories');
-        $p->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $p->setAccessible(true);
+        }
         $this->assertCount(0, $p->getValue($pimple));
     }
 
-    /**
-     * @expectedException \Pimple\Exception\UnknownIdentifierException
-     * @expectedExceptionMessage Identifier "foo" is not defined.
-     */
     public function testExtendValidatesKeyIsPresent()
     {
+        $this->expectException(\Pimple\Exception\UnknownIdentifierException::class);
+        $this->expectExceptionMessage('Identifier "foo" is not defined.');
+
         $pimple = new Container();
-        $pimple->extend('foo', function () {});
+        $pimple->extend('foo', function () {
+        });
     }
 
     /**
      * @group legacy
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Identifier "foo" is not defined.
      */
     public function testLegacyExtendValidatesKeyIsPresent()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Identifier "foo" is not defined.');
+
         $pimple = new Container();
-        $pimple->extend('foo', function () {});
+        $pimple->extend('foo', function () {
+        });
     }
 
     public function testKeys()
@@ -299,7 +324,7 @@ class PimpleTest extends \PHPUnit_Framework_TestCase
         $pimple['foo'] = 123;
         $pimple['bar'] = 123;
 
-        $this->assertEquals(array('foo', 'bar'), $pimple->keys());
+        $this->assertEquals(['foo', 'bar'], $pimple->keys());
     }
 
     /** @test */
@@ -322,11 +347,13 @@ class PimpleTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider badServiceDefinitionProvider
-     * @expectedException \Pimple\Exception\ExpectedInvokableException
-     * @expectedExceptionMessage Service definition is not a Closure or invokable object.
      */
+    #[DataProvider('badServiceDefinitionProvider')]
     public function testFactoryFailsForInvalidServiceDefinitions($service)
     {
+        $this->expectException(\Pimple\Exception\ExpectedInvokableException::class);
+        $this->expectExceptionMessage('Service definition is not a Closure or invokable object.');
+
         $pimple = new Container();
         $pimple->factory($service);
     }
@@ -334,22 +361,26 @@ class PimpleTest extends \PHPUnit_Framework_TestCase
     /**
      * @group legacy
      * @dataProvider badServiceDefinitionProvider
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Service definition is not a Closure or invokable object.
      */
+    #[DataProvider('badServiceDefinitionProvider')]
     public function testLegacyFactoryFailsForInvalidServiceDefinitions($service)
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Service definition is not a Closure or invokable object.');
+
         $pimple = new Container();
         $pimple->factory($service);
     }
 
     /**
      * @dataProvider badServiceDefinitionProvider
-     * @expectedException \Pimple\Exception\ExpectedInvokableException
-     * @expectedExceptionMessage Callable is not a Closure or invokable object.
      */
+    #[DataProvider('badServiceDefinitionProvider')]
     public function testProtectFailsForInvalidServiceDefinitions($service)
     {
+        $this->expectException(\Pimple\Exception\ExpectedInvokableException::class);
+        $this->expectExceptionMessage('Callable is not a Closure or invokable object.');
+
         $pimple = new Container();
         $pimple->protect($service);
     }
@@ -357,45 +388,55 @@ class PimpleTest extends \PHPUnit_Framework_TestCase
     /**
      * @group legacy
      * @dataProvider badServiceDefinitionProvider
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Callable is not a Closure or invokable object.
      */
+    #[DataProvider('badServiceDefinitionProvider')]
     public function testLegacyProtectFailsForInvalidServiceDefinitions($service)
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Callable is not a Closure or invokable object.');
+
         $pimple = new Container();
         $pimple->protect($service);
     }
 
     /**
      * @dataProvider badServiceDefinitionProvider
-     * @expectedException \Pimple\Exception\InvalidServiceIdentifierException
-     * @expectedExceptionMessage Identifier "foo" does not contain an object definition.
      */
+    #[DataProvider('badServiceDefinitionProvider')]
     public function testExtendFailsForKeysNotContainingServiceDefinitions($service)
     {
+        $this->expectException(\Pimple\Exception\InvalidServiceIdentifierException::class);
+        $this->expectExceptionMessage('Identifier "foo" does not contain an object definition.');
+
         $pimple = new Container();
         $pimple['foo'] = $service;
-        $pimple->extend('foo', function () {});
+        $pimple->extend('foo', function () {
+        });
     }
 
     /**
      * @group legacy
      * @dataProvider badServiceDefinitionProvider
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Identifier "foo" does not contain an object definition.
      */
+    #[DataProvider('badServiceDefinitionProvider')]
     public function testLegacyExtendFailsForKeysNotContainingServiceDefinitions($service)
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Identifier "foo" does not contain an object definition.');
+
         $pimple = new Container();
         $pimple['foo'] = $service;
-        $pimple->extend('foo', function () {});
+        $pimple->extend('foo', function () {
+        });
     }
 
     /**
      * @group legacy
      * @expectedDeprecation How Pimple behaves when extending protected closures will be fixed in Pimple 4. Are you sure "foo" should be protected?
+     * @dataProvider badServiceDefinitionProvider
      */
-    public function testExtendingProtectedClosureDeprecation()
+    #[DataProvider('badServiceDefinitionProvider')]
+    public function testExtendingProtectedClosureDeprecation($service)
     {
         $pimple = new Container();
         $pimple['foo'] = $pimple->protect(function () {
@@ -411,84 +452,90 @@ class PimpleTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider badServiceDefinitionProvider
-     * @expectedException \Pimple\Exception\ExpectedInvokableException
-     * @expectedExceptionMessage Extension service definition is not a Closure or invokable object.
      */
+    #[DataProvider('badServiceDefinitionProvider')]
     public function testExtendFailsForInvalidServiceDefinitions($service)
     {
+        $this->expectException(\Pimple\Exception\ExpectedInvokableException::class);
+        $this->expectExceptionMessage('Extension service definition is not a Closure or invokable object.');
+
         $pimple = new Container();
-        $pimple['foo'] = function () {};
+        $pimple['foo'] = function () {
+        };
         $pimple->extend('foo', $service);
     }
 
     /**
      * @group legacy
      * @dataProvider badServiceDefinitionProvider
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Extension service definition is not a Closure or invokable object.
      */
+    #[DataProvider('badServiceDefinitionProvider')]
     public function testLegacyExtendFailsForInvalidServiceDefinitions($service)
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Extension service definition is not a Closure or invokable object.');
+
         $pimple = new Container();
-        $pimple['foo'] = function () {};
+        $pimple['foo'] = function () {
+        };
         $pimple->extend('foo', $service);
     }
 
-    /**
-     * @expectedException \Pimple\Exception\FrozenServiceException
-     * @expectedExceptionMessage Cannot override frozen service "foo".
-     */
     public function testExtendFailsIfFrozenServiceIsNonInvokable()
     {
+        $this->expectException(\Pimple\Exception\FrozenServiceException::class);
+        $this->expectExceptionMessage('Cannot override frozen service "foo".');
+
         $pimple = new Container();
         $pimple['foo'] = function () {
             return new Fixtures\NonInvokable();
         };
         $foo = $pimple['foo'];
 
-        $pimple->extend('foo', function () {});
+        $pimple->extend('foo', function () {
+        });
     }
 
-    /**
-     * @expectedException \Pimple\Exception\FrozenServiceException
-     * @expectedExceptionMessage Cannot override frozen service "foo".
-     */
     public function testExtendFailsIfFrozenServiceIsInvokable()
     {
+        $this->expectException(\Pimple\Exception\FrozenServiceException::class);
+        $this->expectExceptionMessage('Cannot override frozen service "foo".');
+
         $pimple = new Container();
         $pimple['foo'] = function () {
             return new Fixtures\Invokable();
         };
         $foo = $pimple['foo'];
 
-        $pimple->extend('foo', function () {});
+        $pimple->extend('foo', function () {
+        });
     }
 
     /**
      * Provider for invalid service definitions.
      */
-    public function badServiceDefinitionProvider()
+    public static function badServiceDefinitionProvider()
     {
-        return array(
-          array(123),
-          array(new Fixtures\NonInvokable()),
-        );
+        return [
+          [123],
+          [new Fixtures\NonInvokable()],
+        ];
     }
 
     /**
      * Provider for service definitions.
      */
-    public function serviceDefinitionProvider()
+    public static function serviceDefinitionProvider()
     {
-        return array(
-            array(function ($value) {
+        return [
+            [function ($value) {
                 $service = new Fixtures\Service();
                 $service->value = $value;
 
                 return $service;
-            }),
-            array(new Fixtures\Invokable()),
-        );
+            }],
+            [new Fixtures\Invokable()],
+        ];
     }
 
     public function testDefiningNewServiceAfterFreeze()
@@ -505,12 +552,11 @@ class PimpleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('bar', $pimple['bar']);
     }
 
-    /**
-     * @expectedException \Pimple\Exception\FrozenServiceException
-     * @expectedExceptionMessage Cannot override frozen service "foo".
-     */
     public function testOverridingServiceAfterFreeze()
     {
+        $this->expectException(\Pimple\Exception\FrozenServiceException::class);
+        $this->expectExceptionMessage('Cannot override frozen service "foo".');
+
         $pimple = new Container();
         $pimple['foo'] = function () {
             return 'foo';
@@ -524,11 +570,12 @@ class PimpleTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @group legacy
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Cannot override frozen service "foo".
      */
     public function testLegacyOverridingServiceAfterFreeze()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Cannot override frozen service "foo".');
+
         $pimple = new Container();
         $pimple['foo'] = function () {
             return 'foo';
