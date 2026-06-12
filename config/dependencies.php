@@ -14,8 +14,14 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Knowledgeroot\Application\Login\AuthenticateUser;
 use Knowledgeroot\Domain\Group\GroupRepository;
+use Knowledgeroot\Domain\Page\PageAccess;
+use Knowledgeroot\Domain\Page\PagePathResolver;
+use Knowledgeroot\Domain\Search\SearchRepository;
 use Knowledgeroot\Domain\User\LoginThrottleRepository;
 use Knowledgeroot\Domain\User\UserRepository;
+use Knowledgeroot\Infrastructure\Persistence\DbalPageAccess;
+use Knowledgeroot\Infrastructure\Persistence\DbalPagePathResolver;
+use Knowledgeroot\Infrastructure\Persistence\DbalSearchRepository;
 use Knowledgeroot\Infrastructure\Persistence\DbalGroupRepository;
 use Knowledgeroot\Infrastructure\Theme\ThemeLocator;
 use Knowledgeroot\Presentation\Http\UrlHelper;
@@ -113,6 +119,9 @@ return [
 	UserRepository::class => autowire(DbalUserRepository::class),
 	LoginThrottleRepository::class => autowire(DbalLoginThrottleRepository::class),
 	GroupRepository::class => autowire(DbalGroupRepository::class),
+	SearchRepository::class => autowire(DbalSearchRepository::class),
+	PageAccess::class => autowire(DbalPageAccess::class),
+	PagePathResolver::class => autowire(DbalPagePathResolver::class),
 
 	// use cases
 	AuthenticateUser::class => function (ContainerInterface $c) {

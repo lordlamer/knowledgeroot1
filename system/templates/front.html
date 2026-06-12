@@ -25,10 +25,9 @@
             {{ language_dropdown|raw }}
         </form>
 
-        <form class="form-inline my-2 my-lg-0" action="index.php" method="post" style="margin-right: 5px;">
-            <input class="form-control mr-sm-2" type="text" name="search" placeholder="{{ search_placeholder }}" aria-label="{{ search_placeholder }}" value="{{ search_value }}" />
-            <input type="hidden" name="submit" value="GO" />
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit">{{ search_action_text }}</button>
+        <form class="form-inline my-2 my-lg-0" action="search" method="get" style="margin-right: 5px;">
+            <input class="form-control mr-sm-2" type="text" name="q" placeholder="{{ search_placeholder }}" aria-label="{{ search_placeholder }}" value="{{ search_value }}" />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{ search_action_text }}</button>
         </form>
 
         <span class="navbar-text">

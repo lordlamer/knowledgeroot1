@@ -42,6 +42,8 @@ $app->get('/ping', function (Request $request, Response $response) {
 	return $response;
 });
 
+$app->get('/search', \Knowledgeroot\Presentation\Search\SearchAction::class);
+
 $app->get('/login', \Knowledgeroot\Presentation\Login\ShowLoginFormAction::class);
 $app->post('/login', \Knowledgeroot\Presentation\Login\SubmitLoginAction::class);
 $app->get('/logout', \Knowledgeroot\Presentation\Login\LogoutAction::class);
