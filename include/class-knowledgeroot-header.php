@@ -176,15 +176,16 @@ class knowledgeroot_header {
 			case 'addgroup': $legacyUserTarget = 'groups/new'; break;
 			case 'editgroup': $legacyUserTarget = isset($_GET['gid']) ? 'groups/' . (int) $_GET['gid'] . '/edit' : 'users'; break;
 			case 'delgroup': $legacyUserTarget = 'users'; break;
+			case 'options': $legacyUserTarget = 'options'; break;
+			case 'login': $legacyUserTarget = 'login'; break;
+			case 'showsearch':
+				$searchword = isset($_GET['key'], $_SESSION['search'][$_GET['key']]) ? stripslashes($_SESSION['search'][$_GET['key']]) : '';
+				$legacyUserTarget = 'search?q=' . urlencode($searchword);
+				break;
 		}
 		if($legacyUserTarget !== null) {
 			header('Location: ' . $legacyUserTarget);
 			exit();
-		}
-
-		// edit options?
-		if (isset ($_POST['action']) and $_POST['action'] == "options") {
-			$this->edit_options();
 		}
 
 		// hide menu
@@ -227,9 +228,10 @@ class knowledgeroot_header {
 			$this->open_tree_element();
 		}
 
-		// create search
+		// search has moved to the slim route - redirect old form posts
 		if (isset($_POST['submit']) && isset ($_POST['search']) and $_POST['search'] != "") {
-			$this->create_search();
+			header('Location: search?q=' . urlencode(stripslashes($_POST['search'])));
+			exit();
 		}
 
 		// add title to htmlheader
@@ -1212,44 +1214,6 @@ class knowledgeroot_header {
 	}
 
 	/**
-	 * edit options
-	 */
-	function edit_options() {
-		$this->CLASS['hooks']->setHook("kr_header","edit_options","start");
-
-		if($_POST['language'] != $_SESSION['language']) {
-			$_SESSION['language'] = $_POST['language'];
-
-
-			// gettext
-			$language = str_replace(".UTF8","", $_POST['language']);
-			$this->CLASS['translate'] = new \Knowledgeroot\Infrastructure\Translation\Translator($this->CLASS['config']->base->base_path.'system/language/'.$language.'.UTF8/LC_MESSAGES/knowledgeroot.mo', $language);
-
-			$res = $this->CLASS['db']->query(sprintf("UPDATE users SET language='%s' WHERE id=%d",$_POST['language'],$_SESSION['userid']));
-			$this->addmessage($this->CLASS['translate']->_('Language changed.'));
-		}
-
-		if($_POST['password'] == $_POST['password1'] && $_POST['password'] != "" && $_SESSION['userid'] != 0) {
-			$res = $this->CLASS['db']->query(sprintf("UPDATE users SET password='%s' WHERE id=%d",md5(addslashes($_POST['password'])),$_SESSION['userid']));
-			$this->addmessage($this->CLASS['translate']->_('Password changed!'));
-		} else {
-			if($_POST['password'] != "") {
-				$this->addwarning($this->CLASS['translate']->_('Failed to change password!'));
-			}
-		}
-
-		if($_POST['theme'] != $_SESSION['theme']) {
-			$_SESSION['theme'] = $_POST['theme'];
-			$res = $this->CLASS['db']->query(sprintf("UPDATE users SET theme='%s' WHERE id=%d",$_POST['theme'],$_SESSION['userid']));
-			$this->addmessage($this->CLASS['translate']->_('Theme was changed.'));
-		} else {
-			//$this->messages .= "<div class=\"redmsg\">".$this->CLASS['language']->get['optionform']['themefailed']."</div>";
-		}
-
-		$this->CLASS['hooks']->setHook("kr_header","edit_options","end");
-	}
-
-	/**
 	 * change language for current session
 	 */
 	function change_language() {
@@ -1602,37 +1566,6 @@ class knowledgeroot_header {
 
 			$this->CLASS['hooks']->setHook("kr_header","move_content_position","end");
 		}
-	}
-
-	/**
-	 * This function will add the searchwords to your session and will redirect you to the search
-	 */
-	function create_search() {
-		$this->CLASS['hooks']->setHook("kr_content","create_search","start");
-
-		// if user search for special content the searchword is #[0-9]+
-		if(preg_match('/#([0-9]+)/', $_POST['search'], $match)) {
-			$res = $this->CLASS['db']->query(sprintf('SELECT belongs_to FROM content WHERE id=%d',$match[1]));
-			$cnt = $this->CLASS['db']->num_rows($res);
-
-			if($cnt == 1) {
-				$row = $this->CLASS['db']->fetch_assoc($res);
-				header('Location: index.php?id='.$row['belongs_to'].'#'.$match[1]);
-				exit();
-			}
-		}
-
-		// generete uniqu key for search
-		$sum = md5($_POST['search']);
-
-		// save searchword to key in the session
-		$_SESSION['search'][$sum] = $_POST['search'];
-
-		$this->CLASS['hooks']->setHook("kr_content","create_search","end");
-
-		// redirect to show search
-		header("Location: index.php?action=showsearch&key=".$sum."");
-		exit();
 	}
 
 	/**

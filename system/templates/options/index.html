@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ 'options'|trans }} - {{ site_title }}{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" style="border-bottom: 3px solid #F88529;">
+    <a class="navbar-brand" href="{{ base_url }}index.php">{{ site_title }}</a>
+</nav>
+
+<div class="container" style="max-width: 640px; margin-top: 20px;">
+
+    {% for message in flashes %}
+        <div class="alert alert-info" role="alert">{{ message }}</div>
+    {% endfor %}
+
+    {% if error %}
+        <div class="alert alert-warning" role="alert">{{ error }}</div>
+    {% endif %}
+
+    <div class="card">
+        <div class="card-header">
+            {{ 'change options'|trans }}
+        </div>
+        <div class="card-body">
+            <form action="{{ base_url }}options" method="post">
+
+                <div class="form-group">
+                    <label for="password">{{ 'new password'|trans }}</label>
+                    <input type="password" class="form-control" name="password" id="password" autocomplete="new-password">
+                </div>
+
+                <div class="form-group">
+                    <label for="password1">{{ 'confirm password'|trans }}</label>
+                    <input type="password" class="form-control" name="password1" id="password1" autocomplete="new-password">
+                </div>
+
+                <div class="form-group">
+                    <label for="theme">{{ 'theme'|trans }}</label>
+                    <select class="form-control form-control-sm" name="theme" id="theme">
+                        {% for theme in themes %}
+                            <option value="{{ theme }}" {{ current_theme == theme ? 'selected' }}>{{ theme }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="language">{{ 'language'|trans }}</label>
+                    <select class="form-control form-control-sm" name="language" id="language">
+                        {% for locale in locales %}
+                            <option value="{{ locale }}" {{ current_language == locale ? 'selected' }}>{{ locale }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">{{ 'save'|trans }}</button>
+                    <a class="btn btn-link" href="{{ base_url }}index.php">{{ site_title }}</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

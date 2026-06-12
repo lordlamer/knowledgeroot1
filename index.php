@@ -49,6 +49,11 @@ $app->post('/login', \Knowledgeroot\Presentation\Login\SubmitLoginAction::class)
 $app->get('/logout', \Knowledgeroot\Presentation\Login\LogoutAction::class);
 
 $app->group('', function (\Slim\Routing\RouteCollectorProxy $group) {
+	$group->get('/options', \Knowledgeroot\Presentation\Options\ShowOptionsAction::class);
+	$group->post('/options', \Knowledgeroot\Presentation\Options\SaveOptionsAction::class);
+})->add(\Knowledgeroot\Presentation\Middleware\RequireLogin::class);
+
+$app->group('', function (\Slim\Routing\RouteCollectorProxy $group) {
 	$group->get('/users', \Knowledgeroot\Presentation\UserManagement\ListUsersAction::class);
 	$group->get('/users/new', \Knowledgeroot\Presentation\UserManagement\ShowUserFormAction::class);
 	$group->post('/users/new', \Knowledgeroot\Presentation\UserManagement\SaveUserAction::class);

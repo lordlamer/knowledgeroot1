@@ -41,7 +41,6 @@ require_once($base_path."include/class-db-result.php");
 require_once($base_path."include/class-db-core.php");
 require_once($base_path."include/class-db-dbal.php");
 require_once($base_path."include/class-highlight.php");
-require_once($base_path."include/class-search-string-parser.php");
 
 // this is the variable where all classes are in
 $CLASS = array();

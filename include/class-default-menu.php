@@ -76,8 +76,9 @@ class default_menu {
         $this->defaultmenu['top']['user']['atagparams'] = "class=\"nav-link\"";
 
 		// options
+		// served by the new slim route, index.php?action=options still works
 		$this->defaultmenu['top']['options']['name'] = $this->CLASS['translate']->_('options');
-		$this->defaultmenu['top']['options']['link'] = "index.php?action=options";
+		$this->defaultmenu['top']['options']['link'] = "options";
 		$this->defaultmenu['top']['options']['tooltip'] = "edit options";
 		$this->defaultmenu['top']['options']['login'] = "1";
 		$this->defaultmenu['top']['options']['priority'] = "30";

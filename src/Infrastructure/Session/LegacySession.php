@@ -95,6 +95,28 @@ class LegacySession
         return (int) ($_SESSION['userid'] ?? 0);
     }
 
+    public function theme(): string
+    {
+        $this->start();
+
+        return (string) ($_SESSION['theme'] ?? '');
+    }
+
+    public function language(): string
+    {
+        $this->start();
+
+        return (string) ($_SESSION['language'] ?? '');
+    }
+
+    public function setPreferences(string $theme, string $language): void
+    {
+        $this->start();
+
+        $_SESSION['theme'] = $theme;
+        $_SESSION['language'] = $language;
+    }
+
     /**
      * queue a message for the next rendered page
      */

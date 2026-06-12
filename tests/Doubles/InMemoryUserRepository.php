@@ -96,6 +96,18 @@ class InMemoryUserRepository implements UserRepository
         unset($this->users[$id], $this->memberships[$id]);
     }
 
+    public function updatePassword(int $id, string $passwordHash): void
+    {
+        $u = $this->users[$id];
+        $this->users[$id] = new User($u->id, $u->name, $passwordHash, $u->defaultGroup, $u->defaultRights, $u->admin, $u->rightEdit, $u->enabled, $u->treeCache, $u->theme, $u->language);
+    }
+
+    public function updatePreferences(int $id, string $theme, string $language): void
+    {
+        $u = $this->users[$id];
+        $this->users[$id] = new User($u->id, $u->name, $u->passwordHash, $u->defaultGroup, $u->defaultRights, $u->admin, $u->rightEdit, $u->enabled, $u->treeCache, $theme, $language);
+    }
+
     public function groupIdsOfUser(int $id): array
     {
         return $this->memberships[$id] ?? [];

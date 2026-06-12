@@ -33,6 +33,10 @@ interface UserRepository
      */
     public function delete(int $id): void;
 
+    public function updatePassword(int $id, string $passwordHash): void;
+
+    public function updatePreferences(int $id, string $theme, string $language): void;
+
     /**
      * @return int[]
      */

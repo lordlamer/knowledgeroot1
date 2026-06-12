@@ -23,6 +23,7 @@ use Knowledgeroot\Infrastructure\Persistence\DbalPageAccess;
 use Knowledgeroot\Infrastructure\Persistence\DbalPagePathResolver;
 use Knowledgeroot\Infrastructure\Persistence\DbalSearchRepository;
 use Knowledgeroot\Infrastructure\Persistence\DbalGroupRepository;
+use Knowledgeroot\Infrastructure\Language\LanguageLocator;
 use Knowledgeroot\Infrastructure\Theme\ThemeLocator;
 use Knowledgeroot\Presentation\Http\UrlHelper;
 use Knowledgeroot\Infrastructure\Cache\FileCache;
@@ -102,6 +103,8 @@ return [
 	},
 
 	ThemeLocator::class => fn (ContainerInterface $c) => new ThemeLocator($c->get('base_path') . 'system/themes/'),
+
+	LanguageLocator::class => fn (ContainerInterface $c) => new LanguageLocator($c->get('base_path') . 'system/language/'),
 
 	FileCache::class => function (ContainerInterface $c) {
 		$config = $c->get(Config::class);

@@ -97,6 +97,16 @@ class DbalUserRepository implements UserRepository
         });
     }
 
+    public function updatePassword(int $id, string $passwordHash): void
+    {
+        $this->connection->update('users', ['password' => $passwordHash], ['id' => $id]);
+    }
+
+    public function updatePreferences(int $id, string $theme, string $language): void
+    {
+        $this->connection->update('users', ['theme' => $theme, 'language' => $language], ['id' => $id]);
+    }
+
     public function delete(int $id): void
     {
         $this->connection->transactional(function () use ($id): void {
