@@ -2,146 +2,76 @@
 /**
  * Knowledgeroot is published under the GNU GPL! Read LICENSE
  *
+ * Front controller: every request runs through the Slim app. New use
+ * cases get their own routes here; everything not handled by a route
+ * falls through to the legacy application (include/legacy-front.php).
+ *
  * @package Knowledgeroot
- * @author Frank Habermann <lordlamer@lordlamer.de>
- * @author Robert Scholz <scholzrobert@web.de>
- * @version $Id: index.php 1071 2011-05-08 20:28:39Z lordlamer $
  */
 
-// timer
-$timer = microtime();
-$starttime = ((double)strstr($timer, ' ') + (double)substr($timer,0,strpos($timer,' ')));
+declare(strict_types=1);
 
-if (!is_file("config/app.ini")) {
-	echo "<html><body>No configuration file found! Please make a <a href=\"install.php\">install</a>!</body></html>";
-	exit();
+use DI\ContainerBuilder;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Factory\AppFactory;
+
+require __DIR__ . '/vendor/autoload.php';
+
+// container with the new-style service definitions
+$containerBuilder = new ContainerBuilder();
+$containerBuilder->addDefinitions(__DIR__ . '/config/dependencies.php');
+AppFactory::setContainer($containerBuilder->build());
+
+$app = AppFactory::create();
+$app->addRoutingMiddleware();
+
+// set KR_DEBUG=1 in the environment to see error details during development
+$app->addErrorMiddleware((bool) getenv('KR_DEBUG'), true, true);
+
+// support installations in a sub directory (e.g. /knowledgeroot/index.php)
+$scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
+if ($scriptDir !== '/' && $scriptDir !== '') {
+	$app->setBasePath($scriptDir);
 }
 
-// load requiered files
-require_once ('include/init.php');
+// --- new routes go here ---------------------------------------------------
 
+$app->get('/ping', function (Request $request, Response $response) {
+	$response->getBody()->write('pong');
+	return $response;
+});
 
-/********************
- * This is the end of initialisation
- * Now do header work
- ********************/
+$app->get('/login', \Knowledgeroot\Presentation\Login\ShowLoginFormAction::class);
+$app->post('/login', \Knowledgeroot\Presentation\Login\SubmitLoginAction::class);
+$app->get('/logout', \Knowledgeroot\Presentation\Login\LogoutAction::class);
 
-if ($CLASS['config']->base->charset != '') {
-  header("Content-Type: text/html; charset=".$CLASS['config']->base->charset);
-}
+$app->group('', function (\Slim\Routing\RouteCollectorProxy $group) {
+	$group->get('/users', \Knowledgeroot\Presentation\UserManagement\ListUsersAction::class);
+	$group->get('/users/new', \Knowledgeroot\Presentation\UserManagement\ShowUserFormAction::class);
+	$group->post('/users/new', \Knowledgeroot\Presentation\UserManagement\SaveUserAction::class);
+	$group->get('/users/{id:[0-9]+}/edit', \Knowledgeroot\Presentation\UserManagement\ShowUserFormAction::class);
+	$group->post('/users/{id:[0-9]+}', \Knowledgeroot\Presentation\UserManagement\SaveUserAction::class);
+	$group->post('/users/{id:[0-9]+}/delete', \Knowledgeroot\Presentation\UserManagement\DeleteUserAction::class);
 
-?>
-<!doctype html>
-<html lang="en">
-<head>
-<?php
-  $CLASS['kr_header']->show_header();
-?>
-</head>
-<body class="claro">
+	$group->get('/groups/new', \Knowledgeroot\Presentation\UserManagement\ShowGroupFormAction::class);
+	$group->post('/groups/new', \Knowledgeroot\Presentation\UserManagement\SaveGroupAction::class);
+	$group->get('/groups/{id:[0-9]+}/edit', \Knowledgeroot\Presentation\UserManagement\ShowGroupFormAction::class);
+	$group->post('/groups/{id:[0-9]+}', \Knowledgeroot\Presentation\UserManagement\SaveGroupAction::class);
+	$group->post('/groups/{id:[0-9]+}/delete', \Knowledgeroot\Presentation\UserManagement\DeleteGroupAction::class);
+})->add(\Knowledgeroot\Presentation\Middleware\RequireAdmin::class);
 
-<div style="display: none;" id="messagebox">
-  <div id="msg" class="loading"><?php echo $CLASS['translate']->_('loading...'); ?></div>
-</div>
+// --- legacy catch-all -----------------------------------------------------
+// handles index.php?action=..., page aliases (*.html rewrites) and downloads
+$app->map(['GET', 'POST'], '/{path:.*}', function (Request $request, Response $response) {
+	$output = (static function (): string {
+		ob_start();
+		require __DIR__ . '/include/legacy-front.php';
+		return (string) ob_get_clean();
+	})();
 
-<a name="top"></a>
+	$response->getBody()->write($output);
+	return $response;
+});
 
-<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark" style="border-bottom: 3px solid #F88529;">
-    <a class="navbar-brand" href="#"><?php echo $CLASS['config']->base->title; ?></a>
-    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="navbar-collapse offcanvas-collapse nav-justified" id="navbarsExampleDefault">
-        <?php
-        // show top menu
-        echo $CLASS['kr_extension']->show_menu("top");
-        ?>
-
-        <form class="form-inline my-2 my-lg-0" id="change_language" action="index.php" method="post" style="margin-right: 5px;">
-            <input type="hidden" name="action" value="change_language" />
-            <?php
-
-            if (!isset ($_SESSION['language'])) { $_SESSION['language'] = ''; }
-
-            echo $CLASS['language']->lang_dropdown("language", $_SESSION['language']);
-
-            ?>
-        </form>
-
-        <form class="form-inline my-2 my-lg-0" action="index.php" method="post" style="margin-right: 5px;">
-            <input class="form-control mr-sm-2" type="text" name="search" placeholder="<?php echo $CLASS['translate']->_('Search'); ?>" aria-label="Search" value="<?php if(isset ($_GET['action']) && $_GET['action'] == "showsearch" && isset ($_GET['key']) && $_GET['key'] != "" && isset($_SESSION['search'][$_GET['key']])) { echo str_replace('&amp;quot;','&quot;',htmlspecialchars(stripslashes($_SESSION['search'][$_GET['key']]))); } ?>">
-            <input type="hidden" name="submit" value="GO" />
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit"><?php echo $CLASS['translate']->_('GO'); ?></button>
-        </form>
-
-        <span class="navbar-text">
-            <?php echo $CLASS['translate']->_('User')  . ":&nbsp;" . $_SESSION['user']; ?>
-        </span>
-    </div>
-</nav>
-
-<nav class="navbar fixed-bottom navbar-light bg-light justify-content-end">
-        <span class="navbar-text">
-            <a href="http://www.knowledgeroot.org">Knowledgeroot</a> - <?php echo $CLASS['translate']->_('version') . ":&nbsp;" . $CLASS['config']->base->version; ?>
-        </span>
-</nav>
-
-<nav aria-label="breadcrumb" style="margin-top:55px;">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i> </li>
-    <?php
-	  // show path
-	  if($CLASS['knowledgeroot']->checkRecursivPerm($_SESSION['cid'], $_SESSION['userid']) != 0) {
-	    echo $CLASS['path']->getPath($_SESSION['cid']);
-	  }
-	  ?>
-    </ol>
-</nav>
-
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-
-	<tr>
-	 <td id="treecontainer">
-
-	   <div id="tree" style="display:block;">
-	<?php
-	  // show tree
-	  if (isset ($_SESSION['open'])) {
-	    $CLASS['tree']->open = $_SESSION['open'];
-	  }
-	  $CLASS['tree']->buildTree(0);
-	?>
-	  </div>
-	 </td>
-	 <td id="contentcontainer">
-	<?php
-	  // show page content
-	  $CLASS['kr_header']->show_messages();
-	  $CLASS['kr_content']->show_content();
-	?>
-	 </td>
-	</tr>
-</table>
-
-<?php
-  // do last cleanups
-  $_SESSION['firstrun'] = 0;
-
-  // show querys - only for debug
-  if($CLASS['config']->development->sqldebug) {
-    echo "<span class=\"badge badge-primary\">Queries: " . $CLASS['db']->querys . "</span>";
-    echo $CLASS['error']->view_array($CLASS['db']->query_cache);
-  }
-
-  // close db connection
-  $CLASS['db']->close();
-
-  if($CLASS['config']->development->runtime) {
-    $timer = microtime();
-    $stoptime = ((double)strstr($timer, ' ') + (double)substr($timer,0,strpos($timer,' ')));
-    echo "<!-- runtime: ".sprintf('%2.3f', $stoptime - $starttime)." -->";
-  }
-?>
-</body>
-</html>
+$app->run();

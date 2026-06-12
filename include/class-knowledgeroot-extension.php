@@ -34,6 +34,8 @@ class knowledgeroot_extension {
 	function loading_extensions($adminext = 0) {
 		$hashkey = md5('extensions_'.$adminext);
 		if(!($data = $this->CLASS['cache']->load($hashkey))) {
+			$data = array();
+
 			if($adminext) {
 				$query = "SELECT * FROM extensions WHERE active=1 AND admin=1";
 			} else {
@@ -424,14 +426,18 @@ class knowledgeroot_extension {
 				continue;
 			}
 
-			// check if login is required
-			if (isset ($this->menu[$name][$key]['login']) and $this->menu[$name][$key]['login'] == "1" && (!isset ($_SESSION['userid']) or $_SESSION['userid'] == "0" || $_SESSION['userid'] == "" || !isset ($_SESSION['groupid']) or $_SESSION['groupid'] == "0" || $_SESSION['groupid'] == "")) {
+			// check if user is logged in (guest has userid/groupid 0 or empty)
+			$loggedin = isset($_SESSION['userid']) && (string) $_SESSION['userid'] !== '' && (string) $_SESSION['userid'] !== '0'
+				&& isset($_SESSION['groupid']) && (string) $_SESSION['groupid'] !== '' && (string) $_SESSION['groupid'] !== '0';
+
+			// item requires login - hide it for guests
+			if (isset ($this->menu[$name][$key]['login']) and $this->menu[$name][$key]['login'] == "1" && !$loggedin) {
 				// do not display item
 				continue;
 			}
 
-			// check if logout is required
-			if (isset ($this->menu[$name][$key]['logout']) and $this->menu[$name][$key]['logout'] == "1" && (!isset ($_SESSION['userid']) or $_SESSION['userid'] != "0" || $_SESSION['userid'] != "" || !isset ($_SESSION['groupid']) or $_SESSION['groupid'] != "0" || $_SESSION['groupid'] != "")) {
+			// item requires logout - hide it for logged in users
+			if (isset ($this->menu[$name][$key]['logout']) and $this->menu[$name][$key]['logout'] == "1" && $loggedin) {
 				// do not display item
 				continue;
 			}

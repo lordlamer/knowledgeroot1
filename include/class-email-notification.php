@@ -12,7 +12,7 @@ class knowledgeroot_notification {
 	/**
 	 * start mailnotification
 	 */
-	function knowledgeroot_notification(&$CLASS) {
+	function __construct(&$CLASS) {
 		$this->CLASS =& $CLASS;
 		$this->config = $this->CLASS['config']->email;
 	}
@@ -217,41 +217,40 @@ class knowledgeroot_notification {
     /**
      * send email
      *
-     * @param mixed $config - Zend_Config Object of email configuration
+     * @param mixed $config - email config section from app.ini
      * @param string $subject - subject of email
-     * @param string $body - body of email
-     * @param return bool
+     * @param string $bodyText - plain text body of email
+     * @param string|null $bodyHtml - html body of email
      * @return bool
      */
 	function sendEmail($config, $subject, $bodyText, $bodyHtml = null) {
 		try {
-		    // get mail transport
-            $transport = $this->getMailTransport($config);
+			$mailer = \Knowledgeroot\Infrastructure\Mail\MailerFactory::fromConfig($config);
 
-			$mail = new Zend_Mail();
+			$mail = new \Symfony\Component\Mime\Email();
 
 			// set mail generator to knowledgeroot :D
-			$mail->addHeader('X-MailGenerator', 'Knowledgeroot');
+			$mail->getHeaders()->addTextHeader('X-MailGenerator', 'Knowledgeroot');
 
 			// set subject
-            $mail->setSubject($config->subject_prefix . $subject);
+			$mail->subject($config->subject_prefix . $subject);
 
-            // set from
-            $mail->setFrom($config->from, $config->from_name);
+			// set from
+			$mail->from(new \Symfony\Component\Mime\Address((string) $config->from, (string) $config->from_name));
 
-            // addTo
-            foreach(explode(",", $config->to) as $value) {
-                if(trim($value) != "") {
-                    $mail->addTo($value);
-                }
-            }
+			// addTo
+			foreach(explode(",", (string) $config->to) as $value) {
+				if(trim($value) != "") {
+					$mail->addTo(trim($value));
+				}
+			}
 
 			// set body parts
-			$mail->setBodyText($bodyText);
-			if($bodyHtml != null) $mail->setBodyHtml($bodyHtml);
+			$mail->text($bodyText);
+			if($bodyHtml != null) $mail->html($bodyHtml);
 
 			// send email
-			$mail->send($transport);
+			$mailer->send($mail);
 
 			return true;
 		} catch(Exception $e) {
@@ -259,35 +258,4 @@ class knowledgeroot_notification {
 			return false;
 		}
 	}
-
-    /**
-     * get email transport object
-     *
-     * @param $config
-     * @return Zend_Mail_Transport_Smtp|null
-     */
-	function getMailTransport($config) {
-        $transport = null;
-
-        if($config->host != '') {
-            $smtpConfig = array();
-            if($config->auth != '') {
-                $smtpConfig['auth'] = $config->auth;
-                $smtpConfig['username'] = $config->username;
-                $smtpConfig['password'] = $config->password;
-            }
-
-            if($config->port != '') {
-                $smtpConfig['port'] = $config->port;
-            }
-
-            if($config->ssl != '') {
-                $smtpConfig['ssl'] = $config->ssl;
-            }
-
-            $transport = new Zend_Mail_Transport_Smtp($config->host, $smtpConfig);
-        }
-
-        return $transport;
-    }
 }

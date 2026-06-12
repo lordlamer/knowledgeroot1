@@ -164,34 +164,22 @@ class knowledgeroot_header {
 			$this->create_root();
 		}
 
-		// add user?
-		if (isset ($_POST['submit']) && isset ($_POST['action']) and $_POST['action'] == "adduser" && isset ($_POST['name']) and $_POST['name'] != "") {
-			$this->add_user();
+		// user and group management has moved to the slim routes
+		// (src/Presentation/UserManagement) - redirect old deep links
+		$legacyUserAction = isset($_GET['action']) ? $_GET['action'] : (isset($_POST['action']) ? $_POST['action'] : '');
+		$legacyUserTarget = null;
+		switch($legacyUserAction) {
+			case 'users': $legacyUserTarget = 'users'; break;
+			case 'adduser': $legacyUserTarget = 'users/new'; break;
+			case 'edituser': $legacyUserTarget = isset($_GET['uid']) ? 'users/' . (int) $_GET['uid'] . '/edit' : 'users'; break;
+			case 'deluser': $legacyUserTarget = 'users'; break;
+			case 'addgroup': $legacyUserTarget = 'groups/new'; break;
+			case 'editgroup': $legacyUserTarget = isset($_GET['gid']) ? 'groups/' . (int) $_GET['gid'] . '/edit' : 'users'; break;
+			case 'delgroup': $legacyUserTarget = 'users'; break;
 		}
-
-		// edit user?
-		if (isset ($_POST['submit']) && isset ($_POST['action']) and $_POST['action'] == "edituser" && isset ($_POST['name']) and $_POST['name'] != "") {
-			$this->edit_user();
-		}
-
-		// add group?
-		if (isset ($_POST['submit']) && isset ($_POST['action']) and $_POST['action'] == "addgroup" && isset ($_POST['name']) and $_POST['name'] != "") {
-			$this->add_group();
-		}
-
-		// edit group?
-		if (isset ($_POST['submit']) && isset ($_POST['action']) and $_POST['action'] == "editgroup" && isset ($_POST['name']) and $_POST['name'] != "") {
-			$this->edit_group();
-		}
-
-		// delete user?
-		if (isset ($_GET['action']) and $_GET['action'] == "deluser" && isset ($_GET['uid']) and $_GET['uid'] != "") {
-			$this->delete_user();
-		}
-
-		// delete group?
-		if (isset ($_GET['action']) and $_GET['action'] == "delgroup" && isset ($_GET['gid']) and $_GET['gid'] != "") {
-			$this->delete_group();
+		if($legacyUserTarget !== null) {
+			header('Location: ' . $legacyUserTarget);
+			exit();
 		}
 
 		// edit options?
@@ -1224,130 +1212,6 @@ class knowledgeroot_header {
 	}
 
 	/**
-	 * add user
-	 */
-	function add_user() {
-		if($_SESSION['admin'] == 1) {
-			$this->CLASS['hooks']->setHook("kr_header","add_user","start");
-
-			$res = $this->CLASS['db']->query(sprintf("INSERT INTO users (name, password, theme, enabled, defaultgroup, defaultrights, admin, rightedit, treecache) VALUES ('%s','%s','%s', %d, %d, '%d', %d, %d, '')",$_POST['name'],md5(addslashes($_POST['password'])),$_POST['theme'],$_POST['enabled'],$_POST['defaultgroup'],$_POST['userrights'].$_POST['grouprights'].$_POST['otherrights'],$_POST['admin'],$_POST['rightedit']));
-
-			$res = $this->CLASS['db']->query(sprintf("SELECT id FROM users WHERE name='%s'",$_POST['name']));
-			while($row = $this->CLASS['db']->fetch_assoc($res)) {
-				if (isset ($_POST['groups']) and is_array($_POST['groups'])) {
-					foreach ($_POST['groups'] as $key => $value) {
-						$ressub = $this->CLASS['db']->query(sprintf("INSERT INTO user_group (userid, groupid) VALUES (%d,%d)",$row['id'],$value));
-					}
-				}
-			}
-
-			$_GET['action'] = "users";
-
-			$this->CLASS['hooks']->setHook("kr_header","add_user","end");
-		}
-	}
-
-	/**
-	 * edit user
-	 */
-	function edit_user() {
-		if($_SESSION['admin'] == 1) {
-			$this->CLASS['hooks']->setHook("kr_header","edit_user","start");
-
-			//print_r($_POST['groups']);
-			if($_POST['password'] == "") {
-				$res = $this->CLASS['db']->query(sprintf("UPDATE users SET name='%s', theme='%s', enabled=%d, defaultgroup=%d, defaultrights='%d', admin=%d, rightedit=%d WHERE id=%d",$_POST['name'],$_POST['theme'],$_POST['enabled'],$_POST['defaultgroup'],$_POST['userrights'].$_POST['grouprights'].$_POST['otherrights'],$_POST['admin'],$_POST['rightedit'],$_POST['uid']));
-			} else {
-				$res = $this->CLASS['db']->query(sprintf("UPDATE users SET name='%s', theme='%s', password='%s', enabled=%d, defaultgroup=%d, defaultrights='%d', admin=%d, rightedit=%d WHERE id=%d",$_POST['name'],$_POST['theme'],md5(addslashes($_POST['password'])),$_POST['enabled'],$_POST['defaultgroup'],$_POST['userrights'].$_POST['grouprights'].$_POST['otherrights'],$_POST['admin'],$_POST['rightedit'],$_POST['uid']));
-			}
-
-			if(!isset($_POST['groups']) || !is_array($_POST['groups'])) {
-				$_POST['groups'] = array();
-			}
-
-			$res = $this->CLASS['db']->query(sprintf("DELETE FROM user_group WHERE userid=%d",$_POST['uid']));
-			foreach($_POST['groups'] as $key => $value) {
-				$res = $this->CLASS['db']->query(sprintf("INSERT INTO user_group (userid, groupid) VALUES (%d, %d)",$_POST['uid'],$value));
-			}
-
-			$_GET['action'] = "users";
-
-			$this->CLASS['hooks']->setHook("kr_header","edit_user","end");
-		}
-	}
-
-	/**
-	 * add group
-	 */
-	function add_group() {
-		if($_SESSION['admin'] == 1) {
-			$this->CLASS['hooks']->setHook("kr_header","add_group","start");
-
-			$res = $this->CLASS['db']->query(sprintf("INSERT INTO groups (name,enabled) VALUES ('%s', 1)",$_POST['name']));
-			$_GET['action'] = "users";
-
-			$this->CLASS['hooks']->setHook("kr_header","add_group","end");
-		}
-	}
-
-	/**
-	 * edit group
-	 */
-	function edit_group() {
-		if($_SESSION['admin'] == 1) {
-			$this->CLASS['hooks']->setHook("kr_header","edit_group","start");
-
-			$res = $this->CLASS['db']->query(sprintf("UPDATE groups SET name='%s' WHERE id=%d",$_POST['name'],$_POST['gid']));
-			$_GET['action'] = "users";
-
-			$this->CLASS['hooks']->setHook("kr_header","edit_group","end");
-		}
-	}
-
-	/**
-	 * delete user
-	 */
-	function delete_user() {
-		if($_SESSION['admin'] == 1) {
-			$this->CLASS['hooks']->setHook("kr_header","delete_user","start");
-
-			$res = $this->CLASS['db']->query(sprintf("DELETE FROM users WHERE id =%d",$_GET['uid']));
-			$res = $this->CLASS['db']->query(sprintf("DELETE FROM user_group WHERE userid =%d",$_GET['uid']));
-			$this->addmessage($this->CLASS['translate']->_('User was deleted!'));
-			$_GET['action'] = "users";
-
-			$this->CLASS['hooks']->setHook("kr_header","delete_user","end");
-		}
-	}
-
-	/**
-	 * delete group
-	 */
-	function delete_group() {
-		if($_SESSION['admin'] == 1) {
-			$this->CLASS['hooks']->setHook("kr_header","delete_group","start");
-
-			// check only in user table for defaultgroup - if a user use this group as defaultgroup then delete fail
-			$res = $this->CLASS['db']->query(sprintf("SELECT id FROM users WHERE defaultgroup=%d",$_GET['gid']));
-			$anz = $this->CLASS['db']->num_rows($res);
-
-			if($anz == 0) {
-				$res = $this->CLASS['db']->query(sprintf("DELETE FROM groups WHERE id =%d",$_GET['gid']));
-				$res = $this->CLASS['db']->query(sprintf("DELETE FROM user_group WHERE groupid =%d",$_GET['gid']));
-				$this->addmessage($this->CLASS['translate']->_('Group was deleted!'));
-				$this->CLASS['hooks']->setHook("kr_header","delete_group","success");
-			} else {
-				$this->addwarning($this->CLASS['translate']->_('Could not delete group. Group is in use as defaultgroup!'));
-				$this->CLASS['hooks']->setHook("kr_header","delete_group","fail");
-			}
-
-			$_GET['action'] = "users";
-
-			$this->CLASS['hooks']->setHook("kr_header","delete_group","end");
-		}
-	}
-
-	/**
 	 * edit options
 	 */
 	function edit_options() {
@@ -1358,9 +1222,8 @@ class knowledgeroot_header {
 
 
 			// gettext
-			Zend_Translate::setCache($this->CLASS['cache']);
 			$language = str_replace(".UTF8","", $_POST['language']);
-			$this->CLASS['translate'] = new Zend_Translate('gettext', $this->CLASS['config']->base->base_path.'system/language/'.$language.'.UTF8/LC_MESSAGES/knowledgeroot.mo', $language);
+			$this->CLASS['translate'] = new \Knowledgeroot\Infrastructure\Translation\Translator($this->CLASS['config']->base->base_path.'system/language/'.$language.'.UTF8/LC_MESSAGES/knowledgeroot.mo', $language);
 
 			$res = $this->CLASS['db']->query(sprintf("UPDATE users SET language='%s' WHERE id=%d",$_POST['language'],$_SESSION['userid']));
 			$this->addmessage($this->CLASS['translate']->_('Language changed.'));
@@ -1926,7 +1789,7 @@ class knowledgeroot_header {
 			case 'REQUEST_URI':
 				// Typical application of REQUEST_URI is return urls, forms submitting to itself etc. Example: returnUrl='.rawurlencode($this->getIndpEnv('REQUEST_URI'))
 				if (!$_SERVER['REQUEST_URI'])  {  // This is for ISS/CGI which does not have the REQUEST_URI available.
-					return '/'.ereg_replace('^/','',$this->getIndpEnv('SCRIPT_NAME')).
+					return '/'.preg_replace('/^\//','',$this->getIndpEnv('SCRIPT_NAME')).
 					($_SERVER['QUERY_STRING']?'?'.$_SERVER['QUERY_STRING']:'');
 				} else return $_SERVER['REQUEST_URI'];
 			break;
@@ -1956,7 +1819,7 @@ class knowledgeroot_header {
 				$SN_A = explode('/',strrev($this->getIndpEnv('SCRIPT_NAME')));
 				$SFN_A = explode('/',strrev($SFN));
 				$acc = array();
-				while(list($kk,$vv)=each($SN_A))  {
+				foreach($SN_A as $kk => $vv)  {
 					if (!strcmp($SFN_A[$kk],$vv))  {
 						$acc[] = $vv;
 					} else break;
@@ -2026,11 +1889,9 @@ class knowledgeroot_header {
 				REMOTE_HOST,
 				HTTP_USER_AGENT,
 				HTTP_ACCEPT_LANGUAGE');
-				reset($envTestVars);
-				while(list(,$v)=each($envTestVars))  {
+				foreach($envTestVars as $v)  {
 					$out[trim($v)]=$this->getIndpEnv(trim($v));
 				}
-				reset($out);
 				return $out;
 			break;
 		}
@@ -2071,11 +1932,10 @@ class knowledgeroot_header {
 	 */
 	function revExplode($delim, $string, $count=0)  {
 		$temp = explode($delim,strrev($string),$count);
-		while(list($key,$val)=each($temp))  {
+		foreach($temp as $key => $val)  {
 			$temp[$key]=strrev($val);
 		}
 		$temp=array_reverse($temp);
-		reset($temp);
 		return $temp;
 	}
 
@@ -2088,7 +1948,7 @@ class knowledgeroot_header {
 	 * @return  array    Contains keys [path], [file], [filebody], [fileext], [realFileext]
 	 */
 	function split_fileref($fileref)  {
-		if (  ereg('(.*/)(.*)$',$fileref,$reg)  )  {
+		if (  preg_match('/(.*\/)(.*)$/',$fileref,$reg)  )  {
 			$info['path'] = $reg[1];
 			$info['file'] = $reg[2];
 		} else {
@@ -2096,7 +1956,7 @@ class knowledgeroot_header {
 			$info['file'] = $fileref;
 		}
 		$reg='';
-		if (  ereg('(.*)\.([^\.]*$)',$info['file'],$reg)  )  {
+		if (  preg_match('/(.*)\.([^\.]*$)/',$info['file'],$reg)  )  {
 			$info['filebody'] = $reg[1];
 			$info['fileext'] = strtolower($reg[2]);
 			$info['realFileext'] = $reg[2];

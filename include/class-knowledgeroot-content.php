@@ -24,7 +24,7 @@ class knowledgeroot_content {
 	 * this function show the content
 	 */
 	function show_content() {
-		$this->CLASS['hooks']->setHook("kr_content","show_content","start");
+	$this->CLASS['hooks']->setHook("kr_content","show_content","start");
 
 		if(isset ($_GET['action']) and $_GET['action'] == "newcontent") {
 			$this->new_content();
@@ -42,16 +42,6 @@ class knowledgeroot_content {
 			$this->create_root();
 		} elseif(((isset ($_GET['action']) and $_GET['action'] == "options") || (isset ($_POST['action']) and $_POST['action'] == "options")) && !empty($_SESSION['userid'])) {
 			$this->show_options();
-		} elseif(isset ($_GET['action']) and $_GET['action'] == "users" && isset ($_SESSION['admin']) and $_SESSION['admin'] == 1) {
-			$this->list_users();
-		} elseif(isset ($_GET['action']) and $_GET['action'] == "adduser" && isset ($_SESSION['admin']) and $_SESSION['admin'] == 1) {
-			$this->add_user();
-		} elseif(isset ($_GET['action']) and $_GET['action'] == "edituser" && isset ($_SESSION['admin']) and $_SESSION['admin'] == 1) {
-			$this->edit_user();
-		} elseif(isset ($_GET['action']) and $_GET['action'] == "addgroup" && isset ($_SESSION['admin']) and $_SESSION['admin'] == 1) {
-			$this->add_group();
-		} elseif(isset ($_GET['action']) and $_GET['action'] == "editgroup" && isset ($_SESSION['admin']) and $_SESSION['admin'] == 1) {
-			$this->edit_group();
 		} elseif(isset ($_GET['action']) and $_GET['action'] == "error") {
 			$this->show_error();
 		} elseif($this->CLASS['kr_extension']->content != "") {
@@ -974,79 +964,35 @@ class knowledgeroot_content {
 	function create_root() {
 		$this->CLASS['hooks']->setHook("kr_content","create_root","start");
 
-		// rechte checken -> adminrechte
-		echo '
-		<form action="index.php" method="post">
-		<input type="hidden" name="action" value="createroot" />
-		<input type="hidden" name="'.session_name().'" value="'.session_id().'" />
-
-		<button class="btn btn-primary" type="submit" name="submit">'.$this->CLASS['translate']->_('create').'</button>
-
-		<p />
-
-		<div class="card">
-
-		  <div class="card-header">
-			<ul class="nav nav-tabs card-header-tabs" role="tablist">
-			  <li class="nav-item">
-				<a class="nav-link active" id="content-tab" data-toggle="tab" href="#content" role="tab" aria-controls="content" aria-selected="true">'.$this->CLASS['translate']->_('site').'</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" id="permissions-tab" data-toggle="tab" href="#permissions" role="tab" aria-controls="permissions" aria-selected="false">'.$this->CLASS['translate']->_('permissions').'</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" id="inherit-permissions-tab" data-toggle="tab" href="#inherit-permissions" role="tab" aria-controls="inherit-permissions" aria-selected="false">'.$this->CLASS['translate']->_('inherit permissions').'</a>
-			  </li>
-			</ul>
-		  </div>
-		  <div class="card-body">
-			<div class="tab-content">
-			<div class="tab-pane fade show active" id="content" role="tabpanel" aria-labelledby="content-tab">
-			
-			  <div class="form-group">
-				<label for="titleText">'.$this->CLASS['translate']->_('name').'</label>
-				<input type="text" class="form-control" id="titleText" aria-describedby="titleText" name="title">
-			  </div>
-			  
-			  <div class="form-group">
-				<label for="aliasText">'.$this->CLASS['translate']->_('alias').'</label>
-				<input type="text" class="form-control" id="aliasText" aria-describedby="aliasText" name="alias">
-			  </div>
-			  ';
-
-        // check for tooltip
-		if($this->CLASS['config']->tree->edittooltiptext == 1) {
-            echo '
-			  <div class="form-group">
-				<label for="tooltipText">' . $this->CLASS['translate']->_('tooltip') . '</label>
-				<input type="text" class="form-control" id="tooltipText" aria-describedby="tooltipText" name="tooltip">
-			  </div>
-			';
-        }
-
-		// check for order
-		if($this->CLASS['config']->tree->order == 1) {
-			echo '
-			  <div class="form-group">
-				<label for="sortingText">' . $this->CLASS['translate']->_('priority') . '</label>
-				<input type="text" class="form-control" id="sortingText" aria-describedby="sortingText" name="sorting" value="0">
-			  </div>
-			';
-		}
-
-		echo '</div>';
+		$showTooltip = ($this->CLASS['config']->tree->edittooltiptext == 1);
+		$showOrder = ($this->CLASS['config']->tree->order == 1);
+		$showRightPanels = false;
+		$rightPanel = '';
+		$rightPanelInherit = '';
 
 		if(!empty($_SESSION['userid'])) {
-			echo '<div class="tab-pane fade" id="permissions" role="tabpanel" aria-labelledby="permissions-tab">';
-			echo $this->CLASS['knowledgeroot']->rightpanel($_SESSION['userid']);
-			echo "</div>\n";
-			echo '<div class="tab-pane fade" id="inherit-permissions" role="tabpanel" aria-labelledby="inherit-permissions-tab">';
-			echo $this->CLASS['knowledgeroot']->rightpanelsubinherit($_SESSION['userid']);
-			echo "</div>\n";
+			$showRightPanels = true;
+			$rightPanel = $this->CLASS['knowledgeroot']->rightpanel($_SESSION['userid']);
+			$rightPanelInherit = $this->CLASS['knowledgeroot']->rightpanelsubinherit($_SESSION['userid']);
 		}
 
-		echo '</div></div></div></form>
-		';
+		echo $this->CLASS['container']['twig']->render('content/create-root.html', array(
+			'session_name' => session_name(),
+			'session_id' => session_id(),
+			'label_create' => $this->CLASS['translate']->_('create'),
+			'label_site' => $this->CLASS['translate']->_('site'),
+			'label_permissions' => $this->CLASS['translate']->_('permissions'),
+			'label_inherit_permissions' => $this->CLASS['translate']->_('inherit permissions'),
+			'label_name' => $this->CLASS['translate']->_('name'),
+			'label_alias' => $this->CLASS['translate']->_('alias'),
+			'label_tooltip' => $this->CLASS['translate']->_('tooltip'),
+			'label_priority' => $this->CLASS['translate']->_('priority'),
+			'show_tooltip' => $showTooltip,
+			'show_order' => $showOrder,
+			'show_right_panels' => $showRightPanels,
+			'right_panel' => $rightPanel,
+			'right_panel_inherit' => $rightPanelInherit,
+		));
 
 		$this->CLASS['hooks']->setHook("kr_content","create_root","end");
 	}
@@ -1057,421 +1003,18 @@ class knowledgeroot_content {
 	function show_options() {
 		$this->CLASS['hooks']->setHook("kr_content","show_options","start");
 
-		echo '
-<div class="card">
-  <div class="card-header">
-    '.$this->CLASS['translate']->_('change options').'
-  </div>
-  <div class="card-body">
-		<form action="index.php" method="post">
-		<input type="hidden" name="action" value="options" />
-
-		  <div class="form-group">
-			<label for="password">'.$this->CLASS['translate']->_('new password').'</label>
-			<input type="password" class="form-control" name="password" id="password" placeholder="'.$this->CLASS['translate']->_('new password').'">
-		  </div>
-		  <div class="form-group">
-			<label for="password1">'.$this->CLASS['translate']->_('confirm password').'</label>
-			<input type="password" class="form-control" name="password1" id="password1" placeholder="'.$this->CLASS['translate']->_('confirm password').'">
-		  </div>
-		  <div class="form-group">
-			<label for="theme">'.$this->CLASS['translate']->_('theme').'</label>
-			'.$this->CLASS['themes']->theme_dropdown($_SESSION['theme']).'
-		  </div>
-		  <div class="form-group">
-			<label for="language">'.$this->CLASS['translate']->_('language').'</label>
-			'.$this->CLASS['language']->lang_dropdown("language",$_SESSION['language'],"", false).'
-		  </div>
-
-		<button class="btn btn-primary" type="submit" name="submit">'.$this->CLASS['translate']->_('save').'</button>
-
-		</form>
-	</div>
-</div>
-		';
+		echo $this->CLASS['container']['twig']->render('content/options.html', array(
+			'label_change_options' => $this->CLASS['translate']->_('change options'),
+			'label_new_password' => $this->CLASS['translate']->_('new password'),
+			'label_confirm_password' => $this->CLASS['translate']->_('confirm password'),
+			'label_theme' => $this->CLASS['translate']->_('theme'),
+			'label_language' => $this->CLASS['translate']->_('language'),
+			'label_save' => $this->CLASS['translate']->_('save'),
+			'theme_dropdown' => $this->CLASS['themes']->theme_dropdown($_SESSION['theme']),
+			'language_dropdown' => $this->CLASS['language']->lang_dropdown("language",$_SESSION['language'],"", false),
+		));
 
 		$this->CLASS['hooks']->setHook("kr_content","show_options","end");
-	}
-
-	/**
-	 * list users
-	 */
-	function list_users() {
-		$this->CLASS['hooks']->setHook("kr_content","list_users","start");
-
-		echo '
-		<div class="card">
-		  <div class="card-header">
-			'.$this->CLASS['translate']->_('user').'
-		  </div>
-		  <div class="card-body">
-		  <a class="btn btn-primary" href="index.php?action=adduser">'.$this->CLASS['translate']->_('add user').'</a>
-		  <p />
-		<table id="userList" class="table table-striped table-hover table-sm">
-			<thead>
-			<tr>
-					<th>'.$this->CLASS['translate']->_('id').'</th>
-					<th>'.$this->CLASS['translate']->_('name').'</th>
-					<th>'.$this->CLASS['translate']->_('default group').'</th>
-					<th>'.$this->CLASS['translate']->_('default rights').'</th>
-					<th>'.$this->CLASS['translate']->_('admin').'</th>
-					<th>'.$this->CLASS['translate']->_('edit rights').'</th>
-					<th>'.$this->CLASS['translate']->_('enabled').'</th>
-					<th></th>
-			</tr>
-			</thead>
-			<tbody>
-		';
-
-		$res = $this->CLASS['db']->query("SELECT * FROM users ORDER BY name");
-		while($row = $this->CLASS['db']->fetch_assoc($res)) {
-			echo "
-			<tr>
-				<td>".$row['id']."</td>
-				<td>".$row['name']."</td>
-				<td>".$this->CLASS['knowledgeroot']->getGroup($row['defaultgroup'])."</td>
-				<td>".$row['defaultrights']."</td>
-				<td>".$this->CLASS['knowledgeroot']->yesno($row['admin'])."</td>
-				<td>".$this->CLASS['knowledgeroot']->yesno($row['rightedit'])."</td>
-				<td>".$this->CLASS['knowledgeroot']->yesno($row['enabled'])."</td>
-				<td>
-					<a class=\"btn btn-secondary\" href=\"index.php?action=edituser&amp;uid=".$row['id']."\">".$this->CLASS['translate']->_('edit')."</a>
-					<a class=\"btn btn-danger\" href=\"index.php?action=deluser&amp;uid=".$row['id']."\" onclick=\"return confirm('" . $this->CLASS['translate']->_('Do you really want to delete this user?') . "');\">".$this->CLASS['translate']->_('delete')."</a>
-				</td>
-			</tr>\n";
-		}
-
-		echo '
-		</tbody>
-		</table>
-			</div>
-		</div>
-		';
-
-		echo '<p />';
-
-        echo '
-		<div class="card">
-		  <div class="card-header">
-			'.$this->CLASS['translate']->_('groups').'
-		  </div>
-		  <div class="card-body">
-		  <a class="btn btn-primary" href="index.php?action=addgroup">'.$this->CLASS['translate']->_('add group').'</a>
-		  <p />
-		<table id="userList" class="table table-striped table-hover table-sm">
-			<thead>
-			<tr>
-					<th>'.$this->CLASS['translate']->_('id').'</th>
-					<th>'.$this->CLASS['translate']->_('name').'</th>
-					<th></th>
-			</tr>
-			</thead>
-			<tbody>
-		';
-
-        $res = $this->CLASS['db']->query("SELECT * FROM groups ORDER BY name");
-        while($row = $this->CLASS['db']->fetch_assoc($res)) {
-            echo "
-			<tr>
-				<td>".$row['id']."</td>
-				<td>".$row['name']."</td>
-				<td>
-					<a class=\"btn btn-secondary\" href=\"index.php?action=editgroup&amp;gid=".$row['id']."\">".$this->CLASS['translate']->_('edit')."</a>
-					<a class=\"btn btn-danger\" href=\"index.php?action=delgroup&amp;gid=".$row['id']."\" onclick=\"return confirm('" . $this->CLASS['translate']->_('Do you really want to delete this group?') . "');\">".$this->CLASS['translate']->_('delete')."</a>
-				</td>
-			</tr>\n";
-        }
-
-        echo '
-		</tbody>
-		</table>
-			</div>
-		</div>
-		';
-
-		$this->CLASS['hooks']->setHook("kr_content","list_users","end");
-	}
-
-	/**
-	 * add user
-	 */
-	function add_user() {
-		$this->CLASS['hooks']->setHook("kr_content","add_user","start");
-
-		/*
-		echo $this->CLASS['container']['twig']->render('user/add.html', [
-			'themes' => $this->CLASS['themes']->getThemes(),
-			'session_id' => session_id(),
-			'translate' => $this->CLASS['translate']
-		]);
-		*/
-
-		echo '
-		<div class="card">
-		  <div class="card-header">
-			'.$this->CLASS['translate']->_('add user').'
-		  </div>
-		  <div class="card-body">
-		
-		<form action="index.php" method="post" name="adduserformular">
-		<input type="hidden" name="action" value="adduser">
-
-		  <div class="form-group">
-			<label for="name">' . $this->CLASS['translate']->_('name') . '</label>
-			<input type="text" class="form-control" aria-describedby="name" name="name" value="">
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="password">' . $this->CLASS['translate']->_('password') . '</label>
-			<input type="password" class="form-control" aria-describedby="password" name="password" value="">
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="theme">' . $this->CLASS['translate']->_('theme') . '</label>
-			' . $this->CLASS['themes']->theme_dropdown() . '
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="default group">' . $this->CLASS['translate']->_('default group') . '</label>
-			' . $this->CLASS['knowledgeroot']->groupdropdown("defaultgroup") . '
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="default group">' . $this->CLASS['translate']->_('admin') . '</label>
-			' . $this->CLASS['knowledgeroot']->yesnodropdown("admin") . '
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="edit rights">' . $this->CLASS['translate']->_('edit rights') . '</label>
-			' . $this->CLASS['knowledgeroot']->yesnodropdown("rightedit") . '
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="enabled">' . $this->CLASS['translate']->_('enabled') . '</label>
-			' . $this->CLASS['knowledgeroot']->yesnodropdown("enabled") . '
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="groups">' . $this->CLASS['translate']->_('groups') . '</label>
-			' . $this->CLASS['knowledgeroot']->groupDropDown("groups[]","",true) . '
-		  </div>
-		  
-		  <h3>'.$this->CLASS['translate']->_('default rights').'</h3>
-		  
-		  <div class="form-group">
-			<label for="user">' . $this->CLASS['translate']->_('user') . '</label>
-			'.$this->CLASS['knowledgeroot']->rightDropDown("userrights",2).'
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="group">' . $this->CLASS['translate']->_('group') . '</label>
-			'.$this->CLASS['knowledgeroot']->rightDropDown("grouprights",1).'
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="others">' . $this->CLASS['translate']->_('others') . '</label>
-			'.$this->CLASS['knowledgeroot']->rightDropDown("otherrights",1).'
-		  </div>
-		';
-
-		$this->CLASS['hooks']->setHook("kr_content","add_user","show");
-
-		echo '
-		  <div class="form-group">
-		  	<button class="btn btn-primary" name="submit" type="submit">'.$this->CLASS['translate']->_('save').'</button>
-		  </div>
-
-			</div>
-		</div>
-		';
-
-		$this->CLASS['hooks']->setHook("kr_content","add_user","end");
-	}
-
-	/**
-	* edit user
-	*/
-	function edit_user() {
-		$this->CLASS['hooks']->setHook("kr_content","edit_user","start");
-
-		$res = $this->CLASS['db']->query(sprintf("SELECT * FROM users WHERE id=%d",$_GET['uid']));
-		$anz = $this->CLASS['db']->num_rows($res);
-
-		if($anz == 1) {
-			$row = $this->CLASS['db']->fetch_assoc($res);
-
-			//fetch groups
-			$res = $this->CLASS['db']->query(sprintf("SELECT * FROM user_group WHERE userid=%d",$row['id']));
-			$x = 0;
-			$grouparr = array();
-			while($rowgroup = $this->CLASS['db']->fetch_assoc($res)) {
-				$grouparr[$x] = $rowgroup['groupid'];
-				$x++;
-			}
-
-			echo '
-		<div class="card">
-		  <div class="card-header">
-			'.$this->CLASS['translate']->_('add user').'
-		  </div>
-		  <div class="card-body">
-		
-				<form action="index.php" method="post">
-				<input type="hidden" name="action" value="edituser" />
-				<input type="hidden" name="uid" value="'.$row['id'].'" />
-
-		  <div class="form-group">
-			<label for="name">' . $this->CLASS['translate']->_('name') . '</label>
-			<input type="text" class="form-control" aria-describedby="name" name="name" value="'.$row['name'].'">
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="password">' . $this->CLASS['translate']->_('password') . '</label>
-			<input type="password" class="form-control" aria-describedby="password" name="password" value="">
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="theme">' . $this->CLASS['translate']->_('theme') . '</label>
-			' . $this->CLASS['themes']->theme_dropdown($row['theme']) . '
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="default group">' . $this->CLASS['translate']->_('default group') . '</label>
-			' . $this->CLASS['knowledgeroot']->groupdropdown("defaultgroup",$row['defaultgroup']) . '
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="default group">' . $this->CLASS['translate']->_('admin') . '</label>
-			' . $this->CLASS['knowledgeroot']->yesnodropdown("admin", $row['admin']) . '
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="edit rights">' . $this->CLASS['translate']->_('edit rights') . '</label>
-			' . $this->CLASS['knowledgeroot']->yesnodropdown("rightedit",$row['rightedit']) . '
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="enabled">' . $this->CLASS['translate']->_('enabled') . '</label>
-			' . $this->CLASS['knowledgeroot']->yesnodropdown("enabled",$row['enabled']) . '
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="groups">' . $this->CLASS['translate']->_('groups') . '</label>
-			' . $this->CLASS['knowledgeroot']->groupDropDown("groups[]","",true,$grouparr) . '
-		  </div>
-		  
-		  <h3>'.$this->CLASS['translate']->_('default rights').'</h3>
-		  
-		  <div class="form-group">
-			<label for="user">' . $this->CLASS['translate']->_('user') . '</label>
-			'.$this->CLASS['knowledgeroot']->rightDropDown("userrights",substr($row['defaultrights'],0,1)).'
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="group">' . $this->CLASS['translate']->_('group') . '</label>
-			'.$this->CLASS['knowledgeroot']->rightDropDown("grouprights",substr($row['defaultrights'],1,1)).'
-		  </div>
-		  
-		  <div class="form-group">
-			<label for="others">' . $this->CLASS['translate']->_('others') . '</label>
-			'.$this->CLASS['knowledgeroot']->rightDropDown("otherrights",substr($row['defaultrights'],2,1)).'
-		  </div>
-			';
-
-			$this->CLASS['hooks']->setHook("kr_content","edit_user","show");
-
-			echo '
-		  <div class="form-group">
-		  	<button class="btn btn-primary" name="submit" type="submit">'.$this->CLASS['translate']->_('save').'</button>
-		  </div>
-
-			</div>
-		</div>
-			';
-		}
-
-		$this->CLASS['hooks']->setHook("kr_content","edit_user","end");
-	}
-
-	/**
-	 * add group
-	 */
-	function add_group() {
-		$this->CLASS['hooks']->setHook("kr_content","add_group","start");
-
-		echo '
-		<div class="card">
-		  <div class="card-header">
-			'.$this->CLASS['translate']->_('add group').'
-		  </div>
-		  <div class="card-body">
-		
-		<form action="index.php" method="post" name="addgroupformular">
-			<input type="hidden" name="action" value="addgroup" />
-
-		  <div class="form-group">
-			<label for="name">' . $this->CLASS['translate']->_('name') . '</label>
-			<input type="text" class="form-control" aria-describedby="name" name="name" value="">
-		  </div>
-		';
-
-		$this->CLASS['hooks']->setHook("kr_content","add_group","show");
-
-		echo '
-		  <div class="form-group">
-		  	<button class="btn btn-primary" name="submit" type="submit">'.$this->CLASS['translate']->_('save').'</button>
-		  </div>
-			
-				</form>
-		  </div>
-		 </div>
-		';
-
-		$this->CLASS['hooks']->setHook("kr_content","add_group","end");
-	}
-
-	/**
-	 * edit group
-	 */
-	function edit_group() {
-		$this->CLASS['hooks']->setHook("kr_content","edit_group","start");
-
-		$res = $this->CLASS['db']->query(sprintf("SELECT * FROM groups WHERE id=%d",$_GET['gid']));
-		$anz = $this->CLASS['db']->num_rows($res);
-
-		if($anz == 1) {
-			$row = $this->CLASS['db']->fetch_assoc($res);
-			echo '
-		<div class="card">
-		  <div class="card-header">
-			'.$this->CLASS['translate']->_('add group').'
-		  </div>
-		  <div class="card-body">
-		
-			<form action="index.php" method="post">
-			<input type="hidden" name="action" value="editgroup" />
-			<input type="hidden" name="gid" value="'.$row['id'].'" />
-
-		  <div class="form-group">
-			<label for="name">' . $this->CLASS['translate']->_('name') . '</label>
-			<input type="text" class="form-control" aria-describedby="name" name="name" value="'.$row['name'].'">
-		  </div>
-			';
-
-			$this->CLASS['hooks']->setHook("kr_content","edit_group","show");
-
-			echo '
-		  <div class="form-group">
-		  	<button class="btn btn-primary" name="submit" type="submit">'.$this->CLASS['translate']->_('save').'</button>
-		  </div>
-			
-				</form>
-		  </div>
-		 </div>
-			';
-		}
-
-		$this->CLASS['hooks']->setHook("kr_content","edit_group","end");
 	}
 
 	/**

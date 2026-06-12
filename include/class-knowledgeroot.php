@@ -82,17 +82,13 @@ class knowledgeroot {
 	 * @return	array
 	 */
 	function addSlashesOnArray(&$theArray)	{
-		if(get_magic_quotes_gpc() == 0) {
-			if (is_array($theArray))	{
-				reset($theArray);
-				while(list($Akey,$AVal)=each($theArray))	{
-					if (is_array($AVal))	{
-						$this->addSlashesOnArray($theArray[$Akey]);
-					} else {
-						$theArray[$Akey] = addslashes($AVal);
-					}
+		if (is_array($theArray))	{
+			foreach($theArray as $Akey => $AVal)	{
+				if (is_array($AVal))	{
+					$this->addSlashesOnArray($theArray[$Akey]);
+				} else {
+					$theArray[$Akey] = addslashes((string) $AVal);
 				}
-				reset($theArray);
 			}
 		}
 	}
@@ -1266,14 +1262,14 @@ class knowledgeroot {
 
 		try {
 			// write new config
-			$writer = new Zend_Config_Writer_Ini(array('config' => new Zend_Config($configOri), 'filename' => $this->CLASS['config']->base->base_path.'config/app.ini'));
-			$writer->write();
+			$writer = new \Knowledgeroot\Infrastructure\Config\IniWriter();
+			$writer->write($this->CLASS['config']->base->base_path.'config/app.ini', $configOri);
 
 			// create new config instance
-			$this->CLASS['config'] = new Zend_Config($configOri);
+			$this->CLASS['config'] = new \Knowledgeroot\Infrastructure\Config\Config($configOri);
 
 			$res = true;
-		} catch(Zend_Config_Exception $e) {
+		} catch(\Exception $e) {
 
 		}
 
@@ -1388,11 +1384,11 @@ class knowledgeroot {
 		$config = array();
 
 		// write new config
-		$writer = new Zend_Config_Writer_Ini(array('config' => new Zend_Config($configOri), 'filename' => $this->CLASS['config']->base->base_path.'config/app.ini'));
-		$writer->write();
+		$writer = new \Knowledgeroot\Infrastructure\Config\IniWriter();
+		$writer->write($this->CLASS['config']->base->base_path.'config/app.ini', $configOri);
 
 		// create new config instance
-		$this->CLASS['config'] = new Zend_Config($configOri);
+		$this->CLASS['config'] = new \Knowledgeroot\Infrastructure\Config\Config($configOri);
 	}
 
 	/**
@@ -1561,7 +1557,7 @@ class knowledgeroot {
 			case 'REQUEST_URI':
 					// Typical application of REQUEST_URI is return urls, forms submitting to itself etc. Example: returnUrl='.rawurlencode($this->getIndpEnv('REQUEST_URI'))
 				if (!$_SERVER['REQUEST_URI'])	{	// This is for ISS/CGI which does not have the REQUEST_URI available.
-					return '/'.ereg_replace('^/','',$this->getEnv('SCRIPT_NAME')).
+					return '/'.preg_replace('/^\//','',$this->getEnv('SCRIPT_NAME')).
 						($_SERVER['QUERY_STRING']?'?'.$_SERVER['QUERY_STRING']:'');
 				} else return $_SERVER['REQUEST_URI'];
 			break;
@@ -1591,7 +1587,7 @@ class knowledgeroot {
 				$SN_A = explode('/',strrev($this->getEnv('SCRIPT_NAME')));
 				$SFN_A = explode('/',strrev($SFN));
 				$acc = array();
-				while(list($kk,$vv)=each($SN_A))	{
+				foreach($SN_A as $kk => $vv)	{
 					if (!strcmp($SFN_A[$kk],$vv))	{
 						$acc[] = $vv;
 					} else break;
@@ -1685,11 +1681,10 @@ class knowledgeroot {
 	 */
 	function revExplode($delim, $string, $count=0)	{
 		$temp = explode($delim,strrev($string),$count);
-		while(list($key,$val)=each($temp))	{
+		foreach($temp as $key => $val)	{
 			$temp[$key]=strrev($val);
 		}
 		$temp=array_reverse($temp);
-		reset($temp);
 		return $temp;
 	}
 

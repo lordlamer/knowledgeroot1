@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{ head|raw }}
+</head>
+<body class="claro">
+
+<div style="display: none;" id="messagebox">
+  <div id="msg" class="loading">{{ loading_text }}</div>
+</div>
+
+<a name="top"></a>
+
+<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark" style="border-bottom: 3px solid #F88529;">
+    <a class="navbar-brand" href="#">{{ site_title }}</a>
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse nav-justified" id="navbarsExampleDefault">
+        {{ top_menu|raw }}
+
+        <form class="form-inline my-2 my-lg-0" id="change_language" action="index.php" method="post" style="margin-right: 5px;">
+            <input type="hidden" name="action" value="change_language" />
+            {{ language_dropdown|raw }}
+        </form>
+
+        <form class="form-inline my-2 my-lg-0" action="index.php" method="post" style="margin-right: 5px;">
+            <input class="form-control mr-sm-2" type="text" name="search" placeholder="{{ search_placeholder }}" aria-label="{{ search_placeholder }}" value="{{ search_value }}" />
+            <input type="hidden" name="submit" value="GO" />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit">{{ search_action_text }}</button>
+        </form>
+
+        <span class="navbar-text">
+            {{ user_label }}:&nbsp;{{ user }}
+        </span>
+    </div>
+</nav>
+
+<nav class="navbar fixed-bottom navbar-light bg-light justify-content-end">
+    <span class="navbar-text">
+        <a href="http://www.knowledgeroot.org">Knowledgeroot</a> - {{ version_label }}:&nbsp;{{ site_version }}
+    </span>
+</nav>
+
+<nav aria-label="breadcrumb" style="margin-top:55px;">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i> </li>
+        {{ path|raw }}
+    </ol>
+</nav>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+	 <td id="treecontainer">
+
+	   <div id="tree" style="display:block;">
+          {{ tree|raw }}
+	   </div>
+	 </td>
+	 <td id="contentcontainer">
+        {{ messages|raw }}
+        {{ content|raw }}
+	 </td>
+	</tr>
+</table>
+
+{{ debug|raw }}
+{{ runtime|raw }}
+</body>
+</html>

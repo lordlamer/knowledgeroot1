@@ -1,21 +1,13 @@
 <?php
-/**
- * autoloader function for classes
- * @param string $class name of class
- */
-function __autoload($class) {
-        Zend_Loader::loadClass($class);
-}
+
+use Knowledgeroot\Infrastructure\Config\Config;
+use Knowledgeroot\Infrastructure\Config\IniWriter;
 
 // base path
 $base_path = realpath(dirname(__FILE__).'/../') . '/';
 
-// set include path
-set_include_path($base_path . '/lib/' . PATH_SEPARATOR . get_include_path());
-
 require_once($base_path."vendor/autoload.php");
 
-require_once('Zend/Loader.php');
 require_once($base_path."include/class-db-result.php");
 require_once($base_path."include/class-db-core.php");
 require_once($base_path."include/class-db-dbal.php");
@@ -124,7 +116,7 @@ class knowledgeroot_installer {
 	}
 
 	function doUpdateConnect() {
-		$newConfig = new Zend_Config_Ini($this->file_config_dist, null, array('allowModifications' => true));
+		$newConfig = Config::fromIniFile($this->file_config_dist);
 		$this->CLASS['config'] =& $newConfig;
 		$CONFIG = '';
 		require_once($this->file_config_old);
@@ -179,7 +171,7 @@ class knowledgeroot_installer {
 	}
 
 	function doInstall() {
-		$config = new Zend_Config_Ini($this->file_config_dist, null, array('allowModifications' => true));
+		$config = Config::fromIniFile($this->file_config_dist);
 
 		$out = "";
 		$out .= '
@@ -244,7 +236,7 @@ class knowledgeroot_installer {
 		<table class="table table-striped table-sm" align="center" width="548" cellpadding="1" cellspacing="1" border="0">
 		';
 
-		$config = new Zend_Config_Ini($this->file_config_dist, null, array('allowModifications' => true));
+		$config = Config::fromIniFile($this->file_config_dist);
 
 		if($this->CLASS['vars']['db']['type'] == "pgsql") {
 			$dump_file = $this->file_pgsql_upgrade_dump;
@@ -339,9 +331,9 @@ class knowledgeroot_installer {
 		$config->db->schema = $db_schema;
 
 		// init writer
-		$writer = new Zend_Config_Writer_Ini(array('config' => $config));
+		$writer = new IniWriter();
 
-		return $writer->render();
+		return $writer->render($config);
 	}
 
 	function getInstallForm() {
@@ -464,70 +456,6 @@ class knowledgeroot_installer {
 		';
 
 		return $content;
-	}
-
-	function isPgsqlConnect($host,$user,$pass,$db,$schema="",$encoding="") {
-		$this->db_connection = pg_connect("host=".$host." dbname=" . $db . " user=".$user." password=".$pass."");
-
-		if($this->db_connection) {
-			if($schema != "") {
-				pg_query("SET search_path TO ".$schema);
-			}
-
-			if($encoding != "") {
-				pg_set_client_encoding($this->db_connection, $encoding);
-			}
-
-			return 1;
-		}
-
-		return 0;
-	}
-
-	function isMysqlConnect($host,$user,$pass,$db="") {
-		$this->db_connection = mysql_connect($host,$user,$pass);
-
-		if($this->db_connection) {
-			if($db != "") {
-				$db_conn = mysql_select_db($db, $this->db_connection);
-
-				if($db_conn) {
-					return 1;
-				}
-			} else {
-				return 1;
-			}
-		}
-
-		return 0;
-	}
-
-	function isMysqliConnect($host,$user,$pass,$db="") {
-		$this->db_connection = mysqli_connect($host,$user,$pass);
-
-		if($this->db_connection) {
-			if($db != "") {
-				$db_conn = mysqli_select_db($this->db_connection, $db);
-
-				if($db_conn) {
-					return 1;
-				}
-			} else {
-				return 1;
-			}
-		}
-
-		return 0;
-	}
-
-	function isSqliteConnect($host,$user,$pass,$db="") {
-		$this->db_connection = sqlite_open($db, "0666");
-
-		if($this->db_connection) {
-			return 1;
-		}
-
-		return 0;
 	}
 
 	/**
@@ -701,17 +629,13 @@ class knowledgeroot_installer {
 	 * @return	array
 	 */
 	function addSlashesOnArray(&$theArray)	{
-		if(get_magic_quotes_gpc() == 0) {
-			if (is_array($theArray))	{
-				reset($theArray);
-				while(list($Akey,$AVal)=each($theArray))	{
-					if (is_array($AVal))	{
-						$this->addSlashesOnArray($theArray[$Akey]);
-					} else {
-						$theArray[$Akey] = addslashes($AVal);
-					}
+		if (is_array($theArray))	{
+			foreach($theArray as $Akey => $AVal)	{
+				if (is_array($AVal))	{
+					$this->addSlashesOnArray($theArray[$Akey]);
+				} else {
+					$theArray[$Akey] = addslashes((string) $AVal);
 				}
-				reset($theArray);
 			}
 		}
 	}

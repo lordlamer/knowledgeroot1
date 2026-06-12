@@ -56,4 +56,28 @@ function getFormattedSize($size) {
   }
 }
 
+/**
+ * Capture all output of a callback and return it as string.
+ *
+ * @param callable $callback
+ * @return string
+ */
+function kr_capture($callback) {
+  ob_start();
+  call_user_func($callback);
+  return ob_get_clean();
+}
+
+/**
+ * Render a Twig template with the shared container instance.
+ *
+ * @param array $CLASS
+ * @param string $template
+ * @param array $vars
+ * @return string
+ */
+function kr_render($CLASS, $template, $vars = array()) {
+  return $CLASS['container']['twig']->render($template, $vars);
+}
+
 ?>

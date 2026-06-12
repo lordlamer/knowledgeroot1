@@ -1,0 +1,12 @@
+/nbproject/private/
+/.idea/
+
+# local configuration - app.ini.dist is the template
+/config/app.ini
+/config/app-*.ini
+
+# runtime data (database, cache, uploaded files)
+/data/*
+!/data/.htaccess
+
+/composer_2.phar

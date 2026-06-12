@@ -1,5 +1,9 @@
 <?php
 
+use Knowledgeroot\Infrastructure\Cache\FileCache;
+use Knowledgeroot\Infrastructure\Config\Config;
+use Knowledgeroot\Infrastructure\Translation\Translator;
+use Knowledgeroot\Infrastructure\Twig\I18nExtension;
 use Pimple\Container;
 
 /**
@@ -48,7 +52,7 @@ if(!is_file($base_path.'config/app.ini')) {
 }
 
 // init config
-$CLASS['config'] = new Zend_Config_Ini($base_path.'config/app.ini', null, array('allowModifications' => true));
+$CLASS['config'] = Config::fromIniFile($base_path.'config/app.ini');
 
 // init error
 $CLASS['error'] = new knowledgeroot_error();
@@ -62,12 +66,11 @@ $CLASS['container'] = new Container();
 
 // init twig
 $loader = new \Twig\Loader\FilesystemLoader($base_path.'system/templates');
-$CLASS['container']['twig'] = new \Twig\Environment($loader, [
-    'cache' => $base_path.$CLASS['config']->cache->path,
-]);
 
-// use translation extension for twig
-$CLASS['container']['twig']->addExtension(new Twig_Extensions_Extension_I18n());
+$CLASS['container']['twig'] = new \Twig\Environment($loader, array(
+	'cache' => $base_path.$CLASS['config']->cache->path,
+	'auto_reload' => true,
+));
 
 // init slim
 /*
@@ -112,7 +115,11 @@ if(!is_dir($base_path.$CLASS['config']->cache->path)) {
 if(!is_writeable($base_path.$CLASS['config']->cache->path)) {
 	die('Cache path is not writeable:'.$base_path.$CLASS['config']->cache->path);
 }
-$CLASS['cache'] = Zend_Cache::factory('Core', 'File', $CLASS['config']->cache->options->toArray(), array('cache_dir' => $base_path.$CLASS['config']->cache->path));
+$CLASS['cache'] = new FileCache(
+	$base_path.$CLASS['config']->cache->path,
+	(bool) $CLASS['config']->cache->options->caching,
+	(int) $CLASS['config']->cache->options->lifetime
+);
 
 // init knowledgerootclass
 $CLASS['knowledgeroot'] = new knowledgeroot();
@@ -134,19 +141,21 @@ if(!$CLASS['session']->checkSession()) {
 }
 
 // init gettext
-Zend_Translate::setCache($CLASS['cache']);
 if(isset($_SESSION['language']) && $_SESSION['language'] != '' && (is_file($base_path.'system/language/'.$_SESSION['language'].'.UTF8/LC_MESSAGES/knowledgeroot.mo') || is_file($base_path.'system/language/'.$_SESSION['language'].'/LC_MESSAGES/knowledgeroot.mo'))) {
 	$language = str_replace(".UTF8","",$_SESSION['language']);
-	$CLASS['translate'] = new Zend_Translate('gettext', $base_path.'system/language/'.$language.'.UTF8/LC_MESSAGES/knowledgeroot.mo', $language);
+	$CLASS['translate'] = new Translator($base_path.'system/language/'.$language.'.UTF8/LC_MESSAGES/knowledgeroot.mo', $language);
 	if($language != $CLASS['config']->base->locale) {
 		$CLASS['translate']->addTranslation($base_path.'system/language/'.$CLASS['config']->base->locale.'.UTF8/LC_MESSAGES/knowledgeroot.mo', $CLASS['config']->base->locale);
 		$CLASS['translate']->setLocale($language);
 	}
 } elseif(is_file($base_path.'system/language/'.$CLASS['config']->base->locale .'.UTF8/LC_MESSAGES/knowledgeroot.mo')) {
-	$CLASS['translate'] = new Zend_Translate('gettext', $base_path.'system/language/'.$CLASS['config']->base->locale .'.UTF8/LC_MESSAGES/knowledgeroot.mo', $CLASS['config']->base->locale);
+	$CLASS['translate'] = new Translator($base_path.'system/language/'.$CLASS['config']->base->locale .'.UTF8/LC_MESSAGES/knowledgeroot.mo', $CLASS['config']->base->locale);
 } else {
-	$CLASS['translate'] = new Zend_Translate('gettext', $base_path.'system/language/en_US.UTF8/LC_MESSAGES/knowledgeroot.mo', 'en_US');
+	$CLASS['translate'] = new Translator($base_path.'system/language/en_US.UTF8/LC_MESSAGES/knowledgeroot.mo', 'en_US');
 }
+
+// expose translator to twig templates ({{ 'msg'|trans }})
+$CLASS['container']['twig']->addExtension(new I18nExtension($CLASS['translate']));
 
 // if gettext function not exists use our translate
 if (!function_exists('gettext')) {

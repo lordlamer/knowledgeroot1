@@ -1,0 +1,30 @@
+﻿<div class="card">
+  <div class="card-header">
+    {{ label_change_options }}
+  </div>
+  <div class="card-body">
+    <form action="index.php" method="post">
+      <input type="hidden" name="action" value="options" />
+
+      <div class="form-group">
+        <label for="password">{{ label_new_password }}</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="{{ label_new_password }}">
+      </div>
+      <div class="form-group">
+        <label for="password1">{{ label_confirm_password }}</label>
+        <input type="password" class="form-control" name="password1" id="password1" placeholder="{{ label_confirm_password }}">
+      </div>
+      <div class="form-group">
+        <label for="theme">{{ label_theme }}</label>
+        {{ theme_dropdown|raw }}
+      </div>
+      <div class="form-group">
+        <label for="language">{{ label_language }}</label>
+        {{ language_dropdown|raw }}
+      </div>
+
+      <button class="btn btn-primary" type="submit" name="submit">{{ label_save }}</button>
+
+    </form>
+  </div>
+</div>

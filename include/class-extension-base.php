@@ -38,27 +38,12 @@ class extension_base {
 	/**
 	 * init/start class
 	 */
-	function __contruct(&$CLASS) {
+	function __construct(&$CLASS) {
 		$this->CLASS =& $CLASS;
 
 		// load GET and POST
 		if(isset($_GET[get_class($this)])) $this->GET = $_GET[get_class($this)];
-		if(isset($_POST[get_class($this)])) $this->GET = $_POST[get_class($this)];
-
-		return 0;
-	}
-
-	/**
-	 *
-	 */
-	function extension_base(&$CLASS) {
-		$this->CLASS =& $CLASS;
-
-		// load GET and POST
-		if(isset($_GET[get_class($this)])) $this->GET = $_GET[get_class($this)];
-		if(isset($_POST[get_class($this)])) $this->GET = $_POST[get_class($this)];
-
-		return 0;
+		if(isset($_POST[get_class($this)])) $this->POST = $_POST[get_class($this)];
 	}
 
 	/**

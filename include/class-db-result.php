@@ -2,31 +2,52 @@
 /**
  * class for results of a db query
  *
+ * Holds the complete, buffered resultset of a query so that
+ * num_rows(), data_seek() and repeated fetches work identically
+ * on all supported database drivers.
+ *
  * @package Knowledgeroot
  * @author Frank Habermann
- * @version $Id: class-db-result.php 860 2009-09-25 12:15:19Z lordlamer $
  */
 class db_result {
 	/**
 	 * reference to all classes
-	 * @param array $CLASS
+	 * @var array
 	 */
 	var $CLASS = null;
 
 	/**
-	 * result of query
-	 * @param resource $result
+	 * raw driver result of query
+	 * @var mixed
 	 */
 	var $result = null;
 
 	/**
 	 * query that was used
-	 * @param string $query
+	 * @var string
 	 */
 	var $query = "";
 
 	/**
-	 * constructor for php5
+	 * buffered rows (assoc arrays)
+	 * @var array
+	 */
+	var $rows = array();
+
+	/**
+	 * current fetch position
+	 * @var int
+	 */
+	var $position = 0;
+
+	/**
+	 * number of rows affected by a write query
+	 * @var int
+	 */
+	var $affectedRows = 0;
+
+	/**
+	 * constructor
 	 * @param array $CLASS
 	 */
 	function __construct(&$CLASS) {
@@ -34,19 +55,30 @@ class db_result {
 	}
 
 	/**
-	 * get result
-	 * @return resource
+	 * get raw driver result
+	 * @return mixed
 	 */
 	function getResult() {
 		return $this->result;
 	}
 
 	/**
-	 * set result
-	 * @param resource $result
+	 * set raw driver result
+	 * @param mixed $result
 	 */
 	function setResult($result) {
 		$this->result = $result;
+	}
+
+	/**
+	 * set buffered rows
+	 * @param array $rows
+	 * @param int $affectedRows
+	 */
+	function setRows($rows, $affectedRows = 0) {
+		$this->rows = $rows;
+		$this->position = 0;
+		$this->affectedRows = $affectedRows;
 	}
 
 	/**
@@ -67,26 +99,34 @@ class db_result {
 
 	/**
 	 * fetch as assoc
-	 * @return array
+	 * @return array|false
 	 */
 	function fetch_assoc() {
-		return $this->CLASS['db']->fetch_assoc($this);
+		if (!isset($this->rows[$this->position])) {
+			return false;
+		}
+
+		return $this->rows[$this->position++];
 	}
 
 	/**
 	 * fetch as object
-	 * @return object
+	 * @return object|false
 	 */
 	function fetch_object() {
-		return $this->CLASS['db']->fetch_object($this);
+		$row = $this->fetch_assoc();
+
+		return $row === false ? false : (object) $row;
 	}
 
 	/**
-	 * fetch as row
-	 * @return array
+	 * fetch as numeric row
+	 * @return array|false
 	 */
 	function fetch_row() {
-		return $this->CLASS['db']->fetch_row($this);
+		$row = $this->fetch_assoc();
+
+		return $row === false ? false : array_values($row);
 	}
 
 	/**
@@ -94,7 +134,7 @@ class db_result {
 	 * @return integer
 	 */
 	function num_rows() {
-		return $this->CLASS['db']->num_rows($this);
+		return count($this->rows);
 	}
 
 	/**
@@ -102,7 +142,7 @@ class db_result {
 	 * @return integer
 	 */
 	function affected_rows() {
-		return $this->CLASS['db']->affected_rows($this);
+		return $this->affectedRows;
 	}
 
 	/**
@@ -111,8 +151,12 @@ class db_result {
 	 * @return bool
 	 */
 	function data_seek($number) {
-		return $this->CLASS['db']->data_seek($this, $number);
+		if ($number < 0 || ($number > 0 && !isset($this->rows[$number]))) {
+			return false;
+		}
+
+		$this->position = $number;
+
+		return true;
 	}
 }
-
-?>

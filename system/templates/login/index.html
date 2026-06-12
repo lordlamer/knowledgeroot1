@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ 'login'|trans }} - {{ site_title }}{% endblock %}
+
+{% block body %}
+<div class="container" style="max-width: 420px; margin-top: 80px;">
+
+    {% if error %}
+        <div class="alert alert-warning" role="alert">{{ error }}</div>
+    {% endif %}
+
+    <div class="card">
+        <div class="card-header">
+            {{ 'login'|trans }}
+        </div>
+        <div class="card-body">
+            <form action="{{ base_url }}login" method="post">
+                <div class="form-group">
+                    <label for="user">{{ 'user'|trans }}</label>
+                    <input type="text" class="form-control" name="user" id="user" value="{{ user }}" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="password">{{ 'password'|trans }}</label>
+                    <input type="password" class="form-control" name="password" id="password" required>
+                </div>
+
+                <button class="btn btn-primary" type="submit">{{ 'login'|trans }}</button>
+                <a class="btn btn-link" href="{{ base_url }}index.php">{{ site_title }}</a>
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

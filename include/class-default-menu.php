@@ -39,15 +39,18 @@ class default_menu {
 
 		// login
 		$this->defaultmenu['top']['login']['name'] = $this->CLASS['translate']->_('login');
-		$this->defaultmenu['top']['login']['link'] = "index.php?action=login";
+		// served by the new slim route (src/Presentation/Login), the old
+		// index.php?action=login still works as fallback
+		$this->defaultmenu['top']['login']['link'] = "login";
 		$this->defaultmenu['top']['login']['tooltip'] = "login";
 		$this->defaultmenu['top']['login']['logout'] = "1";
 		$this->defaultmenu['top']['login']['priority'] = "10";
         $this->defaultmenu['top']['login']['atagparams'] = "class=\"nav-link\"";
 
 		// logout
+		// served by the new slim route, index.php?action=logout still works
 		$this->defaultmenu['top']['logout']['name'] = $this->CLASS['translate']->_('logout');
-		$this->defaultmenu['top']['logout']['link'] = "index.php?action=logout";
+		$this->defaultmenu['top']['logout']['link'] = "logout";
 		$this->defaultmenu['top']['logout']['tooltip'] = "logout";
 		$this->defaultmenu['top']['logout']['login'] = "1";
 		$this->defaultmenu['top']['logout']['priority'] = "90";
@@ -63,8 +66,9 @@ class default_menu {
         $this->defaultmenu['top']['roots']['atagparams'] = "class=\"nav-link\"";
 
 		// user
+		// served by the new slim route, index.php?action=users still works
 		$this->defaultmenu['top']['user']['name'] = $this->CLASS['translate']->_('user');
-		$this->defaultmenu['top']['user']['link'] = "index.php?action=users";
+		$this->defaultmenu['top']['user']['link'] = "users";
 		$this->defaultmenu['top']['user']['tooltip'] = "create users";
 		$this->defaultmenu['top']['user']['login'] = "1";
 		$this->defaultmenu['top']['user']['priority'] = "20";

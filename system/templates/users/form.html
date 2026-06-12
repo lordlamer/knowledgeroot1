@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ (mode == 'add' ? 'add user' : 'edit')|trans }} - {{ site_title }}{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" style="border-bottom: 3px solid #F88529;">
+    <a class="navbar-brand" href="{{ base_url }}index.php">{{ site_title }}</a>
+</nav>
+
+<div class="container" style="max-width: 640px; margin-top: 20px;">
+
+    {% if error %}
+        <div class="alert alert-warning" role="alert">{{ error }}</div>
+    {% endif %}
+
+    <div class="card">
+        <div class="card-header">
+            {{ (mode == 'add' ? 'add user' : 'edit')|trans }}
+        </div>
+        <div class="card-body">
+            <form action="{{ mode == 'add' ? base_url ~ 'users/new' : base_url ~ 'users/' ~ form.id }}" method="post">
+
+                <div class="form-group">
+                    <label for="name">{{ 'name'|trans }}</label>
+                    <input type="text" class="form-control" name="name" id="name" value="{{ form.name|default('') }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">{{ 'password'|trans }}</label>
+                    <input type="password" class="form-control" name="password" id="password"
+                           {% if mode == 'add' %}required{% else %}placeholder="{{ 'Leave empty to keep the current password'|trans }}"{% endif %}>
+                </div>
+
+                <div class="form-group">
+                    <label for="theme">{{ 'theme'|trans }}</label>
+                    <select class="form-control form-control-sm" name="theme" id="theme">
+                        {% for theme in themes %}
+                            <option value="{{ theme }}" {{ form.theme|default('') == theme ? 'selected' }}>{{ theme }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="defaultgroup">{{ 'default group'|trans }}</label>
+                    <select class="form-control form-control-sm" name="defaultgroup" id="defaultgroup">
+                        {% for group in all_groups %}
+                            <option value="{{ group.id }}" {{ form.defaultgroup|default(0) == group.id ? 'selected' }}>{{ group.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="admin">{{ 'admin'|trans }}</label>
+                    <select class="form-control form-control-sm" name="admin" id="admin">
+                        <option value="0" {{ not form.admin|default(false) ? 'selected' }}>{{ 'no'|trans }}</option>
+                        <option value="1" {{ form.admin|default(false) ? 'selected' }}>{{ 'yes'|trans }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="rightedit">{{ 'edit rights'|trans }}</label>
+                    <select class="form-control form-control-sm" name="rightedit" id="rightedit">
+                        <option value="0" {{ not form.rightedit|default(false) ? 'selected' }}>{{ 'no'|trans }}</option>
+                        <option value="1" {{ form.rightedit|default(false) ? 'selected' }}>{{ 'yes'|trans }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="enabled">{{ 'enabled'|trans }}</label>
+                    <select class="form-control form-control-sm" name="enabled" id="enabled">
+                        <option value="0" {{ not form.enabled|default(true) ? 'selected' }}>{{ 'no'|trans }}</option>
+                        <option value="1" {{ form.enabled|default(true) ? 'selected' }}>{{ 'yes'|trans }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="groups">{{ 'groups'|trans }}</label>
+                    <select class="form-control form-control-sm" name="groups[]" id="groups" multiple size="5">
+                        {% for group in all_groups %}
+                            <option value="{{ group.id }}" {{ group.id in form.groups|default([]) ? 'selected' }}>{{ group.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <h5>{{ 'default rights'|trans }}</h5>
+
+                {% set rights_options = {2: 'read+write', 1: 'read', 0: 'no rights'} %}
+                {% for field, label in {'userrights': 'user', 'grouprights': 'group', 'otherrights': 'others'} %}
+                <div class="form-group">
+                    <label for="{{ field }}">{{ label|trans }}</label>
+                    <select class="form-control form-control-sm" name="{{ field }}" id="{{ field }}">
+                        {% for value, option in rights_options %}
+                            <option value="{{ value }}" {{ form[field]|default(2) == value ? 'selected' }}>{{ option|trans }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% endfor %}
+
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">{{ 'save'|trans }}</button>
+                    <a class="btn btn-link" href="{{ base_url }}users">{{ 'user'|trans }}</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
