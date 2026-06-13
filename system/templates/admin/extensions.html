@@ -1,0 +1,61 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}{{ 'extensions'|trans }}{% endblock %}
+
+{% macro action_button(base_url, keyname, action, label, css) %}
+    <form method="post" action="{{ base_url }}admin/extensions/{{ action }}" style="display: inline;">
+        <input type="hidden" name="keyname" value="{{ keyname }}">
+        <button class="btn btn-sm {{ css }}" type="submit">{{ label|trans }}</button>
+    </form>
+{% endmacro %}
+
+{% block content %}
+<h2>{{ 'extensions'|trans }}</h2>
+
+<table class="table table-striped table-sm">
+    <thead>
+        <tr>
+            <th>{{ 'name'|trans }}</th>
+            <th>{{ 'version'|trans }}</th>
+            <th>{{ 'state'|trans }}</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ext in extensions %}
+            <tr>
+                <td>
+                    <strong>{{ ext.keyname }}</strong>{% if ext.admin %} <span class="badge badge-secondary">admin</span>{% endif %}
+                    {% if not ext.onDisk %}<span class="badge badge-warning">{{ 'missing on disk'|trans }}</span>{% endif %}
+                    {% if ext.description %}<br><small class="text-muted">{{ ext.description }}</small>{% endif %}
+                </td>
+                <td>{{ ext.version }}</td>
+                <td>
+                    {% if not ext.installed %}
+                        <span class="badge badge-light">{{ 'not installed'|trans }}</span>
+                    {% elseif ext.active %}
+                        <span class="badge badge-success">{{ 'active'|trans }}</span>
+                    {% else %}
+                        <span class="badge badge-secondary">{{ 'inactive'|trans }}</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not ext.installed %}
+                        {{ _self.action_button(base_url, ext.keyname, 'install', 'install', 'btn-outline-primary') }}
+                    {% elseif ext.active %}
+                        {{ _self.action_button(base_url, ext.keyname, 'disable', 'disable', 'btn-outline-secondary') }}
+                    {% else %}
+                        {{ _self.action_button(base_url, ext.keyname, 'enable', 'enable', 'btn-outline-success') }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if ext.installed %}
+                        {{ _self.action_button(base_url, ext.keyname, 'uninstall', 'uninstall', 'btn-outline-danger') }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

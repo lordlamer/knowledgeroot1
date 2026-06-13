@@ -39,8 +39,11 @@ use Knowledgeroot\Infrastructure\Persistence\DbalGroupRepository;
 use Knowledgeroot\Infrastructure\Language\LanguageLocator;
 use Knowledgeroot\Infrastructure\Theme\ThemeLocator;
 use Knowledgeroot\Presentation\Http\UrlHelper;
+use Knowledgeroot\Domain\Extension\ExtensionRepository;
 use Knowledgeroot\Infrastructure\Admin\AdminGate;
 use Knowledgeroot\Infrastructure\Cache\FileCache;
+use Knowledgeroot\Infrastructure\Extension\ExtensionCatalog;
+use Knowledgeroot\Infrastructure\Persistence\DbalExtensionRepository;
 use Knowledgeroot\Infrastructure\Config\Config;
 use Knowledgeroot\Infrastructure\Mail\MailerFactory;
 use Knowledgeroot\Infrastructure\Session\LegacySession;
@@ -135,6 +138,9 @@ return [
 		$c->get(LegacySession::class),
 		(string) ($c->get(Config::class)->admin->loginhash ?? ''),
 	),
+
+	ExtensionRepository::class => autowire(DbalExtensionRepository::class),
+	ExtensionCatalog::class => fn (ContainerInterface $c) => new ExtensionCatalog($c->get('base_path')),
 
 	FileCache::class => function (ContainerInterface $c) {
 		$config = $c->get(Config::class);
