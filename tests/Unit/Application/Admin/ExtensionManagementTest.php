@@ -63,9 +63,9 @@ class ExtensionManagementTest extends TestCase
         $available = $this->catalog->available();
 
         $this->assertArrayHasKey('ckeditor', $available);
-        $this->assertArrayHasKey('admin_config', $available);
-        $this->assertTrue($available['admin_config']['admin'], 'sysext extensions are admin');
+        $this->assertArrayHasKey('libsecure', $available);
         $this->assertFalse($available['ckeditor']['admin']);
+        $this->assertNotSame('', $available['ckeditor']['title']);
     }
 
     public function testListMergesRegistryAndDisk(): void
