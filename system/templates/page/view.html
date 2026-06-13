@@ -84,11 +84,25 @@
                                 {% for file in item.attachments %}
                                     <li>
                                         <i class="fa fa-cloud-download" aria-hidden="true"></i>
-                                        <a href="{{ base_url }}index.php?download={{ file.id }}">{{ file.filename }}</a>
+                                        <a href="{{ base_url }}file/{{ file.id }}">{{ file.filename }}</a>
                                         <span class="badge badge-info">{{ (file.filesize / 1024)|round(1) }} KB</span>
+                                        {% if item.canEdit %}
+                                            <form method="post" action="{{ base_url }}file/{{ file.id }}/delete" style="display: inline;"
+                                                  onsubmit="return confirm('{{ 'Do you really want to delete?'|trans|escape('js') }}');">
+                                                <button class="btn btn-sm btn-link text-danger p-0" type="submit"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                        {% endif %}
                                     </li>
                                 {% endfor %}
                             </ul>
+                        {% endif %}
+
+                        {% if item.canEdit %}
+                            <form method="post" action="{{ base_url }}content/{{ item.block.id }}/files" enctype="multipart/form-data" class="form-inline mt-2">
+                                <input type="hidden" name="page_id" value="{{ page.id }}">
+                                <input type="file" name="file" class="form-control-file mr-2" required>
+                                <button class="btn btn-sm btn-outline-secondary" type="submit">{{ 'add file'|trans }}</button>
+                            </form>
                         {% endif %}
 
                         {% if item.block.lastUpdated != '' %}

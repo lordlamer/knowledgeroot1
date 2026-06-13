@@ -16,6 +16,7 @@ use Knowledgeroot\Application\Login\AuthenticateUser;
 use Knowledgeroot\Domain\Content\AttachmentRepository;
 use Knowledgeroot\Domain\Content\ContentAccess;
 use Knowledgeroot\Domain\Content\ContentRepository;
+use Knowledgeroot\Application\FileHandling\UploadFile;
 use Knowledgeroot\Application\Navigation\BuildNavigation;
 use Knowledgeroot\Domain\Group\GroupRepository;
 use Knowledgeroot\Domain\Navigation\NavigationTreeBuilder;
@@ -142,6 +143,13 @@ return [
 	ContentAccess::class => autowire(DbalContentAccess::class),
 	AttachmentRepository::class => autowire(DbalAttachmentRepository::class),
 	TreeRepository::class => autowire(DbalTreeRepository::class),
+
+	UploadFile::class => fn (ContainerInterface $c) => new UploadFile(
+		$c->get(AttachmentRepository::class),
+		$c->get(ContentRepository::class),
+		$c->get(ContentAccess::class),
+		(int) ($c->get(Config::class)->upload->maxfilesize ?: 0),
+	),
 
 	BuildNavigation::class => fn (ContainerInterface $c) => new BuildNavigation(
 		$c->get(TreeRepository::class),

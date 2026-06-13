@@ -46,6 +46,10 @@ $app->get('/search', \Knowledgeroot\Presentation\Search\SearchAction::class);
 
 $app->get('/page/{id:[0-9]+}', \Knowledgeroot\Presentation\PageView\ViewPageAction::class);
 
+$app->get('/file/{id:[0-9]+}', \Knowledgeroot\Presentation\FileHandling\DownloadFileAction::class);
+$app->post('/content/{id:[0-9]+}/files', \Knowledgeroot\Presentation\FileHandling\UploadFileAction::class);
+$app->post('/file/{id:[0-9]+}/delete', \Knowledgeroot\Presentation\FileHandling\DeleteFileAction::class);
+
 $app->get('/page/root/new', \Knowledgeroot\Presentation\PageEditing\PageEditorAction::class);
 $app->post('/page/root/new', \Knowledgeroot\Presentation\PageEditing\SavePageAction::class);
 $app->get('/page/{parentId:[0-9]+}/subpage/new', \Knowledgeroot\Presentation\PageEditing\PageEditorAction::class);

@@ -99,6 +99,29 @@ class FakeAttachmentRepository implements AttachmentRepository
     {
         return $this->byContent[$contentId] ?? [];
     }
+
+    public function findDownload(int $fileId): ?\Knowledgeroot\Domain\Content\FileDownload
+    {
+        return null;
+    }
+
+    public function incrementCounter(int $fileId): void
+    {
+    }
+
+    public function contentIdOf(int $fileId): ?int
+    {
+        return null;
+    }
+
+    public function store(int $contentId, string $filename, string $mimeType, int $size, string $bytes, int $owner): int
+    {
+        return 0;
+    }
+
+    public function softDelete(int $fileId): void
+    {
+    }
 }
 
 class ConfigurablePageAccess implements PageAccess
