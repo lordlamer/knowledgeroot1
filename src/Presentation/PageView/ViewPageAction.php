@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knowledgeroot\Presentation\PageView;
 
+use Knowledgeroot\Application\Navigation\BuildNavigation;
 use Knowledgeroot\Application\PageView\ViewPage;
 use Knowledgeroot\Infrastructure\Session\LegacySession;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -15,6 +16,7 @@ class ViewPageAction
     public function __construct(
         private readonly Environment $twig,
         private readonly ViewPage $viewPage,
+        private readonly BuildNavigation $buildNavigation,
         private readonly LegacySession $session,
     ) {
     }
@@ -22,11 +24,12 @@ class ViewPageAction
     public function __invoke(Request $request, Response $response, array $args): Response
     {
         $pageId = (int) $args['id'];
+        $userId = $this->session->userId();
 
         $highlightParam = (string) ($request->getQueryParams()['highlight'] ?? '');
         $terms = $highlightParam === '' ? [] : explode(',', $highlightParam);
 
-        $view = $this->viewPage->execute($pageId, $this->session->userId(), $terms);
+        $view = $this->viewPage->execute($pageId, $userId, $terms);
 
         if ($view === null) {
             return $response->withStatus(404);
@@ -37,6 +40,7 @@ class ViewPageAction
             'breadcrumb' => $view->breadcrumb,
             'blocks' => $view->blocks,
             'can_edit_page' => $view->canEditPage,
+            'navigation' => $this->buildNavigation->execute($userId, $pageId),
         ]));
 
         return $response;

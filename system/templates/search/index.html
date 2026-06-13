@@ -4,7 +4,7 @@
 
 {% macro breadcrumbs(path, highlight) %}
     {% for crumb in path %}
-        <li class="breadcrumb-item"><a href="{{ base_url }}index.php?id={{ crumb.pageId }}{% if highlight %}&highlight={{ highlight }}{% endif %}">{{ crumb.title }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ base_url }}page/{{ crumb.pageId }}{% if highlight %}?highlight={{ highlight }}{% endif %}">{{ crumb.title }}</a></li>
     {% endfor %}
 {% endmacro %}
 
@@ -29,10 +29,10 @@
                     <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
                     {{ _self.breadcrumbs(hit.path, highlight) }}
                     {% if hit.title != '' %}
-                        <li class="breadcrumb-item">"<a href="{{ base_url }}index.php?highlight={{ highlight }}&id={{ hit.pageId }}#{{ hit.contentId }}">{{ hit.title }}</a>"</li>
+                        <li class="breadcrumb-item">"<a href="{{ base_url }}page/{{ hit.pageId }}?highlight={{ highlight }}#{{ hit.contentId }}">{{ hit.title }}</a>"</li>
                     {% endif %}
                     <li class="breadcrumb-item">
-                        <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}index.php?highlight={{ highlight }}&id={{ hit.pageId }}&oc={{ hit.contentId }}#{{ hit.contentId }}">{{ 'show'|trans }}</a>
+                        <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}page/{{ hit.pageId }}?highlight={{ highlight }}#{{ hit.contentId }}">{{ 'show'|trans }}</a>
                     </li>
                 </ol>
             {% else %}

@@ -16,7 +16,10 @@ use Knowledgeroot\Application\Login\AuthenticateUser;
 use Knowledgeroot\Domain\Content\AttachmentRepository;
 use Knowledgeroot\Domain\Content\ContentAccess;
 use Knowledgeroot\Domain\Content\ContentRepository;
+use Knowledgeroot\Application\Navigation\BuildNavigation;
 use Knowledgeroot\Domain\Group\GroupRepository;
+use Knowledgeroot\Domain\Navigation\NavigationTreeBuilder;
+use Knowledgeroot\Domain\Navigation\TreeRepository;
 use Knowledgeroot\Domain\Page\PageAccess;
 use Knowledgeroot\Domain\Page\PagePathResolver;
 use Knowledgeroot\Domain\Page\PageRepository;
@@ -29,6 +32,7 @@ use Knowledgeroot\Infrastructure\Persistence\DbalContentRepository;
 use Knowledgeroot\Infrastructure\Persistence\DbalPageAccess;
 use Knowledgeroot\Infrastructure\Persistence\DbalPageRepository;
 use Knowledgeroot\Infrastructure\Persistence\DbalPagePathResolver;
+use Knowledgeroot\Infrastructure\Persistence\DbalTreeRepository;
 use Knowledgeroot\Infrastructure\Persistence\DbalSearchRepository;
 use Knowledgeroot\Infrastructure\Persistence\DbalGroupRepository;
 use Knowledgeroot\Infrastructure\Language\LanguageLocator;
@@ -137,6 +141,14 @@ return [
 	ContentRepository::class => autowire(DbalContentRepository::class),
 	ContentAccess::class => autowire(DbalContentAccess::class),
 	AttachmentRepository::class => autowire(DbalAttachmentRepository::class),
+	TreeRepository::class => autowire(DbalTreeRepository::class),
+
+	BuildNavigation::class => fn (ContainerInterface $c) => new BuildNavigation(
+		$c->get(TreeRepository::class),
+		$c->get(PageAccess::class),
+		$c->get(NavigationTreeBuilder::class),
+		(string) $c->get(Config::class)->tree->order === 'self' ? 'sorting' : 'title',
+	),
 
 	// use cases
 	AuthenticateUser::class => function (ContainerInterface $c) {
