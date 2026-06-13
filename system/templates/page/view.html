@@ -60,7 +60,7 @@
                         <label class="mr-1 mb-0 small">{{ 'move page'|trans }}:</label>
                         <select class="form-control form-control-sm mr-1" name="target">
                             {% if is_admin %}<option value="0">/ ({{ 'roots'|trans }})</option>{% endif %}
-                            {% for opt in page_options if opt.id != page.id %}
+                            {% for opt in page_options|filter(opt => opt.id != page.id) %}
                                 <option value="{{ opt.id }}">{{ opt.label }}</option>
                             {% endfor %}
                         </select>
@@ -84,11 +84,18 @@
                                 <form method="post" action="{{ base_url }}content/{{ item.block.id }}/move/down" style="display: inline;">
                                     <button class="btn btn-sm btn-outline-secondary" type="submit" title="{{ 'move'|trans }}"><i class="fa fa-arrow-down"></i></button>
                                 </form>
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}content/{{ item.block.id }}/print" target="_blank" title="{{ 'print'|trans }}"><i class="fa fa-print"></i></a>
                                 <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}content/{{ item.block.id }}/edit">{{ 'edit'|trans }}</a>
                                 <form method="post" action="{{ base_url }}content/{{ item.block.id }}/delete" style="display: inline;"
                                       onsubmit="return confirm('{{ 'Do you really want to delete?'|trans|escape('js') }}');">
                                     <button class="btn btn-sm btn-outline-danger" type="submit">{{ 'delete'|trans }}</button>
                                 </form>
+                            </div>
+                        {% endif %}
+
+                        {% if not item.canEdit %}
+                            <div class="float-right">
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}content/{{ item.block.id }}/print" target="_blank" title="{{ 'print'|trans }}"><i class="fa fa-print"></i></a>
                             </div>
                         {% endif %}
 
@@ -122,7 +129,7 @@
                             <form method="post" action="{{ base_url }}content/{{ item.block.id }}/relocate" class="form-inline mt-2">
                                 <label class="mr-1 mb-0 small">{{ 'move'|trans }} &rarr;</label>
                                 <select class="form-control form-control-sm mr-1" name="target">
-                                    {% for opt in page_options if opt.id != page.id %}
+                                    {% for opt in page_options|filter(opt => opt.id != page.id) %}
                                         <option value="{{ opt.id }}">{{ opt.label }}</option>
                                     {% endfor %}
                                 </select>
