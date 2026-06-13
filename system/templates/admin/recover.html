@@ -1,0 +1,43 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}{{ 'user'|trans }}{% endblock %}
+
+{% block content %}
+<h2>{{ 'Add new users or edit existing users'|trans }}</h2>
+
+<div class="card mb-3">
+    <div class="card-header">{{ 'Edit existing user'|trans }}</div>
+    <div class="card-body">
+        <form action="{{ base_url }}admin/recover/reset" method="post" class="form-inline">
+            <div class="form-group mr-2">
+                <label class="mr-1" for="userid">{{ 'User'|trans }}</label>
+                <select name="userid" id="userid" class="form-control">
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group mr-2">
+                <input type="password" name="password" class="form-control" placeholder="{{ 'new password'|trans }}" required>
+            </div>
+            <button class="btn btn-primary" type="submit">{{ 'save'|trans }}</button>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">{{ 'add user'|trans }}</div>
+    <div class="card-body">
+        <form action="{{ base_url }}admin/recover/create" method="post" class="form-inline">
+            <div class="form-group mr-2">
+                <input type="text" name="username" class="form-control" placeholder="{{ 'name'|trans }}" required>
+            </div>
+            <div class="form-group mr-2">
+                <input type="password" name="password" class="form-control" placeholder="{{ 'password'|trans }}" required>
+            </div>
+            <button class="btn btn-primary" type="submit">{{ 'add user'|trans }}</button>
+        </form>
+        <small class="text-muted d-block mt-2">{{ 'Creates an enabled administrator.'|trans }}</small>
+    </div>
+</div>
+{% endblock %}

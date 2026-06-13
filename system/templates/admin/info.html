@@ -1,0 +1,18 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}{{ 'information'|trans }}{% endblock %}
+
+{% block content %}
+<h2>{{ 'information'|trans }}</h2>
+
+<table class="table table-striped">
+    <tbody>
+        {% for key, value in info %}
+            <tr>
+                <th style="width: 12rem;">{{ key }}</th>
+                <td style="word-break: break-word;">{{ value }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

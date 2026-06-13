@@ -104,6 +104,11 @@ $app->get('/admin/logout', \Knowledgeroot\Presentation\Admin\AdminLogoutAction::
 
 $app->group('/admin', function (\Slim\Routing\RouteCollectorProxy $group) {
 	$group->get('', \Knowledgeroot\Presentation\Admin\DashboardAction::class);
+	$group->get('/config', \Knowledgeroot\Presentation\Admin\ConfigSectionAction::class);
+	$group->get('/info', \Knowledgeroot\Presentation\Admin\InfoSectionAction::class);
+	$group->get('/recover', [\Knowledgeroot\Presentation\Admin\RecoverSectionAction::class, 'show']);
+	$group->post('/recover/reset', [\Knowledgeroot\Presentation\Admin\RecoverSectionAction::class, 'reset']);
+	$group->post('/recover/create', [\Knowledgeroot\Presentation\Admin\RecoverSectionAction::class, 'create']);
 })->add(\Knowledgeroot\Presentation\Admin\Middleware\RequireAdminGate::class);
 
 $app->run();
