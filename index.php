@@ -2,9 +2,8 @@
 /**
  * Knowledgeroot is published under the GNU GPL! Read LICENSE
  *
- * Front controller: every request runs through the Slim app. New use
- * cases get their own routes here; everything not handled by a route
- * falls through to the legacy application (include/legacy-front.php).
+ * Front controller: every request runs through the Slim app. Each use
+ * case has its own route; unknown paths return a 404.
  *
  * @package Knowledgeroot
  */
@@ -97,18 +96,5 @@ $app->group('', function (\Slim\Routing\RouteCollectorProxy $group) {
 	$group->post('/groups/{id:[0-9]+}', \Knowledgeroot\Presentation\UserManagement\SaveGroupAction::class);
 	$group->post('/groups/{id:[0-9]+}/delete', \Knowledgeroot\Presentation\UserManagement\DeleteGroupAction::class);
 })->add(\Knowledgeroot\Presentation\Middleware\RequireAdmin::class);
-
-// --- legacy catch-all -----------------------------------------------------
-// handles index.php?action=..., page aliases (*.html rewrites) and downloads
-$app->map(['GET', 'POST'], '/{path:.*}', function (Request $request, Response $response) {
-	$output = (static function (): string {
-		ob_start();
-		require __DIR__ . '/include/legacy-front.php';
-		return (string) ob_get_clean();
-	})();
-
-	$response->getBody()->write($output);
-	return $response;
-});
 
 $app->run();
