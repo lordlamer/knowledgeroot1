@@ -46,6 +46,20 @@ class DbalPageAccess implements PageAccess
 
     public function canRead(int $pageId, int $userId): bool
     {
+        return $this->canReadGuarded($pageId, $userId, []);
+    }
+
+    /**
+     * @param array<int, true> $visited
+     */
+    private function canReadGuarded(int $pageId, int $userId, array $visited): bool
+    {
+        // protect against cyclic belongs_to data
+        if (isset($visited[$pageId])) {
+            return false;
+        }
+        $visited[$pageId] = true;
+
         $page = $this->page($pageId);
 
         if ($page === null) {
@@ -60,7 +74,7 @@ class DbalPageAccess implements PageAccess
             return true;
         }
 
-        return $this->canRead((int) $page['belongs_to'], $userId);
+        return $this->canReadGuarded((int) $page['belongs_to'], $userId, $visited);
     }
 
     private function computeRights(int $pageId, int $userId): int

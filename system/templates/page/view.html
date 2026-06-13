@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ page.title }} - {{ site_title }}{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" style="border-bottom: 3px solid #F88529;">
+    <a class="navbar-brand" href="{{ base_url }}index.php">{{ site_title }}</a>
+    <form class="form-inline my-2 my-lg-0 ml-auto" action="{{ base_url }}search" method="get">
+        <input class="form-control mr-sm-2" type="text" name="q" placeholder="{{ 'Search'|trans }}" aria-label="{{ 'Search'|trans }}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{ 'GO'|trans }}</button>
+    </form>
+</nav>
+
+<div class="container" style="margin-top: 20px;">
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+        {% for crumb in breadcrumb %}
+            <li class="breadcrumb-item"><a href="{{ base_url }}page/{{ crumb.pageId }}">{{ crumb.title }}</a></li>
+        {% endfor %}
+    </ol>
+
+    {% if can_edit_page %}
+        <div class="mb-3">
+            <a class="btn btn-sm btn-outline-primary" href="{{ base_url }}index.php?id={{ page.id }}&action=newcontent">{{ 'add new content'|trans }}</a>
+            <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}index.php?id={{ page.id }}&action=editpage">{{ 'edit page'|trans }}</a>
+        </div>
+    {% endif %}
+
+    {% for item in blocks %}
+        <div class="card mb-3" id="content-{{ item.block.id }}">
+            <a name="{{ item.block.id }}"></a>
+            {% if item.block.title != '' %}
+                <h5 class="card-header">{{ item.block.title }}</h5>
+            {% endif %}
+            <div class="card-body">
+                {% if item.canEdit %}
+                    <div class="float-right">
+                        <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}index.php?id={{ page.id }}&eid={{ item.block.id }}">{{ 'edit'|trans }}</a>
+                        <a class="btn btn-sm btn-outline-danger" href="{{ base_url }}index.php?id={{ page.id }}&delid={{ item.block.id }}"
+                           onclick="return confirm('{{ 'Do you really want to delete?'|trans|escape('js') }}');">{{ 'delete'|trans }}</a>
+                    </div>
+                {% endif %}
+
+                <div class="content-body">{{ item.html|raw }}</div>
+
+                {% if item.attachments is not empty %}
+                    <hr>
+                    <ul class="list-unstyled mb-0">
+                        {% for file in item.attachments %}
+                            <li>
+                                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                <a href="{{ base_url }}index.php?download={{ file.id }}">{{ file.filename }}</a>
+                                <span class="badge badge-info">{{ (file.filesize / 1024)|round(1) }} KB</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if item.block.lastUpdated != '' %}
+                    <small class="text-muted d-block mt-2">
+                        {{ 'Last modified by'|trans }} {{ item.block.lastUpdatedBy != '' ? item.block.lastUpdatedBy : 'guest'|trans }} {{ 'on'|trans }} {{ item.block.lastUpdated }}
+                    </small>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <p class="text-muted">{{ 'no content'|trans }}</p>
+    {% endfor %}
+
+</div>
+{% endblock %}

@@ -13,13 +13,21 @@ declare(strict_types=1);
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Knowledgeroot\Application\Login\AuthenticateUser;
+use Knowledgeroot\Domain\Content\AttachmentRepository;
+use Knowledgeroot\Domain\Content\ContentAccess;
+use Knowledgeroot\Domain\Content\ContentRepository;
 use Knowledgeroot\Domain\Group\GroupRepository;
 use Knowledgeroot\Domain\Page\PageAccess;
 use Knowledgeroot\Domain\Page\PagePathResolver;
+use Knowledgeroot\Domain\Page\PageRepository;
 use Knowledgeroot\Domain\Search\SearchRepository;
 use Knowledgeroot\Domain\User\LoginThrottleRepository;
 use Knowledgeroot\Domain\User\UserRepository;
+use Knowledgeroot\Infrastructure\Persistence\DbalAttachmentRepository;
+use Knowledgeroot\Infrastructure\Persistence\DbalContentAccess;
+use Knowledgeroot\Infrastructure\Persistence\DbalContentRepository;
 use Knowledgeroot\Infrastructure\Persistence\DbalPageAccess;
+use Knowledgeroot\Infrastructure\Persistence\DbalPageRepository;
 use Knowledgeroot\Infrastructure\Persistence\DbalPagePathResolver;
 use Knowledgeroot\Infrastructure\Persistence\DbalSearchRepository;
 use Knowledgeroot\Infrastructure\Persistence\DbalGroupRepository;
@@ -125,6 +133,10 @@ return [
 	SearchRepository::class => autowire(DbalSearchRepository::class),
 	PageAccess::class => autowire(DbalPageAccess::class),
 	PagePathResolver::class => autowire(DbalPagePathResolver::class),
+	PageRepository::class => autowire(DbalPageRepository::class),
+	ContentRepository::class => autowire(DbalContentRepository::class),
+	ContentAccess::class => autowire(DbalContentAccess::class),
+	AttachmentRepository::class => autowire(DbalAttachmentRepository::class),
 
 	// use cases
 	AuthenticateUser::class => function (ContainerInterface $c) {
