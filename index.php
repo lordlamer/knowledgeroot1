@@ -25,6 +25,9 @@ AppFactory::setContainer($containerBuilder->build());
 $app = AppFactory::create();
 $app->addRoutingMiddleware();
 
+// redirect /path/ to /path before routing, so trailing slashes resolve
+$app->add(\Knowledgeroot\Presentation\Middleware\TrailingSlash::class);
+
 // set KR_DEBUG=1 in the environment to see error details during development
 $app->addErrorMiddleware((bool) getenv('KR_DEBUG'), true, true);
 
