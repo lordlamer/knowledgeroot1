@@ -47,6 +47,7 @@
                             <a class="btn btn-secondary btn-sm" href="{{ base_url }}users/{{ user.id }}/edit">{{ 'edit'|trans }}</a>
                             <form method="post" action="{{ base_url }}users/{{ user.id }}/delete" style="display: inline;"
                                   onsubmit="return confirm('{{ 'Do you really want to delete this user?'|trans|escape('js') }}');">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
                                 <button class="btn btn-danger btn-sm" type="submit">{{ 'delete'|trans }}</button>
                             </form>
                         </td>
@@ -87,6 +88,7 @@
                             <a class="btn btn-secondary btn-sm" href="{{ base_url }}groups/{{ group.id }}/edit">{{ 'edit'|trans }}</a>
                             <form method="post" action="{{ base_url }}groups/{{ group.id }}/delete" style="display: inline;"
                                   onsubmit="return confirm('{{ 'Do you really want to delete this group?'|trans|escape('js') }}');">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
                                 <button class="btn btn-danger btn-sm" type="submit">{{ 'delete'|trans }}</button>
                             </form>
                         </td>

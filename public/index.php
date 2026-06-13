@@ -15,11 +15,11 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 // container with the new-style service definitions
 $containerBuilder = new ContainerBuilder();
-$containerBuilder->addDefinitions(__DIR__ . '/config/dependencies.php');
+$containerBuilder->addDefinitions(__DIR__ . '/../config/dependencies.php');
 AppFactory::setContainer($containerBuilder->build());
 
 $app = AppFactory::create();
@@ -27,6 +27,9 @@ $app->addRoutingMiddleware();
 
 // redirect /path/ to /path before routing, so trailing slashes resolve
 $app->add(\Knowledgeroot\Presentation\Middleware\TrailingSlash::class);
+
+// reject state-changing requests without a valid CSRF token
+$app->add(\Knowledgeroot\Presentation\Middleware\VerifyCsrf::class);
 
 // set KR_DEBUG=1 in the environment to see error details during development
 $app->addErrorMiddleware((bool) getenv('KR_DEBUG'), true, true);

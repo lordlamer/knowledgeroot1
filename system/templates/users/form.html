@@ -19,6 +19,7 @@
         </div>
         <div class="card-body">
             <form action="{{ mode == 'add' ? base_url ~ 'users/new' : base_url ~ 'users/' ~ form.id }}" method="post">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
 
                 <div class="form-group">
                     <label for="name">{{ 'name'|trans }}</label>

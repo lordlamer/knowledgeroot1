@@ -44,6 +44,7 @@ use Knowledgeroot\Infrastructure\Admin\AdminGate;
 use Knowledgeroot\Infrastructure\Cache\FileCache;
 use Knowledgeroot\Infrastructure\Extension\ExtensionCatalog;
 use Knowledgeroot\Infrastructure\Persistence\DbalExtensionRepository;
+use Knowledgeroot\Infrastructure\Security\Csrf;
 use Knowledgeroot\Infrastructure\Config\Config;
 use Knowledgeroot\Infrastructure\Mail\MailerFactory;
 use Knowledgeroot\Infrastructure\Session\LegacySession;
@@ -126,6 +127,7 @@ return [
 		$twig->addGlobal('current_user', $session->isLoggedIn() ? (string) ($_SESSION['user'] ?? '') : 'guest');
 		$twig->addGlobal('current_language', $session->language());
 		$twig->addGlobal('locales', $c->get(LanguageLocator::class)->localeNames());
+		$twig->addGlobal('csrf_token', $c->get(Csrf::class)->token());
 
 		return $twig;
 	},

@@ -20,6 +20,7 @@
 
         {% if locales|length > 1 %}
             <form class="form-inline my-2 my-lg-0 mr-2" action="{{ base_url }}language" method="post">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
                 <select class="form-control form-control-sm" name="language" onchange="this.form.submit();">
                     {% for locale in locales %}
                         <option value="{{ locale }}" {{ current_language == locale ? 'selected' }}>{{ locale }}</option>

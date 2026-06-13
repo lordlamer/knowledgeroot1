@@ -19,6 +19,7 @@
         </div>
         <div class="card-body">
             <form action="{{ editing ? base_url ~ 'content/' ~ content_id ~ '/edit' : base_url ~ 'page/' ~ page_id ~ '/content/new' }}" method="post">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
 
                 <div class="form-group">
                     <label for="title">{{ 'Title'|trans }}</label>

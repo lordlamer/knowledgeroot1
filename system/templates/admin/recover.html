@@ -9,6 +9,7 @@
     <div class="card-header">{{ 'Edit existing user'|trans }}</div>
     <div class="card-body">
         <form action="{{ base_url }}admin/recover/reset" method="post" class="form-inline">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
             <div class="form-group mr-2">
                 <label class="mr-1" for="userid">{{ 'User'|trans }}</label>
                 <select name="userid" id="userid" class="form-control">
@@ -29,6 +30,7 @@
     <div class="card-header">{{ 'add user'|trans }}</div>
     <div class="card-body">
         <form action="{{ base_url }}admin/recover/create" method="post" class="form-inline">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
             <div class="form-group mr-2">
                 <input type="text" name="username" class="form-control" placeholder="{{ 'name'|trans }}" required>
             </div>

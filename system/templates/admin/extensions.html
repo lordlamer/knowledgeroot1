@@ -4,6 +4,7 @@
 
 {% macro action_button(base_url, keyname, action, label, css) %}
     <form method="post" action="{{ base_url }}admin/extensions/{{ action }}" style="display: inline;">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
         <input type="hidden" name="keyname" value="{{ keyname }}">
         <button class="btn btn-sm {{ css }}" type="submit">{{ label|trans }}</button>
     </form>

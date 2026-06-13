@@ -19,6 +19,7 @@
     {% endif %}
 
     <form action="{{ base_url }}admin/login" method="post">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
         <div class="form-group">
             <label for="user">{{ 'Username'|trans }}</label>
             <input type="text" class="form-control" name="user" id="user" required autofocus>

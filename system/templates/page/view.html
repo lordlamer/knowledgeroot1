@@ -48,9 +48,11 @@
                     <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}page/{{ page.id }}/edit">{{ 'edit page'|trans }}</a>
                     <form method="post" action="{{ base_url }}page/{{ page.id }}/delete" style="display: inline;"
                           onsubmit="return confirm('{{ 'Do you really want to delete?'|trans|escape('js') }}');">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
                         <button class="btn btn-sm btn-outline-danger" type="submit">{{ 'delete page'|trans }}</button>
                     </form>
                     <form method="post" action="{{ base_url }}page/{{ page.id }}/relocate" class="form-inline d-inline-block ml-2">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
                         <label class="mr-1 mb-0 small">{{ 'move page'|trans }}:</label>
                         <select class="form-control form-control-sm mr-1" name="target">
                             {% if is_admin %}<option value="0">/ ({{ 'roots'|trans }})</option>{% endif %}
@@ -73,15 +75,18 @@
                         {% if item.canEdit %}
                             <div class="float-right">
                                 <form method="post" action="{{ base_url }}content/{{ item.block.id }}/move/up" style="display: inline;">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
                                     <button class="btn btn-sm btn-outline-secondary" type="submit" title="{{ 'move'|trans }}"><i class="fa fa-arrow-up"></i></button>
                                 </form>
                                 <form method="post" action="{{ base_url }}content/{{ item.block.id }}/move/down" style="display: inline;">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
                                     <button class="btn btn-sm btn-outline-secondary" type="submit" title="{{ 'move'|trans }}"><i class="fa fa-arrow-down"></i></button>
                                 </form>
                                 <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}content/{{ item.block.id }}/print" target="_blank" title="{{ 'print'|trans }}"><i class="fa fa-print"></i></a>
                                 <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}content/{{ item.block.id }}/edit">{{ 'edit'|trans }}</a>
                                 <form method="post" action="{{ base_url }}content/{{ item.block.id }}/delete" style="display: inline;"
                                       onsubmit="return confirm('{{ 'Do you really want to delete?'|trans|escape('js') }}');">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
                                     <button class="btn btn-sm btn-outline-danger" type="submit">{{ 'delete'|trans }}</button>
                                 </form>
                             </div>
@@ -106,6 +111,7 @@
                                         {% if item.canEdit %}
                                             <form method="post" action="{{ base_url }}file/{{ file.id }}/delete" style="display: inline;"
                                                   onsubmit="return confirm('{{ 'Do you really want to delete?'|trans|escape('js') }}');">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
                                                 <button class="btn btn-sm btn-link text-danger p-0" type="submit"><i class="fa fa-trash"></i></button>
                                             </form>
                                         {% endif %}
@@ -116,11 +122,13 @@
 
                         {% if item.canEdit %}
                             <form method="post" action="{{ base_url }}content/{{ item.block.id }}/files" enctype="multipart/form-data" class="form-inline mt-2">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
                                 <input type="hidden" name="page_id" value="{{ page.id }}">
                                 <input type="file" name="file" class="form-control-file mr-2" required>
                                 <button class="btn btn-sm btn-outline-secondary" type="submit">{{ 'add file'|trans }}</button>
                             </form>
                             <form method="post" action="{{ base_url }}content/{{ item.block.id }}/relocate" class="form-inline mt-2">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
                                 <label class="mr-1 mb-0 small">{{ 'move'|trans }} &rarr;</label>
                                 <select class="form-control form-control-sm mr-1" name="target">
                                     {% for opt in page_options|filter(opt => opt.id != page.id) %}

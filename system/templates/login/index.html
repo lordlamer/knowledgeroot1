@@ -15,6 +15,7 @@
         </div>
         <div class="card-body">
             <form action="{{ base_url }}login" method="post">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
                 <div class="form-group">
                     <label for="user">{{ 'user'|trans }}</label>
                     <input type="text" class="form-control" name="user" id="user" value="{{ user }}" required autofocus>

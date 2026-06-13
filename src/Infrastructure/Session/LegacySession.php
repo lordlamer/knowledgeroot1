@@ -29,6 +29,18 @@ class LegacySession
         }
 
         ini_set('session.use_trans_sid', '0');
+        ini_set('session.use_only_cookies', '1');
+        ini_set('session.use_strict_mode', '1');
+
+        $https = (($_SERVER['HTTPS'] ?? '') !== '' && $_SERVER['HTTPS'] !== 'off')
+            || ($_SERVER['SERVER_PORT'] ?? '') === '443';
+
+        session_set_cookie_params([
+            'httponly' => true,
+            'samesite' => 'Lax',
+            'secure' => $https,
+        ]);
+
         session_name(md5((string) $this->config->base->base_url));
         session_start();
     }
