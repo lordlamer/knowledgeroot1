@@ -10,3 +10,8 @@
 !/data/.htaccess
 
 /composer_2.phar
+
+# dependencies are installed via composer, not committed
+/vendor/
+/composer.phar
+/composer.phar.*
