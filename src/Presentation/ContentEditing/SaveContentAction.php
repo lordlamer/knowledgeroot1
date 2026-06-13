@@ -9,25 +9,22 @@ use Knowledgeroot\Application\ContentEditing\ContentFormData;
 use Knowledgeroot\Application\ContentEditing\ContentNotFound;
 use Knowledgeroot\Application\ContentEditing\CreateContent;
 use Knowledgeroot\Application\ContentEditing\UpdateContent;
-use Knowledgeroot\Domain\Group\GroupRepository;
 use Knowledgeroot\Infrastructure\Session\LegacySession;
 use Knowledgeroot\Infrastructure\Translation\Translator;
 use Knowledgeroot\Presentation\Http\UrlHelper;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Twig\Environment;
 
 /**
  * Persists the content editor form, for create (route carries pageId)
- * and update (route carries the content id).
+ * and update (route carries the content id). On success it redirects to
+ * the page; the editor form itself is rendered by ContentEditorAction.
  */
 class SaveContentAction
 {
     public function __construct(
-        private readonly Environment $twig,
         private readonly CreateContent $createContent,
         private readonly UpdateContent $updateContent,
-        private readonly GroupRepository $groups,
         private readonly LegacySession $session,
         private readonly Translator $translator,
         private readonly UrlHelper $url,

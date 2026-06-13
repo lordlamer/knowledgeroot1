@@ -1,0 +1,10 @@
+parameters:
+    level: 5
+    paths:
+        - src
+        - migrations
+        - public/index.php
+        - bin
+
+includes:
+    - phpstan-baseline.neon

@@ -1,23 +1,35 @@
-name: PHP Composer
+name: CI
 
-on: [push]
+on:
+  push:
+  pull_request:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        php-version: ['8.2', '8.3', '8.4']
+
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate
+      - name: Setup PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: pdo, pdo_sqlite, mbstring, intl
+          coverage: none
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Validate composer.json
+        run: composer validate --strict
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
 
-    # - name: Run test suite
-    #   run: composer run-script test
+      - name: Static analysis (PHPStan)
+        run: composer stan
+
+      - name: Tests (PHPUnit)
+        run: composer test

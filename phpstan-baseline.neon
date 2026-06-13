@@ -1,0 +1,115 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Using nullsafe property access "\?\-\>active" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: src/Application/Admin/ListExtensions.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>admin" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: src/Application/Admin/ListExtensions.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>version" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: src/Application/Admin/ListExtensions.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>defaultGroup" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: src/Application/ContentEditing/CreateContent.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>pageId" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: src/Application/FileHandling/DeleteFile.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>defaultGroup" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: src/Application/PageEditing/CreatePage.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>defaultGroup" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: src/Application/Search/Search.php
+
+		-
+			message: '#^Offset ''description'' on array\{\} on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Infrastructure/Extension/ExtensionCatalog.php
+
+		-
+			message: '#^Offset ''state'' on array\{\} on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Infrastructure/Extension/ExtensionCatalog.php
+
+		-
+			message: '#^Offset ''title'' on array\{\} on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Infrastructure/Extension/ExtensionCatalog.php
+
+		-
+			message: '#^Offset ''version'' on array\{\} on left side of \?\? does not exist\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Infrastructure/Extension/ExtensionCatalog.php
+
+		-
+			message: '#^Access to an undefined property Knowledgeroot\\Infrastructure\\Config\\Config\:\:\$base\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Infrastructure/Session/LegacySession.php
+
+		-
+			message: '#^Offset ''css_file'' on array\{\} in isset\(\) does not exist\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/Infrastructure/Theme/ThemeLocator.php
+
+		-
+			message: '#^Offset ''name'' on array\{\} in isset\(\) does not exist\.$#'
+			identifier: isset.offset
+			count: 1
+			path: src/Infrastructure/Theme/ThemeLocator.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 1
+			path: src/Infrastructure/Theme/ThemeLocator.php
+
+		-
+			message: '#^Access to an undefined property Knowledgeroot\\Infrastructure\\Config\\Config\:\:\$base\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Presentation/Admin/InfoSectionAction.php
+
+		-
+			message: '#^Access to an undefined property Knowledgeroot\\Infrastructure\\Config\\Config\:\:\$db\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Presentation/Admin/InfoSectionAction.php
+
+		-
+			message: '#^Access to an undefined property Knowledgeroot\\Infrastructure\\Config\\Config\:\:\$login\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Presentation/Login/SubmitLoginAction.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: src/Presentation/UserManagement/ShowGroupFormAction.php
