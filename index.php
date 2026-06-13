@@ -46,6 +46,14 @@ $app->get('/search', \Knowledgeroot\Presentation\Search\SearchAction::class);
 
 $app->get('/page/{id:[0-9]+}', \Knowledgeroot\Presentation\PageView\ViewPageAction::class);
 
+$app->get('/page/root/new', \Knowledgeroot\Presentation\PageEditing\PageEditorAction::class);
+$app->post('/page/root/new', \Knowledgeroot\Presentation\PageEditing\SavePageAction::class);
+$app->get('/page/{parentId:[0-9]+}/subpage/new', \Knowledgeroot\Presentation\PageEditing\PageEditorAction::class);
+$app->post('/page/{parentId:[0-9]+}/subpage/new', \Knowledgeroot\Presentation\PageEditing\SavePageAction::class);
+$app->get('/page/{id:[0-9]+}/edit', \Knowledgeroot\Presentation\PageEditing\PageEditorAction::class);
+$app->post('/page/{id:[0-9]+}/edit', \Knowledgeroot\Presentation\PageEditing\SavePageAction::class);
+$app->post('/page/{id:[0-9]+}/delete', \Knowledgeroot\Presentation\PageEditing\DeletePageAction::class);
+
 $app->get('/page/{pageId:[0-9]+}/content/new', \Knowledgeroot\Presentation\ContentEditing\ContentEditorAction::class);
 $app->post('/page/{pageId:[0-9]+}/content/new', \Knowledgeroot\Presentation\ContentEditing\SaveContentAction::class);
 $app->get('/content/{id:[0-9]+}/edit', \Knowledgeroot\Presentation\ContentEditing\ContentEditorAction::class);

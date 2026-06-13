@@ -42,6 +42,7 @@ class ViewPageAction
             'can_edit_page' => $view->canEditPage,
             'navigation' => $this->buildNavigation->execute($userId, $pageId),
             'flashes' => $this->session->consumeFlashes(),
+            'is_admin' => $this->session->isAdmin(),
         ]));
 
         return $response;

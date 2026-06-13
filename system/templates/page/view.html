@@ -27,6 +27,9 @@
             <div class="card">
                 <div class="card-body p-2">
                     {{ nav.tree(navigation, base_url) }}
+                    {% if is_admin %}
+                        <a class="btn btn-sm btn-outline-primary btn-block mt-2" href="{{ base_url }}page/root/new">{{ 'add new page'|trans }}</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -47,7 +50,12 @@
             {% if can_edit_page %}
                 <div class="mb-3">
                     <a class="btn btn-sm btn-outline-primary" href="{{ base_url }}page/{{ page.id }}/content/new">{{ 'add new content'|trans }}</a>
-                    <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}index.php?id={{ page.id }}&action=editpage">{{ 'edit page'|trans }}</a>
+                    <a class="btn btn-sm btn-outline-primary" href="{{ base_url }}page/{{ page.id }}/subpage/new">{{ 'add new page'|trans }}</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}page/{{ page.id }}/edit">{{ 'edit page'|trans }}</a>
+                    <form method="post" action="{{ base_url }}page/{{ page.id }}/delete" style="display: inline;"
+                          onsubmit="return confirm('{{ 'Do you really want to delete?'|trans|escape('js') }}');">
+                        <button class="btn btn-sm btn-outline-danger" type="submit">{{ 'delete page'|trans }}</button>
+                    </form>
                 </div>
             {% endif %}
 

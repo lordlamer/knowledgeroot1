@@ -26,6 +26,34 @@ class FakePageRepository implements PageRepository
     {
         return $this->page;
     }
+
+    public function findEditable(int $pageId): ?\Knowledgeroot\Domain\Page\EditablePage
+    {
+        return null;
+    }
+
+    public function add(\Knowledgeroot\Domain\Page\EditablePage $page): int
+    {
+        return 0;
+    }
+
+    public function update(\Knowledgeroot\Domain\Page\EditablePage $page, bool $withRights): void
+    {
+    }
+
+    public function softDelete(int $pageId): void
+    {
+    }
+
+    public function hasChildren(int $pageId): bool
+    {
+        return false;
+    }
+
+    public function hasContent(int $pageId): bool
+    {
+        return false;
+    }
 }
 
 class FakeContentRepository implements ContentRepository
