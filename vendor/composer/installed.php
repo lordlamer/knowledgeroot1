@@ -3,7 +3,7 @@
         'name' => 'lordlamer/knowledgeroot1',
         'pretty_version' => 'dev-1.10dev',
         'version' => 'dev-1.10dev',
-        'reference' => 'f5780ec5f90b583107055bc3df6948ef56f9cea0',
+        'reference' => '36308dbab07efcb0a8501c2f55f585dd0d5eb5cb',
         'type' => 'application',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -64,6 +64,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'ezyang/htmlpurifier' => array(
+            'pretty_version' => 'v4.19.0',
+            'version' => '4.19.0.0',
+            'reference' => 'b287d2a16aceffbf6e0295559b39662612b77fcf',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../ezyang/htmlpurifier',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'fig/http-message-util' => array(
             'pretty_version' => '1.1.5',
             'version' => '1.1.5.0',
@@ -85,7 +94,7 @@
         'lordlamer/knowledgeroot1' => array(
             'pretty_version' => 'dev-1.10dev',
             'version' => 'dev-1.10dev',
-            'reference' => 'f5780ec5f90b583107055bc3df6948ef56f9cea0',
+            'reference' => '36308dbab07efcb0a8501c2f55f585dd0d5eb5cb',
             'type' => 'application',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
