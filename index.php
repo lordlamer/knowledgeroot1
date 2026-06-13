@@ -97,4 +97,13 @@ $app->group('', function (\Slim\Routing\RouteCollectorProxy $group) {
 	$group->post('/groups/{id:[0-9]+}/delete', \Knowledgeroot\Presentation\UserManagement\DeleteGroupAction::class);
 })->add(\Knowledgeroot\Presentation\Middleware\RequireAdmin::class);
 
+// --- admin backend (break-glass loginhash auth) ---------------------------
+$app->get('/admin/login', [\Knowledgeroot\Presentation\Admin\AdminLoginAction::class, 'show']);
+$app->post('/admin/login', [\Knowledgeroot\Presentation\Admin\AdminLoginAction::class, 'submit']);
+$app->get('/admin/logout', \Knowledgeroot\Presentation\Admin\AdminLogoutAction::class);
+
+$app->group('/admin', function (\Slim\Routing\RouteCollectorProxy $group) {
+	$group->get('', \Knowledgeroot\Presentation\Admin\DashboardAction::class);
+})->add(\Knowledgeroot\Presentation\Admin\Middleware\RequireAdminGate::class);
+
 $app->run();

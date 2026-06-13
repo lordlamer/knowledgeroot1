@@ -39,6 +39,7 @@ use Knowledgeroot\Infrastructure\Persistence\DbalGroupRepository;
 use Knowledgeroot\Infrastructure\Language\LanguageLocator;
 use Knowledgeroot\Infrastructure\Theme\ThemeLocator;
 use Knowledgeroot\Presentation\Http\UrlHelper;
+use Knowledgeroot\Infrastructure\Admin\AdminGate;
 use Knowledgeroot\Infrastructure\Cache\FileCache;
 use Knowledgeroot\Infrastructure\Config\Config;
 use Knowledgeroot\Infrastructure\Mail\MailerFactory;
@@ -129,6 +130,11 @@ return [
 	ThemeLocator::class => fn (ContainerInterface $c) => new ThemeLocator($c->get('base_path') . 'system/themes/'),
 
 	LanguageLocator::class => fn (ContainerInterface $c) => new LanguageLocator($c->get('base_path') . 'system/language/'),
+
+	AdminGate::class => fn (ContainerInterface $c) => new AdminGate(
+		$c->get(LegacySession::class),
+		(string) ($c->get(Config::class)->admin->loginhash ?? ''),
+	),
 
 	FileCache::class => function (ContainerInterface $c) {
 		$config = $c->get(Config::class);

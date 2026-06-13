@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Admin{% endblock %} - {{ site_title }}</title>
+    <link rel="stylesheet" href="{{ base_url }}assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ base_url }}assets/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" style="border-bottom: 3px solid #F88529;">
+    <a class="navbar-brand" href="{{ base_url }}admin">{{ site_title }} — Admin</a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="{{ base_url }}index.php"><i class="fa fa-arrow-left"></i> {{ 'Back to Knowledgeroot'|trans }}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ base_url }}admin/logout">{{ 'logout'|trans }}</a></li>
+    </ul>
+</nav>
+
+<div class="container-fluid" style="margin-top: 20px;">
+    <div class="row">
+        <div class="col-md-3 col-lg-2">
+            <div class="list-group">
+                {% set items = {
+                    'dashboard': {'label': 'Admin', 'url': 'admin'},
+                    'recover': {'label': 'user'|trans, 'url': 'admin/recover'},
+                    'config': {'label': 'configure'|trans, 'url': 'admin/config'},
+                    'extensions': {'label': 'extensions'|trans, 'url': 'admin/extensions'},
+                    'info': {'label': 'info'|trans, 'url': 'admin/info'}
+                } %}
+                {% for key, item in items %}
+                    <a class="list-group-item list-group-item-action {{ active == key ? 'active' }}" href="{{ base_url }}{{ item.url }}">{{ item.label }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-9 col-lg-10">
+            {% for message in flashes|default([]) %}
+                <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
