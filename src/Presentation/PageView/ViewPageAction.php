@@ -41,6 +41,7 @@ class ViewPageAction
             'blocks' => $view->blocks,
             'can_edit_page' => $view->canEditPage,
             'navigation' => $this->buildNavigation->execute($userId, $pageId),
+            'flashes' => $this->session->consumeFlashes(),
         ]));
 
         return $response;

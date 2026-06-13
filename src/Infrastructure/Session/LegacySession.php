@@ -88,6 +88,17 @@ class LegacySession
         return $this->isLoggedIn() && isset($_SESSION['admin']) && (string) $_SESSION['admin'] === '1';
     }
 
+    /**
+     * may the current user set permissions when editing content
+     * (admins and users with the rightedit flag)
+     */
+    public function canEditRights(): bool
+    {
+        $this->start();
+
+        return $this->isAdmin() || (isset($_SESSION['rightedit']) && (string) $_SESSION['rightedit'] === '1');
+    }
+
     public function userId(): int
     {
         $this->start();

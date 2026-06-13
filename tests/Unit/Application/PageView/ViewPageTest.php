@@ -37,6 +37,29 @@ class FakeContentRepository implements ContentRepository
     {
         return $this->blocks;
     }
+
+    public function findEditable(int $contentId): ?\Knowledgeroot\Domain\Content\EditableContent
+    {
+        return null;
+    }
+
+    public function nextSorting(int $pageId): int
+    {
+        return 1;
+    }
+
+    public function add(\Knowledgeroot\Domain\Content\EditableContent $content, int $sorting, int $lastUpdatedBy): int
+    {
+        return 0;
+    }
+
+    public function update(\Knowledgeroot\Domain\Content\EditableContent $content, int $lastUpdatedBy, bool $withRights): void
+    {
+    }
+
+    public function softDelete(int $contentId): void
+    {
+    }
 }
 
 class FakeAttachmentRepository implements AttachmentRepository

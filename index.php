@@ -46,6 +46,12 @@ $app->get('/search', \Knowledgeroot\Presentation\Search\SearchAction::class);
 
 $app->get('/page/{id:[0-9]+}', \Knowledgeroot\Presentation\PageView\ViewPageAction::class);
 
+$app->get('/page/{pageId:[0-9]+}/content/new', \Knowledgeroot\Presentation\ContentEditing\ContentEditorAction::class);
+$app->post('/page/{pageId:[0-9]+}/content/new', \Knowledgeroot\Presentation\ContentEditing\SaveContentAction::class);
+$app->get('/content/{id:[0-9]+}/edit', \Knowledgeroot\Presentation\ContentEditing\ContentEditorAction::class);
+$app->post('/content/{id:[0-9]+}/edit', \Knowledgeroot\Presentation\ContentEditing\SaveContentAction::class);
+$app->post('/content/{id:[0-9]+}/delete', \Knowledgeroot\Presentation\ContentEditing\DeleteContentAction::class);
+
 $app->get('/login', \Knowledgeroot\Presentation\Login\ShowLoginFormAction::class);
 $app->post('/login', \Knowledgeroot\Presentation\Login\SubmitLoginAction::class);
 $app->get('/logout', \Knowledgeroot\Presentation\Login\LogoutAction::class);

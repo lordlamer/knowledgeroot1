@@ -7,11 +7,96 @@ namespace Knowledgeroot\Infrastructure\Persistence;
 use Doctrine\DBAL\Connection;
 use Knowledgeroot\Domain\Content\ContentBlock;
 use Knowledgeroot\Domain\Content\ContentRepository;
+use Knowledgeroot\Domain\Content\EditableContent;
 
 class DbalContentRepository implements ContentRepository
 {
     public function __construct(private readonly Connection $connection)
     {
+    }
+
+    public function findEditable(int $contentId): ?EditableContent
+    {
+        $row = $this->connection->fetchAssociative(
+            'SELECT id, belongs_to, title, content, owner, ' . $this->connection->quoteIdentifier('group')
+            . ', userrights, grouprights, otherrights FROM content WHERE id = ? AND deleted = 0',
+            [$contentId]
+        );
+
+        if ($row === false) {
+            return null;
+        }
+
+        return new EditableContent(
+            id: (int) $row['id'],
+            pageId: (int) $row['belongs_to'],
+            title: (string) ($row['title'] ?? ''),
+            html: (string) ($row['content'] ?? ''),
+            owner: (int) $row['owner'],
+            group: (int) $row['group'],
+            userRights: (int) $row['userrights'],
+            groupRights: (int) $row['grouprights'],
+            otherRights: (int) $row['otherrights'],
+        );
+    }
+
+    public function nextSorting(int $pageId): int
+    {
+        $max = $this->connection->fetchOne('SELECT MAX(sorting) FROM content WHERE belongs_to = ?', [$pageId]);
+
+        return (int) $max + 1;
+    }
+
+    public function add(EditableContent $content, int $sorting, int $lastUpdatedBy): int
+    {
+        $now = date('Y-m-d H:i:s');
+
+        $this->connection->insert('content', [
+            'belongs_to' => $content->pageId,
+            'sorting' => $sorting,
+            'content' => $content->html,
+            'title' => $content->title,
+            'type' => 'text',
+            'createdate' => $now,
+            'lastupdated' => $now,
+            'lastupdatedby' => $lastUpdatedBy,
+            'owner' => $content->owner,
+            $this->connection->quoteIdentifier('group') => $content->group,
+            'userrights' => $content->userRights,
+            'grouprights' => $content->groupRights,
+            'otherrights' => $content->otherRights,
+            'deleted' => 0,
+        ]);
+
+        return (int) $this->connection->lastInsertId();
+    }
+
+    public function update(EditableContent $content, int $lastUpdatedBy, bool $withRights): void
+    {
+        $data = [
+            'content' => $content->html,
+            'title' => $content->title,
+            'lastupdated' => date('Y-m-d H:i:s'),
+            'lastupdatedby' => $lastUpdatedBy,
+        ];
+
+        if ($withRights) {
+            $data['owner'] = $content->owner;
+            $data[$this->connection->quoteIdentifier('group')] = $content->group;
+            $data['userrights'] = $content->userRights;
+            $data['grouprights'] = $content->groupRights;
+            $data['otherrights'] = $content->otherRights;
+        }
+
+        $this->connection->update('content', $data, ['id' => $content->id]);
+    }
+
+    public function softDelete(int $contentId): void
+    {
+        $this->connection->transactional(function () use ($contentId): void {
+            $this->connection->update('content', ['deleted' => 1], ['id' => $contentId]);
+            $this->connection->update('files', ['deleted' => 1], ['belongs_to' => $contentId]);
+        });
     }
 
     public function findByPage(int $pageId): array

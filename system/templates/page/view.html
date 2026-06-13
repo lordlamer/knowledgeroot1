@@ -33,6 +33,10 @@
 
         <div class="col-md-9 col-lg-10">
 
+            {% for message in flashes %}
+                <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
                 {% for crumb in breadcrumb %}
@@ -42,7 +46,7 @@
 
             {% if can_edit_page %}
                 <div class="mb-3">
-                    <a class="btn btn-sm btn-outline-primary" href="{{ base_url }}index.php?id={{ page.id }}&action=newcontent">{{ 'add new content'|trans }}</a>
+                    <a class="btn btn-sm btn-outline-primary" href="{{ base_url }}page/{{ page.id }}/content/new">{{ 'add new content'|trans }}</a>
                     <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}index.php?id={{ page.id }}&action=editpage">{{ 'edit page'|trans }}</a>
                 </div>
             {% endif %}
@@ -56,9 +60,11 @@
                     <div class="card-body">
                         {% if item.canEdit %}
                             <div class="float-right">
-                                <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}index.php?id={{ page.id }}&eid={{ item.block.id }}">{{ 'edit'|trans }}</a>
-                                <a class="btn btn-sm btn-outline-danger" href="{{ base_url }}index.php?id={{ page.id }}&delid={{ item.block.id }}"
-                                   onclick="return confirm('{{ 'Do you really want to delete?'|trans|escape('js') }}');">{{ 'delete'|trans }}</a>
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}content/{{ item.block.id }}/edit">{{ 'edit'|trans }}</a>
+                                <form method="post" action="{{ base_url }}content/{{ item.block.id }}/delete" style="display: inline;"
+                                      onsubmit="return confirm('{{ 'Do you really want to delete?'|trans|escape('js') }}');">
+                                    <button class="btn btn-sm btn-outline-danger" type="submit">{{ 'delete'|trans }}</button>
+                                </form>
                             </div>
                         {% endif %}
 
