@@ -16,6 +16,8 @@ use Knowledgeroot\Application\Login\AuthenticateUser;
 use Knowledgeroot\Domain\Content\AttachmentRepository;
 use Knowledgeroot\Domain\Content\ContentAccess;
 use Knowledgeroot\Domain\Content\ContentRepository;
+use Knowledgeroot\Domain\Content\HtmlSanitizer;
+use Knowledgeroot\Infrastructure\Content\HtmlPurifierSanitizer;
 use Knowledgeroot\Application\FileHandling\UploadFile;
 use Knowledgeroot\Application\Navigation\BuildNavigation;
 use Knowledgeroot\Domain\Group\GroupRepository;
@@ -168,6 +170,7 @@ return [
 	ContentAccess::class => autowire(DbalContentAccess::class),
 	AttachmentRepository::class => autowire(DbalAttachmentRepository::class),
 	TreeRepository::class => autowire(DbalTreeRepository::class),
+	HtmlSanitizer::class => fn (ContainerInterface $c) => new HtmlPurifierSanitizer($c->get('base_path') . $c->get(Config::class)->cache->path),
 
 	UploadFile::class => fn (ContainerInterface $c) => new UploadFile(
 		$c->get(AttachmentRepository::class),

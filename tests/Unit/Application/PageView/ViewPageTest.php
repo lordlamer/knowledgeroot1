@@ -214,6 +214,7 @@ class ViewPageTest extends TestCase
             $contentAccess,
             new FakePagePathResolver(),
             new Highlighter(),
+            new \Knowledgeroot\Tests\Doubles\PassthroughHtmlSanitizer(),
         );
     }
 

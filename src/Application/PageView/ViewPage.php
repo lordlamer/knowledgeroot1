@@ -8,6 +8,7 @@ use Knowledgeroot\Domain\Content\AttachmentRepository;
 use Knowledgeroot\Domain\Content\ContentAccess;
 use Knowledgeroot\Domain\Content\ContentRepository;
 use Knowledgeroot\Domain\Content\Highlighter;
+use Knowledgeroot\Domain\Content\HtmlSanitizer;
 use Knowledgeroot\Domain\Page\PageAccess;
 use Knowledgeroot\Domain\Page\PagePathResolver;
 use Knowledgeroot\Domain\Page\PageRepository;
@@ -30,6 +31,7 @@ class ViewPage
         private readonly ContentAccess $contentAccess,
         private readonly PagePathResolver $paths,
         private readonly Highlighter $highlighter,
+        private readonly HtmlSanitizer $sanitizer,
     ) {
     }
 
@@ -58,9 +60,11 @@ class ViewPage
                 continue;
             }
 
-            $html = $highlightTerms === []
-                ? $block->html
-                : $this->highlighter->highlight($block->html, $highlightTerms);
+            // clean stored markup first, then add highlight spans
+            $html = $this->sanitizer->sanitize($block->html);
+            if ($highlightTerms !== []) {
+                $html = $this->highlighter->highlight($html, $highlightTerms);
+            }
 
             $blocks[] = new ViewedContentBlock(
                 block: $block,
