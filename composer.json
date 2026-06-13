@@ -22,12 +22,14 @@
 		"symfony/mailer": "^7.2",
 		"pimple/pimple": "^3.6",
 		"doctrine/dbal": "^3.10",
-		"php-di/php-di": "^7.1"
+		"php-di/php-di": "^7.1",
+		"doctrine/migrations": "^3.9"
 	},
 
 	"autoload": {
 		"psr-4": {
-			"Knowledgeroot\\": "src/"
+			"Knowledgeroot\\": "src/",
+			"Knowledgeroot\\Migrations\\": "migrations/"
 		}
 	},
 
