@@ -132,4 +132,29 @@ class DbalPageRepository implements PageRepository
             [$pageId]
         ) > 0;
     }
+
+    public function changeParent(int $pageId, int $newParentId): void
+    {
+        $this->connection->update('tree', ['belongs_to' => $newParentId], ['id' => $pageId]);
+    }
+
+    public function isAncestor(int $ancestorId, int $pageId): bool
+    {
+        $current = $pageId;
+        $guard = 0;
+
+        while ($current !== 0 && $guard++ < 100) {
+            $parent = $this->connection->fetchOne('SELECT belongs_to FROM tree WHERE id = ? AND deleted = 0', [$current]);
+            if ($parent === false) {
+                return false;
+            }
+            $parent = (int) $parent;
+            if ($parent === $ancestorId) {
+                return true;
+            }
+            $current = $parent;
+        }
+
+        return false;
+    }
 }

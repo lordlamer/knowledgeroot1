@@ -43,4 +43,9 @@ interface ContentRepository
     public function orderedIdsByPage(int $pageId): array;
 
     public function setSorting(int $contentId, int $sorting): void;
+
+    /**
+     * move a content block to another page (appended at the end)
+     */
+    public function moveToPage(int $contentId, int $targetPageId): void;
 }

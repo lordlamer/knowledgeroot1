@@ -54,6 +54,15 @@ class FakePageRepository implements PageRepository
     {
         return false;
     }
+
+    public function changeParent(int $pageId, int $newParentId): void
+    {
+    }
+
+    public function isAncestor(int $ancestorId, int $pageId): bool
+    {
+        return false;
+    }
 }
 
 class FakeContentRepository implements ContentRepository
@@ -95,6 +104,10 @@ class FakeContentRepository implements ContentRepository
     }
 
     public function setSorting(int $contentId, int $sorting): void
+    {
+    }
+
+    public function moveToPage(int $contentId, int $targetPageId): void
     {
     }
 }

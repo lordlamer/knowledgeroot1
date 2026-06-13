@@ -96,4 +96,10 @@ class InMemoryContentRepository implements ContentRepository
     {
         $this->sorting[$contentId] = $sorting;
     }
+
+    public function moveToPage(int $contentId, int $targetPageId): void
+    {
+        $c = $this->store[$contentId];
+        $this->store[$contentId] = new EditableContent($c->id, $targetPageId, $c->title, $c->html, $c->owner, $c->group, $c->userRights, $c->groupRights, $c->otherRights);
+    }
 }

@@ -35,16 +35,39 @@ class ViewPageAction
             return $response->withStatus(404);
         }
 
+        $navigation = $this->buildNavigation->execute($userId, $pageId);
+
         $response->getBody()->write($this->twig->render('page/view.html', [
             'page' => $view->page,
             'breadcrumb' => $view->breadcrumb,
             'blocks' => $view->blocks,
             'can_edit_page' => $view->canEditPage,
-            'navigation' => $this->buildNavigation->execute($userId, $pageId),
+            'navigation' => $navigation,
+            'page_options' => $this->flatten($navigation),
             'flashes' => $this->session->consumeFlashes(),
             'is_admin' => $this->session->isAdmin(),
         ]));
 
         return $response;
+    }
+
+    /**
+     * flatten the navigation tree into [{id, label}] with indentation,
+     * for the "move to page" target selectors
+     *
+     * @param \Knowledgeroot\Domain\Navigation\NavigationNode[] $nodes
+     * @return array<int, array{id: int, label: string}>
+     */
+    private function flatten(array $nodes, int $depth = 0): array
+    {
+        $out = [];
+        foreach ($nodes as $node) {
+            $out[] = ['id' => $node->id, 'label' => str_repeat('— ', $depth) . $node->title];
+            foreach ($this->flatten($node->children, $depth + 1) as $child) {
+                $out[] = $child;
+            }
+        }
+
+        return $out;
     }
 }

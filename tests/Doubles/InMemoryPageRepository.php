@@ -84,4 +84,25 @@ class InMemoryPageRepository implements PageRepository
     {
         return ($this->contentCount[$pageId] ?? 0) > 0;
     }
+
+    public function changeParent(int $pageId, int $newParentId): void
+    {
+        $p = $this->store[$pageId];
+        $this->store[$pageId] = new EditablePage($p->id, $newParentId, $p->title, $p->tooltip, $p->symlink, $p->icon, $p->defaultContentPosition, $p->contentCollapsed, $p->owner, $p->group, $p->userRights, $p->groupRights, $p->otherRights);
+    }
+
+    public function isAncestor(int $ancestorId, int $pageId): bool
+    {
+        $current = $pageId;
+        $guard = 0;
+        while ($current !== 0 && $guard++ < 100) {
+            $parent = isset($this->store[$current]) ? $this->store[$current]->belongsTo : 0;
+            if ($parent === $ancestorId) {
+                return true;
+            }
+            $current = $parent;
+        }
+
+        return false;
+    }
 }

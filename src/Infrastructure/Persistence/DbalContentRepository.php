@@ -114,6 +114,15 @@ class DbalContentRepository implements ContentRepository
         $this->connection->update('content', ['sorting' => $sorting], ['id' => $contentId]);
     }
 
+    public function moveToPage(int $contentId, int $targetPageId): void
+    {
+        $this->connection->update(
+            'content',
+            ['belongs_to' => $targetPageId, 'sorting' => $this->nextSorting($targetPageId)],
+            ['id' => $contentId]
+        );
+    }
+
     public function findByPage(int $pageId): array
     {
         $rows = $this->connection->fetchAllAssociative(

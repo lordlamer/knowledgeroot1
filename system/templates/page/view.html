@@ -56,6 +56,16 @@
                           onsubmit="return confirm('{{ 'Do you really want to delete?'|trans|escape('js') }}');">
                         <button class="btn btn-sm btn-outline-danger" type="submit">{{ 'delete page'|trans }}</button>
                     </form>
+                    <form method="post" action="{{ base_url }}page/{{ page.id }}/relocate" class="form-inline d-inline-block ml-2">
+                        <label class="mr-1 mb-0 small">{{ 'move page'|trans }}:</label>
+                        <select class="form-control form-control-sm mr-1" name="target">
+                            {% if is_admin %}<option value="0">/ ({{ 'roots'|trans }})</option>{% endif %}
+                            {% for opt in page_options if opt.id != page.id %}
+                                <option value="{{ opt.id }}">{{ opt.label }}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn-sm btn-outline-secondary" type="submit">{{ 'move'|trans }}</button>
+                    </form>
                 </div>
             {% endif %}
 
@@ -108,6 +118,15 @@
                                 <input type="hidden" name="page_id" value="{{ page.id }}">
                                 <input type="file" name="file" class="form-control-file mr-2" required>
                                 <button class="btn btn-sm btn-outline-secondary" type="submit">{{ 'add file'|trans }}</button>
+                            </form>
+                            <form method="post" action="{{ base_url }}content/{{ item.block.id }}/relocate" class="form-inline mt-2">
+                                <label class="mr-1 mb-0 small">{{ 'move'|trans }} &rarr;</label>
+                                <select class="form-control form-control-sm mr-1" name="target">
+                                    {% for opt in page_options if opt.id != page.id %}
+                                        <option value="{{ opt.id }}">{{ opt.label }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button class="btn btn-sm btn-outline-secondary" type="submit">{{ 'move'|trans }}</button>
                             </form>
                         {% endif %}
 

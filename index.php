@@ -64,6 +64,8 @@ $app->get('/content/{id:[0-9]+}/edit', \Knowledgeroot\Presentation\ContentEditin
 $app->post('/content/{id:[0-9]+}/edit', \Knowledgeroot\Presentation\ContentEditing\SaveContentAction::class);
 $app->post('/content/{id:[0-9]+}/delete', \Knowledgeroot\Presentation\ContentEditing\DeleteContentAction::class);
 $app->post('/content/{id:[0-9]+}/move/{direction:up|down}', \Knowledgeroot\Presentation\ContentEditing\MoveContentAction::class);
+$app->post('/content/{id:[0-9]+}/relocate', \Knowledgeroot\Presentation\ContentEditing\RelocateContentAction::class);
+$app->post('/page/{id:[0-9]+}/relocate', \Knowledgeroot\Presentation\PageEditing\RelocatePageAction::class);
 
 $app->get('/login', \Knowledgeroot\Presentation\Login\ShowLoginFormAction::class);
 $app->post('/login', \Knowledgeroot\Presentation\Login\SubmitLoginAction::class);
