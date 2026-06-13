@@ -34,4 +34,13 @@ interface ContentRepository
      * soft-delete the content block and its attachments
      */
     public function softDelete(int $contentId): void;
+
+    /**
+     * content block ids of a page in display order (sorting, then id)
+     *
+     * @return int[]
+     */
+    public function orderedIdsByPage(int $pageId): array;
+
+    public function setSorting(int $contentId, int $sorting): void;
 }

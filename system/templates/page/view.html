@@ -68,6 +68,12 @@
                     <div class="card-body">
                         {% if item.canEdit %}
                             <div class="float-right">
+                                <form method="post" action="{{ base_url }}content/{{ item.block.id }}/move/up" style="display: inline;">
+                                    <button class="btn btn-sm btn-outline-secondary" type="submit" title="{{ 'move'|trans }}"><i class="fa fa-arrow-up"></i></button>
+                                </form>
+                                <form method="post" action="{{ base_url }}content/{{ item.block.id }}/move/down" style="display: inline;">
+                                    <button class="btn btn-sm btn-outline-secondary" type="submit" title="{{ 'move'|trans }}"><i class="fa fa-arrow-down"></i></button>
+                                </form>
                                 <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}content/{{ item.block.id }}/edit">{{ 'edit'|trans }}</a>
                                 <form method="post" action="{{ base_url }}content/{{ item.block.id }}/delete" style="display: inline;"
                                       onsubmit="return confirm('{{ 'Do you really want to delete?'|trans|escape('js') }}');">

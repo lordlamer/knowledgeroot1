@@ -75,4 +75,25 @@ class InMemoryContentRepository implements ContentRepository
     {
         $this->deleted[$contentId] = true;
     }
+
+    /** @var array<int, int> content id => sorting */
+    public array $sorting = [];
+
+    public function orderedIdsByPage(int $pageId): array
+    {
+        $ids = [];
+        foreach ($this->store as $c) {
+            if ($c->pageId === $pageId && !isset($this->deleted[$c->id])) {
+                $ids[$c->id] = $this->sorting[$c->id] ?? $c->id;
+            }
+        }
+        asort($ids);
+
+        return array_keys($ids);
+    }
+
+    public function setSorting(int $contentId, int $sorting): void
+    {
+        $this->sorting[$contentId] = $sorting;
+    }
 }

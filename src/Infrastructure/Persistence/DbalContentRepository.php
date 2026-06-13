@@ -99,6 +99,21 @@ class DbalContentRepository implements ContentRepository
         });
     }
 
+    public function orderedIdsByPage(int $pageId): array
+    {
+        $ids = $this->connection->fetchFirstColumn(
+            'SELECT id FROM content WHERE belongs_to = ? AND deleted = 0 ORDER BY sorting ASC, id ASC',
+            [$pageId]
+        );
+
+        return array_map(intval(...), $ids);
+    }
+
+    public function setSorting(int $contentId, int $sorting): void
+    {
+        $this->connection->update('content', ['sorting' => $sorting], ['id' => $contentId]);
+    }
+
     public function findByPage(int $pageId): array
     {
         $rows = $this->connection->fetchAllAssociative(

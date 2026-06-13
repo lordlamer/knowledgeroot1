@@ -88,6 +88,15 @@ class FakeContentRepository implements ContentRepository
     public function softDelete(int $contentId): void
     {
     }
+
+    public function orderedIdsByPage(int $pageId): array
+    {
+        return [];
+    }
+
+    public function setSorting(int $contentId, int $sorting): void
+    {
+    }
 }
 
 class FakeAttachmentRepository implements AttachmentRepository

@@ -63,6 +63,7 @@ $app->post('/page/{pageId:[0-9]+}/content/new', \Knowledgeroot\Presentation\Cont
 $app->get('/content/{id:[0-9]+}/edit', \Knowledgeroot\Presentation\ContentEditing\ContentEditorAction::class);
 $app->post('/content/{id:[0-9]+}/edit', \Knowledgeroot\Presentation\ContentEditing\SaveContentAction::class);
 $app->post('/content/{id:[0-9]+}/delete', \Knowledgeroot\Presentation\ContentEditing\DeleteContentAction::class);
+$app->post('/content/{id:[0-9]+}/move/{direction:up|down}', \Knowledgeroot\Presentation\ContentEditing\MoveContentAction::class);
 
 $app->get('/login', \Knowledgeroot\Presentation\Login\ShowLoginFormAction::class);
 $app->post('/login', \Knowledgeroot\Presentation\Login\SubmitLoginAction::class);
