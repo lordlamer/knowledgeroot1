@@ -42,6 +42,7 @@ use Knowledgeroot\Presentation\Http\UrlHelper;
 use Knowledgeroot\Infrastructure\Cache\FileCache;
 use Knowledgeroot\Infrastructure\Config\Config;
 use Knowledgeroot\Infrastructure\Mail\MailerFactory;
+use Knowledgeroot\Infrastructure\Session\LegacySession;
 use Knowledgeroot\Infrastructure\Persistence\DbalLoginThrottleRepository;
 use Knowledgeroot\Infrastructure\Persistence\DbalUserRepository;
 use Knowledgeroot\Infrastructure\Translation\Translator;
@@ -110,7 +111,17 @@ return [
 		]);
 		$twig->addExtension(new I18nExtension($c->get(Translator::class)));
 		$twig->addGlobal('site_title', (string) $config->base->title);
+		$twig->addGlobal('site_version', (string) $config->base->version);
 		$twig->addGlobal('base_url', $c->get(UrlHelper::class)->to(''));
+
+		// shared menu context so every template (via _topnav.html) knows
+		// the current user, admin state and available languages
+		$session = $c->get(LegacySession::class);
+		$twig->addGlobal('is_logged_in', $session->isLoggedIn());
+		$twig->addGlobal('is_admin', $session->isAdmin());
+		$twig->addGlobal('current_user', $session->isLoggedIn() ? (string) ($_SESSION['user'] ?? '') : 'guest');
+		$twig->addGlobal('current_language', $session->language());
+		$twig->addGlobal('locales', $c->get(LanguageLocator::class)->localeNames());
 
 		return $twig;
 	},

@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% import "page/_tree.html" as nav %}
+
+{% block title %}{{ site_title }}{% endblock %}
+
+{% block head %}
+<style>
+    .kr-tree { padding-left: 1rem; }
+    .kr-tree-item > ul { display: none; }
+    .kr-tree-item.is-open > ul { display: block; }
+</style>
+{% endblock %}
+
+{% block body %}
+{% include "_topnav.html" %}
+
+<div class="container-fluid" style="margin-top: 20px;">
+    <div class="row">
+
+        <div class="col-md-3 col-lg-2">
+            <div class="card">
+                <div class="card-body p-2">
+                    {{ nav.tree(navigation, base_url) }}
+                    {% if is_admin %}
+                        <a class="btn btn-sm btn-outline-primary btn-block mt-2" href="{{ base_url }}page/root/new">{{ 'add new page'|trans }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9 col-lg-10">
+            {% for message in flashes %}
+                <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+
+            <div class="jumbotron" style="border-left: 5px solid #178EC7;">
+                <h1 class="display-4" style="font-weight: bold;">{{ 'Welcome to Knowledgeroot'|trans }}</h1>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<nav class="navbar fixed-bottom navbar-light bg-light justify-content-end">
+    <span class="navbar-text">
+        <a href="http://www.knowledgeroot.org">Knowledgeroot</a> - {{ 'version'|trans }}:&nbsp;{{ site_version }}
+    </span>
+</nav>
+{% endblock %}

@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" style="border-bottom: 3px solid #F88529;">
+    <a class="navbar-brand" href="{{ base_url }}">{{ site_title }}</a>
+
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="collapse" data-target="#krnav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="krnav">
+        <ul class="navbar-nav mr-auto">
+            {% if is_logged_in %}
+                {% if is_admin %}
+                    <li class="nav-item"><a class="nav-link" href="{{ base_url }}users">{{ 'user'|trans }}</a></li>
+                {% endif %}
+                <li class="nav-item"><a class="nav-link" href="{{ base_url }}options">{{ 'options'|trans }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ base_url }}logout">{{ 'logout'|trans }}</a></li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="{{ base_url }}login">{{ 'login'|trans }}</a></li>
+            {% endif %}
+        </ul>
+
+        {% if locales|length > 1 %}
+            <form class="form-inline my-2 my-lg-0 mr-2" action="{{ base_url }}language" method="post">
+                <select class="form-control form-control-sm" name="language" onchange="this.form.submit();">
+                    {% for locale in locales %}
+                        <option value="{{ locale }}" {{ current_language == locale ? 'selected' }}>{{ locale }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        {% endif %}
+
+        <form class="form-inline my-2 my-lg-0 mr-2" action="{{ base_url }}search" method="get">
+            <input class="form-control mr-sm-2" type="text" name="q" placeholder="{{ 'Search'|trans }}" aria-label="{{ 'Search'|trans }}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{ 'GO'|trans }}</button>
+        </form>
+
+        <span class="navbar-text">{{ 'User'|trans }}:&nbsp;{{ current_user }}</span>
+    </div>
+</nav>

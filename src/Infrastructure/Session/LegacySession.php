@@ -128,6 +128,13 @@ class LegacySession
         $_SESSION['language'] = $language;
     }
 
+    public function setLanguage(string $language): void
+    {
+        $this->start();
+
+        $_SESSION['language'] = $language;
+    }
+
     /**
      * queue a message for the next rendered page
      */

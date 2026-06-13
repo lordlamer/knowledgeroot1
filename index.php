@@ -42,6 +42,11 @@ $app->get('/ping', function (Request $request, Response $response) {
 	return $response;
 });
 
+// front page (replaces the legacy index.php home flow)
+$app->get('/', \Knowledgeroot\Presentation\Home\HomeAction::class);
+$app->get('/index.php', \Knowledgeroot\Presentation\Home\HomeAction::class);
+$app->post('/language', \Knowledgeroot\Presentation\Home\LanguageSwitchAction::class);
+
 $app->get('/search', \Knowledgeroot\Presentation\Search\SearchAction::class);
 
 $app->get('/page/{id:[0-9]+}', \Knowledgeroot\Presentation\PageView\ViewPageAction::class);
