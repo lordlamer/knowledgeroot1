@@ -38,6 +38,29 @@ portable definition that runs on SQLite, MySQL/MariaDB and PostgreSQL.
    credentials behind your `loginhash`, go to **user** (recover) and create
    an administrator. You can then log in normally at `/login`.
 
+## Document root
+
+The web server's document root must point at **`public/`** - it contains
+`index.php` and the static assets. Everything else (`src/`, `config/` with
+the database credentials, `migrations/`, `data/`, `vendor/`) lives above the
+document root and is therefore never web-accessible.
+
+Apache example:
+
+```
+DocumentRoot /path/to/knowledgeroot/public
+<Directory /path/to/knowledgeroot/public>
+    AllowOverride All
+    Require all granted
+</Directory>
+```
+
+Local development with PHP's built-in server:
+
+```
+php -S 127.0.0.1:8080 -t public public/dev-server.php
+```
+
 ## Upgrades
 
 Schema changes ship as new migration classes in `migrations/`. To upgrade an
