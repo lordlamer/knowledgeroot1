@@ -98,10 +98,19 @@ return [
 	},
 
 	Translator::class => function (ContainerInterface $c) {
-		$locale = (string) ($c->get(Config::class)->base->locale ?: 'en_US');
+		// prefer the language chosen for this session (language switcher),
+		// fall back to the configured default locale
+		$chosen = $c->get(LegacySession::class)->language();
+		if ($chosen === '') {
+			$chosen = (string) ($c->get(Config::class)->base->locale ?: 'en_US');
+		}
+
+		// locale directories are named e.g. de_DE.UTF8 - normalise to the
+		// base locale so it works whether or not ".UTF8" is included
+		$locale = (string) preg_replace('/\.UTF8$/i', '', $chosen);
 
 		$file = $c->get('base_path') . 'system/language/' . $locale . '.UTF8/LC_MESSAGES/knowledgeroot.mo';
-		if (!is_file($file)) {
+		if ($locale === '' || !is_file($file)) {
 			$locale = 'en_US';
 			$file = $c->get('base_path') . 'system/language/en_US.UTF8/LC_MESSAGES/knowledgeroot.mo';
 		}
