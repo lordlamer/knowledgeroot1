@@ -3,9 +3,7 @@
 {% block title %}{{ (mode == 'add' ? 'add user' : 'edit')|trans }} - {{ site_title }}{% endblock %}
 
 {% block body %}
-<nav class="navbar navbar-expand-md navbar-dark bg-dark" style="border-bottom: 3px solid #F88529;">
-    <a class="navbar-brand" href="{{ base_url }}index.php">{{ site_title }}</a>
-</nav>
+{% include "_topnav.html" %}
 
 <div class="container" style="max-width: 640px; margin-top: 20px;">
 
