@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ 'Search'|trans }} - {{ site_title }}{% endblock %}
+
+{% macro breadcrumbs(path, highlight) %}
+    {% for crumb in path %}
+        <li class="breadcrumb-item"><a href="{{ base_url }}page/{{ crumb.pageId }}{% if highlight %}?highlight={{ highlight }}{% endif %}">{{ crumb.title }}</a></li>
+    {% endfor %}
+{% endmacro %}
+
+{% block body %}
+{% include "_topnav.html" %}
+
+<div class="container" style="margin-top: 20px;">
+
+    <p>{{ 'Search for'|trans }} <b>'{{ query }}'</b></p>
+
+    <div class="card">
+        <div class="card-header">{{ 'Content'|trans }}</div>
+        <div class="card-body">
+            {% for hit in content %}
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                    {{ _self.breadcrumbs(hit.path, highlight) }}
+                    {% if hit.title != '' %}
+                        <li class="breadcrumb-item">"<a href="{{ base_url }}page/{{ hit.pageId }}?highlight={{ highlight }}#{{ hit.contentId }}">{{ hit.title }}</a>"</li>
+                    {% endif %}
+                    <li class="breadcrumb-item">
+                        <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}page/{{ hit.pageId }}?highlight={{ highlight }}#{{ hit.contentId }}">{{ 'show'|trans }}</a>
+                    </li>
+                </ol>
+            {% else %}
+                {{ 'Nothing found'|trans }}
+            {% endfor %}
+        </div>
+    </div>
+
+    <p></p>
+
+    <div class="card">
+        <div class="card-header">{{ 'Menu'|trans }}</div>
+        <div class="card-body">
+            {% for hit in pages %}
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                    {{ _self.breadcrumbs(hit.path, highlight) }}
+                </ol>
+            {% else %}
+                {{ 'Nothing found'|trans }}
+            {% endfor %}
+        </div>
+    </div>
+
+    <p></p>
+
+    <div class="card">
+        <div class="card-header">{{ 'Files'|trans }}</div>
+        <div class="card-body">
+            {% for hit in files %}
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                    {{ _self.breadcrumbs(hit.path, highlight) }}
+                    <li class="breadcrumb-item">
+                        <span class="badge badge-info">{{ hit.filename }}</span>
+                        <span class="badge badge-secondary">{{ (hit.filesize / 1024)|round(1) }} KB</span>
+                        <span class="badge badge-light">{{ hit.date }}</span>
+                    </li>
+                </ol>
+            {% else %}
+                {{ 'Nothing found'|trans }}
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

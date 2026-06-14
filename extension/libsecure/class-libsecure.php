@@ -59,8 +59,7 @@ class libsecure extends extension_base {
 	 */
 	function whitelistVar(&$var, $convertslashes = false) {
 		if(is_array($var)) {
-			reset($var);
-			while(list($key,$val)=each($var)) {
+			foreach($var as $key => $val) {
 				if(is_array($val)) {
 					$this->whitelistVar($var[$key],$convertslashes);
 				} else {
@@ -70,7 +69,6 @@ class libsecure extends extension_base {
 					}
 				}
 			}
-			reset($var);
 		} else {
 			if($this->stringShouldBeChecked($var[$key])) {
 				if($convertslashes) $var = addslashes($this->htmlpurifier->purify(stripslashes($var)));
@@ -104,8 +102,7 @@ class libsecure extends extension_base {
 	 */
 	function blacklistVar(&$var,$convertslashes = false) {
 		if(is_array($var)) {
-			reset($var);
-			while(list($key,$val)=each($var)) {
+			foreach($var as $key => $val) {
 				if(is_array($val)) {
 					$this->blacklistVar($var[$key],$convertslashes);
 				} else {
@@ -116,7 +113,6 @@ class libsecure extends extension_base {
 					}
 				}
 			}
-			reset($var);
 		} else {
 			if($this->stringShouldBeChecked($var[$key])) {
 				if($convertslashes) $var = addslashes($this->safehtml->parse(stripslashes($var)));

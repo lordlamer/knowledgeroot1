@@ -1,0 +1,16 @@
+{% macro tree(nodes, base_url) %}
+    <ul class="kr-tree list-unstyled mb-0">
+        {% for node in nodes %}
+            <li class="kr-tree-item {{ node.expanded ? 'is-open' }}">
+                <a class="{{ node.active ? 'font-weight-bold text-dark' : 'text-secondary' }}"
+                   href="{{ base_url }}{{ node.link }}"
+                   {% if node.tooltip != '' %}title="{{ node.tooltip }}"{% endif %}>
+                    {{ node.isSymlink ? '» ' }}{{ node.title }}
+                </a>
+                {% if node.hasChildren %}
+                    {{ _self.tree(node.children, base_url) }}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}

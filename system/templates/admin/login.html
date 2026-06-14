@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin login - {{ site_title }}</title>
+    <link rel="stylesheet" href="{{ base_url }}assets/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark" style="border-bottom: 3px solid #F88529;">
+    <a class="navbar-brand" href="{{ base_url }}index.php"><i class="fa fa-arrow-left"></i> {{ 'Back to Knowledgeroot'|trans }}</a>
+</nav>
+
+<div class="container" style="max-width: 380px; margin-top: 60px;">
+    <h1 class="h3 mb-3">{{ site_title }}</h1>
+
+    {% if error %}
+        <div class="alert alert-warning" role="alert">{{ error }}</div>
+    {% endif %}
+
+    <form action="{{ base_url }}admin/login" method="post">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        <div class="form-group">
+            <label for="user">{{ 'Username'|trans }}</label>
+            <input type="text" class="form-control" name="user" id="user" required autofocus>
+        </div>
+        <div class="form-group">
+            <label for="pass">{{ 'Password'|trans }}</label>
+            <input type="password" class="form-control" name="pass" id="pass" required>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit">{{ 'login'|trans }}</button>
+    </form>
+
+    {% if hash_hint %}
+        <div class="alert alert-secondary mt-4 small">
+            <strong>{{ 'Forgot password?'|trans }}</strong><br>
+            {{ 'To reset the admin password you need to make a new login.'|trans }}
+            <br>app.ini → [admin] loginhash:
+            <code>{{ hash_hint }}</code>
+        </div>
+    {% endif %}
+</div>
+</body>
+</html>

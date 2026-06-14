@@ -1,0 +1,156 @@
+{% extends "layout.html" %}
+{% import "page/_tree.html" as nav %}
+
+{% block title %}{{ page.title }} - {{ site_title }}{% endblock %}
+
+{% block head %}
+<style>
+    .kr-tree { padding-left: 1rem; }
+    .kr-tree-item > ul { display: none; }
+    .kr-tree-item.is-open > ul { display: block; }
+</style>
+{% endblock %}
+
+{% block body %}
+{% include "_topnav.html" %}
+
+<div class="container-fluid" style="margin-top: 20px;">
+    <div class="row">
+
+        <div class="col-md-3 col-lg-2">
+            <div class="card">
+                <div class="card-body p-2">
+                    {{ nav.tree(navigation, base_url) }}
+                    {% if is_admin %}
+                        <a class="btn btn-sm btn-outline-primary btn-block mt-2" href="{{ base_url }}page/root/new">{{ 'add new page'|trans }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9 col-lg-10">
+
+            {% for message in flashes %}
+                <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                {% for crumb in breadcrumb %}
+                    <li class="breadcrumb-item"><a href="{{ base_url }}page/{{ crumb.pageId }}">{{ crumb.title }}</a></li>
+                {% endfor %}
+            </ol>
+
+            {% if can_edit_page %}
+                <div class="mb-3">
+                    <a class="btn btn-sm btn-outline-primary" href="{{ base_url }}page/{{ page.id }}/content/new">{{ 'add new content'|trans }}</a>
+                    <a class="btn btn-sm btn-outline-primary" href="{{ base_url }}page/{{ page.id }}/subpage/new">{{ 'add new page'|trans }}</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}page/{{ page.id }}/edit">{{ 'edit page'|trans }}</a>
+                    <form method="post" action="{{ base_url }}page/{{ page.id }}/delete" style="display: inline;"
+                          onsubmit="return confirm('{{ 'Do you really want to delete?'|trans|escape('js') }}');">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+                        <button class="btn btn-sm btn-outline-danger" type="submit">{{ 'delete page'|trans }}</button>
+                    </form>
+                    <form method="post" action="{{ base_url }}page/{{ page.id }}/relocate" class="form-inline d-inline-block ml-2">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+                        <label class="mr-1 mb-0 small">{{ 'move page'|trans }}:</label>
+                        <select class="form-control form-control-sm mr-1" name="target">
+                            {% if is_admin %}<option value="0">/ ({{ 'roots'|trans }})</option>{% endif %}
+                            {% for opt in page_options|filter(opt => opt.id != page.id) %}
+                                <option value="{{ opt.id }}">{{ opt.label }}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn-sm btn-outline-secondary" type="submit">{{ 'move'|trans }}</button>
+                    </form>
+                </div>
+            {% endif %}
+
+            {% for item in blocks %}
+                <div class="card mb-3" id="content-{{ item.block.id }}">
+                    <a name="{{ item.block.id }}"></a>
+                    {% if item.block.title != '' %}
+                        <h5 class="card-header">{{ item.block.title }}</h5>
+                    {% endif %}
+                    <div class="card-body">
+                        {% if item.canEdit %}
+                            <div class="float-right">
+                                <form method="post" action="{{ base_url }}content/{{ item.block.id }}/move/up" style="display: inline;">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+                                    <button class="btn btn-sm btn-outline-secondary" type="submit" title="{{ 'move'|trans }}"><i class="fa fa-arrow-up"></i></button>
+                                </form>
+                                <form method="post" action="{{ base_url }}content/{{ item.block.id }}/move/down" style="display: inline;">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+                                    <button class="btn btn-sm btn-outline-secondary" type="submit" title="{{ 'move'|trans }}"><i class="fa fa-arrow-down"></i></button>
+                                </form>
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}content/{{ item.block.id }}/print" target="_blank" title="{{ 'print'|trans }}"><i class="fa fa-print"></i></a>
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}content/{{ item.block.id }}/edit">{{ 'edit'|trans }}</a>
+                                <form method="post" action="{{ base_url }}content/{{ item.block.id }}/delete" style="display: inline;"
+                                      onsubmit="return confirm('{{ 'Do you really want to delete?'|trans|escape('js') }}');">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+                                    <button class="btn btn-sm btn-outline-danger" type="submit">{{ 'delete'|trans }}</button>
+                                </form>
+                            </div>
+                        {% endif %}
+
+                        {% if not item.canEdit %}
+                            <div class="float-right">
+                                <a class="btn btn-sm btn-outline-secondary" href="{{ base_url }}content/{{ item.block.id }}/print" target="_blank" title="{{ 'print'|trans }}"><i class="fa fa-print"></i></a>
+                            </div>
+                        {% endif %}
+
+                        <div class="content-body">{{ item.html|raw }}</div>
+
+                        {% if item.attachments is not empty %}
+                            <hr>
+                            <ul class="list-unstyled mb-0">
+                                {% for file in item.attachments %}
+                                    <li>
+                                        <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                        <a href="{{ base_url }}file/{{ file.id }}">{{ file.filename }}</a>
+                                        <span class="badge badge-info">{{ (file.filesize / 1024)|round(1) }} KB</span>
+                                        {% if item.canEdit %}
+                                            <form method="post" action="{{ base_url }}file/{{ file.id }}/delete" style="display: inline;"
+                                                  onsubmit="return confirm('{{ 'Do you really want to delete?'|trans|escape('js') }}');">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+                                                <button class="btn btn-sm btn-link text-danger p-0" type="submit"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+                        {% if item.canEdit %}
+                            <form method="post" action="{{ base_url }}content/{{ item.block.id }}/files" enctype="multipart/form-data" class="form-inline mt-2">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+                                <input type="hidden" name="page_id" value="{{ page.id }}">
+                                <input type="file" name="file" class="form-control-file mr-2" required>
+                                <button class="btn btn-sm btn-outline-secondary" type="submit">{{ 'add file'|trans }}</button>
+                            </form>
+                            <form method="post" action="{{ base_url }}content/{{ item.block.id }}/relocate" class="form-inline mt-2">
+            <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+                                <label class="mr-1 mb-0 small">{{ 'move'|trans }} &rarr;</label>
+                                <select class="form-control form-control-sm mr-1" name="target">
+                                    {% for opt in page_options|filter(opt => opt.id != page.id) %}
+                                        <option value="{{ opt.id }}">{{ opt.label }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button class="btn btn-sm btn-outline-secondary" type="submit">{{ 'move'|trans }}</button>
+                            </form>
+                        {% endif %}
+
+                        {% if item.block.lastUpdated != '' %}
+                            <small class="text-muted d-block mt-2">
+                                {{ 'Last modified by'|trans }} {{ item.block.lastUpdatedBy != '' ? item.block.lastUpdatedBy : 'guest'|trans }} {{ 'on'|trans }} {{ item.block.lastUpdated }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+            {% else %}
+                <p class="text-muted">{{ 'no content'|trans }}</p>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}
