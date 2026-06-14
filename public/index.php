@@ -25,20 +25,24 @@ AppFactory::setContainer($containerBuilder->build());
 $app = AppFactory::create();
 $app->addRoutingMiddleware();
 
-// redirect /path/ to /path before routing, so trailing slashes resolve
-$app->add(\Knowledgeroot\Presentation\Middleware\TrailingSlash::class);
+// base path: empty when served from the public/ document root, or the
+// sub-path the front controller lives under (sub-directory installs,
+// or serving the project root and browsing /public/)
+$basePath = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
+$basePath = ($basePath === '/' || $basePath === '.') ? '' : $basePath;
+if ($basePath !== '') {
+	$app->setBasePath($basePath);
+}
+
+// redirect /path/ to /path before routing (base-path aware, so the app
+// root itself is never redirected)
+$app->add(new \Knowledgeroot\Presentation\Middleware\TrailingSlash($basePath));
 
 // reject state-changing requests without a valid CSRF token
 $app->add(\Knowledgeroot\Presentation\Middleware\VerifyCsrf::class);
 
 // set KR_DEBUG=1 in the environment to see error details during development
 $app->addErrorMiddleware((bool) getenv('KR_DEBUG'), true, true);
-
-// support installations in a sub directory (e.g. /knowledgeroot/index.php)
-$scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
-if ($scriptDir !== '/' && $scriptDir !== '') {
-	$app->setBasePath($scriptDir);
-}
 
 // --- new routes go here ---------------------------------------------------
 

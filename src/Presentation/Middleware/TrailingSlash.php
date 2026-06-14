@@ -12,17 +12,28 @@ use Slim\Psr7\Response as SlimResponse;
 
 /**
  * Normalises trailing slashes: a request to /admin/ is redirected to
- * /admin so the routes (which are defined without a trailing slash)
- * match. The root path "/" is left untouched.
+ * /admin so the routes (defined without a trailing slash) match. The
+ * decision is made on the path relative to the base path, so the app
+ * root itself (e.g. /public/ when served from the project root) is
+ * never redirected into a non-matching path.
  */
 class TrailingSlash implements MiddlewareInterface
 {
+    public function __construct(private readonly string $basePath = '')
+    {
+    }
+
     public function process(Request $request, RequestHandlerInterface $handler): Response
     {
         $uri = $request->getUri();
         $path = $uri->getPath();
 
-        if ($path !== '/' && str_ends_with($path, '/')) {
+        $relative = $path;
+        if ($this->basePath !== '' && str_starts_with($path, $this->basePath)) {
+            $relative = substr($path, strlen($this->basePath));
+        }
+
+        if ($relative !== '' && $relative !== '/' && str_ends_with($path, '/')) {
             $location = rtrim($path, '/');
             if ($uri->getQuery() !== '') {
                 $location .= '?' . $uri->getQuery();
